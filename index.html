@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#080808">
-
 <title>CHRONO VAULT BD</title>
 
 <style>
@@ -209,6 +208,12 @@ header{
   padding:40px
 }
 
+.loading{
+  text-align:center;
+  color:#d4af37;
+  padding:40px
+}
+
 .why{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
@@ -238,12 +243,6 @@ footer{
 
 footer b{
   color:#d4af37
-}
-
-.loading{
-  text-align:center;
-  color:#d4af37;
-  padding:40px
 }
 </style>
 </head>
@@ -287,9 +286,11 @@ footer b{
   </div>
 
   <div id="products" class="products">
+
     <div class="loading">
       Loading products...
     </div>
+
   </div>
 
 </section>
@@ -343,9 +344,9 @@ footer b{
 
 <script>
 
-/* =========================
-   SUPABASE CONFIG
-========================= */
+/* ================================
+   SUPABASE
+================================ */
 
 const SUPABASE_URL =
 "https://rufdvkelwzsmnuruvdko.supabase.co";
@@ -354,16 +355,16 @@ const SUPABASE_KEY =
 "sb_publishable_3j4Bs4rft9_w4r1j6uHo5w_fYLIJsNI";
 
 
-/* =========================
+/* ================================
    CART
-========================= */
+================================ */
 
 let cartCount = 0;
 
 
-/* =========================
+/* ================================
    SAFE TEXT
-========================= */
+================================ */
 
 function safe(value){
 
@@ -380,9 +381,9 @@ function safe(value){
 }
 
 
-/* =========================
+/* ================================
    LOAD PRODUCTS
-========================= */
+================================ */
 
 async function loadProducts(){
 
@@ -391,15 +392,12 @@ async function loadProducts(){
 
   try{
 
-    const url =
+    const response = await fetch(
+
       SUPABASE_URL +
-      "/rest/v1/products" +
-      "?select=id,name,slug,description,price,old_price,category,stock,image_url,featured,created_at" +
-      "&order=created_at.desc";
+      "/rest/v1/products?select=*&order=created_at.desc",
 
-
-    const response =
-      await fetch(url,{
+      {
         method:"GET",
 
         headers:{
@@ -407,7 +405,9 @@ async function loadProducts(){
           "Authorization":"Bearer " + SUPABASE_KEY,
           "Content-Type":"application/json"
         }
-      });
+      }
+
+    );
 
 
     if(!response.ok){
@@ -416,14 +416,16 @@ async function loadProducts(){
         await response.text();
 
       console.error(
-        "Supabase error:",
+        "Supabase Error:",
         response.status,
         errorText
       );
 
       throw new Error(
-        "Supabase returned " + response.status
+        "Supabase Error " +
+        response.status
       );
+
     }
 
 
@@ -432,99 +434,114 @@ async function loadProducts(){
 
 
     console.log(
-      "Products received from Supabase:",
+      "Supabase Products:",
       products
     );
 
 
-    if(!Array.isArray(products) || products.length === 0){
+    if(
+      !Array.isArray(products) ||
+      products.length === 0
+    ){
 
       box.innerHTML =
         '<div class="empty">No products available yet.</div>';
 
       return;
+
     }
 
 
     box.innerHTML =
       products.map(function(product){
 
-        /* =========================
-           PRODUCT DATA
-        ========================= */
+        /* ============================
+           EXACT SUPABASE COLUMN NAMES
+        ============================ */
 
         const name =
-          product.name !== null &&
-          product.name !== undefined
-          ? String(product.name)
-          : "Unnamed Product";
+          product.Name ||
+          "Unnamed Product";
 
 
         const category =
-          product.category !== null &&
-          product.category !== undefined &&
-          String(product.category).trim() !== ""
-          ? String(product.category)
-          : "Watch";
+          product.Category ||
+          "Watch";
 
 
         const price =
-          Number(product.price);
+          Number(product.Price);
 
 
         const oldPrice =
-          Number(product.old_price);
+          Number(product["Old price"]);
 
 
         const stock =
-          Number(product.stock);
+          Number(product.Stock);
 
 
         const imageUrl =
-          product.image_url !== null &&
-          product.image_url !== undefined
-          ? String(product.image_url).trim()
-          : "";
+          product.image_url ||
+          "";
 
 
-        /* =========================
+        /* ============================
            IMAGE
-        ========================= */
+        ============================ */
 
-        let imageHTML = "";
+        let imageHTML;
 
         if(imageUrl){
 
-          imageHTML =
-            `<img
+          imageHTML = `
+
+            <img
               src="${safe(imageUrl)}"
               alt="${safe(name)}"
               loading="lazy"
-              onerror="this.style.display='none';this.parentElement.innerHTML='<div class=&quot;noimg&quot;>⌚</div>'"
-            >`;
+              onerror="
+                this.style.display='none';
+                this.parentElement.innerHTML='<div class=&quot;noimg&quot;>⌚</div>';
+              "
+            >
+
+          `;
 
         }else{
 
-          imageHTML =
-            `<div class="noimg">⌚</div>`;
+          imageHTML = `
+            <div class="noimg">⌚</div>
+          `;
 
         }
 
 
-        /* =========================
+        /* ============================
            PRICE
-        ========================= */
+        ============================ */
 
-        let priceHTML = "Price unavailable";
+        let priceHTML;
 
-        if(Number.isFinite(price)){
+        if(
+          Number.isFinite(price)
+        ){
 
           priceHTML =
             "৳" +
             price.toLocaleString("en-BD");
 
+        }else{
+
+          priceHTML =
+            "Price unavailable";
+
         }
 
+
+        /* ============================
+           OLD PRICE
+        ============================ */
 
         if(
           Number.isFinite(oldPrice) &&
@@ -532,21 +549,27 @@ async function loadProducts(){
           oldPrice > price
         ){
 
-          priceHTML +=
-            `<span class="old">
+          priceHTML += `
+
+            <span class="old">
               ৳${oldPrice.toLocaleString("en-BD")}
-            </span>`;
+            </span>
+
+          `;
 
         }
 
 
-        /* =========================
+        /* ============================
            STOCK
-        ========================= */
+        ============================ */
 
-        let stockHTML = "";
+        let stockHTML;
 
-        if(Number.isFinite(stock) && stock > 0){
+        if(
+          Number.isFinite(stock) &&
+          stock > 0
+        ){
 
           stockHTML =
             "Stock: " + stock;
@@ -559,28 +582,34 @@ async function loadProducts(){
         }
 
 
-        /* =========================
+        /* ============================
            BUTTON
-        ========================= */
+        ============================ */
 
         let buttonHTML = "";
 
-        if(Number.isFinite(stock) && stock > 0){
+        if(
+          Number.isFinite(stock) &&
+          stock > 0
+        ){
 
-          buttonHTML =
-            `<button
+          buttonHTML = `
+
+            <button
               class="btn"
               onclick="addCart('${safe(name)}')"
             >
               Add to Cart
-            </button>`;
+            </button>
+
+          `;
 
         }
 
 
-        /* =========================
-           CARD
-        ========================= */
+        /* ============================
+           PRODUCT CARD
+        ============================ */
 
         return `
 
@@ -651,19 +680,17 @@ async function loadProducts(){
 }
 
 
-/* =========================
+/* ================================
    ADD TO CART
-========================= */
+================================ */
 
 function addCart(productName){
 
   cartCount++;
 
-  const cart =
-    document.getElementById("cartCount");
-
-  cart.textContent =
-    cartCount;
+  document.getElementById(
+    "cartCount"
+  ).textContent = cartCount;
 
   alert(
     productName +
@@ -673,9 +700,9 @@ function addCart(productName){
 }
 
 
-/* =========================
+/* ================================
    START
-========================= */
+================================ */
 
 loadProducts();
 
