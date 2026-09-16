@@ -4,99 +4,247 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#080808">
+
 <title>CHRONO VAULT BD</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0
+}
+
 body{
   font-family:Arial,Helvetica,sans-serif;
-  background:#080808;color:#fff;
+  background:#080808;
+  color:#fff;
   line-height:1.5
 }
-a{text-decoration:none;color:inherit}
+
+a{
+  text-decoration:none;
+  color:inherit
+}
+
 header{
-  position:sticky;top:0;z-index:99;
+  position:sticky;
+  top:0;
+  z-index:99;
   background:rgba(8,8,8,.96);
   border-bottom:1px solid #292929
 }
+
 .nav{
-  max-width:1200px;margin:auto;
-  min-height:70px;padding:10px 4%;
-  display:flex;align-items:center;
+  max-width:1200px;
+  margin:auto;
+  min-height:70px;
+  padding:10px 4%;
+  display:flex;
+  align-items:center;
   justify-content:space-between
 }
-.brand{display:flex;align-items:center;gap:10px}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px
+}
+
 .logo{
-  width:44px;height:44px;border:1px solid #d4af37;
-  border-radius:50%;display:grid;place-items:center;
-  color:#d4af37;font-weight:bold;font-size:16px
+  width:44px;
+  height:44px;
+  border:1px solid #d4af37;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:#d4af37;
+  font-weight:bold;
+  font-size:16px
 }
-.brand b{color:#d4af37;letter-spacing:2px}
+
+.brand b{
+  color:#d4af37;
+  letter-spacing:2px
+}
+
 .cart{
-  border:1px solid #d4af37;color:#d4af37;
-  padding:8px 14px;border-radius:20px
+  border:1px solid #d4af37;
+  color:#d4af37;
+  padding:8px 14px;
+  border-radius:20px
 }
+
 .hero{
-  text-align:center;padding:80px 20px 65px;
+  text-align:center;
+  padding:80px 20px 65px;
   background:radial-gradient(circle,#252010 0,#080808 60%)
 }
-.hero small{color:#d4af37;letter-spacing:4px}
+
+.hero small{
+  color:#d4af37;
+  letter-spacing:4px
+}
+
 .hero h1{
   font-size:clamp(36px,9vw,72px);
-  margin:12px 0;color:#d4af37;
+  margin:12px 0;
+  color:#d4af37;
   letter-spacing:3px
 }
-.hero p{color:#bbb;max-width:600px;margin:auto}
-.section{max-width:1200px;margin:auto;padding:55px 4%}
-.title{text-align:center;margin-bottom:30px}
-.title h2{color:#d4af37;font-size:30px}
+
+.hero p{
+  color:#bbb;
+  max-width:600px;
+  margin:auto
+}
+
+.section{
+  max-width:1200px;
+  margin:auto;
+  padding:55px 4%
+}
+
+.title{
+  text-align:center;
+  margin-bottom:30px
+}
+
+.title h2{
+  color:#d4af37;
+  font-size:30px
+}
+
 .products{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:20px
 }
+
 .card{
-  background:#111;border:1px solid #292929;
-  border-radius:14px;overflow:hidden;
+  background:#111;
+  border:1px solid #292929;
+  border-radius:14px;
+  overflow:hidden;
   transition:.2s
 }
-.card:hover{border-color:#d4af37}
+
+.card:hover{
+  border-color:#d4af37
+}
+
 .pic{
-  height:250px;background:#171717;
-  display:flex;align-items:center;justify-content:center;
+  height:250px;
+  background:#171717;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   overflow:hidden
 }
+
 .pic img{
-  width:100%;height:100%;object-fit:contain
+  width:100%;
+  height:100%;
+  object-fit:contain
 }
-.noimg{font-size:55px;color:#d4af37}
-.info{padding:18px}
-.info h3{font-size:17px;margin-bottom:8px}
-.category{color:#999;font-size:13px}
-.price{color:#d4af37;font-size:22px;font-weight:bold;margin-top:10px}
-.old{text-decoration:line-through;color:#777;font-size:13px;margin-left:8px}
-.stock{font-size:13px;color:#aaa;margin-top:5px}
+
+.noimg{
+  font-size:55px;
+  color:#d4af37
+}
+
+.info{
+  padding:18px
+}
+
+.info h3{
+  font-size:17px;
+  margin-bottom:8px
+}
+
+.category{
+  color:#999;
+  font-size:13px
+}
+
+.price{
+  color:#d4af37;
+  font-size:22px;
+  font-weight:bold;
+  margin-top:10px
+}
+
+.old{
+  text-decoration:line-through;
+  color:#777;
+  font-size:13px;
+  margin-left:8px
+}
+
+.stock{
+  font-size:13px;
+  color:#aaa;
+  margin-top:5px
+}
+
 .btn{
-  display:block;text-align:center;
-  margin-top:14px;padding:11px;
-  background:#d4af37;color:#080808;
-  font-weight:bold;border-radius:8px
+  display:block;
+  width:100%;
+  margin-top:14px;
+  padding:11px;
+  border:0;
+  background:#d4af37;
+  color:#080808;
+  font-weight:bold;
+  border-radius:8px;
+  cursor:pointer
 }
-.empty{text-align:center;color:#aaa;padding:40px}
+
+.btn:active{
+  transform:scale(.98)
+}
+
+.empty{
+  text-align:center;
+  color:#aaa;
+  padding:40px
+}
+
 .why{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
   gap:15px
 }
+
 .box{
-  background:#111;border:1px solid #292929;
-  padding:25px;border-radius:12px;text-align:center
+  background:#111;
+  border:1px solid #292929;
+  padding:25px;
+  border-radius:12px;
+  text-align:center
 }
-.box strong{display:block;color:#d4af37;margin-bottom:8px}
+
+.box strong{
+  display:block;
+  color:#d4af37;
+  margin-bottom:8px
+}
+
 footer{
-  text-align:center;padding:35px 20px;
-  border-top:1px solid #292929;color:#888
+  text-align:center;
+  padding:35px 20px;
+  border-top:1px solid #292929;
+  color:#888
 }
-footer b{color:#d4af37}
+
+footer b{
+  color:#d4af37
+}
+
+.loading{
+  text-align:center;
+  color:#d4af37;
+  padding:40px
+}
 </style>
 </head>
 
@@ -104,170 +252,433 @@ footer b{color:#d4af37}
 
 <header>
   <div class="nav">
+
     <div class="brand">
       <div class="logo">CV</div>
       <b>CHRONO VAULT BD</b>
     </div>
-    <div class="cart">🛒 Cart <span id="cartCount">0</span></div>
+
+    <div class="cart">
+      🛒 Cart:
+      <span id="cartCount">0</span>
+    </div>
+
   </div>
 </header>
 
+
 <section class="hero">
-  <small>PREMIUM WATCH COLLECTION</small>
+
+  <small>WELCOME TO</small>
+
   <h1>CHRONO VAULT BD</h1>
-  <p>More Than Just a Watch. It's a Lifestyle.</p>
+
+  <p>
+    More Than Just a Watch. It's a Lifestyle.
+  </p>
+
 </section>
 
+
 <section class="section">
+
   <div class="title">
     <h2>Our Collection</h2>
   </div>
+
   <div id="products" class="products">
-    <div class="empty">Loading products...</div>
+    <div class="loading">
+      Loading products...
+    </div>
   </div>
+
 </section>
 
+
 <section class="section">
+
   <div class="title">
-    <h2>Why Choose Us</h2>
+    <h2>Why CHRONO VAULT BD?</h2>
   </div>
 
   <div class="why">
+
+    <div class="box">
+      <strong>Premium Style</strong>
+      Elegant watches for your everyday lifestyle.
+    </div>
+
+    <div class="box">
+      <strong>Quality</strong>
+      Carefully selected products.
+    </div>
+
     <div class="box">
       <strong>Cash on Delivery</strong>
-      Easy & convenient ordering
+      Easy ordering with convenient payment.
     </div>
+
     <div class="box">
-      <strong>Premium Selection</strong>
-      Stylish watches for every occasion
+      <strong>Store Warranty</strong>
+      Warranty support on selected products.
     </div>
-    <div class="box">
-      <strong>Secure Packaging</strong>
-      Carefully packed before delivery
-    </div>
+
   </div>
+
 </section>
 
+
 <footer>
-  <b>CHRONO VAULT BD</b><br>
-  More Than Just a Watch. It's a Lifestyle.<br><br>
-  © 2026 CHRONO VAULT BD
+
+  <p>
+    © 2026 <b>CHRONO VAULT BD</b>
+  </p>
+
+  <p>
+    More Than Just a Watch. It's a Lifestyle.
+  </p>
+
 </footer>
 
+
 <script>
+
+/* =========================
+   SUPABASE CONFIG
+========================= */
+
 const SUPABASE_URL =
 "https://rufdvkelwzsmnuruvdko.supabase.co";
 
 const SUPABASE_KEY =
 "sb_publishable_3j4Bs4rft9_w4r1j6uHo5w_fYLIJsNI";
 
+
+/* =========================
+   CART
+========================= */
+
 let cartCount = 0;
 
-function safe(text){
-  return String(text ?? "")
+
+/* =========================
+   SAFE TEXT
+========================= */
+
+function safe(value){
+
+  if(value === null || value === undefined){
+    return "";
+  }
+
+  return String(value)
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;");
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 }
 
+
+/* =========================
+   LOAD PRODUCTS
+========================= */
+
 async function loadProducts(){
-  const box = document.getElementById("products");
+
+  const box =
+    document.getElementById("products");
 
   try{
-    const response = await fetch(
+
+    const url =
       SUPABASE_URL +
-      "/rest/v1/products?select=*&order=created_at.desc",
-      {
+      "/rest/v1/products" +
+      "?select=id,name,slug,description,price,old_price,category,stock,image_url,featured,created_at" +
+      "&order=created_at.desc";
+
+
+    const response =
+      await fetch(url,{
+        method:"GET",
+
         headers:{
           "apikey":SUPABASE_KEY,
-          "Authorization":"Bearer " + SUPABASE_KEY
+          "Authorization":"Bearer " + SUPABASE_KEY,
+          "Content-Type":"application/json"
         }
-      }
-    );
+      });
+
 
     if(!response.ok){
-      throw new Error("Supabase error");
+
+      const errorText =
+        await response.text();
+
+      console.error(
+        "Supabase error:",
+        response.status,
+        errorText
+      );
+
+      throw new Error(
+        "Supabase returned " + response.status
+      );
     }
 
-    const products = await response.json();
 
-    if(!products.length){
+    const products =
+      await response.json();
+
+
+    console.log(
+      "Products received from Supabase:",
+      products
+    );
+
+
+    if(!Array.isArray(products) || products.length === 0){
+
       box.innerHTML =
         '<div class="empty">No products available yet.</div>';
+
       return;
     }
 
-    box.innerHTML = products.map(product => {
 
-      const image = product.image_url
-        ? `<img src="${safe(product.image_url)}"
-             alt="${safe(product.name)}"
-             onerror="this.style.display='none'">`
-        : `<div class="noimg">⌚</div>`;
+    box.innerHTML =
+      products.map(function(product){
 
-      return `
-        <div class="card">
-          <div class="pic">${image}</div>
+        /* =========================
+           PRODUCT DATA
+        ========================= */
 
-          <div class="info">
-            <h3>${safe(product.name)}</h3>
+        const name =
+          product.name !== null &&
+          product.name !== undefined
+          ? String(product.name)
+          : "Unnamed Product";
 
-            <div class="category">
-              ${safe(product.category || "Watch")}
+
+        const category =
+          product.category !== null &&
+          product.category !== undefined &&
+          String(product.category).trim() !== ""
+          ? String(product.category)
+          : "Watch";
+
+
+        const price =
+          Number(product.price);
+
+
+        const oldPrice =
+          Number(product.old_price);
+
+
+        const stock =
+          Number(product.stock);
+
+
+        const imageUrl =
+          product.image_url !== null &&
+          product.image_url !== undefined
+          ? String(product.image_url).trim()
+          : "";
+
+
+        /* =========================
+           IMAGE
+        ========================= */
+
+        let imageHTML = "";
+
+        if(imageUrl){
+
+          imageHTML =
+            `<img
+              src="${safe(imageUrl)}"
+              alt="${safe(name)}"
+              loading="lazy"
+              onerror="this.style.display='none';this.parentElement.innerHTML='<div class=&quot;noimg&quot;>⌚</div>'"
+            >`;
+
+        }else{
+
+          imageHTML =
+            `<div class="noimg">⌚</div>`;
+
+        }
+
+
+        /* =========================
+           PRICE
+        ========================= */
+
+        let priceHTML = "Price unavailable";
+
+        if(Number.isFinite(price)){
+
+          priceHTML =
+            "৳" +
+            price.toLocaleString("en-BD");
+
+        }
+
+
+        if(
+          Number.isFinite(oldPrice) &&
+          oldPrice > 0 &&
+          oldPrice > price
+        ){
+
+          priceHTML +=
+            `<span class="old">
+              ৳${oldPrice.toLocaleString("en-BD")}
+            </span>`;
+
+        }
+
+
+        /* =========================
+           STOCK
+        ========================= */
+
+        let stockHTML = "";
+
+        if(Number.isFinite(stock) && stock > 0){
+
+          stockHTML =
+            "Stock: " + stock;
+
+        }else{
+
+          stockHTML =
+            "Out of stock";
+
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        let buttonHTML = "";
+
+        if(Number.isFinite(stock) && stock > 0){
+
+          buttonHTML =
+            `<button
+              class="btn"
+              onclick="addCart('${safe(name)}')"
+            >
+              Add to Cart
+            </button>`;
+
+        }
+
+
+        /* =========================
+           CARD
+        ========================= */
+
+        return `
+
+          <div class="card">
+
+            <div class="pic">
+              ${imageHTML}
             </div>
 
-            <div class="price">
-              ৳${Number(product.price || 0).toLocaleString()}
-              ${
-                product.old_price
-                ? `<span class="old">
-                     ৳${Number(product.old_price).toLocaleString()}
-                   </span>`
-                : ""
-              }
+
+            <div class="info">
+
+              <h3>
+                ${safe(name)}
+              </h3>
+
+
+              <div class="category">
+                ${safe(category)}
+              </div>
+
+
+              <div class="price">
+                ${priceHTML}
+              </div>
+
+
+              <div class="stock">
+                ${safe(stockHTML)}
+              </div>
+
+
+              ${buttonHTML}
+
             </div>
 
-            <div class="stock">
-              ${
-                Number(product.stock) > 0
-                ? "Stock: " + product.stock
-                : "Out of stock"
-              }
-            </div>
-
-            ${
-              Number(product.stock) > 0
-              ? `<button class="btn"
-                   onclick="addCart()">
-                   Add to Cart
-                 </button>`
-              : ""
-            }
           </div>
-        </div>
-      `;
-    }).join("");
+
+        `;
+
+      }).join("");
+
 
   }catch(error){
 
+    console.error(
+      "Product loading failed:",
+      error
+    );
+
+
     box.innerHTML = `
+
       <div class="empty">
-        Products could not be loaded.<br>
+
+        Products could not be loaded.
+
+        <br><br>
+
         Please check Supabase connection.
+
       </div>
+
     `;
 
-    console.error(error);
   }
+
 }
 
-function addCart(){
+
+/* =========================
+   ADD TO CART
+========================= */
+
+function addCart(productName){
+
   cartCount++;
-  document.getElementById("cartCount").textContent = cartCount;
+
+  const cart =
+    document.getElementById("cartCount");
+
+  cart.textContent =
+    cartCount;
+
+  alert(
+    productName +
+    " added to cart."
+  );
+
 }
+
+
+/* =========================
+   START
+========================= */
 
 loadProducts();
+
 </script>
 
 </body>
