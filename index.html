@@ -7,10 +7,15 @@
 <title>CHRONO VAULT BD</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
   padding:0
+}
+
+html{
+  scroll-behavior:smooth
 }
 
 body{
@@ -25,12 +30,21 @@ a{
   color:inherit
 }
 
+button{
+  font-family:inherit
+}
+
+/* =========================
+   HEADER
+========================= */
+
 header{
   position:sticky;
   top:0;
-  z-index:99;
-  background:rgba(8,8,8,.96);
-  border-bottom:1px solid #292929
+  z-index:1000;
+  background:rgba(8,8,8,.97);
+  border-bottom:1px solid #292929;
+  backdrop-filter:blur(10px)
 }
 
 .nav{
@@ -40,18 +54,21 @@ header{
   padding:10px 4%;
   display:flex;
   align-items:center;
-  justify-content:space-between
+  justify-content:space-between;
+  gap:15px
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:10px
+  gap:10px;
+  min-width:0
 }
 
 .logo{
   width:44px;
   height:44px;
+  flex-shrink:0;
   border:1px solid #d4af37;
   border-radius:50%;
   display:grid;
@@ -63,15 +80,29 @@ header{
 
 .brand b{
   color:#d4af37;
-  letter-spacing:2px
+  letter-spacing:2px;
+  font-size:14px
 }
 
 .cart{
   border:1px solid #d4af37;
   color:#d4af37;
-  padding:8px 14px;
-  border-radius:20px
+  background:transparent;
+  padding:9px 15px;
+  border-radius:20px;
+  cursor:pointer;
+  white-space:nowrap;
+  font-weight:bold
 }
+
+.cart:hover{
+  background:#d4af37;
+  color:#080808
+}
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
   text-align:center;
@@ -97,6 +128,10 @@ header{
   margin:auto
 }
 
+/* =========================
+   SECTION
+========================= */
+
 .section{
   max-width:1200px;
   margin:auto;
@@ -113,6 +148,10 @@ header{
   font-size:30px
 }
 
+/* =========================
+   PRODUCTS
+========================= */
+
 .products{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -128,7 +167,8 @@ header{
 }
 
 .card:hover{
-  border-color:#d4af37
+  border-color:#d4af37;
+  transform:translateY(-2px)
 }
 
 .pic{
@@ -198,6 +238,10 @@ header{
   cursor:pointer
 }
 
+.btn:hover{
+  opacity:.9
+}
+
 .btn:active{
   transform:scale(.98)
 }
@@ -213,6 +257,10 @@ header{
   color:#d4af37;
   padding:40px
 }
+
+/* =========================
+   WHY
+========================= */
 
 .why{
   display:grid;
@@ -234,6 +282,174 @@ header{
   margin-bottom:8px
 }
 
+/* =========================
+   CART SECTION
+========================= */
+
+.cart-section{
+  display:none;
+  max-width:900px;
+  margin:0 auto;
+  padding:30px 4% 60px
+}
+
+.cart-section.show{
+  display:block
+}
+
+.cart-box{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:14px;
+  padding:20px
+}
+
+.cart-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:20px
+}
+
+.cart-header h2{
+  color:#d4af37
+}
+
+.close-cart{
+  border:1px solid #555;
+  background:transparent;
+  color:#aaa;
+  padding:7px 12px;
+  border-radius:7px;
+  cursor:pointer
+}
+
+.cart-item{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:15px 0;
+  border-bottom:1px solid #292929
+}
+
+.cart-item:last-child{
+  border-bottom:0
+}
+
+.cart-item-image{
+  width:75px;
+  height:75px;
+  flex-shrink:0;
+  background:#171717;
+  border-radius:10px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+
+.cart-item-image img{
+  width:100%;
+  height:100%;
+  object-fit:contain
+}
+
+.cart-item-image span{
+  font-size:32px;
+  color:#d4af37
+}
+
+.cart-item-info{
+  flex:1;
+  min-width:0
+}
+
+.cart-item-info h3{
+  font-size:15px;
+  margin-bottom:4px
+}
+
+.cart-item-price{
+  color:#d4af37;
+  font-weight:bold
+}
+
+.quantity{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:8px
+}
+
+.quantity button{
+  width:28px;
+  height:28px;
+  border:1px solid #555;
+  background:#181818;
+  color:#fff;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:18px
+}
+
+.quantity span{
+  min-width:25px;
+  text-align:center
+}
+
+.remove-btn{
+  border:0;
+  background:transparent;
+  color:#888;
+  cursor:pointer;
+  font-size:13px;
+  margin-top:5px
+}
+
+.remove-btn:hover{
+  color:#d4af37
+}
+
+.cart-total{
+  border-top:1px solid #292929;
+  margin-top:20px;
+  padding-top:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center
+}
+
+.cart-total strong{
+  color:#aaa
+}
+
+.cart-total span{
+  color:#d4af37;
+  font-size:24px;
+  font-weight:bold
+}
+
+.checkout-btn{
+  width:100%;
+  margin-top:20px;
+  padding:13px;
+  border:0;
+  border-radius:8px;
+  background:#d4af37;
+  color:#080808;
+  font-weight:bold;
+  cursor:pointer
+}
+
+.checkout-btn:hover{
+  opacity:.9
+}
+
+/* =========================
+   FOOTER
+========================= */
+
 footer{
   text-align:center;
   padding:35px 20px;
@@ -244,33 +460,148 @@ footer{
 footer b{
   color:#d4af37
 }
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+  .nav{
+    min-height:64px;
+    padding:9px 4%
+  }
+
+  .brand b{
+    font-size:11px;
+    letter-spacing:1.5px
+  }
+
+  .logo{
+    width:40px;
+    height:40px
+  }
+
+  .cart{
+    padding:8px 11px;
+    font-size:13px
+  }
+
+  .hero{
+    padding:60px 18px 50px
+  }
+
+  .hero h1{
+    font-size:35px;
+    letter-spacing:2px
+  }
+
+  .section{
+    padding:45px 4%
+  }
+
+  .products{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px
+  }
+
+  .pic{
+    height:190px
+  }
+
+  .info{
+    padding:13px
+  }
+
+  .info h3{
+    font-size:14px
+  }
+
+  .price{
+    font-size:18px
+  }
+
+  .btn{
+    padding:10px 6px;
+    font-size:13px
+  }
+
+  .cart-item{
+    gap:10px;
+    align-items:flex-start
+  }
+
+  .cart-item-image{
+    width:65px;
+    height:65px
+  }
+
+  .cart-item-info h3{
+    font-size:13px
+  }
+
+  .cart-total span{
+    font-size:20px
+  }
+
+}
+
 </style>
 </head>
 
+
 <body>
 
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
+
   <div class="nav">
 
     <div class="brand">
-      <div class="logo">CV</div>
-      <b>CHRONO VAULT BD</b>
+
+      <div class="logo">
+        CV
+      </div>
+
+      <b>
+        CHRONO VAULT BD
+      </b>
+
     </div>
 
-    <div class="cart">
+
+    <button
+      class="cart"
+      onclick="toggleCart()"
+    >
+
       🛒 Cart:
       <span id="cartCount">0</span>
-    </div>
+
+    </button>
 
   </div>
+
 </header>
 
 
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="hero">
 
-  <small>WELCOME TO</small>
+  <small>
+    WELCOME TO
+  </small>
 
-  <h1>CHRONO VAULT BD</h1>
+  <h1>
+    CHRONO VAULT BD
+  </h1>
 
   <p>
     More Than Just a Watch. It's a Lifestyle.
@@ -279,13 +610,25 @@ footer b{
 </section>
 
 
+<!-- =========================
+     PRODUCTS
+========================= -->
+
 <section class="section">
 
   <div class="title">
-    <h2>Our Collection</h2>
+
+    <h2>
+      Our Collection
+    </h2>
+
   </div>
 
-  <div id="products" class="products">
+
+  <div
+    id="products"
+    class="products"
+  >
 
     <div class="loading">
       Loading products...
@@ -296,38 +639,135 @@ footer b{
 </section>
 
 
+<!-- =========================
+     CART
+========================= -->
+
+<section
+  id="cartSection"
+  class="cart-section"
+>
+
+  <div class="cart-box">
+
+    <div class="cart-header">
+
+      <h2>
+        🛒 Your Cart
+      </h2>
+
+      <button
+        class="close-cart"
+        onclick="toggleCart()"
+      >
+        Close
+      </button>
+
+    </div>
+
+
+    <div id="cartItems">
+
+      <div class="empty">
+        Your cart is empty.
+      </div>
+
+    </div>
+
+
+    <div class="cart-total">
+
+      <strong>
+        Total
+      </strong>
+
+      <span id="cartTotal">
+        ৳0
+      </span>
+
+    </div>
+
+
+    <button
+      class="checkout-btn"
+      onclick="checkout()"
+    >
+      Proceed to Checkout
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     WHY
+========================= -->
+
 <section class="section">
 
   <div class="title">
-    <h2>Why CHRONO VAULT BD?</h2>
+
+    <h2>
+      Why CHRONO VAULT BD?
+    </h2>
+
   </div>
+
 
   <div class="why">
 
     <div class="box">
-      <strong>Premium Style</strong>
+
+      <strong>
+        Premium Style
+      </strong>
+
       Elegant watches for your everyday lifestyle.
+
     </div>
 
+
     <div class="box">
-      <strong>Quality</strong>
+
+      <strong>
+        Quality
+      </strong>
+
       Carefully selected products.
+
     </div>
 
+
     <div class="box">
-      <strong>Cash on Delivery</strong>
+
+      <strong>
+        Cash on Delivery
+      </strong>
+
       Easy ordering with convenient payment.
+
     </div>
 
+
     <div class="box">
-      <strong>Store Warranty</strong>
+
+      <strong>
+        Store Warranty
+      </strong>
+
       Warranty support on selected products.
+
     </div>
 
   </div>
 
 </section>
 
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
@@ -344,6 +784,7 @@ footer b{
 
 <script>
 
+
 /* ================================
    SUPABASE
 ================================ */
@@ -356,10 +797,39 @@ const SUPABASE_KEY =
 
 
 /* ================================
-   CART
+   CART STORAGE
 ================================ */
 
-let cartCount = 0;
+let cart = [];
+
+try{
+
+  const savedCart =
+    localStorage.getItem("chronoVaultCart");
+
+  if(savedCart){
+
+    cart =
+      JSON.parse(savedCart);
+
+  }
+
+  if(!Array.isArray(cart)){
+
+    cart = [];
+
+  }
+
+}catch(error){
+
+  console.error(
+    "Cart storage error:",
+    error
+  );
+
+  cart = [];
+
+}
 
 
 /* ================================
@@ -368,8 +838,13 @@ let cartCount = 0;
 
 function safe(value){
 
-  if(value === null || value === undefined){
+  if(
+    value === null ||
+    value === undefined
+  ){
+
     return "";
+
   }
 
   return String(value)
@@ -378,6 +853,453 @@ function safe(value){
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
+
+}
+
+
+/* ================================
+   SAVE CART
+================================ */
+
+function saveCart(){
+
+  try{
+
+    localStorage.setItem(
+      "chronoVaultCart",
+      JSON.stringify(cart)
+    );
+
+  }catch(error){
+
+    console.error(
+      "Could not save cart:",
+      error
+    );
+
+  }
+
+}
+
+
+/* ================================
+   UPDATE CART COUNT
+================================ */
+
+function updateCartCount(){
+
+  const count =
+    cart.reduce(
+      function(total,item){
+
+        return total + item.quantity;
+
+      },
+      0
+    );
+
+
+  const cartCount =
+    document.getElementById("cartCount");
+
+
+  cartCount.textContent =
+    count;
+
+}
+
+
+/* ================================
+   ADD CART
+================================ */
+
+function addCart(product){
+
+  const id =
+    String(product.id);
+
+
+  const stock =
+    Number(product.stock);
+
+
+  const existing =
+    cart.find(
+      function(item){
+
+        return String(item.id) === id;
+
+      }
+    );
+
+
+  if(existing){
+
+    if(
+      existing.quantity >= stock
+    ){
+
+      alert(
+        "Maximum available stock already added."
+      );
+
+      return;
+
+    }
+
+    existing.quantity++;
+
+  }else{
+
+    cart.push({
+
+      id:id,
+
+      name:product.name,
+
+      price:Number(product.price),
+
+      image:product.image || "",
+
+      stock:stock,
+
+      quantity:1
+
+    });
+
+  }
+
+
+  saveCart();
+
+  updateCartCount();
+
+  renderCart();
+
+
+  alert(
+    product.name +
+    " added to cart."
+  );
+
+}
+
+
+/* ================================
+   CHANGE QUANTITY
+================================ */
+
+function changeQuantity(
+  id,
+  change
+){
+
+  const item =
+    cart.find(
+      function(product){
+
+        return String(product.id) ===
+          String(id);
+
+      }
+    );
+
+
+  if(!item){
+
+    return;
+
+  }
+
+
+  const newQuantity =
+    item.quantity + change;
+
+
+  if(newQuantity <= 0){
+
+    removeFromCart(id);
+
+    return;
+
+  }
+
+
+  if(
+    newQuantity > item.stock
+  ){
+
+    alert(
+      "Maximum available stock: " +
+      item.stock
+    );
+
+    return;
+
+  }
+
+
+  item.quantity =
+    newQuantity;
+
+
+  saveCart();
+
+  updateCartCount();
+
+  renderCart();
+
+}
+
+
+/* ================================
+   REMOVE CART
+================================ */
+
+function removeFromCart(id){
+
+  cart =
+    cart.filter(
+      function(item){
+
+        return String(item.id) !==
+          String(id);
+
+      }
+    );
+
+
+  saveCart();
+
+  updateCartCount();
+
+  renderCart();
+
+}
+
+
+/* ================================
+   RENDER CART
+================================ */
+
+function renderCart(){
+
+  const box =
+    document.getElementById(
+      "cartItems"
+    );
+
+
+  if(
+    cart.length === 0
+  ){
+
+    box.innerHTML = `
+
+      <div class="empty">
+        Your cart is empty.
+      </div>
+
+    `;
+
+    document.getElementById(
+      "cartTotal"
+    ).textContent = "৳0";
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+    cart.map(
+      function(item){
+
+        const subtotal =
+          item.price *
+          item.quantity;
+
+
+        let imageHTML = "";
+
+
+        if(item.image){
+
+          imageHTML = `
+
+            <img
+              src="${safe(item.image)}"
+              alt="${safe(item.name)}"
+              onerror="
+                this.style.display='none';
+                this.parentElement.innerHTML='<span>⌚</span>';
+              "
+            >
+
+          `;
+
+        }else{
+
+          imageHTML = `
+            <span>⌚</span>
+          `;
+
+        }
+
+
+        return `
+
+          <div class="cart-item">
+
+            <div class="cart-item-image">
+
+              ${imageHTML}
+
+            </div>
+
+
+            <div class="cart-item-info">
+
+              <h3>
+                ${safe(item.name)}
+              </h3>
+
+
+              <div class="cart-item-price">
+
+                ৳${item.price.toLocaleString("en-BD")}
+
+                ×
+
+                ${item.quantity}
+
+                =
+
+                ৳${subtotal.toLocaleString("en-BD")}
+
+              </div>
+
+
+              <div class="quantity">
+
+                <button
+                  onclick="changeQuantity('${safe(item.id)}',-1)"
+                >
+                  −
+                </button>
+
+
+                <span>
+                  ${item.quantity}
+                </span>
+
+
+                <button
+                  onclick="changeQuantity('${safe(item.id)}',1)"
+                >
+                  +
+                </button>
+
+              </div>
+
+
+              <button
+                class="remove-btn"
+                onclick="removeFromCart('${safe(item.id)}')"
+              >
+                Remove
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    ).join("");
+
+
+  const total =
+    cart.reduce(
+      function(sum,item){
+
+        return sum +
+          (
+            item.price *
+            item.quantity
+          );
+
+      },
+      0
+    );
+
+
+  document.getElementById(
+    "cartTotal"
+  ).textContent =
+    "৳" +
+    total.toLocaleString("en-BD");
+
+}
+
+
+/* ================================
+   TOGGLE CART
+================================ */
+
+function toggleCart(){
+
+  const section =
+    document.getElementById(
+      "cartSection"
+    );
+
+
+  section.classList.toggle(
+    "show"
+  );
+
+
+  if(
+    section.classList.contains("show")
+  ){
+
+    renderCart();
+
+    section.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+  }
+
+}
+
+
+/* ================================
+   CHECKOUT
+================================ */
+
+function checkout(){
+
+  if(
+    cart.length === 0
+  ){
+
+    alert(
+      "Your cart is empty."
+    );
+
+    return;
+
+  }
+
+
+  alert(
+    "Checkout system will be connected next."
+  );
+
 }
 
 
@@ -388,26 +1310,40 @@ function safe(value){
 async function loadProducts(){
 
   const box =
-    document.getElementById("products");
+    document.getElementById(
+      "products"
+    );
+
 
   try{
 
-    const response = await fetch(
+    const response =
+      await fetch(
 
-      SUPABASE_URL +
-      "/rest/v1/products?select=*&order=created_at.desc",
+        SUPABASE_URL +
+        "/rest/v1/products?select=*&order=created_at.desc",
 
-      {
-        method:"GET",
+        {
 
-        headers:{
-          "apikey":SUPABASE_KEY,
-          "Authorization":"Bearer " + SUPABASE_KEY,
-          "Content-Type":"application/json"
+          method:"GET",
+
+          headers:{
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json"
+
+          }
+
         }
-      }
 
-    );
+      );
 
 
     if(!response.ok){
@@ -415,11 +1351,13 @@ async function loadProducts(){
       const errorText =
         await response.text();
 
+
       console.error(
         "Supabase Error:",
         response.status,
         errorText
       );
+
 
       throw new Error(
         "Supabase Error " +
@@ -444,8 +1382,13 @@ async function loadProducts(){
       products.length === 0
     ){
 
-      box.innerHTML =
-        '<div class="empty">No products available yet.</div>';
+      box.innerHTML = `
+
+        <div class="empty">
+          No products available yet.
+        </div>
+
+      `;
 
       return;
 
@@ -453,204 +1396,258 @@ async function loadProducts(){
 
 
     box.innerHTML =
-      products.map(function(product){
+      products.map(
+        function(product){
 
-        /* ============================
-           EXACT SUPABASE COLUMN NAMES
-        ============================ */
+          /* ============================
+             EXACT SUPABASE COLUMN NAMES
+          ============================ */
 
-        const name =
-          product.Name ||
-          "Unnamed Product";
-
-
-        const category =
-          product.Category ||
-          "Watch";
+          const name =
+            product.Name ||
+            "Unnamed Product";
 
 
-        const price =
-          Number(product.Price);
+          const category =
+            product.Category ||
+            "Watch";
 
 
-        const oldPrice =
-          Number(product["Old price"]);
+          const price =
+            Number(product.Price);
 
 
-        const stock =
-          Number(product.Stock);
+          const oldPrice =
+            Number(product["Old price"]);
 
 
-        const imageUrl =
-          product.image_url ||
-          "";
+          const stock =
+            Number(product.Stock);
 
 
-        /* ============================
-           IMAGE
-        ============================ */
-
-        let imageHTML;
-
-        if(imageUrl){
-
-          imageHTML = `
-
-            <img
-              src="${safe(imageUrl)}"
-              alt="${safe(name)}"
-              loading="lazy"
-              onerror="
-                this.style.display='none';
-                this.parentElement.innerHTML='<div class=&quot;noimg&quot;>⌚</div>';
-              "
-            >
-
-          `;
-
-        }else{
-
-          imageHTML = `
-            <div class="noimg">⌚</div>
-          `;
-
-        }
+          const imageUrl =
+            product.image_url ||
+            "";
 
 
-        /* ============================
-           PRICE
-        ============================ */
-
-        let priceHTML;
-
-        if(
-          Number.isFinite(price)
-        ){
-
-          priceHTML =
-            "৳" +
-            price.toLocaleString("en-BD");
-
-        }else{
-
-          priceHTML =
-            "Price unavailable";
-
-        }
+          const productId =
+            product.id;
 
 
-        /* ============================
-           OLD PRICE
-        ============================ */
+          /* ============================
+             IMAGE
+          ============================ */
 
-        if(
-          Number.isFinite(oldPrice) &&
-          oldPrice > 0 &&
-          oldPrice > price
-        ){
-
-          priceHTML += `
-
-            <span class="old">
-              ৳${oldPrice.toLocaleString("en-BD")}
-            </span>
-
-          `;
-
-        }
+          let imageHTML;
 
 
-        /* ============================
-           STOCK
-        ============================ */
+          if(imageUrl){
 
-        let stockHTML;
+            imageHTML = `
 
-        if(
-          Number.isFinite(stock) &&
-          stock > 0
-        ){
+              <img
+                src="${safe(imageUrl)}"
+                alt="${safe(name)}"
+                loading="lazy"
+                onerror="
+                  this.style.display='none';
+                  this.parentElement.innerHTML='<div class=&quot;noimg&quot;>⌚</div>';
+                "
+              >
 
-          stockHTML =
-            "Stock: " + stock;
+            `;
 
-        }else{
+          }else{
 
-          stockHTML =
-            "Out of stock";
+            imageHTML = `
 
-        }
+              <div class="noimg">
+                ⌚
+              </div>
 
+            `;
 
-        /* ============================
-           BUTTON
-        ============================ */
-
-        let buttonHTML = "";
-
-        if(
-          Number.isFinite(stock) &&
-          stock > 0
-        ){
-
-          buttonHTML = `
-
-            <button
-              class="btn"
-              onclick="addCart('${safe(name)}')"
-            >
-              Add to Cart
-            </button>
-
-          `;
-
-        }
+          }
 
 
-        /* ============================
-           PRODUCT CARD
-        ============================ */
+          /* ============================
+             PRICE
+          ============================ */
 
-        return `
+          let priceHTML;
 
-          <div class="card">
 
-            <div class="pic">
-              ${imageHTML}
+          if(
+            Number.isFinite(price)
+          ){
+
+            priceHTML =
+              "৳" +
+              price.toLocaleString(
+                "en-BD"
+              );
+
+          }else{
+
+            priceHTML =
+              "Price unavailable";
+
+          }
+
+
+          /* ============================
+             OLD PRICE
+          ============================ */
+
+          if(
+            Number.isFinite(oldPrice) &&
+            oldPrice > 0 &&
+            oldPrice > price
+          ){
+
+            priceHTML += `
+
+              <span class="old">
+                ৳${oldPrice.toLocaleString("en-BD")}
+              </span>
+
+            `;
+
+          }
+
+
+          /* ============================
+             STOCK
+          ============================ */
+
+          let stockHTML;
+
+
+          if(
+            Number.isFinite(stock) &&
+            stock > 0
+          ){
+
+            stockHTML =
+              "Stock: " +
+              stock;
+
+          }else{
+
+            stockHTML =
+              "Out of stock";
+
+          }
+
+
+          /* ============================
+             BUTTON
+          ============================ */
+
+          let buttonHTML =
+            "";
+
+
+          if(
+            Number.isFinite(stock) &&
+            stock > 0
+          ){
+
+            const cartProduct =
+              {
+
+                id:productId,
+
+                name:name,
+
+                price:price,
+
+                image:imageUrl,
+
+                stock:stock
+
+              };
+
+
+            const productJSON =
+              JSON.stringify(
+                cartProduct
+              )
+              .replace(
+                /\\/g,
+                "\\\\"
+              )
+              .replace(
+                /'/g,
+                "\\'"
+              )
+              .replace(
+                /"/g,
+                "&quot;"
+              );
+
+
+            buttonHTML = `
+
+              <button
+                class="btn"
+                onclick='addCart(${JSON.stringify(cartProduct).replace(/'/g,"&#39;")})'
+              >
+                Add to Cart
+              </button>
+
+            `;
+
+          }
+
+
+          /* ============================
+             PRODUCT CARD
+          ============================ */
+
+          return `
+
+            <div class="card">
+
+              <div class="pic">
+
+                ${imageHTML}
+
+              </div>
+
+
+              <div class="info">
+
+                <h3>
+                  ${safe(name)}
+                </h3>
+
+
+                <div class="category">
+                  ${safe(category)}
+                </div>
+
+
+                <div class="price">
+                  ${priceHTML}
+                </div>
+
+
+                <div class="stock">
+                  ${safe(stockHTML)}
+                </div>
+
+
+                ${buttonHTML}
+
+              </div>
+
             </div>
 
+          `;
 
-            <div class="info">
-
-              <h3>
-                ${safe(name)}
-              </h3>
-
-
-              <div class="category">
-                ${safe(category)}
-              </div>
-
-
-              <div class="price">
-                ${priceHTML}
-              </div>
-
-
-              <div class="stock">
-                ${safe(stockHTML)}
-              </div>
-
-
-              ${buttonHTML}
-
-            </div>
-
-          </div>
-
-        `;
-
-      }).join("");
+        }
+      ).join("");
 
 
   }catch(error){
@@ -681,30 +1678,15 @@ async function loadProducts(){
 
 
 /* ================================
-   ADD TO CART
-================================ */
-
-function addCart(productName){
-
-  cartCount++;
-
-  document.getElementById(
-    "cartCount"
-  ).textContent = cartCount;
-
-  alert(
-    productName +
-    " added to cart."
-  );
-
-}
-
-
-/* ================================
    START
 ================================ */
 
+updateCartCount();
+
+renderCart();
+
 loadProducts();
+
 
 </script>
 
