@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#080808">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
+<meta
+  name="theme-color"
+  content="#080808"
+>
+
 <title>CHRONO VAULT BD</title>
 
 <style>
@@ -35,6 +45,11 @@ input,
 textarea{
   font-family:inherit
 }
+
+
+/* ================================
+   HEADER
+================================ */
 
 header{
   position:sticky;
@@ -98,10 +113,20 @@ header{
   color:#080808
 }
 
+
+/* ================================
+   HERO
+================================ */
+
 .hero{
   text-align:center;
   padding:80px 20px 65px;
-  background:radial-gradient(circle,#252010 0,#080808 60%)
+  background:
+    radial-gradient(
+      circle,
+      #252010 0,
+      #080808 60%
+    )
 }
 
 .hero small{
@@ -122,6 +147,11 @@ header{
   margin:auto
 }
 
+
+/* ================================
+   SECTION
+================================ */
+
 .section{
   max-width:1200px;
   margin:auto;
@@ -138,9 +168,15 @@ header{
   font-size:30px
 }
 
+
+/* ================================
+   PRODUCTS
+================================ */
+
 .products{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
   gap:20px
 }
 
@@ -244,11 +280,15 @@ header{
   padding:40px
 }
 
-/* WHY */
+
+/* ================================
+   WHY
+================================ */
 
 .why{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  grid-template-columns:
+    repeat(auto-fit,minmax(180px,1fr));
   gap:15px
 }
 
@@ -266,7 +306,10 @@ header{
   margin-bottom:8px
 }
 
-/* CART */
+
+/* ================================
+   CART
+================================ */
 
 .cart-section{
   display:none;
@@ -428,7 +471,10 @@ header{
   opacity:.9
 }
 
-/* CHECKOUT */
+
+/* ================================
+   CHECKOUT
+================================ */
 
 .checkout-box{
   display:none;
@@ -526,7 +572,10 @@ header{
   cursor:pointer
 }
 
-/* SUCCESS */
+
+/* ================================
+   SUCCESS
+================================ */
 
 .order-success{
   display:none;
@@ -560,6 +609,11 @@ header{
   margin:12px 0
 }
 
+
+/* ================================
+   FOOTER
+================================ */
+
 footer{
   text-align:center;
   padding:35px 20px;
@@ -571,7 +625,10 @@ footer b{
   color:#d4af37
 }
 
-/* MOBILE */
+
+/* ================================
+   MOBILE
+================================ */
 
 @media(max-width:600px){
 
@@ -609,7 +666,8 @@ footer b{
   }
 
   .products{
-    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
     gap:12px
   }
 
@@ -657,7 +715,13 @@ footer b{
 </style>
 </head>
 
+
 <body>
+
+
+<!-- ================================
+     HEADER
+================================ -->
 
 <header>
 
@@ -675,18 +739,28 @@ footer b{
 
     </div>
 
+
     <button
       class="cart"
       onclick="toggleCart()"
     >
+
       🛒 Cart:
-      <span id="cartCount">0</span>
+
+      <span id="cartCount">
+        0
+      </span>
+
     </button>
 
   </div>
 
 </header>
 
+
+<!-- ================================
+     HERO
+================================ -->
 
 <section class="hero">
 
@@ -705,6 +779,10 @@ footer b{
 </section>
 
 
+<!-- ================================
+     PRODUCTS
+================================ -->
+
 <section class="section">
 
   <div class="title">
@@ -714,6 +792,7 @@ footer b{
     </h2>
 
   </div>
+
 
   <div
     id="products"
@@ -729,7 +808,9 @@ footer b{
 </section>
 
 
-<!-- CART -->
+<!-- ================================
+     CART
+================================ -->
 
 <section
   id="cartSection"
@@ -737,6 +818,7 @@ footer b{
 >
 
   <div class="cart-box">
+
 
     <div class="cart-header">
 
@@ -785,7 +867,9 @@ footer b{
     </button>
 
 
-    <!-- CHECKOUT FORM -->
+    <!-- ============================
+         CHECKOUT FORM
+    ============================= -->
 
     <div
       id="checkoutBox"
@@ -877,7 +961,9 @@ footer b{
     </div>
 
 
-    <!-- ORDER SUCCESS -->
+    <!-- ============================
+         ORDER SUCCESS
+    ============================= -->
 
     <div
       id="orderSuccess"
@@ -893,13 +979,15 @@ footer b{
       </h2>
 
       <p>
-        Thank you for shopping with CHRONO VAULT BD.
+        Thank you for shopping with
+        CHRONO VAULT BD.
       </p>
 
       <div
         id="orderId"
         class="order-id"
       >
+        Order received successfully.
       </div>
 
       <p>
@@ -913,6 +1001,10 @@ footer b{
 </section>
 
 
+<!-- ================================
+     WHY
+================================ -->
+
 <section class="section">
 
   <div class="title">
@@ -923,7 +1015,9 @@ footer b{
 
   </div>
 
+
   <div class="why">
+
 
     <div class="box">
 
@@ -931,7 +1025,8 @@ footer b{
         Premium Style
       </strong>
 
-      Elegant watches for your everyday lifestyle.
+      Elegant watches for your
+      everyday lifestyle.
 
     </div>
 
@@ -968,10 +1063,15 @@ footer b{
 
     </div>
 
+
   </div>
 
 </section>
 
+
+<!-- ================================
+     FOOTER
+================================ -->
 
 <footer>
 
@@ -1005,10 +1105,14 @@ const SUPABASE_KEY =
 
 let cart = [];
 
+
 try{
 
   const savedCart =
-    localStorage.getItem("chronoVaultCart");
+    localStorage.getItem(
+      "chronoVaultCart"
+    );
+
 
   if(savedCart){
 
@@ -1016,6 +1120,7 @@ try{
       JSON.parse(savedCart);
 
   }
+
 
   if(!Array.isArray(cart)){
 
@@ -1049,6 +1154,7 @@ function safe(value){
     return "";
 
   }
+
 
   return String(value)
     .replace(/&/g,"&amp;")
@@ -1095,7 +1201,8 @@ function updateCartCount(){
     cart.reduce(
       function(total,item){
 
-        return total + item.quantity;
+        return total +
+          Number(item.quantity || 0);
 
       },
       0
@@ -1118,15 +1225,36 @@ function addCart(product){
   const id =
     String(product.id);
 
+
   const stock =
     Number(product.stock);
+
+
+  const price =
+    Number(product.price);
+
 
   if(
     !Number.isFinite(stock) ||
     stock <= 0
   ){
 
-    alert("This product is out of stock.");
+    alert(
+      "This product is out of stock."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !Number.isFinite(price)
+  ){
+
+    alert(
+      "Product price is unavailable."
+    );
 
     return;
 
@@ -1157,6 +1285,7 @@ function addCart(product){
 
     }
 
+
     existing.quantity++;
 
   }else{
@@ -1167,7 +1296,7 @@ function addCart(product){
 
       name:product.name,
 
-      price:Number(product.price),
+      price:price,
 
       image:product.image || "",
 
@@ -1223,7 +1352,8 @@ function changeQuantity(
 
 
   const newQuantity =
-    item.quantity + change;
+    Number(item.quantity) +
+    Number(change);
 
 
   if(newQuantity <= 0){
@@ -1236,7 +1366,7 @@ function changeQuantity(
 
 
   if(
-    newQuantity > item.stock
+    newQuantity > Number(item.stock)
   ){
 
     alert(
@@ -1334,13 +1464,18 @@ function renderCart(){
 
     `;
 
+
     document.getElementById(
       "cartTotal"
-    ).textContent = "৳0";
+    ).textContent =
+      "৳0";
+
 
     document.getElementById(
       "checkoutButton"
-    ).style.display = "none";
+    ).style.display =
+      "none";
+
 
     return;
 
@@ -1349,7 +1484,8 @@ function renderCart(){
 
   document.getElementById(
     "checkoutButton"
-  ).style.display = "block";
+  ).style.display =
+    "block";
 
 
   box.innerHTML =
@@ -1408,7 +1544,8 @@ function renderCart(){
 
               <div class="cart-item-price">
 
-                ৳${Number(item.price).toLocaleString("en-BD")}
+                ৳${Number(item.price)
+                  .toLocaleString("en-BD")}
 
                 ×
 
@@ -1416,7 +1553,8 @@ function renderCart(){
 
                 =
 
-                ৳${subtotal.toLocaleString("en-BD")}
+                ৳${subtotal
+                  .toLocaleString("en-BD")}
 
               </div>
 
@@ -1424,7 +1562,10 @@ function renderCart(){
               <div class="quantity">
 
                 <button
-                  onclick="changeQuantity('${safe(item.id)}',-1)"
+                  onclick="changeQuantity(
+                    '${safe(item.id)}',
+                    -1
+                  )"
                 >
                   −
                 </button>
@@ -1436,7 +1577,10 @@ function renderCart(){
 
 
                 <button
-                  onclick="changeQuantity('${safe(item.id)}',1)"
+                  onclick="changeQuantity(
+                    '${safe(item.id)}',
+                    1
+                  )"
                 >
                   +
                 </button>
@@ -1446,7 +1590,9 @@ function renderCart(){
 
               <button
                 class="remove-btn"
-                onclick="removeFromCart('${safe(item.id)}')"
+                onclick="removeFromCart(
+                  '${safe(item.id)}'
+                )"
               >
                 Remove
               </button>
@@ -1465,7 +1611,8 @@ function renderCart(){
     "cartTotal"
   ).textContent =
     "৳" +
-    getCartTotal().toLocaleString("en-BD");
+    getCartTotal()
+      .toLocaleString("en-BD");
 
 }
 
@@ -1493,9 +1640,13 @@ function toggleCart(){
 
     renderCart();
 
+
     section.scrollIntoView({
+
       behavior:"smooth",
+
       block:"start"
+
     });
 
   }
@@ -1529,7 +1680,8 @@ function checkout(){
 
   document.getElementById(
     "checkoutButton"
-  ).style.display = "none";
+  ).style.display =
+    "none";
 
 
   document.getElementById(
@@ -1540,8 +1692,11 @@ function checkout(){
   document.getElementById(
     "checkoutBox"
   ).scrollIntoView({
+
     behavior:"smooth",
+
     block:"start"
+
   });
 
 }
@@ -1754,10 +1909,18 @@ async function placeOrder(){
             "Content-Type":
               "application/json",
 
+            /*
+              IMPORTANT:
+              We don't request the inserted
+              row back because public SELECT
+              access is not needed.
+            */
+
             "Prefer":
-              "return=representation"
+              "return=minimal"
 
           },
+
 
           body:JSON.stringify({
 
@@ -1784,6 +1947,10 @@ async function placeOrder(){
       await response.text();
 
 
+    /* ==========================
+       ERROR CHECK
+    ========================== */
+
     if(!response.ok){
 
       console.error(
@@ -1800,48 +1967,9 @@ async function placeOrder(){
     }
 
 
-    let orderData = null;
-
-
-    try{
-
-      orderData =
-        JSON.parse(responseText);
-
-    }catch(error){
-
-      console.log(
-        "Order response was not JSON."
-      );
-
-    }
-
-
-    /* ==========================
-       ORDER ID
-    ========================== */
-
-    let orderIdText =
-      "Order received";
-
-
-    if(
-      Array.isArray(orderData) &&
-      orderData.length > 0 &&
-      orderData[0].id
-    ){
-
-      orderIdText =
-        "Order ID: #" +
-        orderData[0].id;
-
-    }
-
-
-    document.getElementById(
-      "orderId"
-    ).textContent =
-      orderIdText;
+    console.log(
+      "Order submitted successfully."
+    );
 
 
     /* ==========================
@@ -1849,6 +1977,7 @@ async function placeOrder(){
     ========================== */
 
     cart = [];
+
 
     saveCart();
 
@@ -1868,12 +1997,19 @@ async function placeOrder(){
 
     document.getElementById(
       "checkoutButton"
-    ).style.display = "none";
+    ).style.display =
+      "none";
 
 
     /* ==========================
-       SUCCESS
+       SUCCESS MESSAGE
     ========================== */
+
+    document.getElementById(
+      "orderId"
+    ).textContent =
+      "Order received successfully.";
+
 
     document.getElementById(
       "orderSuccess"
@@ -1883,8 +2019,11 @@ async function placeOrder(){
     document.getElementById(
       "orderSuccess"
     ).scrollIntoView({
+
       behavior:"smooth",
+
       block:"start"
+
     });
 
 
@@ -2027,7 +2166,7 @@ async function loadProducts(){
         function(product){
 
           /* ======================
-             EXACT COLUMN NAMES
+             EXACT SUPABASE COLUMNS
           ====================== */
 
           const name =
@@ -2131,7 +2270,9 @@ async function loadProducts(){
             priceHTML += `
 
               <span class="old">
-                ৳${oldPrice.toLocaleString("en-BD")}
+                ৳${oldPrice.toLocaleString(
+                  "en-BD"
+                )}
               </span>
 
             `;
@@ -2172,7 +2313,8 @@ async function loadProducts(){
 
           if(
             Number.isFinite(stock) &&
-            stock > 0
+            stock > 0 &&
+            Number.isFinite(price)
           ){
 
             const cartProduct = {
@@ -2192,18 +2334,22 @@ async function loadProducts(){
 
             const encodedProduct =
               JSON.stringify(cartProduct)
+
                 .replace(
                   /&/g,
                   "\\u0026"
                 )
+
                 .replace(
                   /</g,
                   "\\u003c"
                 )
+
                 .replace(
                   />/g,
                   "\\u003e"
                 )
+
                 .replace(
                   /'/g,
                   "\\u0027"
