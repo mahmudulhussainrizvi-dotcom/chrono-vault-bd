@@ -30,13 +30,11 @@ a{
   color:inherit
 }
 
-button{
+button,
+input,
+textarea{
   font-family:inherit
 }
-
-/* =========================
-   HEADER
-========================= */
 
 header{
   position:sticky;
@@ -100,10 +98,6 @@ header{
   color:#080808
 }
 
-/* =========================
-   HERO
-========================= */
-
 .hero{
   text-align:center;
   padding:80px 20px 65px;
@@ -128,10 +122,6 @@ header{
   margin:auto
 }
 
-/* =========================
-   SECTION
-========================= */
-
 .section{
   max-width:1200px;
   margin:auto;
@@ -147,10 +137,6 @@ header{
   color:#d4af37;
   font-size:30px
 }
-
-/* =========================
-   PRODUCTS
-========================= */
 
 .products{
   display:grid;
@@ -258,9 +244,7 @@ header{
   padding:40px
 }
 
-/* =========================
-   WHY
-========================= */
+/* WHY */
 
 .why{
   display:grid;
@@ -282,9 +266,7 @@ header{
   margin-bottom:8px
 }
 
-/* =========================
-   CART SECTION
-========================= */
+/* CART */
 
 .cart-section{
   display:none;
@@ -446,9 +428,137 @@ header{
   opacity:.9
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* CHECKOUT */
+
+.checkout-box{
+  display:none;
+  margin-top:25px;
+  padding-top:25px;
+  border-top:1px solid #292929
+}
+
+.checkout-box.show{
+  display:block
+}
+
+.checkout-title{
+  color:#d4af37;
+  font-size:22px;
+  margin-bottom:18px
+}
+
+.form-group{
+  margin-bottom:15px
+}
+
+.form-group label{
+  display:block;
+  color:#bbb;
+  font-size:14px;
+  margin-bottom:6px
+}
+
+.form-group input,
+.form-group textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #444;
+  border-radius:8px;
+  background:#181818;
+  color:#fff;
+  outline:none;
+  font-size:15px
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+  border-color:#d4af37
+}
+
+.form-group textarea{
+  min-height:100px;
+  resize:vertical
+}
+
+.payment-box{
+  background:#181818;
+  border:1px solid #292929;
+  border-radius:8px;
+  padding:13px;
+  margin-bottom:15px
+}
+
+.payment-box strong{
+  color:#d4af37
+}
+
+.payment-box p{
+  color:#aaa;
+  font-size:13px;
+  margin-top:3px
+}
+
+.place-order-btn{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:8px;
+  background:#d4af37;
+  color:#080808;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:16px
+}
+
+.place-order-btn:disabled{
+  opacity:.5;
+  cursor:not-allowed
+}
+
+.cancel-checkout{
+  width:100%;
+  margin-top:10px;
+  padding:11px;
+  border:1px solid #555;
+  border-radius:8px;
+  background:transparent;
+  color:#aaa;
+  cursor:pointer
+}
+
+/* SUCCESS */
+
+.order-success{
+  display:none;
+  text-align:center;
+  padding:30px 10px
+}
+
+.order-success.show{
+  display:block
+}
+
+.success-icon{
+  font-size:55px;
+  margin-bottom:10px
+}
+
+.order-success h2{
+  color:#d4af37;
+  margin-bottom:10px
+}
+
+.order-success p{
+  color:#bbb;
+  margin-bottom:6px
+}
+
+.order-id{
+  color:#d4af37;
+  font-weight:bold;
+  font-size:18px;
+  margin:12px 0
+}
 
 footer{
   text-align:center;
@@ -461,9 +571,7 @@ footer b{
   color:#d4af37
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media(max-width:600px){
 
@@ -549,13 +657,7 @@ footer b{
 </style>
 </head>
 
-
 <body>
-
-
-<!-- =========================
-     HEADER
-========================= -->
 
 <header>
 
@@ -573,25 +675,18 @@ footer b{
 
     </div>
 
-
     <button
       class="cart"
       onclick="toggleCart()"
     >
-
       🛒 Cart:
       <span id="cartCount">0</span>
-
     </button>
 
   </div>
 
 </header>
 
-
-<!-- =========================
-     HERO
-========================= -->
 
 <section class="hero">
 
@@ -610,10 +705,6 @@ footer b{
 </section>
 
 
-<!-- =========================
-     PRODUCTS
-========================= -->
-
 <section class="section">
 
   <div class="title">
@@ -623,7 +714,6 @@ footer b{
     </h2>
 
   </div>
-
 
   <div
     id="products"
@@ -639,9 +729,7 @@ footer b{
 </section>
 
 
-<!-- =========================
-     CART
-========================= -->
+<!-- CART -->
 
 <section
   id="cartSection"
@@ -689,20 +777,141 @@ footer b{
 
 
     <button
+      id="checkoutButton"
       class="checkout-btn"
       onclick="checkout()"
     >
       Proceed to Checkout
     </button>
 
+
+    <!-- CHECKOUT FORM -->
+
+    <div
+      id="checkoutBox"
+      class="checkout-box"
+    >
+
+      <div class="checkout-title">
+        📦 Delivery Information
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="customerName">
+          Full Name
+        </label>
+
+        <input
+          type="text"
+          id="customerName"
+          placeholder="Enter your full name"
+          autocomplete="name"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="customerPhone">
+          Phone Number
+        </label>
+
+        <input
+          type="tel"
+          id="customerPhone"
+          placeholder="01XXXXXXXXX"
+          inputmode="tel"
+          autocomplete="tel"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="customerAddress">
+          Full Delivery Address
+        </label>
+
+        <textarea
+          id="customerAddress"
+          placeholder="House/Road, Area, Thana, District"
+          autocomplete="street-address"
+        ></textarea>
+
+      </div>
+
+
+      <div class="payment-box">
+
+        <strong>
+          💵 Cash on Delivery
+        </strong>
+
+        <p>
+          Pay when your order is delivered.
+        </p>
+
+      </div>
+
+
+      <button
+        id="placeOrderButton"
+        class="place-order-btn"
+        onclick="placeOrder()"
+      >
+        Place Order
+      </button>
+
+
+      <button
+        class="cancel-checkout"
+        onclick="cancelCheckout()"
+      >
+        Back to Cart
+      </button>
+
+    </div>
+
+
+    <!-- ORDER SUCCESS -->
+
+    <div
+      id="orderSuccess"
+      class="order-success"
+    >
+
+      <div class="success-icon">
+        ✅
+      </div>
+
+      <h2>
+        Order Placed Successfully!
+      </h2>
+
+      <p>
+        Thank you for shopping with CHRONO VAULT BD.
+      </p>
+
+      <div
+        id="orderId"
+        class="order-id"
+      >
+      </div>
+
+      <p>
+        We will contact you soon to confirm your order.
+      </p>
+
+    </div>
+
   </div>
 
 </section>
 
-
-<!-- =========================
-     WHY
-========================= -->
 
 <section class="section">
 
@@ -713,7 +922,6 @@ footer b{
     </h2>
 
   </div>
-
 
   <div class="why">
 
@@ -765,10 +973,6 @@ footer b{
 </section>
 
 
-<!-- =========================
-     FOOTER
-========================= -->
-
 <footer>
 
   <p>
@@ -784,7 +988,6 @@ footer b{
 
 <script>
 
-
 /* ================================
    SUPABASE
 ================================ */
@@ -797,7 +1000,7 @@ const SUPABASE_KEY =
 
 
 /* ================================
-   CART STORAGE
+   CART
 ================================ */
 
 let cart = [];
@@ -883,7 +1086,7 @@ function saveCart(){
 
 
 /* ================================
-   UPDATE CART COUNT
+   CART COUNT
 ================================ */
 
 function updateCartCount(){
@@ -899,12 +1102,9 @@ function updateCartCount(){
     );
 
 
-  const cartCount =
-    document.getElementById("cartCount");
-
-
-  cartCount.textContent =
-    count;
+  document.getElementById(
+    "cartCount"
+  ).textContent = count;
 
 }
 
@@ -918,9 +1118,19 @@ function addCart(product){
   const id =
     String(product.id);
 
-
   const stock =
     Number(product.stock);
+
+  if(
+    !Number.isFinite(stock) ||
+    stock <= 0
+  ){
+
+    alert("This product is out of stock.");
+
+    return;
+
+  }
 
 
   const existing =
@@ -1053,7 +1263,7 @@ function changeQuantity(
 
 
 /* ================================
-   REMOVE CART
+   REMOVE
 ================================ */
 
 function removeFromCart(id){
@@ -1074,6 +1284,28 @@ function removeFromCart(id){
   updateCartCount();
 
   renderCart();
+
+}
+
+
+/* ================================
+   CART TOTAL
+================================ */
+
+function getCartTotal(){
+
+  return cart.reduce(
+    function(sum,item){
+
+      return sum +
+        (
+          Number(item.price) *
+          Number(item.quantity)
+        );
+
+    },
+    0
+  );
 
 }
 
@@ -1106,9 +1338,18 @@ function renderCart(){
       "cartTotal"
     ).textContent = "৳0";
 
+    document.getElementById(
+      "checkoutButton"
+    ).style.display = "none";
+
     return;
 
   }
+
+
+  document.getElementById(
+    "checkoutButton"
+  ).style.display = "block";
 
 
   box.innerHTML =
@@ -1116,8 +1357,8 @@ function renderCart(){
       function(item){
 
         const subtotal =
-          item.price *
-          item.quantity;
+          Number(item.price) *
+          Number(item.quantity);
 
 
         let imageHTML = "";
@@ -1167,7 +1408,7 @@ function renderCart(){
 
               <div class="cart-item-price">
 
-                ৳${item.price.toLocaleString("en-BD")}
+                ৳${Number(item.price).toLocaleString("en-BD")}
 
                 ×
 
@@ -1220,26 +1461,11 @@ function renderCart(){
     ).join("");
 
 
-  const total =
-    cart.reduce(
-      function(sum,item){
-
-        return sum +
-          (
-            item.price *
-            item.quantity
-          );
-
-      },
-      0
-    );
-
-
   document.getElementById(
     "cartTotal"
   ).textContent =
     "৳" +
-    total.toLocaleString("en-BD");
+    getCartTotal().toLocaleString("en-BD");
 
 }
 
@@ -1278,7 +1504,7 @@ function toggleCart(){
 
 
 /* ================================
-   CHECKOUT
+   CHECKOUT OPEN
 ================================ */
 
 function checkout(){
@@ -1296,9 +1522,410 @@ function checkout(){
   }
 
 
-  alert(
-    "Checkout system will be connected next."
-  );
+  document.getElementById(
+    "checkoutBox"
+  ).classList.add("show");
+
+
+  document.getElementById(
+    "checkoutButton"
+  ).style.display = "none";
+
+
+  document.getElementById(
+    "orderSuccess"
+  ).classList.remove("show");
+
+
+  document.getElementById(
+    "checkoutBox"
+  ).scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+}
+
+
+/* ================================
+   CANCEL CHECKOUT
+================================ */
+
+function cancelCheckout(){
+
+  document.getElementById(
+    "checkoutBox"
+  ).classList.remove("show");
+
+
+  document.getElementById(
+    "checkoutButton"
+  ).style.display =
+    cart.length > 0
+      ? "block"
+      : "none";
+
+}
+
+
+/* ================================
+   PLACE ORDER
+================================ */
+
+async function placeOrder(){
+
+  if(
+    cart.length === 0
+  ){
+
+    alert(
+      "Your cart is empty."
+    );
+
+    return;
+
+  }
+
+
+  const name =
+    document.getElementById(
+      "customerName"
+    ).value.trim();
+
+
+  const phone =
+    document.getElementById(
+      "customerPhone"
+    ).value.trim();
+
+
+  const address =
+    document.getElementById(
+      "customerAddress"
+    ).value.trim();
+
+
+  /* ============================
+     VALIDATION
+  ============================ */
+
+  if(!name){
+
+    alert(
+      "Please enter your full name."
+    );
+
+    document.getElementById(
+      "customerName"
+    ).focus();
+
+    return;
+
+  }
+
+
+  if(!phone){
+
+    alert(
+      "Please enter your phone number."
+    );
+
+    document.getElementById(
+      "customerPhone"
+    ).focus();
+
+    return;
+
+  }
+
+
+  const cleanPhone =
+    phone.replace(
+      /[\s-]/g,
+      ""
+    );
+
+
+  if(
+    !/^01\d{9}$/.test(cleanPhone)
+  ){
+
+    alert(
+      "Please enter a valid Bangladesh phone number. Example: 01712345678"
+    );
+
+    document.getElementById(
+      "customerPhone"
+    ).focus();
+
+    return;
+
+  }
+
+
+  if(!address){
+
+    alert(
+      "Please enter your full delivery address."
+    );
+
+    document.getElementById(
+      "customerAddress"
+    ).focus();
+
+    return;
+
+  }
+
+
+  const total =
+    getCartTotal();
+
+
+  /* ============================
+     ORDER ITEMS
+  ============================ */
+
+  const orderItems =
+    cart.map(
+      function(item){
+
+        return {
+
+          product_id:item.id,
+
+          name:item.name,
+
+          price:Number(item.price),
+
+          quantity:Number(item.quantity),
+
+          subtotal:
+            Number(item.price) *
+            Number(item.quantity)
+
+        };
+
+      }
+    );
+
+
+  /* ============================
+     BUTTON LOCK
+  ============================ */
+
+  const button =
+    document.getElementById(
+      "placeOrderButton"
+    );
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "Placing Order...";
+
+
+  try{
+
+    /* ==========================
+       INSERT ORDER
+    ========================== */
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/orders",
+
+        {
+
+          method:"POST",
+
+          headers:{
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json",
+
+            "Prefer":
+              "return=representation"
+
+          },
+
+          body:JSON.stringify({
+
+            customer_name:name,
+
+            phone:cleanPhone,
+
+            address:address,
+
+            items:orderItems,
+
+            total:total,
+
+            status:"Pending"
+
+          })
+
+        }
+
+      );
+
+
+    const responseText =
+      await response.text();
+
+
+    if(!response.ok){
+
+      console.error(
+        "Order Error:",
+        response.status,
+        responseText
+      );
+
+
+      throw new Error(
+        "Order could not be placed."
+      );
+
+    }
+
+
+    let orderData = null;
+
+
+    try{
+
+      orderData =
+        JSON.parse(responseText);
+
+    }catch(error){
+
+      console.log(
+        "Order response was not JSON."
+      );
+
+    }
+
+
+    /* ==========================
+       ORDER ID
+    ========================== */
+
+    let orderIdText =
+      "Order received";
+
+
+    if(
+      Array.isArray(orderData) &&
+      orderData.length > 0 &&
+      orderData[0].id
+    ){
+
+      orderIdText =
+        "Order ID: #" +
+        orderData[0].id;
+
+    }
+
+
+    document.getElementById(
+      "orderId"
+    ).textContent =
+      orderIdText;
+
+
+    /* ==========================
+       CLEAR CART
+    ========================== */
+
+    cart = [];
+
+    saveCart();
+
+    updateCartCount();
+
+    renderCart();
+
+
+    /* ==========================
+       HIDE FORM
+    ========================== */
+
+    document.getElementById(
+      "checkoutBox"
+    ).classList.remove("show");
+
+
+    document.getElementById(
+      "checkoutButton"
+    ).style.display = "none";
+
+
+    /* ==========================
+       SUCCESS
+    ========================== */
+
+    document.getElementById(
+      "orderSuccess"
+    ).classList.add("show");
+
+
+    document.getElementById(
+      "orderSuccess"
+    ).scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+
+    /* ==========================
+       CLEAR FORM
+    ========================== */
+
+    document.getElementById(
+      "customerName"
+    ).value = "";
+
+
+    document.getElementById(
+      "customerPhone"
+    ).value = "";
+
+
+    document.getElementById(
+      "customerAddress"
+    ).value = "";
+
+
+  }catch(error){
+
+    console.error(
+      "Checkout Error:",
+      error
+    );
+
+
+    alert(
+      "Order could not be placed. Please try again."
+    );
+
+  }
+
+
+  button.disabled = false;
+
+  button.textContent =
+    "Place Order";
 
 }
 
@@ -1399,9 +2026,9 @@ async function loadProducts(){
       products.map(
         function(product){
 
-          /* ============================
-             EXACT SUPABASE COLUMN NAMES
-          ============================ */
+          /* ======================
+             EXACT COLUMN NAMES
+          ====================== */
 
           const name =
             product.Name ||
@@ -1434,9 +2061,9 @@ async function loadProducts(){
             product.id;
 
 
-          /* ============================
+          /* ======================
              IMAGE
-          ============================ */
+          ====================== */
 
           let imageHTML;
 
@@ -1470,9 +2097,9 @@ async function loadProducts(){
           }
 
 
-          /* ============================
+          /* ======================
              PRICE
-          ============================ */
+          ====================== */
 
           let priceHTML;
 
@@ -1495,10 +2122,6 @@ async function loadProducts(){
           }
 
 
-          /* ============================
-             OLD PRICE
-          ============================ */
-
           if(
             Number.isFinite(oldPrice) &&
             oldPrice > 0 &&
@@ -1516,9 +2139,9 @@ async function loadProducts(){
           }
 
 
-          /* ============================
+          /* ======================
              STOCK
-          ============================ */
+          ====================== */
 
           let stockHTML;
 
@@ -1540,12 +2163,11 @@ async function loadProducts(){
           }
 
 
-          /* ============================
+          /* ======================
              BUTTON
-          ============================ */
+          ====================== */
 
-          let buttonHTML =
-            "";
+          let buttonHTML = "";
 
 
           if(
@@ -1553,45 +2175,46 @@ async function loadProducts(){
             stock > 0
           ){
 
-            const cartProduct =
-              {
+            const cartProduct = {
 
-                id:productId,
+              id:productId,
 
-                name:name,
+              name:name,
 
-                price:price,
+              price:price,
 
-                image:imageUrl,
+              image:imageUrl,
 
-                stock:stock
+              stock:stock
 
-              };
+            };
 
 
-            const productJSON =
-              JSON.stringify(
-                cartProduct
-              )
-              .replace(
-                /\\/g,
-                "\\\\"
-              )
-              .replace(
-                /'/g,
-                "\\'"
-              )
-              .replace(
-                /"/g,
-                "&quot;"
-              );
+            const encodedProduct =
+              JSON.stringify(cartProduct)
+                .replace(
+                  /&/g,
+                  "\\u0026"
+                )
+                .replace(
+                  /</g,
+                  "\\u003c"
+                )
+                .replace(
+                  />/g,
+                  "\\u003e"
+                )
+                .replace(
+                  /'/g,
+                  "\\u0027"
+                );
 
 
             buttonHTML = `
 
               <button
                 class="btn"
-                onclick='addCart(${JSON.stringify(cartProduct).replace(/'/g,"&#39;")})'
+                onclick='addCart(${encodedProduct})'
               >
                 Add to Cart
               </button>
@@ -1601,9 +2224,9 @@ async function loadProducts(){
           }
 
 
-          /* ============================
+          /* ======================
              PRODUCT CARD
-          ============================ */
+          ====================== */
 
           return `
 
@@ -1686,7 +2309,6 @@ updateCartCount();
 renderCart();
 
 loadProducts();
-
 
 </script>
 
