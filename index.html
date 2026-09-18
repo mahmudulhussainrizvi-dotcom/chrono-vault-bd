@@ -18,6 +18,10 @@
 
 <style>
 
+/* ================================
+   RESET
+================================ */
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -44,6 +48,10 @@ button,
 input,
 textarea{
   font-family:inherit
+}
+
+button{
+  cursor:pointer
 }
 
 
@@ -103,9 +111,8 @@ header{
   background:transparent;
   padding:9px 15px;
   border-radius:20px;
-  cursor:pointer;
-  white-space:nowrap;
-  font-weight:bold
+  font-weight:bold;
+  white-space:nowrap
 }
 
 .cart:hover{
@@ -149,7 +156,7 @@ header{
 
 
 /* ================================
-   SECTION
+   SECTIONS
 ================================ */
 
 .section{
@@ -219,7 +226,7 @@ header{
 
 .info h3{
   font-size:17px;
-  margin-bottom:8px
+  margin-bottom:7px
 }
 
 .category{
@@ -250,22 +257,34 @@ header{
 .btn{
   display:block;
   width:100%;
-  margin-top:14px;
+  margin-top:10px;
   padding:11px;
   border:0;
   background:#d4af37;
   color:#080808;
   font-weight:bold;
-  border-radius:8px;
-  cursor:pointer
+  border-radius:8px
 }
 
 .btn:hover{
   opacity:.9
 }
 
-.btn:active{
-  transform:scale(.98)
+.details-btn{
+  display:block;
+  width:100%;
+  margin-top:9px;
+  padding:10px;
+  border:1px solid #555;
+  background:#181818;
+  color:#ccc;
+  font-weight:bold;
+  border-radius:8px
+}
+
+.details-btn:hover{
+  color:#d4af37;
+  border-color:#d4af37
 }
 
 .empty{
@@ -278,6 +297,157 @@ header{
   text-align:center;
   color:#d4af37;
   padding:40px
+}
+
+
+/* ================================
+   PRODUCT DETAILS
+================================ */
+
+.product-details{
+  display:none;
+  max-width:1000px;
+  margin:30px auto 0;
+  padding:0 4% 50px
+}
+
+.product-details.show{
+  display:block
+}
+
+.details-box{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:16px;
+  overflow:hidden
+}
+
+.details-grid{
+  display:grid;
+  grid-template-columns:
+    minmax(280px,1fr)
+    minmax(280px,1fr)
+}
+
+.details-image{
+  min-height:420px;
+  background:#171717;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px
+}
+
+.details-image img{
+  width:100%;
+  height:100%;
+  max-height:420px;
+  object-fit:contain
+}
+
+.details-noimg{
+  font-size:90px;
+  color:#d4af37
+}
+
+.details-info{
+  padding:35px
+}
+
+.details-category{
+  color:#d4af37;
+  font-size:13px;
+  letter-spacing:2px;
+  text-transform:uppercase
+}
+
+.details-info h2{
+  font-size:30px;
+  margin:8px 0 15px
+}
+
+.details-price{
+  color:#d4af37;
+  font-size:28px;
+  font-weight:bold
+}
+
+.details-old-price{
+  color:#777;
+  text-decoration:line-through;
+  font-size:15px;
+  margin-left:8px
+}
+
+.details-stock{
+  color:#aaa;
+  margin-top:7px;
+  font-size:14px
+}
+
+.details-description{
+  margin-top:22px;
+  color:#bbb;
+  font-size:15px;
+  line-height:1.7
+}
+
+.specs{
+  margin-top:25px;
+  border-top:1px solid #292929;
+  padding-top:20px
+}
+
+.specs h3{
+  color:#d4af37;
+  margin-bottom:12px
+}
+
+.spec-row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:7px 0;
+  border-bottom:1px solid #1f1f1f;
+  font-size:13px
+}
+
+.spec-row span:first-child{
+  color:#777
+}
+
+.spec-row span:last-child{
+  color:#bbb;
+  text-align:right
+}
+
+.details-actions{
+  display:flex;
+  gap:10px;
+  margin-top:25px
+}
+
+.details-add{
+  flex:1;
+  padding:13px;
+  border:0;
+  background:#d4af37;
+  color:#080808;
+  font-weight:bold;
+  border-radius:8px
+}
+
+.details-close{
+  padding:13px 18px;
+  border:1px solid #555;
+  background:#181818;
+  color:#aaa;
+  border-radius:8px
+}
+
+.details-close:hover{
+  color:#d4af37;
+  border-color:#d4af37
 }
 
 
@@ -346,8 +516,7 @@ header{
   background:transparent;
   color:#aaa;
   padding:7px 12px;
-  border-radius:7px;
-  cursor:pointer
+  border-radius:7px
 }
 
 .cart-item{
@@ -414,7 +583,6 @@ header{
   background:#181818;
   color:#fff;
   border-radius:5px;
-  cursor:pointer;
   font-size:18px
 }
 
@@ -427,7 +595,6 @@ header{
   border:0;
   background:transparent;
   color:#888;
-  cursor:pointer;
   font-size:13px;
   margin-top:5px
 }
@@ -463,12 +630,7 @@ header{
   border-radius:8px;
   background:#d4af37;
   color:#080808;
-  font-weight:bold;
-  cursor:pointer
-}
-
-.checkout-btn:hover{
-  opacity:.9
+  font-weight:bold
 }
 
 
@@ -552,7 +714,6 @@ header{
   background:#d4af37;
   color:#080808;
   font-weight:bold;
-  cursor:pointer;
   font-size:16px
 }
 
@@ -568,8 +729,7 @@ header{
   border:1px solid #555;
   border-radius:8px;
   background:transparent;
-  color:#aaa;
-  cursor:pointer
+  color:#aaa
 }
 
 
@@ -625,11 +785,6 @@ footer b{
   color:#d4af37
 }
 
-
-/* ================================
-   SOCIAL LINKS
-================================ */
-
 .social-links{
   display:flex;
   justify-content:center;
@@ -668,7 +823,7 @@ footer b{
    MOBILE
 ================================ */
 
-@media(max-width:600px){
+@media(max-width:700px){
 
   .nav{
     min-height:64px;
@@ -725,9 +880,38 @@ footer b{
     font-size:18px
   }
 
-  .btn{
-    padding:10px 6px;
-    font-size:13px
+  .btn,
+  .details-btn{
+    padding:9px 5px;
+    font-size:12px
+  }
+
+  .details-grid{
+    grid-template-columns:1fr
+  }
+
+  .details-image{
+    min-height:300px
+  }
+
+  .details-info{
+    padding:22px
+  }
+
+  .details-info h2{
+    font-size:24px
+  }
+
+  .details-price{
+    font-size:24px
+  }
+
+  .details-actions{
+    flex-direction:column
+  }
+
+  .details-close{
+    width:100%
   }
 
   .cart-item{
@@ -761,7 +945,7 @@ footer b{
 
 
 /* ================================
-   EXTRA SMALL MOBILE
+   EXTRA SMALL
 ================================ */
 
 @media(max-width:380px){
@@ -853,7 +1037,10 @@ footer b{
      PRODUCTS
 ================================ -->
 
-<section class="section">
+<section
+  id="productsSection"
+  class="section"
+>
 
   <div class="title">
 
@@ -871,6 +1058,162 @@ footer b{
 
     <div class="loading">
       Loading products...
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================================
+     PRODUCT DETAILS
+================================ -->
+
+<section
+  id="productDetails"
+  class="product-details"
+>
+
+  <div class="details-box">
+
+    <div class="details-grid">
+
+
+      <!-- IMAGE -->
+
+      <div
+        id="detailsImage"
+        class="details-image"
+      >
+      </div>
+
+
+      <!-- INFO -->
+
+      <div class="details-info">
+
+        <div
+          id="detailsCategory"
+          class="details-category"
+        >
+          WATCHES
+        </div>
+
+
+        <h2 id="detailsName">
+          Product
+        </h2>
+
+
+        <div
+          id="detailsPrice"
+          class="details-price"
+        >
+          ৳0
+        </div>
+
+
+        <div
+          id="detailsStock"
+          class="details-stock"
+        >
+          Stock: 0
+        </div>
+
+
+        <div
+          id="detailsDescription"
+          class="details-description"
+        >
+        </div>
+
+
+        <!-- SPECIFICATIONS -->
+
+        <div class="specs">
+
+          <h3>
+            Product Specifications
+          </h3>
+
+
+          <div class="spec-row">
+            <span>Movement</span>
+            <span>Quartz</span>
+          </div>
+
+
+          <div class="spec-row">
+            <span>Dial</span>
+            <span>46 mm</span>
+          </div>
+
+
+          <div class="spec-row">
+            <span>Thickness</span>
+            <span>13 mm</span>
+          </div>
+
+
+          <div class="spec-row">
+            <span>Case</span>
+            <span>Alloy</span>
+          </div>
+
+
+          <div class="spec-row">
+            <span>Band</span>
+            <span>Alloy Steel</span>
+          </div>
+
+
+          <div class="spec-row">
+            <span>Dial Shape</span>
+            <span>Round</span>
+          </div>
+
+
+          <div class="spec-row">
+            <span>Style</span>
+            <span>Business</span>
+          </div>
+
+
+          <div class="spec-row">
+            <span>Waterproof</span>
+            <span>No</span>
+          </div>
+
+
+          <div class="spec-row">
+            <span>Warranty</span>
+            <span>Store Warranty</span>
+          </div>
+
+        </div>
+
+
+        <div class="details-actions">
+
+          <button
+            id="detailsAddButton"
+            class="details-add"
+          >
+            Add to Cart
+          </button>
+
+
+          <button
+            class="details-close"
+            onclick="closeDetails()"
+          >
+            Back to Collection
+          </button>
+
+        </div>
+
+      </div>
+
     </div>
 
   </div>
@@ -937,9 +1280,7 @@ footer b{
     </button>
 
 
-    <!-- ============================
-         CHECKOUT FORM
-    ============================= -->
+    <!-- CHECKOUT -->
 
     <div
       id="checkoutBox"
@@ -1031,9 +1372,7 @@ footer b{
     </div>
 
 
-    <!-- ============================
-         ORDER SUCCESS
-    ============================= -->
+    <!-- SUCCESS -->
 
     <div
       id="orderSuccess"
@@ -1154,17 +1493,12 @@ footer b{
   </p>
 
 
-  <!-- ============================
-       SOCIAL MEDIA
-  ============================= -->
-
   <div class="social-links">
 
     <a
       href="https://www.facebook.com/share/1C3CqbjBXk/"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Facebook"
     >
       Facebook
     </a>
@@ -1174,7 +1508,6 @@ footer b{
       href="https://www.instagram.com/chronovaultbd?stkn=MWYxMjBxNXA1YTZ1bg=="
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Instagram"
     >
       Instagram
     </a>
@@ -1184,7 +1517,6 @@ footer b{
       href="https://www.tiktok.com/@chrono.vault.bd?_r=1&_t=ZS-99qPMd7PspQ"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="TikTok"
     >
       TikTok
     </a>
@@ -1194,7 +1526,6 @@ footer b{
       href="https://wa.me/8801326144735"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="WhatsApp"
     >
       WhatsApp
     </a>
@@ -1261,6 +1592,13 @@ try{
   cart = [];
 
 }
+
+
+/* ================================
+   CURRENT DETAIL PRODUCT
+================================ */
+
+let currentDetailProduct = null;
 
 
 /* ================================
@@ -1778,7 +2116,224 @@ function toggleCart(){
 
 
 /* ================================
-   CHECKOUT OPEN
+   SHOW PRODUCT DETAILS
+================================ */
+
+function showDetails(product){
+
+  currentDetailProduct =
+    product;
+
+
+  document.getElementById(
+    "detailsCategory"
+  ).textContent =
+    product.category ||
+    "WATCHES";
+
+
+  document.getElementById(
+    "detailsName"
+  ).textContent =
+    product.name ||
+    "Product";
+
+
+  const price =
+    Number(product.price);
+
+
+  const oldPrice =
+    Number(product.oldPrice);
+
+
+  let priceHTML =
+    Number.isFinite(price)
+      ? "৳" +
+        price.toLocaleString("en-BD")
+      : "Price unavailable";
+
+
+  if(
+    Number.isFinite(oldPrice) &&
+    oldPrice > 0 &&
+    oldPrice > price
+  ){
+
+    priceHTML += `
+
+      <span class="details-old-price">
+        ৳${oldPrice.toLocaleString("en-BD")}
+      </span>
+
+    `;
+
+  }
+
+
+  document.getElementById(
+    "detailsPrice"
+  ).innerHTML =
+    priceHTML;
+
+
+  const stock =
+    Number(product.stock);
+
+
+  document.getElementById(
+    "detailsStock"
+  ).textContent =
+    stock > 0
+      ? "Stock: " + stock
+      : "Out of stock";
+
+
+  document.getElementById(
+    "detailsDescription"
+  ).textContent =
+    product.description ||
+    "Premium three-eye men's watch set designed for a stylish and sophisticated look. Suitable for business and everyday wear.";
+
+
+  /* ==========================
+     IMAGE
+  ========================== */
+
+  const imageBox =
+    document.getElementById(
+      "detailsImage"
+    );
+
+
+  if(product.image){
+
+    imageBox.innerHTML = `
+
+      <img
+        src="${safe(product.image)}"
+        alt="${safe(product.name)}"
+        onerror="
+          this.style.display='none';
+          this.parentElement.innerHTML='<div class=&quot;details-noimg&quot;>⌚</div>';
+        "
+      >
+
+    `;
+
+  }else{
+
+    imageBox.innerHTML = `
+
+      <div class="details-noimg">
+        ⌚
+      </div>
+
+    `;
+
+  }
+
+
+  /* ==========================
+     ADD BUTTON
+  ========================== */
+
+  const addButton =
+    document.getElementById(
+      "detailsAddButton"
+    );
+
+
+  if(
+    stock > 0 &&
+    Number.isFinite(price)
+  ){
+
+    addButton.style.display =
+      "block";
+
+
+    addButton.textContent =
+      "Add to Cart";
+
+
+    addButton.onclick =
+      function(){
+
+        addCart(product);
+
+      };
+
+  }else{
+
+    addButton.style.display =
+      "none";
+
+  }
+
+
+  /* ==========================
+     SHOW
+  ========================== */
+
+  const details =
+    document.getElementById(
+      "productDetails"
+    );
+
+
+  details.classList.add(
+    "show"
+  );
+
+
+  details.scrollIntoView({
+
+    behavior:"smooth",
+
+    block:"start"
+
+  });
+
+}
+
+
+/* ================================
+   CLOSE DETAILS
+================================ */
+
+function closeDetails(){
+
+  const details =
+    document.getElementById(
+      "productDetails"
+    );
+
+
+  details.classList.remove(
+    "show"
+  );
+
+
+  currentDetailProduct =
+    null;
+
+
+  document.getElementById(
+    "productsSection"
+  ).scrollIntoView({
+
+    behavior:"smooth",
+
+    block:"start"
+
+  });
+
+}
+
+
+/* ================================
+   CHECKOUT
 ================================ */
 
 function checkout(){
@@ -1883,10 +2438,6 @@ async function placeOrder(){
     ).value.trim();
 
 
-  /* ============================
-     VALIDATION
-  ============================ */
-
   if(!name){
 
     alert(
@@ -1960,10 +2511,6 @@ async function placeOrder(){
     getCartTotal();
 
 
-  /* ============================
-     ORDER ITEMS
-  ============================ */
-
   const orderItems =
     cart.map(
       function(item){
@@ -1988,10 +2535,6 @@ async function placeOrder(){
     );
 
 
-  /* ============================
-     BUTTON LOCK
-  ============================ */
-
   const button =
     document.getElementById(
       "placeOrderButton"
@@ -2005,10 +2548,6 @@ async function placeOrder(){
 
 
   try{
-
-    /* ==========================
-       INSERT ORDER
-    ========================== */
 
     const response =
       await fetch(
@@ -2063,10 +2602,6 @@ async function placeOrder(){
       await response.text();
 
 
-    /* ==========================
-       ERROR CHECK
-    ========================== */
-
     if(!response.ok){
 
       console.error(
@@ -2083,15 +2618,6 @@ async function placeOrder(){
     }
 
 
-    console.log(
-      "Order submitted successfully."
-    );
-
-
-    /* ==========================
-       CLEAR CART
-    ========================== */
-
     cart = [];
 
 
@@ -2101,10 +2627,6 @@ async function placeOrder(){
 
     renderCart();
 
-
-    /* ==========================
-       HIDE FORM
-    ========================== */
 
     document.getElementById(
       "checkoutBox"
@@ -2116,10 +2638,6 @@ async function placeOrder(){
     ).style.display =
       "none";
 
-
-    /* ==========================
-       SUCCESS MESSAGE
-    ========================== */
 
     document.getElementById(
       "orderId"
@@ -2142,10 +2660,6 @@ async function placeOrder(){
 
     });
 
-
-    /* ==========================
-       CLEAR FORM
-    ========================== */
 
     document.getElementById(
       "customerName"
@@ -2282,7 +2796,7 @@ async function loadProducts(){
         function(product){
 
           /* ======================
-             EXACT SUPABASE COLUMNS
+             SUPABASE COLUMNS
           ====================== */
 
           const name =
@@ -2292,7 +2806,7 @@ async function loadProducts(){
 
           const category =
             product.Category ||
-            "Watch";
+            "Watches";
 
 
           const price =
@@ -2309,6 +2823,11 @@ async function loadProducts(){
 
           const imageUrl =
             product.image_url ||
+            "";
+
+
+          const description =
+            product.Description ||
             "";
 
 
@@ -2400,24 +2919,10 @@ async function loadProducts(){
              STOCK
           ====================== */
 
-          let stockHTML;
-
-
-          if(
-            Number.isFinite(stock) &&
+          const stockHTML =
             stock > 0
-          ){
-
-            stockHTML =
-              "Stock: " +
-              stock;
-
-          }else{
-
-            stockHTML =
-              "Out of stock";
-
-          }
+              ? "Stock: " + stock
+              : "Out of stock";
 
 
           /* ======================
@@ -2427,50 +2932,51 @@ async function loadProducts(){
           let buttonHTML = "";
 
 
+          const cartProduct = {
+
+            id:productId,
+
+            name:name,
+
+            price:price,
+
+            oldPrice:oldPrice,
+
+            image:imageUrl,
+
+            stock:stock,
+
+            category:category,
+
+            description:description
+
+          };
+
+
+          const encodedProduct =
+            JSON.stringify(cartProduct)
+              .replace(
+                /&/g,
+                "\\u0026"
+              )
+              .replace(
+                /</g,
+                "\\u003c"
+              )
+              .replace(
+                />/g,
+                "\\u003e"
+              )
+              .replace(
+                /'/g,
+                "\\u0027"
+              );
+
+
           if(
-            Number.isFinite(stock) &&
             stock > 0 &&
             Number.isFinite(price)
           ){
-
-            const cartProduct = {
-
-              id:productId,
-
-              name:name,
-
-              price:price,
-
-              image:imageUrl,
-
-              stock:stock
-
-            };
-
-
-            const encodedProduct =
-              JSON.stringify(cartProduct)
-
-                .replace(
-                  /&/g,
-                  "\\u0026"
-                )
-
-                .replace(
-                  /</g,
-                  "\\u003c"
-                )
-
-                .replace(
-                  />/g,
-                  "\\u003e"
-                )
-
-                .replace(
-                  /'/g,
-                  "\\u0027"
-                );
-
 
             buttonHTML = `
 
@@ -2487,7 +2993,23 @@ async function loadProducts(){
 
 
           /* ======================
-             PRODUCT CARD
+             DETAILS BUTTON
+          ====================== */
+
+          const detailsButton = `
+
+            <button
+              class="details-btn"
+              onclick='showDetails(${encodedProduct})'
+            >
+              View Details
+            </button>
+
+          `;
+
+
+          /* ======================
+             CARD
           ====================== */
 
           return `
@@ -2524,6 +3046,8 @@ async function loadProducts(){
 
 
                 ${buttonHTML}
+
+                ${detailsButton}
 
               </div>
 
