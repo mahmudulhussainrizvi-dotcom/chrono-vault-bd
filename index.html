@@ -105,7 +105,14 @@ header{
   font-size:14px
 }
 
-.cart{
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:8px
+}
+
+.cart,
+.track-top{
   border:1px solid #d4af37;
   color:#d4af37;
   background:transparent;
@@ -115,7 +122,8 @@ header{
   white-space:nowrap
 }
 
-.cart:hover{
+.cart:hover,
+.track-top:hover{
   background:#d4af37;
   color:#080808
 }
@@ -769,6 +777,246 @@ header{
   margin:12px 0
 }
 
+.track-after-order{
+  margin-top:18px;
+  padding:11px 18px;
+  border:1px solid #d4af37;
+  border-radius:8px;
+  background:transparent;
+  color:#d4af37;
+  font-weight:bold
+}
+
+.track-after-order:hover{
+  background:#d4af37;
+  color:#080808
+}
+
+
+/* ================================
+   TRACK ORDER
+================================ */
+
+.track-section{
+  display:block;
+  max-width:900px;
+  margin:0 auto;
+  padding:35px 4% 60px
+}
+
+.track-box{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:14px;
+  padding:25px
+}
+
+.track-title{
+  text-align:center;
+  margin-bottom:8px
+}
+
+.track-title h2{
+  color:#d4af37;
+  font-size:28px
+}
+
+.track-title p{
+  color:#888;
+  font-size:13px;
+  margin-top:5px
+}
+
+.track-form{
+  margin-top:22px
+}
+
+.track-button{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:8px;
+  background:#d4af37;
+  color:#080808;
+  font-weight:bold;
+  font-size:15px
+}
+
+.track-button:disabled{
+  opacity:.5;
+  cursor:not-allowed
+}
+
+.track-error{
+  display:none;
+  margin-top:15px;
+  padding:12px;
+  border:1px solid #553333;
+  background:#1a1010;
+  border-radius:8px;
+  color:#dd9999;
+  text-align:center;
+  font-size:14px
+}
+
+.track-error.show{
+  display:block
+}
+
+.track-result{
+  display:none;
+  margin-top:25px;
+  border-top:1px solid #292929;
+  padding-top:25px
+}
+
+.track-result.show{
+  display:block
+}
+
+.track-order-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:20px
+}
+
+.track-order-id{
+  color:#d4af37;
+  font-size:20px;
+  font-weight:bold
+}
+
+.track-date{
+  color:#777;
+  font-size:12px;
+  text-align:right
+}
+
+.status-badge{
+  display:inline-block;
+  padding:8px 13px;
+  border-radius:20px;
+  border:1px solid #d4af37;
+  color:#d4af37;
+  font-size:13px;
+  font-weight:bold;
+  margin-bottom:20px
+}
+
+.track-customer{
+  background:#181818;
+  border:1px solid #292929;
+  border-radius:9px;
+  padding:15px;
+  margin-bottom:18px
+}
+
+.track-customer p{
+  color:#aaa;
+  font-size:14px;
+  margin:4px 0
+}
+
+.track-customer strong{
+  color:#fff
+}
+
+.track-items{
+  border-top:1px solid #292929;
+  padding-top:15px
+}
+
+.track-items h3{
+  color:#d4af37;
+  font-size:17px;
+  margin-bottom:10px
+}
+
+.track-item{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:10px 0;
+  border-bottom:1px solid #1f1f1f;
+  font-size:14px
+}
+
+.track-item-name{
+  color:#bbb
+}
+
+.track-item-price{
+  color:#d4af37;
+  white-space:nowrap
+}
+
+.track-total{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:18px;
+  padding-top:15px;
+  border-top:1px solid #292929
+}
+
+.track-total strong{
+  color:#aaa
+}
+
+.track-total span{
+  color:#d4af37;
+  font-size:23px;
+  font-weight:bold
+}
+
+.status-timeline{
+  margin-top:25px;
+  padding-top:20px;
+  border-top:1px solid #292929
+}
+
+.status-timeline h3{
+  color:#d4af37;
+  font-size:17px;
+  margin-bottom:15px
+}
+
+.timeline{
+  display:grid;
+  gap:10px
+}
+
+.timeline-step{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#555;
+  font-size:14px
+}
+
+.timeline-dot{
+  width:12px;
+  height:12px;
+  border:1px solid #555;
+  border-radius:50%;
+  flex-shrink:0
+}
+
+.timeline-step.active{
+  color:#d4af37
+}
+
+.timeline-step.active .timeline-dot{
+  background:#d4af37;
+  border-color:#d4af37
+}
+
+.timeline-step.current{
+  font-weight:bold
+}
+
 
 /* ================================
    FOOTER
@@ -840,9 +1088,14 @@ footer b{
     height:40px
   }
 
-  .cart{
-    padding:8px 11px;
-    font-size:13px
+  .nav-actions{
+    gap:5px
+  }
+
+  .cart,
+  .track-top{
+    padding:8px 9px;
+    font-size:11px
   }
 
   .hero{
@@ -932,6 +1185,27 @@ footer b{
     font-size:20px
   }
 
+  .track-section{
+    padding:30px 4% 50px
+  }
+
+  .track-box{
+    padding:18px
+  }
+
+  .track-title h2{
+    font-size:24px
+  }
+
+  .track-order-top{
+    flex-direction:column;
+    align-items:flex-start
+  }
+
+  .track-date{
+    text-align:left
+  }
+
   .social-links{
     gap:8px
   }
@@ -954,9 +1228,10 @@ footer b{
     font-size:10px
   }
 
-  .cart{
-    padding:7px 9px;
-    font-size:12px
+  .cart,
+  .track-top{
+    padding:7px 7px;
+    font-size:10px
   }
 
   .social-links a{
@@ -994,18 +1269,30 @@ footer b{
     </div>
 
 
-    <button
-      class="cart"
-      onclick="toggleCart()"
-    >
+    <div class="nav-actions">
 
-      🛒 Cart:
+      <button
+        class="track-top"
+        onclick="scrollToTracking()"
+      >
+        📦 Track
+      </button>
 
-      <span id="cartCount">
-        0
-      </span>
 
-    </button>
+      <button
+        class="cart"
+        onclick="toggleCart()"
+      >
+
+        🛒 Cart:
+
+        <span id="cartCount">
+          0
+        </span>
+
+      </button>
+
+    </div>
 
   </div>
 
@@ -1079,16 +1366,12 @@ footer b{
     <div class="details-grid">
 
 
-      <!-- IMAGE -->
-
       <div
         id="detailsImage"
         class="details-image"
       >
       </div>
 
-
-      <!-- INFO -->
 
       <div class="details-info">
 
@@ -1127,8 +1410,6 @@ footer b{
         >
         </div>
 
-
-        <!-- SPECIFICATIONS -->
 
         <div class="specs">
 
@@ -1396,12 +1677,238 @@ footer b{
         id="orderId"
         class="order-id"
       >
-        Order received successfully.
+        Order ID: -
       </div>
 
       <p>
-        We will contact you soon to confirm your order.
+        Save this Order ID to track your order later.
       </p>
+
+
+      <button
+        class="track-after-order"
+        onclick="scrollToTracking()"
+      >
+        📦 Track My Order
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================================
+     TRACK ORDER
+================================ -->
+
+<section
+  id="trackingSection"
+  class="track-section"
+>
+
+  <div class="track-box">
+
+    <div class="track-title">
+
+      <h2>
+        📦 Track My Order
+      </h2>
+
+      <p>
+        Enter your Order ID and phone number to check your order status.
+      </p>
+
+    </div>
+
+
+    <div class="track-form">
+
+
+      <div class="form-group">
+
+        <label for="trackOrderId">
+          Order ID
+        </label>
+
+        <input
+          type="number"
+          id="trackOrderId"
+          placeholder="Enter your Order ID"
+          inputmode="numeric"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="trackPhone">
+          Phone Number
+        </label>
+
+        <input
+          type="tel"
+          id="trackPhone"
+          placeholder="01XXXXXXXXX"
+          inputmode="tel"
+        >
+
+      </div>
+
+
+      <button
+        id="trackButton"
+        class="track-button"
+        onclick="trackOrder()"
+      >
+        Track Order
+      </button>
+
+
+      <div
+        id="trackError"
+        class="track-error"
+      >
+      </div>
+
+
+      <!-- RESULT -->
+
+      <div
+        id="trackResult"
+        class="track-result"
+      >
+
+        <div class="track-order-top">
+
+          <div
+            id="trackOrderNumber"
+            class="track-order-id"
+          >
+            Order #-
+          </div>
+
+          <div
+            id="trackDate"
+            class="track-date"
+          >
+          </div>
+
+        </div>
+
+
+        <div
+          id="statusBadge"
+          class="status-badge"
+        >
+          Pending
+        </div>
+
+
+        <div class="track-customer">
+
+          <p>
+            Customer:
+            <strong id="trackCustomerName">
+              -
+            </strong>
+          </p>
+
+          <p>
+            Phone:
+            <strong id="trackCustomerPhone">
+              -
+            </strong>
+          </p>
+
+        </div>
+
+
+        <div class="track-items">
+
+          <h3>
+            Ordered Products
+          </h3>
+
+          <div id="trackItemsList">
+          </div>
+
+        </div>
+
+
+        <div class="track-total">
+
+          <strong>
+            Total
+          </strong>
+
+          <span id="trackTotal">
+            ৳0
+          </span>
+
+        </div>
+
+
+        <div class="status-timeline">
+
+          <h3>
+            Order Progress
+          </h3>
+
+
+          <div class="timeline">
+
+            <div
+              class="timeline-step"
+              data-status="Pending"
+            >
+              <div class="timeline-dot"></div>
+              <span>Pending</span>
+            </div>
+
+
+            <div
+              class="timeline-step"
+              data-status="Confirmed"
+            >
+              <div class="timeline-dot"></div>
+              <span>Confirmed</span>
+            </div>
+
+
+            <div
+              class="timeline-step"
+              data-status="Processing"
+            >
+              <div class="timeline-dot"></div>
+              <span>Processing</span>
+            </div>
+
+
+            <div
+              class="timeline-step"
+              data-status="Shipped"
+            >
+              <div class="timeline-dot"></div>
+              <span>Shipped</span>
+            </div>
+
+
+            <div
+              class="timeline-step"
+              data-status="Delivered"
+            >
+              <div class="timeline-dot"></div>
+              <span>Delivered</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
 
     </div>
 
@@ -2196,10 +2703,6 @@ function showDetails(product){
     "Premium three-eye men's watch set designed for a stylish and sophisticated look. Suitable for business and everyday wear.";
 
 
-  /* ==========================
-     IMAGE
-  ========================== */
-
   const imageBox =
     document.getElementById(
       "detailsImage"
@@ -2234,10 +2737,6 @@ function showDetails(product){
   }
 
 
-  /* ==========================
-     ADD BUTTON
-  ========================== */
-
   const addButton =
     document.getElementById(
       "detailsAddButton"
@@ -2271,10 +2770,6 @@ function showDetails(product){
 
   }
 
-
-  /* ==========================
-     SHOW
-  ========================== */
 
   const details =
     document.getElementById(
@@ -2572,7 +3067,7 @@ async function placeOrder(){
               "application/json",
 
             "Prefer":
-              "return=minimal"
+              "return=representation"
 
           },
 
@@ -2618,6 +3113,42 @@ async function placeOrder(){
     }
 
 
+    let createdOrder = null;
+
+
+    try{
+
+      const parsed =
+        JSON.parse(responseText);
+
+
+      if(
+        Array.isArray(parsed) &&
+        parsed.length > 0
+      ){
+
+        createdOrder =
+          parsed[0];
+
+      }else if(
+        parsed &&
+        typeof parsed === "object"
+      ){
+
+        createdOrder =
+          parsed;
+
+      }
+
+    }catch(parseError){
+
+      console.warn(
+        "Could not parse order response."
+      );
+
+    }
+
+
     cart = [];
 
 
@@ -2639,10 +3170,36 @@ async function placeOrder(){
       "none";
 
 
-    document.getElementById(
-      "orderId"
-    ).textContent =
-      "Order received successfully.";
+    if(
+      createdOrder &&
+      createdOrder.id !== undefined
+    ){
+
+      document.getElementById(
+        "orderId"
+      ).textContent =
+        "Order ID: #" +
+        createdOrder.id;
+
+
+      document.getElementById(
+        "trackOrderId"
+      ).value =
+        createdOrder.id;
+
+      document.getElementById(
+        "trackPhone"
+      ).value =
+        cleanPhone;
+
+    }else{
+
+      document.getElementById(
+        "orderId"
+      ).textContent =
+        "Order placed successfully.";
+
+    }
 
 
     document.getElementById(
@@ -2695,6 +3252,529 @@ async function placeOrder(){
 
   button.textContent =
     "Place Order";
+
+}
+
+
+/* ================================
+   SCROLL TO TRACKING
+================================ */
+
+function scrollToTracking(){
+
+  const section =
+    document.getElementById(
+      "trackingSection"
+    );
+
+
+  section.scrollIntoView({
+
+    behavior:"smooth",
+
+    block:"start"
+
+  });
+
+}
+
+
+/* ================================
+   TRACK ORDER
+================================ */
+
+async function trackOrder(){
+
+  const orderId =
+    document.getElementById(
+      "trackOrderId"
+    ).value.trim();
+
+
+  const phone =
+    document.getElementById(
+      "trackPhone"
+    ).value.trim();
+
+
+  const cleanPhone =
+    phone.replace(
+      /[\s-]/g,
+      ""
+    );
+
+
+  const errorBox =
+    document.getElementById(
+      "trackError"
+    );
+
+
+  const resultBox =
+    document.getElementById(
+      "trackResult"
+    );
+
+
+  errorBox.classList.remove(
+    "show"
+  );
+
+
+  resultBox.classList.remove(
+    "show"
+  );
+
+
+  if(!orderId){
+
+    errorBox.textContent =
+      "Please enter your Order ID.";
+
+    errorBox.classList.add(
+      "show"
+    );
+
+    return;
+
+  }
+
+
+  if(!/^\d+$/.test(orderId)){
+
+    errorBox.textContent =
+      "Please enter a valid Order ID.";
+
+    errorBox.classList.add(
+      "show"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !/^01\d{9}$/.test(cleanPhone)
+  ){
+
+    errorBox.textContent =
+      "Please enter the same valid Bangladesh phone number used for your order.";
+
+    errorBox.classList.add(
+      "show"
+    );
+
+    return;
+
+  }
+
+
+  const button =
+    document.getElementById(
+      "trackButton"
+    );
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "Checking Order...";
+
+
+  try{
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/rpc/track_order",
+
+        {
+
+          method:"POST",
+
+          headers:{
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json"
+
+          },
+
+
+          body:JSON.stringify({
+
+            p_order_id:
+              Number(orderId),
+
+            p_phone:
+              cleanPhone
+
+          })
+
+        }
+
+      );
+
+
+    const responseText =
+      await response.text();
+
+
+    if(!response.ok){
+
+      console.error(
+        "Tracking Error:",
+        response.status,
+        responseText
+      );
+
+
+      throw new Error(
+        "Tracking request failed."
+      );
+
+    }
+
+
+    let orders = [];
+
+
+    try{
+
+      orders =
+        JSON.parse(responseText);
+
+    }catch(error){
+
+      orders = [];
+
+    }
+
+
+    if(
+      !Array.isArray(orders) ||
+      orders.length === 0
+    ){
+
+      errorBox.textContent =
+        "No order found. Please check your Order ID and phone number.";
+
+      errorBox.classList.add(
+        "show"
+      );
+
+      return;
+
+    }
+
+
+    const order =
+      orders[0];
+
+
+    renderTrackedOrder(
+      order
+    );
+
+
+    resultBox.classList.add(
+      "show"
+    );
+
+
+    resultBox.scrollIntoView({
+
+      behavior:"smooth",
+
+      block:"start"
+
+    });
+
+
+  }catch(error){
+
+    console.error(
+      "Track Order Error:",
+      error
+    );
+
+
+    errorBox.textContent =
+      "Could not check the order right now. Please try again.";
+
+    errorBox.classList.add(
+      "show"
+    );
+
+  }
+
+
+  button.disabled = false;
+
+  button.textContent =
+    "Track Order";
+
+}
+
+
+/* ================================
+   RENDER TRACKED ORDER
+================================ */
+
+function renderTrackedOrder(order){
+
+  const status =
+    order.status ||
+    "Pending";
+
+
+  document.getElementById(
+    "trackOrderNumber"
+  ).textContent =
+    "Order #" +
+    order.id;
+
+
+  const createdDate =
+    order.created_at
+      ? new Date(
+          order.created_at
+        ).toLocaleString(
+          "en-BD",
+          {
+            dateStyle:"medium",
+            timeStyle:"short"
+          }
+        )
+      : "";
+
+
+  document.getElementById(
+    "trackDate"
+  ).textContent =
+    createdDate;
+
+
+  document.getElementById(
+    "statusBadge"
+  ).textContent =
+    status;
+
+
+  document.getElementById(
+    "trackCustomerName"
+  ).textContent =
+    order.customer_name ||
+    "-";
+
+
+  document.getElementById(
+    "trackCustomerPhone"
+  ).textContent =
+    order.phone ||
+    "-";
+
+
+  let items = [];
+
+
+  if(
+    Array.isArray(order.items)
+  ){
+
+    items =
+      order.items;
+
+  }else if(
+    typeof order.items ===
+    "string"
+  ){
+
+    try{
+
+      items =
+        JSON.parse(order.items);
+
+    }catch(error){
+
+      items = [];
+
+    }
+
+  }
+
+
+  const itemsBox =
+    document.getElementById(
+      "trackItemsList"
+    );
+
+
+  if(
+    !Array.isArray(items) ||
+    items.length === 0
+  ){
+
+    itemsBox.innerHTML = `
+
+      <div class="empty">
+        Product information unavailable.
+      </div>
+
+    `;
+
+  }else{
+
+    itemsBox.innerHTML =
+      items.map(
+        function(item){
+
+          const name =
+            item.name ||
+            "Product";
+
+
+          const quantity =
+            Number(
+              item.quantity || 0
+            );
+
+
+          const subtotal =
+            Number(
+              item.subtotal ||
+              (
+                Number(item.price || 0) *
+                quantity
+              )
+            );
+
+
+          return `
+
+            <div class="track-item">
+
+              <div class="track-item-name">
+
+                ${safe(name)}
+
+                ×
+
+                ${quantity}
+
+              </div>
+
+
+              <div class="track-item-price">
+
+                ৳${subtotal
+                  .toLocaleString("en-BD")}
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      ).join("");
+
+  }
+
+
+  const total =
+    Number(order.total || 0);
+
+
+  document.getElementById(
+    "trackTotal"
+  ).textContent =
+    "৳" +
+    total.toLocaleString("en-BD");
+
+
+  updateTimeline(
+    status
+  );
+
+}
+
+
+/* ================================
+   UPDATE TIMELINE
+================================ */
+
+function updateTimeline(status){
+
+  const steps =
+    [
+      "Pending",
+      "Confirmed",
+      "Processing",
+      "Shipped",
+      "Delivered"
+    ];
+
+
+  const currentIndex =
+    steps.indexOf(status);
+
+
+  document
+    .querySelectorAll(
+      ".timeline-step"
+    )
+    .forEach(
+      function(step){
+
+        const stepStatus =
+          step.dataset.status;
+
+
+        const stepIndex =
+          steps.indexOf(
+            stepStatus
+          );
+
+
+        step.classList.remove(
+          "active",
+          "current"
+        );
+
+
+        if(
+          currentIndex >= 0 &&
+          stepIndex <= currentIndex
+        ){
+
+          step.classList.add(
+            "active"
+          );
+
+        }
+
+
+        if(
+          stepStatus === status
+        ){
+
+          step.classList.add(
+            "current"
+          );
+
+        }
+
+      }
+    );
 
 }
 
@@ -2795,10 +3875,6 @@ async function loadProducts(){
       products.map(
         function(product){
 
-          /* ======================
-             SUPABASE COLUMNS
-          ====================== */
-
           const name =
             product.Name ||
             "Unnamed Product";
@@ -2835,10 +3911,6 @@ async function loadProducts(){
             product.id;
 
 
-          /* ======================
-             IMAGE
-          ====================== */
-
           let imageHTML;
 
 
@@ -2870,10 +3942,6 @@ async function loadProducts(){
 
           }
 
-
-          /* ======================
-             PRICE
-          ====================== */
 
           let priceHTML;
 
@@ -2915,19 +3983,11 @@ async function loadProducts(){
           }
 
 
-          /* ======================
-             STOCK
-          ====================== */
-
           const stockHTML =
             stock > 0
               ? "Stock: " + stock
               : "Out of stock";
 
-
-          /* ======================
-             BUTTON
-          ====================== */
 
           let buttonHTML = "";
 
@@ -2992,10 +4052,6 @@ async function loadProducts(){
           }
 
 
-          /* ======================
-             DETAILS BUTTON
-          ====================== */
-
           const detailsButton = `
 
             <button
@@ -3007,10 +4063,6 @@ async function loadProducts(){
 
           `;
 
-
-          /* ======================
-             CARD
-          ====================== */
 
           return `
 
