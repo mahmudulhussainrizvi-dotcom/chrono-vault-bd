@@ -215,6 +215,47 @@ button{
 .date{
   color:#888;
   font-size:13px;
+  margin-top:4px;
+}
+
+/* STATUS */
+
+.status-area{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:8px;
+}
+
+.status-label{
+  color:#d4af37;
+  font-weight:bold;
+  font-size:14px;
+}
+
+.status-select{
+  min-width:150px;
+  padding:10px 12px;
+  border-radius:9px;
+  border:1px solid #d4af37;
+  background:#080808;
+  color:#d4af37;
+  font-size:14px;
+  font-weight:bold;
+  outline:none;
+}
+
+.status-select:focus{
+  box-shadow:0 0 0 2px rgba(212,175,55,.15);
+}
+
+.status-select:disabled{
+  opacity:.6;
+}
+
+.status-message{
+  font-size:12px;
+  color:#75d98b;
 }
 
 .info{
@@ -354,6 +395,15 @@ button{
   .logout-btn{
     width:100%;
   }
+
+  .status-area{
+    width:100%;
+    align-items:stretch;
+  }
+
+  .status-select{
+    width:100%;
+  }
 }
 </style>
 </head>
@@ -365,7 +415,9 @@ button{
 
     <div class="brand">
       <div class="logo">CV</div>
-      <div class="brand-text">CHRONO VAULT BD</div>
+      <div class="brand-text">
+        CHRONO VAULT BD
+      </div>
     </div>
 
     <button class="logout-btn" onclick="logout()">
@@ -419,12 +471,16 @@ button{
 
       <div>
         <h1>Admin Dashboard</h1>
+
         <div class="subtitle">
           CHRONO VAULT BD — Order Management
         </div>
       </div>
 
-      <button class="refresh-btn" onclick="loadOrders()">
+      <button
+        class="refresh-btn"
+        onclick="loadOrders()"
+      >
         ↻ Refresh Orders
       </button>
 
@@ -492,6 +548,7 @@ async function login(){
   const message =
     document.getElementById("loginMessage");
 
+
   if(!email || !password){
 
     message.innerHTML =
@@ -500,6 +557,7 @@ async function login(){
     return;
   }
 
+
   message.innerHTML =
     '<div class="loading">Logging in...</div>';
 
@@ -507,7 +565,8 @@ async function login(){
   try{
 
     const response = await fetch(
-      SUPABASE_URL + "/auth/v1/token?grant_type=password",
+      SUPABASE_URL +
+      "/auth/v1/token?grant_type=password",
       {
         method:"POST",
 
@@ -524,7 +583,8 @@ async function login(){
     );
 
 
-    const data = await response.json();
+    const data =
+      await response.json();
 
 
     if(!response.ok){
@@ -546,11 +606,12 @@ async function login(){
 
     showAdmin();
 
+
   }catch(error){
 
     message.innerHTML =
       '<div class="error">' +
-      error.message +
+      escapeHTML(error.message) +
       '</div>';
 
   }
@@ -584,9 +645,12 @@ async function loadOrders(){
   const ordersBox =
     document.getElementById("orders");
 
+
   const session =
     JSON.parse(
-      localStorage.getItem("chronoAdminSession") || "null"
+      localStorage.getItem(
+        "chronoAdminSession"
+      ) || "null"
     );
 
 
@@ -619,7 +683,8 @@ async function loadOrders(){
     );
 
 
-    const data = await response.json();
+    const data =
+      await response.json();
 
 
     if(!response.ok){
@@ -640,10 +705,13 @@ async function loadOrders(){
 
     ordersBox.innerHTML =
       '<div class="empty">' +
+
       '<div style="color:#ff7070;margin-bottom:10px;">' +
       'Could not load orders' +
       '</div>' +
-      error.message +
+
+      escapeHTML(error.message) +
+
       '</div>';
 
   }
@@ -668,8 +736,8 @@ function renderOrders(orders){
   const pending =
     orders.filter(
       order =>
-        String(order.status || "").toLowerCase()
-        === "pending"
+        String(order.status || "")
+          .toLowerCase() === "pending"
     ).length;
 
 
@@ -677,10 +745,27 @@ function renderOrders(orders){
     pending;
 
 
+  /*
+    Cancelled orders are not counted
+    as sales.
+  */
+
   const sales =
     orders.reduce(
-      (sum,order) =>
-        sum + Number(order.total || 0),
+      (sum,order) => {
+
+        const status =
+          String(order.status || "")
+            .toLowerCase();
+
+        if(status === "cancelled"){
+          return sum;
+        }
+
+        return sum +
+          Number(order.total || 0);
+
+      },
       0
     );
 
@@ -705,6 +790,7 @@ function renderOrders(orders){
 
       let items = [];
 
+
       try{
 
         items =
@@ -726,6 +812,12 @@ function renderOrders(orders){
         : "—";
 
 
+      const currentStatus =
+        String(
+          order.status || "Pending"
+        );
+
+
       const itemHTML =
         items.length
 
@@ -736,12 +828,14 @@ function renderOrders(orders){
               item.name ||
               "Product";
 
+
             const qty =
               Number(
                 item.quantity ||
                 item.qty ||
                 1
               );
+
 
             const price =
               Number(
@@ -782,6 +876,7 @@ function renderOrders(orders){
           <div class="order-head">
 
             <div>
+
               <div class="order-id">
                 Order #${order.id}
               </div>
@@ -789,10 +884,71 @@ function renderOrders(orders){
               <div class="date">
                 ${created}
               </div>
+
             </div>
 
-            <div style="color:#d4af37;">
-              ${escapeHTML(order.status || "Pending")}
+
+            <div class="status-area">
+
+              <div class="status-label">
+                Status
+              </div>
+
+              <select
+                class="status-select"
+                id="status-${order.id}"
+                onchange="updateOrderStatus(${order.id}, this.value)"
+              >
+
+                <option
+                  value="Pending"
+                  ${currentStatus === "Pending" ? "selected" : ""}
+                >
+                  Pending
+                </option>
+
+                <option
+                  value="Confirmed"
+                  ${currentStatus === "Confirmed" ? "selected" : ""}
+                >
+                  Confirmed
+                </option>
+
+                <option
+                  value="Processing"
+                  ${currentStatus === "Processing" ? "selected" : ""}
+                >
+                  Processing
+                </option>
+
+                <option
+                  value="Shipped"
+                  ${currentStatus === "Shipped" ? "selected" : ""}
+                >
+                  Shipped
+                </option>
+
+                <option
+                  value="Delivered"
+                  ${currentStatus === "Delivered" ? "selected" : ""}
+                >
+                  Delivered
+                </option>
+
+                <option
+                  value="Cancelled"
+                  ${currentStatus === "Cancelled" ? "selected" : ""}
+                >
+                  Cancelled
+                </option>
+
+              </select>
+
+              <div
+                id="status-message-${order.id}"
+                class="status-message"
+              ></div>
+
             </div>
 
           </div>
@@ -805,7 +961,9 @@ function renderOrders(orders){
               <small>Customer Name</small>
 
               <div>
-                ${escapeHTML(order.customer_name)}
+                ${escapeHTML(
+                  order.customer_name
+                )}
               </div>
 
             </div>
@@ -816,7 +974,9 @@ function renderOrders(orders){
               <small>Phone</small>
 
               <div>
-                ${escapeHTML(order.phone)}
+                ${escapeHTML(
+                  order.phone
+                )}
               </div>
 
             </div>
@@ -827,7 +987,9 @@ function renderOrders(orders){
               <small>Delivery Address</small>
 
               <div>
-                ${escapeHTML(order.address)}
+                ${escapeHTML(
+                  order.address
+                )}
               </div>
 
             </div>
@@ -848,7 +1010,9 @@ function renderOrders(orders){
 
           <div class="items">
 
-            <h3>Ordered Products</h3>
+            <h3>
+              Ordered Products
+            </h3>
 
             ${itemHTML}
 
@@ -868,6 +1032,147 @@ function renderOrders(orders){
       `;
 
     }).join("");
+
+}
+
+
+/* ================================
+   UPDATE ORDER STATUS
+================================ */
+
+async function updateOrderStatus(
+  orderId,
+  newStatus
+){
+
+  const session =
+    JSON.parse(
+      localStorage.getItem(
+        "chronoAdminSession"
+      ) || "null"
+    );
+
+
+  if(!session || !session.access_token){
+
+    showLogin();
+
+    return;
+  }
+
+
+  const select =
+    document.getElementById(
+      "status-" + orderId
+    );
+
+
+  const message =
+    document.getElementById(
+      "status-message-" + orderId
+    );
+
+
+  if(select){
+
+    select.disabled = true;
+  }
+
+
+  if(message){
+
+    message.textContent =
+      "Updating...";
+    message.style.color =
+      "#d4af37";
+  }
+
+
+  try{
+
+    const response = await fetch(
+      SUPABASE_URL +
+      "/rest/v1/orders?id=eq." +
+      encodeURIComponent(orderId),
+      {
+        method:"PATCH",
+
+        headers:{
+          "apikey":SUPABASE_KEY,
+
+          "Authorization":
+            "Bearer " +
+            session.access_token,
+
+          "Content-Type":
+            "application/json",
+
+          "Prefer":
+            "return=representation"
+        },
+
+        body:JSON.stringify({
+          status:newStatus
+        })
+      }
+    );
+
+
+    const data =
+      await response.json();
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.message ||
+        data.error_description ||
+        "Could not update order status"
+      );
+
+    }
+
+
+    if(message){
+
+      message.textContent =
+        "Status updated ✓";
+
+      message.style.color =
+        "#75d98b";
+    }
+
+
+    /*
+      Refresh statistics after update.
+    */
+
+    setTimeout(
+      () => {
+        loadOrders();
+      },
+      500
+    );
+
+
+  }catch(error){
+
+    if(message){
+
+      message.textContent =
+        error.message;
+
+      message.style.color =
+        "#ff7070";
+    }
+
+
+    if(select){
+
+      select.disabled = false;
+    }
+
+  }
 
 }
 
@@ -893,10 +1198,15 @@ function logout(){
 
 function showLogin(){
 
-  document.getElementById("loginSection").style.display =
+  document.getElementById(
+    "loginSection"
+  ).style.display =
     "block";
 
-  document.getElementById("adminPanel").style.display =
+
+  document.getElementById(
+    "adminPanel"
+  ).style.display =
     "none";
 
 }
@@ -934,6 +1244,7 @@ if(savedSession){
 
     const session =
       JSON.parse(savedSession);
+
 
     if(session.access_token){
 
