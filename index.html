@@ -1,28 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1"
->
-
-<meta
-  name="theme-color"
-  content="#080808"
->
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080808">
 <title>CHRONO VAULT BD</title>
 
 <style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -55,10 +39,9 @@ button{
   cursor:pointer;
 }
 
-
-/* =========================================================
+/* =========================
    HEADER
-========================================================= */
+========================= */
 
 header{
   position:sticky;
@@ -77,7 +60,7 @@ header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:15px;
+  gap:12px;
 }
 
 .brand{
@@ -109,27 +92,30 @@ header{
 .header-actions{
   display:flex;
   align-items:center;
-  gap:8px;
+  justify-content:flex-end;
+  gap:7px;
+  flex-wrap:wrap;
 }
 
 .cart,
-.track-header-btn{
+.track-header-btn,
+.auth-header-btn{
   border:1px solid #d4af37;
   color:#d4af37;
   background:transparent;
-  padding:9px 15px;
+  padding:9px 13px;
   border-radius:20px;
   font-weight:bold;
   white-space:nowrap;
 }
 
 .cart:hover,
-.track-header-btn:hover{
+.track-header-btn:hover,
+.auth-header-btn:hover{
   background:#d4af37;
   color:#080808;
 }
 
-/* Hidden until successful order */
 .track-header-btn{
   display:none;
 }
@@ -138,20 +124,33 @@ header{
   display:block;
 }
 
+.auth-header-btn{
+  display:block;
+}
 
-/* =========================================================
+.user-name-btn{
+  border:1px solid #555;
+  color:#ddd;
+  background:#111;
+  padding:9px 13px;
+  border-radius:20px;
+  font-weight:bold;
+  white-space:nowrap;
+}
+
+.user-name-btn:hover{
+  border-color:#d4af37;
+  color:#d4af37;
+}
+
+/* =========================
    HERO
-========================================================= */
+========================= */
 
 .hero{
   text-align:center;
   padding:80px 20px 65px;
-  background:
-    radial-gradient(
-      circle,
-      #252010 0,
-      #080808 60%
-    );
+  background:radial-gradient(circle,#252010 0,#080808 60%);
 }
 
 .hero small{
@@ -172,10 +171,9 @@ header{
   margin:auto;
 }
 
-
-/* =========================================================
-   SECTIONS
-========================================================= */
+/* =========================
+   GENERAL
+========================= */
 
 .section{
   max-width:1200px;
@@ -193,15 +191,13 @@ header{
   font-size:30px;
 }
 
-
-/* =========================================================
+/* =========================
    PRODUCTS
-========================================================= */
+========================= */
 
 .products{
   display:grid;
-  grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:20px;
 }
 
@@ -317,10 +313,9 @@ header{
   padding:40px;
 }
 
-
-/* =========================================================
+/* =========================
    PRODUCT DETAILS
-========================================================= */
+========================= */
 
 .product-details{
   display:none;
@@ -342,9 +337,7 @@ header{
 
 .details-grid{
   display:grid;
-  grid-template-columns:
-    minmax(280px,1fr)
-    minmax(280px,1fr);
+  grid-template-columns:minmax(280px,1fr) minmax(280px,1fr);
 }
 
 .details-image{
@@ -468,10 +461,9 @@ header{
   border-color:#d4af37;
 }
 
-
-/* =========================================================
+/* =========================
    TRACK ORDER
-========================================================= */
+========================= */
 
 .track-section{
   max-width:900px;
@@ -631,12 +623,12 @@ header{
 }
 
 .track-code{
-  color:#d4af37 !important;
+  color:#d4af37!important;
   font-weight:bold;
 }
 
 .track-total{
-  color:#d4af37 !important;
+  color:#d4af37!important;
   font-weight:bold;
 }
 
@@ -645,7 +637,7 @@ header{
   padding:5px 10px;
   border-radius:20px;
   background:#252010;
-  color:#d4af37 !important;
+  color:#d4af37!important;
   border:1px solid #5a4b18;
   font-weight:bold;
 }
@@ -681,10 +673,9 @@ header{
   font-size:12px;
 }
 
-
-/* =========================================================
+/* =========================
    CART
-========================================================= */
+========================= */
 
 .cart-section{
   display:none;
@@ -782,13 +773,17 @@ header{
 }
 
 .quantity button{
-  width:28px;
-  height:28px;
+  width:30px;
+  height:30px;
   border:1px solid #555;
   background:#181818;
   color:#fff;
-  border-radius:5px;
-  font-size:18px;
+  border-radius:6px;
+}
+
+.quantity button:hover{
+  border-color:#d4af37;
+  color:#d4af37;
 }
 
 .quantity span{
@@ -797,28 +792,28 @@ header{
 }
 
 .remove-btn{
+  margin-top:8px;
   border:0;
   background:transparent;
-  color:#888;
-  font-size:13px;
-  margin-top:5px;
+  color:#b66;
+  font-size:12px;
 }
 
 .remove-btn:hover{
-  color:#d4af37;
+  color:#ff7777;
 }
 
 .cart-total{
-  border-top:1px solid #292929;
-  margin-top:20px;
-  padding-top:20px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
+  margin-top:20px;
+  padding-top:15px;
+  border-top:1px solid #292929;
 }
 
 .cart-total strong{
-  color:#aaa;
+  font-size:18px;
 }
 
 .cart-total span{
@@ -838,16 +833,11 @@ header{
   font-weight:bold;
 }
 
-
-/* =========================================================
-   CHECKOUT
-========================================================= */
-
 .checkout-box{
   display:none;
   margin-top:25px;
-  padding-top:25px;
   border-top:1px solid #292929;
+  padding-top:25px;
 }
 
 .checkout-box.show{
@@ -856,8 +846,9 @@ header{
 
 .checkout-title{
   color:#d4af37;
-  font-size:22px;
-  margin-bottom:18px;
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:20px;
 }
 
 .form-group{
@@ -894,11 +885,11 @@ header{
 }
 
 .payment-box{
+  padding:15px;
   background:#181818;
   border:1px solid #292929;
   border-radius:8px;
-  padding:13px;
-  margin-bottom:15px;
+  margin:18px 0;
 }
 
 .payment-box strong{
@@ -906,46 +897,43 @@ header{
 }
 
 .payment-box p{
-  color:#aaa;
+  color:#999;
   font-size:13px;
-  margin-top:3px;
+  margin-top:4px;
 }
 
 .place-order-btn{
   width:100%;
-  padding:14px;
+  padding:13px;
   border:0;
   border-radius:8px;
   background:#d4af37;
   color:#080808;
   font-weight:bold;
-  font-size:16px;
 }
 
 .place-order-btn:disabled{
   opacity:.5;
-  cursor:not-allowed;
 }
 
 .cancel-checkout{
   width:100%;
+  padding:12px;
   margin-top:10px;
-  padding:11px;
   border:1px solid #555;
   border-radius:8px;
-  background:transparent;
+  background:#181818;
   color:#aaa;
 }
-
-
-/* =========================================================
-   SUCCESS
-========================================================= */
 
 .order-success{
   display:none;
   text-align:center;
-  padding:30px 10px;
+  margin-top:25px;
+  padding:30px 20px;
+  background:#15150f;
+  border:1px solid #5a4b18;
+  border-radius:12px;
 }
 
 .order-success.show{
@@ -953,7 +941,7 @@ header{
 }
 
 .success-icon{
-  font-size:55px;
+  font-size:50px;
   margin-bottom:10px;
 }
 
@@ -963,51 +951,48 @@ header{
 }
 
 .order-success p{
-  color:#bbb;
-  margin-bottom:6px;
+  color:#aaa;
+  margin:6px 0;
 }
 
 .order-id{
+  margin:18px 0;
   color:#d4af37;
+  font-size:20px;
   font-weight:bold;
-  font-size:18px;
-  margin:12px 0;
+  padding:12px;
+  border:1px dashed #d4af37;
+  border-radius:8px;
 }
 
 .success-track-btn{
-  display:inline-block;
+  width:100%;
+  max-width:350px;
   margin-top:15px;
-  padding:11px 20px;
-  border:1px solid #d4af37;
-  background:transparent;
-  color:#d4af37;
+  padding:12px;
+  border:0;
   border-radius:8px;
+  background:#d4af37;
+  color:#080808;
   font-weight:bold;
 }
 
-.success-track-btn:hover{
-  background:#d4af37;
-  color:#080808;
-}
-
-
-/* =========================================================
-   WHY
-========================================================= */
+/* =========================
+   WHY SECTION
+========================= */
 
 .why{
   display:grid;
-  grid-template-columns:
-    repeat(auto-fit,minmax(180px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:15px;
 }
 
 .box{
   background:#111;
   border:1px solid #292929;
-  padding:25px;
   border-radius:12px;
-  text-align:center;
+  padding:20px;
+  color:#aaa;
 }
 
 .box strong{
@@ -1016,16 +1001,15 @@ header{
   margin-bottom:8px;
 }
 
-
-/* =========================================================
+/* =========================
    FOOTER
-========================================================= */
+========================= */
 
 footer{
   text-align:center;
   padding:40px 20px;
   border-top:1px solid #292929;
-  color:#888;
+  color:#777;
 }
 
 footer b{
@@ -1035,56 +1019,202 @@ footer b{
 .social-links{
   display:flex;
   justify-content:center;
-  align-items:center;
   flex-wrap:wrap;
   gap:10px;
   margin-top:20px;
 }
 
 .social-links a{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:9px 15px;
+  padding:9px 14px;
   border:1px solid #444;
   border-radius:20px;
-  color:#bbb;
+  color:#aaa;
   font-size:13px;
-  transition:.2s;
 }
 
 .social-links a:hover{
-  color:#d4af37;
   border-color:#d4af37;
-  transform:translateY(-1px);
+  color:#d4af37;
 }
 
 .social-note{
-  margin-top:15px;
-  color:#666;
+  margin-top:12px;
   font-size:12px;
 }
 
+/* =========================
+   AUTH MODAL
+========================= */
 
-/* =========================================================
-   MOBILE
-========================================================= */
+.auth-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:3000;
+  background:rgba(0,0,0,.78);
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.auth-overlay.show{
+  display:flex;
+}
+
+.auth-box{
+  width:100%;
+  max-width:430px;
+  max-height:90vh;
+  overflow:auto;
+  background:#111;
+  border:1px solid #5a4b18;
+  border-radius:16px;
+  padding:25px;
+  box-shadow:0 20px 70px rgba(0,0,0,.6);
+}
+
+.auth-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.auth-header h2{
+  color:#d4af37;
+}
+
+.auth-close{
+  width:35px;
+  height:35px;
+  border:1px solid #555;
+  background:#181818;
+  color:#aaa;
+  border-radius:50%;
+}
+
+.auth-close:hover{
+  color:#d4af37;
+  border-color:#d4af37;
+}
+
+.auth-tabs{
+  display:flex;
+  gap:8px;
+  margin-bottom:20px;
+}
+
+.auth-tab{
+  flex:1;
+  padding:10px;
+  border:1px solid #444;
+  background:#181818;
+  color:#aaa;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+.auth-tab.active{
+  background:#d4af37;
+  color:#080808;
+  border-color:#d4af37;
+}
+
+.auth-form{
+  display:none;
+}
+
+.auth-form.active{
+  display:block;
+}
+
+.auth-form-group{
+  margin-bottom:15px;
+}
+
+.auth-form-group label{
+  display:block;
+  color:#bbb;
+  font-size:14px;
+  margin-bottom:6px;
+}
+
+.auth-form-group input{
+  width:100%;
+  padding:12px;
+  border:1px solid #444;
+  border-radius:8px;
+  background:#181818;
+  color:#fff;
+  outline:none;
+}
+
+.auth-form-group input:focus{
+  border-color:#d4af37;
+}
+
+.auth-submit{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:8px;
+  background:#d4af37;
+  color:#080808;
+  font-weight:bold;
+}
+
+.auth-message{
+  display:none;
+  margin-bottom:15px;
+  padding:10px;
+  border-radius:8px;
+  font-size:13px;
+}
+
+.auth-message.show{
+  display:block;
+}
+
+.auth-message.success{
+  color:#c8e6c9;
+  background:#102012;
+  border:1px solid #28532b;
+}
+
+.auth-message.error{
+  color:#ffb3b3;
+  background:#201010;
+  border:1px solid #532828;
+}
+
+.auth-note{
+  color:#777;
+  font-size:12px;
+  margin-top:15px;
+  text-align:center;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(max-width:700px){
 
   .nav{
     min-height:64px;
-    padding:9px 4%;
+    padding:8px 3%;
   }
 
   .brand b{
     font-size:11px;
-    letter-spacing:1.5px;
+    letter-spacing:1px;
   }
 
   .logo{
     width:40px;
     height:40px;
+    font-size:14px;
   }
 
   .header-actions{
@@ -1092,27 +1222,23 @@ footer b{
   }
 
   .cart,
-  .track-header-btn{
-    padding:8px 9px;
-    font-size:12px;
+  .track-header-btn,
+  .auth-header-btn,
+  .user-name-btn{
+    padding:7px 8px;
+    font-size:11px;
   }
 
   .hero{
-    padding:60px 18px 50px;
+    padding:60px 15px 50px;
   }
 
   .hero h1{
-    font-size:35px;
-    letter-spacing:2px;
-  }
-
-  .section{
-    padding:45px 4%;
+    letter-spacing:1px;
   }
 
   .products{
-    grid-template-columns:
-      repeat(2,minmax(0,1fr));
+    grid-template-columns:repeat(2,minmax(0,1fr));
     gap:12px;
   }
 
@@ -1132,12 +1258,6 @@ footer b{
     font-size:18px;
   }
 
-  .btn,
-  .details-btn{
-    padding:9px 5px;
-    font-size:12px;
-  }
-
   .details-grid{
     grid-template-columns:1fr;
   }
@@ -1148,14 +1268,6 @@ footer b{
 
   .details-info{
     padding:22px;
-  }
-
-  .details-info h2{
-    font-size:24px;
-  }
-
-  .details-price{
-    font-size:24px;
   }
 
   .details-actions{
@@ -1188,11 +1300,6 @@ footer b{
     gap:8px;
   }
 
-  .social-links a{
-    padding:8px 12px;
-    font-size:12px;
-  }
-
   .track-box{
     padding:18px;
   }
@@ -1210,102 +1317,125 @@ footer b{
     max-width:100%;
     text-align:left;
   }
-
 }
 
+@media(max-width:430px){
 
-/* =========================================================
-   EXTRA SMALL
-========================================================= */
+  .brand{
+    gap:6px;
+  }
+
+  .brand b{
+    font-size:9px;
+  }
+
+  .logo{
+    width:36px;
+    height:36px;
+    font-size:12px;
+  }
+
+  .products{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .pic{
+    height:160px;
+  }
+
+  .btn,
+  .details-btn{
+    font-size:12px;
+    padding:9px;
+  }
+
+  .header-actions{
+    max-width:210px;
+  }
+}
 
 @media(max-width:380px){
 
   .brand b{
-    font-size:10px;
+    font-size:8px;
   }
 
   .cart,
-  .track-header-btn{
-    padding:7px 7px;
-    font-size:11px;
+  .track-header-btn,
+  .auth-header-btn,
+  .user-name-btn{
+    padding:6px 6px;
+    font-size:10px;
   }
 
-  .social-links a{
-    padding:7px 10px;
-    font-size:11px;
+  .products{
+    grid-template-columns:1fr;
   }
 
+  .pic{
+    height:230px;
+  }
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =======================================================
+<!-- =========================
      HEADER
-======================================================= -->
+========================= -->
 
 <header>
-
   <div class="nav">
 
     <div class="brand">
-
-      <div class="logo">
-        CV
-      </div>
-
-      <b>
-        CHRONO VAULT BD
-      </b>
-
+      <div class="logo">CV</div>
+      <b>CHRONO VAULT BD</b>
     </div>
-
 
     <div class="header-actions">
 
-      <!-- Hidden initially -->
       <button
         id="headerTrackButton"
         class="track-header-btn"
-        onclick="toggleTrackOrder()"
-      >
+        onclick="toggleTrackOrder()">
         📦 Track Order
       </button>
 
+      <button
+        id="authHeaderButton"
+        class="auth-header-btn"
+        onclick="openAuthModal()">
+        👤 Login / Sign Up
+      </button>
+
+      <button
+        id="userNameButton"
+        class="user-name-btn"
+        style="display:none"
+        onclick="openAccountMenu()">
+        👤 Account
+      </button>
 
       <button
         class="cart"
-        onclick="toggleCart()"
-      >
-        🛒 Cart:
-        <span id="cartCount">0</span>
+        onclick="toggleCart()">
+        🛒 Cart: <span id="cartCount">0</span>
       </button>
 
     </div>
-
   </div>
-
 </header>
 
-
-<!-- =======================================================
+<!-- =========================
      HERO
-======================================================= -->
+========================= -->
 
 <section class="hero">
 
-  <small>
-    WELCOME TO
-  </small>
+  <small>WELCOME TO</small>
 
-  <h1>
-    CHRONO VAULT BD
-  </h1>
+  <h1>CHRONO VAULT BD</h1>
 
   <p>
     More Than Just a Watch. It's a Lifestyle.
@@ -1313,102 +1443,68 @@ footer b{
 
 </section>
 
-
-<!-- =======================================================
+<!-- =========================
      PRODUCTS
-======================================================= -->
+========================= -->
 
-<section
-  id="productsSection"
-  class="section"
->
+<section id="productsSection" class="section">
 
   <div class="title">
-
-    <h2>
-      Our Collection
-    </h2>
-
+    <h2>Our Collection</h2>
   </div>
 
-
-  <div
-    id="products"
-    class="products"
-  >
-
+  <div id="products" class="products">
     <div class="loading">
       Loading products...
     </div>
-
   </div>
 
 </section>
 
-
-<!-- =======================================================
+<!-- =========================
      PRODUCT DETAILS
-======================================================= -->
+========================= -->
 
-<section
-  id="productDetails"
-  class="product-details"
->
+<section id="productDetails" class="product-details">
 
   <div class="details-box">
 
     <div class="details-grid">
 
-      <div
-        id="detailsImage"
-        class="details-image"
-      >
-      </div>
-
+      <div id="detailsImage" class="details-image"></div>
 
       <div class="details-info">
 
         <div
           id="detailsCategory"
-          class="details-category"
-        >
+          class="details-category">
           WATCHES
         </div>
-
 
         <h2 id="detailsName">
           Product
         </h2>
 
-
         <div
           id="detailsPrice"
-          class="details-price"
-        >
+          class="details-price">
           ৳0
         </div>
 
-
         <div
           id="detailsStock"
-          class="details-stock"
-        >
+          class="details-stock">
           Stock: 0
         </div>
 
-
         <div
           id="detailsDescription"
-          class="details-description"
-        >
+          class="details-description">
         </div>
-
 
         <div class="specs">
 
-          <h3>
-            Product Specifications
-          </h3>
+          <h3>Product Specifications</h3>
 
           <div class="spec-row">
             <span>Movement</span>
@@ -1457,67 +1553,53 @@ footer b{
 
         </div>
 
-
         <div class="details-actions">
 
           <button
             id="detailsAddButton"
-            class="details-add"
-          >
+            class="details-add">
             Add to Cart
           </button>
 
-
           <button
             class="details-close"
-            onclick="closeDetails()"
-          >
+            onclick="closeDetails()">
             Back to Collection
           </button>
 
         </div>
 
       </div>
-
     </div>
-
   </div>
 
 </section>
 
-
-<!-- =======================================================
+<!-- =========================
      TRACK ORDER
-======================================================= -->
+========================= -->
 
 <section
   id="trackSection"
-  class="track-section"
->
+  class="track-section">
 
   <div class="track-box">
 
     <div class="track-header">
 
-      <h2>
-        📦 Track Your Order
-      </h2>
-
+      <h2>📦 Track Your Order</h2>
 
       <button
         class="track-close"
-        onclick="toggleTrackOrder(false)"
-      >
+        onclick="toggleTrackOrder(false)">
         Close
       </button>
 
     </div>
 
-
     <p class="track-intro">
       Enter your Order Number and phone number to check your order status.
     </p>
-
 
     <div class="track-form-group">
 
@@ -1529,11 +1611,9 @@ footer b{
         type="text"
         id="trackingCode"
         placeholder="Example: CVBD-123456"
-        autocomplete="off"
-      >
+        autocomplete="off">
 
     </div>
-
 
     <div class="track-form-group">
 
@@ -1546,149 +1626,87 @@ footer b{
         id="trackingPhone"
         placeholder="01XXXXXXXXX"
         inputmode="tel"
-        autocomplete="tel"
-      >
+        autocomplete="tel">
 
     </div>
-
 
     <button
       id="trackButton"
       class="track-btn"
-      onclick="trackOrder()"
-    >
+      onclick="trackOrder()">
       Track Order
     </button>
 
-
     <div
       id="trackError"
-      class="track-error"
-    >
+      class="track-error">
     </div>
-
 
     <div
       id="trackResult"
-      class="track-result"
-    >
+      class="track-result">
 
       <div class="track-success-title">
         Order Found
       </div>
 
-
       <div class="track-summary">
 
         <div class="track-row">
-
-          <span>
-            Customer Name
-          </span>
-
-          <span id="resultCustomerName">
-          </span>
-
+          <span>Customer Name</span>
+          <span id="resultCustomerName"></span>
         </div>
 
-
         <div class="track-row">
-
-          <span>
-            Phone
-          </span>
-
-          <span id="resultPhone">
-          </span>
-
+          <span>Phone</span>
+          <span id="resultPhone"></span>
         </div>
 
-
         <div class="track-row">
-
-          <span>
-            Delivery Address
-          </span>
-
-          <span id="resultAddress">
-          </span>
-
+          <span>Delivery Address</span>
+          <span id="resultAddress"></span>
         </div>
 
-
         <div class="track-row">
-
-          <span>
-            Order Number
-          </span>
-
+          <span>Order Number</span>
           <span
             id="resultTrackingCode"
-            class="track-code"
-          >
+            class="track-code">
           </span>
-
         </div>
 
-
         <div class="track-row">
-
-          <span>
-            Order Date
-          </span>
-
-          <span id="resultDate">
-          </span>
-
+          <span>Order Date</span>
+          <span id="resultDate"></span>
         </div>
 
-
         <div class="track-row">
-
-          <span>
-            Status
-          </span>
-
+          <span>Status</span>
           <span>
             <span
               id="resultStatus"
-              class="status-badge"
-            >
+              class="status-badge">
             </span>
           </span>
-
         </div>
 
-
         <div class="track-row">
-
-          <span>
-            Total
-          </span>
-
+          <span>Total</span>
           <span
             id="resultTotal"
-            class="track-total"
-          >
+            class="track-total">
           </span>
-
         </div>
 
       </div>
-
 
       <div class="track-products">
 
-        <h3>
-          Ordered Products
-        </h3>
+        <h3>Ordered Products</h3>
 
-
-        <div id="resultProducts">
-        </div>
+        <div id="resultProducts"></div>
 
       </div>
-
 
       <p class="track-note">
         Order status is updated by CHRONO VAULT BD after confirmation and processing.
@@ -1700,48 +1718,37 @@ footer b{
 
 </section>
 
-
-<!-- =======================================================
+<!-- =========================
      CART
-======================================================= -->
+========================= -->
 
 <section
   id="cartSection"
-  class="cart-section"
->
+  class="cart-section">
 
   <div class="cart-box">
 
     <div class="cart-header">
 
-      <h2>
-        🛒 Your Cart
-      </h2>
+      <h2>🛒 Your Cart</h2>
 
       <button
         class="close-cart"
-        onclick="toggleCart()"
-      >
+        onclick="toggleCart()">
         Close
       </button>
 
     </div>
 
-
     <div id="cartItems">
-
       <div class="empty">
         Your cart is empty.
       </div>
-
     </div>
-
 
     <div class="cart-total">
 
-      <strong>
-        Total
-      </strong>
+      <strong>Total</strong>
 
       <span id="cartTotal">
         ৳0
@@ -1749,29 +1756,20 @@ footer b{
 
     </div>
 
-
     <button
       id="checkoutButton"
       class="checkout-btn"
-      onclick="checkout()"
-    >
+      onclick="checkout()">
       Proceed to Checkout
     </button>
 
-
-    <!-- =====================================================
-         CHECKOUT
-    ====================================================== -->
-
     <div
       id="checkoutBox"
-      class="checkout-box"
-    >
+      class="checkout-box">
 
       <div class="checkout-title">
         📦 Delivery Information
       </div>
-
 
       <div class="form-group">
 
@@ -1783,11 +1781,9 @@ footer b{
           type="text"
           id="customerName"
           placeholder="Enter your full name"
-          autocomplete="name"
-        >
+          autocomplete="name">
 
       </div>
-
 
       <div class="form-group">
 
@@ -1800,11 +1796,9 @@ footer b{
           id="customerPhone"
           placeholder="01XXXXXXXXX"
           inputmode="tel"
-          autocomplete="tel"
-        >
+          autocomplete="tel">
 
       </div>
-
 
       <div class="form-group">
 
@@ -1815,11 +1809,10 @@ footer b{
         <textarea
           id="customerAddress"
           placeholder="House/Road, Area, Thana, District"
-          autocomplete="street-address"
-        ></textarea>
+          autocomplete="street-address">
+        </textarea>
 
       </div>
-
 
       <div class="payment-box">
 
@@ -1833,34 +1826,24 @@ footer b{
 
       </div>
 
-
       <button
         id="placeOrderButton"
         class="place-order-btn"
-        onclick="placeOrder()"
-      >
+        onclick="placeOrder()">
         Place Order
       </button>
 
-
       <button
         class="cancel-checkout"
-        onclick="cancelCheckout()"
-      >
+        onclick="cancelCheckout()">
         Back to Cart
       </button>
 
     </div>
 
-
-    <!-- =====================================================
-         SUCCESS
-    ====================================================== -->
-
     <div
       id="orderSuccess"
-      class="order-success"
-    >
+      class="order-success">
 
       <div class="success-icon">
         ✅
@@ -1871,28 +1854,22 @@ footer b{
       </h2>
 
       <p>
-        Thank you for shopping with
-        CHRONO VAULT BD.
+        Thank you for shopping with CHRONO VAULT BD.
       </p>
-
 
       <div
         id="orderId"
-        class="order-id"
-      >
+        class="order-id">
         Order received successfully.
       </div>
-
 
       <p>
         We will contact you soon to confirm your order.
       </p>
 
-
       <button
         class="success-track-btn"
-        onclick="openTrackFromSuccess()"
-      >
+        onclick="openTrackFromSuccess()">
         📦 Track This Order
       </button>
 
@@ -1902,76 +1879,45 @@ footer b{
 
 </section>
 
-
-<!-- =======================================================
-     WHY
-======================================================= -->
+<!-- =========================
+     WHY US
+========================= -->
 
 <section class="section">
 
   <div class="title">
-
-    <h2>
-      Why CHRONO VAULT BD?
-    </h2>
-
+    <h2>Why CHRONO VAULT BD?</h2>
   </div>
-
 
   <div class="why">
 
     <div class="box">
-
-      <strong>
-        Premium Style
-      </strong>
-
-      Elegant watches for your
-      everyday lifestyle.
-
+      <strong>Premium Style</strong>
+      Elegant watches for your everyday lifestyle.
     </div>
 
-
     <div class="box">
-
-      <strong>
-        Quality
-      </strong>
-
+      <strong>Quality</strong>
       Carefully selected products.
-
     </div>
 
-
     <div class="box">
-
-      <strong>
-        Cash on Delivery
-      </strong>
-
+      <strong>Cash on Delivery</strong>
       Easy ordering with convenient payment.
-
     </div>
 
-
     <div class="box">
-
-      <strong>
-        Store Warranty
-      </strong>
-
+      <strong>Store Warranty</strong>
       Warranty support on selected products.
-
     </div>
 
   </div>
 
 </section>
 
-
-<!-- =======================================================
+<!-- =========================
      FOOTER
-======================================================= -->
+========================= -->
 
 <footer>
 
@@ -1983,46 +1929,37 @@ footer b{
     More Than Just a Watch. It's a Lifestyle.
   </p>
 
-
   <div class="social-links">
 
     <a
       href="https://www.facebook.com/share/1C3CqbjBXk/"
       target="_blank"
-      rel="noopener noreferrer"
-    >
+      rel="noopener noreferrer">
       Facebook
     </a>
-
 
     <a
       href="https://www.instagram.com/chronovaultbd?stkn=MWYxMjBxNXA1YTZ1bg=="
       target="_blank"
-      rel="noopener noreferrer"
-    >
+      rel="noopener noreferrer">
       Instagram
     </a>
-
 
     <a
       href="https://www.tiktok.com/@chrono.vault.bd?_r=1&_t=ZS-99qPMd7PspQ"
       target="_blank"
-      rel="noopener noreferrer"
-    >
+      rel="noopener noreferrer">
       TikTok
     </a>
-
 
     <a
       href="https://wa.me/8801326144735"
       target="_blank"
-      rel="noopener noreferrer"
-    >
+      rel="noopener noreferrer">
       WhatsApp
     </a>
 
   </div>
-
 
   <p class="social-note">
     Follow us & stay connected.
@@ -2030,6 +1967,151 @@ footer b{
 
 </footer>
 
+<!-- =========================
+     AUTH MODAL
+========================= -->
+
+<div
+  id="authOverlay"
+  class="auth-overlay">
+
+  <div class="auth-box">
+
+    <div class="auth-header">
+
+      <h2>👤 My Account</h2>
+
+      <button
+        class="auth-close"
+        onclick="closeAuthModal()">
+        ×
+      </button>
+
+    </div>
+
+    <div class="auth-tabs">
+
+      <button
+        id="loginTab"
+        class="auth-tab active"
+        onclick="switchAuthTab('login')">
+        Login
+      </button>
+
+      <button
+        id="signupTab"
+        class="auth-tab"
+        onclick="switchAuthTab('signup')">
+        Sign Up
+      </button>
+
+    </div>
+
+    <div
+      id="authMessage"
+      class="auth-message">
+    </div>
+
+    <!-- LOGIN -->
+
+    <form
+      id="loginForm"
+      class="auth-form active"
+      onsubmit="loginUser(event)">
+
+      <div class="auth-form-group">
+
+        <label for="loginEmail">
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="loginEmail"
+          placeholder="Enter your email"
+          autocomplete="email"
+          required>
+
+      </div>
+
+      <div class="auth-form-group">
+
+        <label for="loginPassword">
+          Password
+        </label>
+
+        <input
+          type="password"
+          id="loginPassword"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+          required>
+
+      </div>
+
+      <button
+        id="loginSubmit"
+        class="auth-submit"
+        type="submit">
+        Login
+      </button>
+
+    </form>
+
+    <!-- SIGN UP -->
+
+    <form
+      id="signupForm"
+      class="auth-form"
+      onsubmit="signupUser(event)">
+
+      <div class="auth-form-group">
+
+        <label for="signupEmail">
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="signupEmail"
+          placeholder="Enter your email"
+          autocomplete="email"
+          required>
+
+      </div>
+
+      <div class="auth-form-group">
+
+        <label for="signupPassword">
+          Password
+        </label>
+
+        <input
+          type="password"
+          id="signupPassword"
+          placeholder="Minimum 6 characters"
+          autocomplete="new-password"
+          minlength="6"
+          required>
+
+      </div>
+
+      <button
+        id="signupSubmit"
+        class="auth-submit"
+        type="submit">
+        Create Account
+      </button>
+
+    </form>
+
+    <p class="auth-note">
+      Account login is optional for shopping.
+    </p>
+
+  </div>
+
+</div>
 
 <script>
 
@@ -2038,10 +2120,10 @@ footer b{
 ========================================================= */
 
 const SUPABASE_URL =
-"https://rufdvkelwzsmnuruvdko.supabase.co";
+  "https://rufdvkelwzsmnuruvdko.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_3j4Bs4rft9_w4r1j6uHo5w_fYLIJsNI";
+  "sb_publishable_3j4Bs4rft9_w4r1j6uHo5w_fYLIJsNI";
 
 
 /* =========================================================
@@ -2053,21 +2135,14 @@ let cart = [];
 try{
 
   const savedCart =
-    localStorage.getItem(
-      "chronoVaultCart"
-    );
+    localStorage.getItem("chronoVaultCart");
 
   if(savedCart){
-
-    cart =
-      JSON.parse(savedCart);
-
+    cart = JSON.parse(savedCart);
   }
 
   if(!Array.isArray(cart)){
-
     cart = [];
-
   }
 
 }catch(error){
@@ -2078,39 +2153,30 @@ try{
   );
 
   cart = [];
-
 }
 
 
 /* =========================================================
-   CURRENT DETAIL PRODUCT
+   GLOBAL VARIABLES
 ========================================================= */
 
 let currentDetailProduct = null;
-
-
-/* =========================================================
-   LAST ORDER
-========================================================= */
 
 let lastOrderTrackingCode = "";
 
 let lastOrderPhone = "";
 
+let currentAuthSession = null;
+
 
 /* =========================================================
-   SAFE TEXT
+   SAFE HTML
 ========================================================= */
 
 function safe(value){
 
-  if(
-    value === null ||
-    value === undefined
-  ){
-
+  if(value === null || value === undefined){
     return "";
-
   }
 
   return String(value)
@@ -2119,12 +2185,112 @@ function safe(value){
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
+}
+
+
+/* =========================================================
+   LAST ORDER STORAGE
+========================================================= */
+
+function saveLastOrder(){
+
+  try{
+
+    if(
+      lastOrderTrackingCode &&
+      lastOrderPhone
+    ){
+
+      localStorage.setItem(
+        "cv_last_tracking_code",
+        lastOrderTrackingCode
+      );
+
+      localStorage.setItem(
+        "cv_last_order_phone",
+        lastOrderPhone
+      );
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Last order storage error:",
+      error
+    );
+
+  }
+}
+
+
+function restoreLastOrder(){
+
+  try{
+
+    const savedTrackingCode =
+      localStorage.getItem(
+        "cv_last_tracking_code"
+      ) || "";
+
+    const savedPhone =
+      localStorage.getItem(
+        "cv_last_order_phone"
+      ) || "";
+
+    if(
+      savedTrackingCode &&
+      savedPhone
+    ){
+
+      lastOrderTrackingCode =
+        savedTrackingCode;
+
+      lastOrderPhone =
+        savedPhone;
+
+      showHeaderTrackButton();
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Restore last order error:",
+      error
+    );
+
+  }
+
+}
+
+
+function clearLastOrder(){
+
+  try{
+
+    localStorage.removeItem(
+      "cv_last_tracking_code"
+    );
+
+    localStorage.removeItem(
+      "cv_last_order_phone"
+    );
+
+  }catch(error){
+
+    console.error(
+      "Clear last order error:",
+      error
+    );
+
+  }
 
 }
 
 
 /* =========================================================
-   SAVE CART
+   CART STORAGE
 ========================================================= */
 
 function saveCart(){
@@ -2165,7 +2331,6 @@ function updateCartCount(){
       0
     );
 
-
   document.getElementById(
     "cartCount"
   ).textContent = count;
@@ -2174,7 +2339,7 @@ function updateCartCount(){
 
 
 /* =========================================================
-   ADD TO CART
+   ADD CART
 ========================================================= */
 
 function addCart(product){
@@ -2188,7 +2353,6 @@ function addCart(product){
   const price =
     Number(product.price);
 
-
   if(
     !Number.isFinite(stock) ||
     stock <= 0
@@ -2199,37 +2363,28 @@ function addCart(product){
     );
 
     return;
-
   }
 
-
-  if(
-    !Number.isFinite(price)
-  ){
+  if(!Number.isFinite(price)){
 
     alert(
       "Product price is unavailable."
     );
 
     return;
-
   }
-
 
   const existing =
     cart.find(
       function(item){
-
         return String(item.id) === id;
-
       }
     );
-
 
   if(existing){
 
     if(
-      existing.quantity >= stock
+      Number(existing.quantity) >= stock
     ){
 
       alert(
@@ -2237,7 +2392,6 @@ function addCart(product){
       );
 
       return;
-
     }
 
     existing.quantity++;
@@ -2262,13 +2416,11 @@ function addCart(product){
 
   }
 
-
   saveCart();
 
   updateCartCount();
 
   renderCart();
-
 
   alert(
     product.name +
@@ -2279,48 +2431,37 @@ function addCart(product){
 
 
 /* =========================================================
-   CHANGE QUANTITY
+   QUANTITY
 ========================================================= */
 
-function changeQuantity(
-  id,
-  change
-){
+function changeQuantity(id,change){
 
   const item =
     cart.find(
       function(product){
-
         return String(product.id) ===
           String(id);
-
       }
     );
 
-
   if(!item){
-
     return;
-
   }
-
 
   const newQuantity =
     Number(item.quantity) +
     Number(change);
-
 
   if(newQuantity <= 0){
 
     removeFromCart(id);
 
     return;
-
   }
 
-
   if(
-    newQuantity > Number(item.stock)
+    newQuantity >
+    Number(item.stock)
   ){
 
     alert(
@@ -2329,13 +2470,10 @@ function changeQuantity(
     );
 
     return;
-
   }
-
 
   item.quantity =
     newQuantity;
-
 
   saveCart();
 
@@ -2347,7 +2485,7 @@ function changeQuantity(
 
 
 /* =========================================================
-   REMOVE FROM CART
+   REMOVE CART
 ========================================================= */
 
 function removeFromCart(id){
@@ -2361,7 +2499,6 @@ function removeFromCart(id){
 
       }
     );
-
 
   saveCart();
 
@@ -2405,42 +2542,25 @@ function renderCart(){
       "cartItems"
     );
 
+  if(cart.length === 0){
 
-  if(
-    cart.length === 0
-  ){
-
-    box.innerHTML = `
-
-      <div class="empty">
-        Your cart is empty.
-      </div>
-
-    `;
-
+    box.innerHTML =
+      '<div class="empty">Your cart is empty.</div>';
 
     document.getElementById(
       "cartTotal"
-    ).textContent =
-      "৳0";
-
+    ).textContent = "৳0";
 
     document.getElementById(
       "checkoutButton"
-    ).style.display =
-      "none";
-
+    ).style.display = "none";
 
     return;
-
   }
-
 
   document.getElementById(
     "checkoutButton"
-  ).style.display =
-    "block";
-
+  ).style.display = "block";
 
   box.innerHTML =
     cart.map(
@@ -2450,44 +2570,30 @@ function renderCart(){
           Number(item.price) *
           Number(item.quantity);
 
-
         let imageHTML = "";
-
 
         if(item.image){
 
-          imageHTML = `
-
-            <img
+          imageHTML =
+            `<img
               src="${safe(item.image)}"
               alt="${safe(item.name)}"
-              onerror="
-                this.style.display='none';
-                this.parentElement.innerHTML='<span>⌚</span>';
-              "
-            >
-
-          `;
+              onerror="this.style.display='none';this.parentElement.innerHTML='<span>⌚</span>';">`;
 
         }else{
 
-          imageHTML = `
-            <span>⌚</span>
-          `;
+          imageHTML =
+            '<span>⌚</span>';
 
         }
-
 
         return `
 
           <div class="cart-item">
 
             <div class="cart-item-image">
-
               ${imageHTML}
-
             </div>
-
 
             <div class="cart-item-info">
 
@@ -2495,59 +2601,34 @@ function renderCart(){
                 ${safe(item.name)}
               </h3>
 
-
               <div class="cart-item-price">
-
-                ৳${Number(item.price)
-                  .toLocaleString("en-BD")}
-
-                ×
-
-                ${item.quantity}
-
+                ৳${Number(item.price).toLocaleString("en-BD")}
+                × ${item.quantity}
                 =
-
-                ৳${subtotal
-                  .toLocaleString("en-BD")}
-
+                ৳${subtotal.toLocaleString("en-BD")}
               </div>
-
 
               <div class="quantity">
 
                 <button
-                  onclick="changeQuantity(
-                    '${safe(item.id)}',
-                    -1
-                  )"
-                >
+                  onclick="changeQuantity('${safe(item.id)}',-1)">
                   −
                 </button>
-
 
                 <span>
                   ${item.quantity}
                 </span>
 
-
                 <button
-                  onclick="changeQuantity(
-                    '${safe(item.id)}',
-                    1
-                  )"
-                >
+                  onclick="changeQuantity('${safe(item.id)}',1)">
                   +
                 </button>
 
               </div>
 
-
               <button
                 class="remove-btn"
-                onclick="removeFromCart(
-                  '${safe(item.id)}'
-                )"
-              >
+                onclick="removeFromCart('${safe(item.id)}')">
                 Remove
               </button>
 
@@ -2559,7 +2640,6 @@ function renderCart(){
 
       }
     ).join("");
-
 
   document.getElementById(
     "cartTotal"
@@ -2582,11 +2662,7 @@ function toggleCart(){
       "cartSection"
     );
 
-
-  section.classList.toggle(
-    "show"
-  );
-
+  section.classList.toggle("show");
 
   if(
     section.classList.contains("show")
@@ -2594,13 +2670,9 @@ function toggleCart(){
 
     renderCart();
 
-
     section.scrollIntoView({
-
       behavior:"smooth",
-
       block:"start"
-
     });
 
   }
@@ -2609,7 +2681,7 @@ function toggleCart(){
 
 
 /* =========================================================
-   SHOW TRACK BUTTON
+   TRACK HEADER BUTTON
 ========================================================= */
 
 function showHeaderTrackButton(){
@@ -2619,12 +2691,9 @@ function showHeaderTrackButton(){
       "headerTrackButton"
     );
 
-
   if(button){
 
-    button.classList.add(
-      "show"
-    );
+    button.classList.add("show");
 
   }
 
@@ -2632,7 +2701,7 @@ function showHeaderTrackButton(){
 
 
 /* =========================================================
-   TOGGLE TRACK ORDER
+   TRACK ORDER TOGGLE
 ========================================================= */
 
 function toggleTrackOrder(force){
@@ -2642,9 +2711,7 @@ function toggleTrackOrder(force){
       "trackSection"
     );
 
-
   let shouldShow;
-
 
   if(typeof force === "boolean"){
 
@@ -2657,18 +2724,13 @@ function toggleTrackOrder(force){
 
   }
 
-
   if(shouldShow){
 
     section.classList.add("show");
 
-
     section.scrollIntoView({
-
       behavior:"smooth",
-
       block:"start"
-
     });
 
   }else{
@@ -2686,51 +2748,33 @@ function toggleTrackOrder(force){
 
 function openTrackFromSuccess(){
 
-  const success =
-    document.getElementById(
-      "orderSuccess"
-    );
-
-
-  success.classList.remove(
-    "show"
-  );
-
+  document.getElementById(
+    "orderSuccess"
+  ).classList.remove("show");
 
   showHeaderTrackButton();
 
-
-  const trackingInput =
-    document.getElementById(
-      "trackingCode"
-    );
-
-
-  const phoneInput =
-    document.getElementById(
-      "trackingPhone"
-    );
-
-
-  trackingInput.value =
+  document.getElementById(
+    "trackingCode"
+  ).value =
     lastOrderTrackingCode;
 
-
-  phoneInput.value =
+  document.getElementById(
+    "trackingPhone"
+  ).value =
     lastOrderPhone;
-
 
   document.getElementById(
     "trackError"
   ).classList.remove("show");
 
-
   document.getElementById(
     "trackResult"
   ).classList.remove("show");
 
-
   toggleTrackOrder(true);
+
+  trackOrder();
 
 }
 
@@ -2746,48 +2790,39 @@ async function trackOrder(){
       "trackingCode"
     );
 
-
   const phoneInput =
     document.getElementById(
       "trackingPhone"
     );
-
 
   const errorBox =
     document.getElementById(
       "trackError"
     );
 
-
   const resultBox =
     document.getElementById(
       "trackResult"
     );
-
 
   const button =
     document.getElementById(
       "trackButton"
     );
 
-
   let trackingCode =
     trackingInput.value.trim();
 
-
   const phone =
     phoneInput.value.trim();
-
 
   errorBox.classList.remove(
     "show"
   );
 
-
   resultBox.classList.remove(
     "show"
   );
-
 
   if(!trackingCode){
 
@@ -2801,9 +2836,7 @@ async function trackOrder(){
     trackingInput.focus();
 
     return;
-
   }
-
 
   if(!phone){
 
@@ -2817,19 +2850,12 @@ async function trackOrder(){
     phoneInput.focus();
 
     return;
-
   }
-
-
-  /* Normalize tracking code */
 
   trackingCode =
     trackingCode
       .toUpperCase()
       .replace(/\s+/g,"");
-
-
-  /* Normalize phone */
 
   const cleanPhone =
     phone.replace(
@@ -2837,10 +2863,7 @@ async function trackOrder(){
       ""
     );
 
-
-  if(
-    !/^01\d{9}$/.test(cleanPhone)
-  ){
+  if(!/^01\d{9}$/.test(cleanPhone)){
 
     errorBox.textContent =
       "Please enter a valid Bangladesh phone number.";
@@ -2852,49 +2875,30 @@ async function trackOrder(){
     phoneInput.focus();
 
     return;
-
   }
-
 
   button.disabled = true;
 
   button.textContent =
     "Checking Order...";
 
-
   try{
-
-    /*
-      IMPORTANT:
-      This uses the NEW RPC function:
-      track_order_v2
-    */
 
     const response =
       await fetch(
-
         SUPABASE_URL +
         "/rest/v1/rpc/track_order_v2",
-
         {
-
           method:"POST",
-
+          cache:"no-store",
           headers:{
-
-            "apikey":
-              SUPABASE_KEY,
-
+            "apikey":SUPABASE_KEY,
             "Authorization":
               "Bearer " +
               SUPABASE_KEY,
-
             "Content-Type":
               "application/json"
-
           },
-
-
           body:JSON.stringify({
 
             p_tracking_code:
@@ -2904,27 +2908,21 @@ async function trackOrder(){
               cleanPhone
 
           })
-
         }
-
       );
-
 
     const responseText =
       await response.text();
-
 
     console.log(
       "TRACK ORDER STATUS:",
       response.status
     );
 
-
     console.log(
       "TRACK ORDER RESPONSE:",
       responseText
     );
-
 
     if(!response.ok){
 
@@ -2935,17 +2933,16 @@ async function trackOrder(){
 
     }
 
-
     let orders = [];
-
 
     if(responseText){
 
       orders =
-        JSON.parse(responseText);
+        JSON.parse(
+          responseText
+        );
 
     }
-
 
     if(
       !Array.isArray(orders) ||
@@ -2960,17 +2957,10 @@ async function trackOrder(){
       );
 
       return;
-
     }
-
 
     const order =
       orders[0];
-
-
-    /* ==========================================
-       CUSTOMER NAME
-    ========================================== */
 
     document.getElementById(
       "resultCustomerName"
@@ -2978,21 +2968,11 @@ async function trackOrder(){
       order.customer_name ||
       "N/A";
 
-
-    /* ==========================================
-       PHONE
-    ========================================== */
-
     document.getElementById(
       "resultPhone"
     ).textContent =
       order.phone ||
       cleanPhone;
-
-
-    /* ==========================================
-       ADDRESS
-    ========================================== */
 
     document.getElementById(
       "resultAddress"
@@ -3000,21 +2980,11 @@ async function trackOrder(){
       order.address ||
       "N/A";
 
-
-    /* ==========================================
-       TRACKING CODE
-    ========================================== */
-
     document.getElementById(
       "resultTrackingCode"
     ).textContent =
       order.tracking_code ||
       trackingCode;
-
-
-    /* ==========================================
-       DATE
-    ========================================== */
 
     const date =
       order.created_at
@@ -3029,27 +2999,16 @@ async function trackOrder(){
           )
         : "N/A";
 
-
     document.getElementById(
       "resultDate"
     ).textContent =
       date;
-
-
-    /* ==========================================
-       STATUS
-    ========================================== */
 
     document.getElementById(
       "resultStatus"
     ).textContent =
       order.status ||
       "Pending";
-
-
-    /* ==========================================
-       TOTAL
-    ========================================== */
 
     document.getElementById(
       "resultTotal"
@@ -3061,29 +3020,21 @@ async function trackOrder(){
         "en-BD"
       );
 
-
-    /* ==========================================
-       PRODUCTS
-    ========================================== */
-
     const productsBox =
       document.getElementById(
         "resultProducts"
       );
 
-
     let items = [];
 
-
-    if(
-      Array.isArray(order.items)
-    ){
+    if(Array.isArray(order.items)){
 
       items =
         order.items;
 
     }else if(
-      typeof order.items === "string"
+      typeof order.items ===
+      "string"
     ){
 
       try{
@@ -3101,19 +3052,13 @@ async function trackOrder(){
 
     }
 
-
     if(
       !Array.isArray(items) ||
       items.length === 0
     ){
 
-      productsBox.innerHTML = `
-
-        <div class="track-product">
-          Order items unavailable.
-        </div>
-
-      `;
+      productsBox.innerHTML =
+        '<div class="track-product">Order items unavailable.</div>';
 
     }else{
 
@@ -3127,18 +3072,15 @@ async function trackOrder(){
                 "Product"
               );
 
-
             const quantity =
               Number(
                 item.quantity || 0
               );
 
-
             const price =
               Number(
                 item.price || 0
               );
-
 
             const subtotal =
               Number(
@@ -3148,7 +3090,6 @@ async function trackOrder(){
                   quantity
                 )
               );
-
 
             return `
 
@@ -3162,18 +3103,10 @@ async function trackOrder(){
 
                 Qty:
                 ${quantity}
-
                 ×
-
-                ৳${price.toLocaleString(
-                  "en-BD"
-                )}
-
+                ৳${price.toLocaleString("en-BD")}
                 =
-
-                ৳${subtotal.toLocaleString(
-                  "en-BD"
-                )}
+                ৳${subtotal.toLocaleString("en-BD")}
 
               </div>
 
@@ -3184,24 +3117,14 @@ async function trackOrder(){
 
     }
 
-
-    /* ==========================================
-       SHOW RESULT
-    ========================================== */
-
     resultBox.classList.add(
       "show"
     );
 
-
     resultBox.scrollIntoView({
-
       behavior:"smooth",
-
       block:"start"
-
     });
-
 
   }catch(error){
 
@@ -3209,7 +3132,6 @@ async function trackOrder(){
       "Track Order Error:",
       error
     );
-
 
     errorBox.textContent =
       "Could not check the order. Please try again.";
@@ -3231,7 +3153,7 @@ async function trackOrder(){
 
 
 /* =========================================================
-   SHOW PRODUCT DETAILS
+   PRODUCT DETAILS
 ========================================================= */
 
 function showDetails(product){
@@ -3239,13 +3161,11 @@ function showDetails(product){
   currentDetailProduct =
     product;
 
-
   document.getElementById(
     "detailsCategory"
   ).textContent =
     product.category ||
     "WATCHES";
-
 
   document.getElementById(
     "detailsName"
@@ -3253,21 +3173,19 @@ function showDetails(product){
     product.name ||
     "Product";
 
-
   const price =
     Number(product.price);
-
 
   const oldPrice =
     Number(product.oldPrice);
 
-
   let priceHTML =
     Number.isFinite(price)
       ? "৳" +
-        price.toLocaleString("en-BD")
+        price.toLocaleString(
+          "en-BD"
+        )
       : "Price unavailable";
-
 
   if(
     Number.isFinite(oldPrice) &&
@@ -3275,26 +3193,20 @@ function showDetails(product){
     oldPrice > price
   ){
 
-    priceHTML += `
-
-      <span class="details-old-price">
+    priceHTML +=
+      `<span class="details-old-price">
         ৳${oldPrice.toLocaleString("en-BD")}
-      </span>
-
-    `;
+      </span>`;
 
   }
-
 
   document.getElementById(
     "detailsPrice"
   ).innerHTML =
     priceHTML;
 
-
   const stock =
     Number(product.stock);
-
 
   document.getElementById(
     "detailsStock"
@@ -3303,53 +3215,36 @@ function showDetails(product){
       ? "Stock: " + stock
       : "Out of stock";
 
-
   document.getElementById(
     "detailsDescription"
   ).textContent =
     product.description ||
     "Premium three-eye men's watch set designed for a stylish and sophisticated look. Suitable for business and everyday wear.";
 
-
   const imageBox =
     document.getElementById(
       "detailsImage"
     );
 
-
   if(product.image){
 
-    imageBox.innerHTML = `
-
-      <img
+    imageBox.innerHTML =
+      `<img
         src="${safe(product.image)}"
         alt="${safe(product.name)}"
-        onerror="
-          this.style.display='none';
-          this.parentElement.innerHTML='<div class=&quot;details-noimg&quot;>⌚</div>';
-        "
-      >
-
-    `;
+        onerror="this.style.display='none';this.parentElement.innerHTML='<div class=&quot;details-noimg&quot;>⌚</div>';">`;
 
   }else{
 
-    imageBox.innerHTML = `
-
-      <div class="details-noimg">
-        ⌚
-      </div>
-
-    `;
+    imageBox.innerHTML =
+      '<div class="details-noimg">⌚</div>';
 
   }
-
 
   const addButton =
     document.getElementById(
       "detailsAddButton"
     );
-
 
   if(
     stock > 0 &&
@@ -3359,10 +3254,8 @@ function showDetails(product){
     addButton.style.display =
       "block";
 
-
     addButton.textContent =
       "Add to Cart";
-
 
     addButton.onclick =
       function(){
@@ -3378,24 +3271,18 @@ function showDetails(product){
 
   }
 
-
   const details =
     document.getElementById(
       "productDetails"
     );
 
-
   details.classList.add(
     "show"
   );
 
-
   details.scrollIntoView({
-
     behavior:"smooth",
-
     block:"start"
-
   });
 
 }
@@ -3407,29 +3294,20 @@ function showDetails(product){
 
 function closeDetails(){
 
-  const details =
-    document.getElementById(
-      "productDetails"
-    );
-
-
-  details.classList.remove(
+  document.getElementById(
+    "productDetails"
+  ).classList.remove(
     "show"
   );
-
 
   currentDetailProduct =
     null;
 
-
   document.getElementById(
     "productsSection"
   ).scrollIntoView({
-
     behavior:"smooth",
-
     block:"start"
-
   });
 
 }
@@ -3441,18 +3319,14 @@ function closeDetails(){
 
 function checkout(){
 
-  if(
-    cart.length === 0
-  ){
+  if(cart.length === 0){
 
     alert(
       "Your cart is empty."
     );
 
     return;
-
   }
-
 
   document.getElementById(
     "checkoutBox"
@@ -3460,12 +3334,10 @@ function checkout(){
     "show"
   );
 
-
   document.getElementById(
     "checkoutButton"
   ).style.display =
     "none";
-
 
   document.getElementById(
     "orderSuccess"
@@ -3473,15 +3345,11 @@ function checkout(){
     "show"
   );
 
-
   document.getElementById(
     "checkoutBox"
   ).scrollIntoView({
-
     behavior:"smooth",
-
     block:"start"
-
   });
 
 }
@@ -3499,7 +3367,6 @@ function cancelCheckout(){
     "show"
   );
 
-
   document.getElementById(
     "checkoutButton"
   ).style.display =
@@ -3511,7 +3378,7 @@ function cancelCheckout(){
 
 
 /* =========================================================
-   GENERATE ORDER NUMBER
+   TRACKING CODE
 ========================================================= */
 
 function generateTrackingCode(){
@@ -3519,11 +3386,12 @@ function generateTrackingCode(){
   const random =
     Math.floor(
       100000 +
-      Math.random() * 900000
+      Math.random() *
+      900000
     );
 
-
-  return "CVBD-" + random;
+  return "CVBD-" +
+    random;
 
 }
 
@@ -3534,36 +3402,29 @@ function generateTrackingCode(){
 
 async function placeOrder(){
 
-  if(
-    cart.length === 0
-  ){
+  if(cart.length === 0){
 
     alert(
       "Your cart is empty."
     );
 
     return;
-
   }
-
 
   const name =
     document.getElementById(
       "customerName"
     ).value.trim();
 
-
   const phone =
     document.getElementById(
       "customerPhone"
     ).value.trim();
 
-
   const address =
     document.getElementById(
       "customerAddress"
     ).value.trim();
-
 
   if(!name){
 
@@ -3576,9 +3437,7 @@ async function placeOrder(){
     ).focus();
 
     return;
-
   }
-
 
   if(!phone){
 
@@ -3591,9 +3450,7 @@ async function placeOrder(){
     ).focus();
 
     return;
-
   }
-
 
   const cleanPhone =
     phone.replace(
@@ -3601,9 +3458,10 @@ async function placeOrder(){
       ""
     );
 
-
   if(
-    !/^01\d{9}$/.test(cleanPhone)
+    !/^01\d{9}$/.test(
+      cleanPhone
+    )
   ){
 
     alert(
@@ -3615,9 +3473,7 @@ async function placeOrder(){
     ).focus();
 
     return;
-
   }
-
 
   if(!address){
 
@@ -3630,13 +3486,10 @@ async function placeOrder(){
     ).focus();
 
     return;
-
   }
-
 
   const total =
     getCartTotal();
-
 
   const orderItems =
     cart.map(
@@ -3644,13 +3497,17 @@ async function placeOrder(){
 
         return {
 
-          product_id:item.id,
+          product_id:
+            item.id,
 
-          name:item.name,
+          name:
+            item.name,
 
-          price:Number(item.price),
+          price:
+            Number(item.price),
 
-          quantity:Number(item.quantity),
+          quantity:
+            Number(item.quantity),
 
           subtotal:
             Number(item.price) *
@@ -3661,43 +3518,29 @@ async function placeOrder(){
       }
     );
 
-
   const trackingCode =
     generateTrackingCode();
-
 
   const button =
     document.getElementById(
       "placeOrderButton"
     );
 
-
   button.disabled = true;
 
   button.textContent =
     "Placing Order...";
 
-
   try{
-
-    /*
-      IMPORTANT:
-      Keep this order POST logic unchanged
-      because your order placement is already working.
-    */
 
     const response =
       await fetch(
-
         SUPABASE_URL +
         "/rest/v1/orders",
-
         {
-
           method:"POST",
 
           headers:{
-
             "apikey":
               SUPABASE_KEY,
 
@@ -3710,37 +3553,37 @@ async function placeOrder(){
 
             "Prefer":
               "return=minimal"
-
           },
-
 
           body:JSON.stringify({
 
-            customer_name:name,
+            customer_name:
+              name,
 
-            phone:cleanPhone,
+            phone:
+              cleanPhone,
 
-            address:address,
+            address:
+              address,
 
-            items:orderItems,
+            items:
+              orderItems,
 
-            total:total,
+            total:
+              total,
 
-            status:"Pending",
+            status:
+              "Pending",
 
             tracking_code:
               trackingCode
 
           })
-
         }
-
       );
-
 
     const responseText =
       await response.text();
-
 
     if(!response.ok){
 
@@ -3750,7 +3593,6 @@ async function placeOrder(){
         responseText
       );
 
-
       throw new Error(
         responseText ||
         "Order could not be placed."
@@ -3758,21 +3600,19 @@ async function placeOrder(){
 
     }
 
-
-    /* Save latest order tracking information */
-
     lastOrderTrackingCode =
       trackingCode;
-
 
     lastOrderPhone =
       cleanPhone;
 
+    /* SAVE TRACKING INFO */
 
-    /* Empty cart */
+    saveLastOrder();
+
+    /* CLEAR CART */
 
     cart = [];
-
 
     saveCart();
 
@@ -3780,23 +3620,16 @@ async function placeOrder(){
 
     renderCart();
 
-
-    /* Close checkout */
-
     document.getElementById(
       "checkoutBox"
     ).classList.remove(
       "show"
     );
 
-
     document.getElementById(
       "checkoutButton"
     ).style.display =
       "none";
-
-
-    /* Show order number */
 
     document.getElementById(
       "orderId"
@@ -3804,48 +3637,34 @@ async function placeOrder(){
       "Order Number: " +
       trackingCode;
 
-
-    /* Show success */
-
     document.getElementById(
       "orderSuccess"
     ).classList.add(
       "show"
     );
 
-
-    /* Track button becomes visible */
+    /* SHOW TRACK BUTTON */
 
     showHeaderTrackButton();
-
 
     document.getElementById(
       "orderSuccess"
     ).scrollIntoView({
-
       behavior:"smooth",
-
       block:"start"
-
     });
-
-
-    /* Clear checkout fields */
 
     document.getElementById(
       "customerName"
     ).value = "";
 
-
     document.getElementById(
       "customerPhone"
     ).value = "";
 
-
     document.getElementById(
       "customerAddress"
     ).value = "";
-
 
   }catch(error){
 
@@ -3854,14 +3673,12 @@ async function placeOrder(){
       error
     );
 
-
     alert(
       "ORDER ERROR:\n\n" +
       error.message
     );
 
   }
-
 
   button.disabled = false;
 
@@ -3882,21 +3699,16 @@ async function loadProducts(){
       "products"
     );
 
-
   try{
 
     const response =
       await fetch(
-
         SUPABASE_URL +
         "/rest/v1/products?select=*&order=created_at.desc",
-
         {
-
           method:"GET",
 
           headers:{
-
             "apikey":
               SUPABASE_KEY,
 
@@ -3906,26 +3718,20 @@ async function loadProducts(){
 
             "Content-Type":
               "application/json"
-
           }
-
         }
-
       );
-
 
     if(!response.ok){
 
       const errorText =
         await response.text();
 
-
       console.error(
         "Supabase Error:",
         response.status,
         errorText
       );
-
 
       throw new Error(
         "Supabase Error " +
@@ -3934,34 +3740,24 @@ async function loadProducts(){
 
     }
 
-
     const products =
       await response.json();
-
 
     console.log(
       "Supabase Products:",
       products
     );
 
-
     if(
       !Array.isArray(products) ||
       products.length === 0
     ){
 
-      box.innerHTML = `
-
-        <div class="empty">
-          No products available yet.
-        </div>
-
-      `;
+      box.innerHTML =
+        '<div class="empty">No products available yet.</div>';
 
       return;
-
     }
-
 
     box.innerHTML =
       products.map(
@@ -3969,8 +3765,7 @@ async function loadProducts(){
 
           /*
             IMPORTANT:
-            Supabase column names are case-sensitive
-            and include:
+            Supabase exact column names:
             Name
             Price
             Old price
@@ -3983,90 +3778,61 @@ async function loadProducts(){
             product.Name ||
             "Unnamed Product";
 
-
           const category =
             product.Category ||
             "Watches";
 
-
           const price =
-            Number(product.Price);
-
+            Number(
+              product.Price
+            );
 
           const oldPrice =
-            Number(product["Old price"]);
-
+            Number(
+              product["Old price"]
+            );
 
           const stock =
-            Number(product.Stock);
-
+            Number(
+              product.Stock
+            );
 
           const imageUrl =
             product.image_url ||
             "";
 
-
           const description =
             product.Description ||
             "";
 
-
           const productId =
             product.id;
 
-
           let imageHTML;
-
 
           if(imageUrl){
 
-            imageHTML = `
-
-              <img
+            imageHTML =
+              `<img
                 src="${safe(imageUrl)}"
                 alt="${safe(name)}"
                 loading="lazy"
-                onerror="
-                  this.style.display='none';
-                  this.parentElement.innerHTML='<div class=&quot;noimg&quot;>⌚</div>';
-                "
-              >
-
-            `;
+                onerror="this.style.display='none';this.parentElement.innerHTML='<div class=&quot;noimg&quot;>⌚</div>';">`;
 
           }else{
 
-            imageHTML = `
-
-              <div class="noimg">
-                ⌚
-              </div>
-
-            `;
+            imageHTML =
+              '<div class="noimg">⌚</div>';
 
           }
 
-
-          let priceHTML;
-
-
-          if(
+          let priceHTML =
             Number.isFinite(price)
-          ){
-
-            priceHTML =
-              "৳" +
-              price.toLocaleString(
-                "en-BD"
-              );
-
-          }else{
-
-            priceHTML =
-              "Price unavailable";
-
-          }
-
+              ? "৳" +
+                price.toLocaleString(
+                  "en-BD"
+                )
+              : "Price unavailable";
 
           if(
             Number.isFinite(oldPrice) &&
@@ -4074,115 +3840,97 @@ async function loadProducts(){
             oldPrice > price
           ){
 
-            priceHTML += `
-
-              <span class="old">
-                ৳${oldPrice.toLocaleString(
-                  "en-BD"
-                )}
-              </span>
-
-            `;
+            priceHTML +=
+              `<span class="old">
+                ৳${oldPrice.toLocaleString("en-BD")}
+              </span>`;
 
           }
-
 
           const stockHTML =
             stock > 0
               ? "Stock: " + stock
               : "Out of stock";
 
-
           let buttonHTML = "";
-
-
-          /*
-            Convert Supabase product into the
-            frontend format used by cart/details.
-          */
 
           const cartProduct = {
 
-            id:productId,
+            id:
+              productId,
 
-            name:name,
+            name:
+              name,
 
-            price:price,
+            price:
+              price,
 
-            oldPrice:oldPrice,
+            oldPrice:
+              oldPrice,
 
-            image:imageUrl,
+            image:
+              imageUrl,
 
-            stock:stock,
+            stock:
+              stock,
 
-            category:category,
+            category:
+              category,
 
-            description:description
+            description:
+              description
 
           };
 
-
           const encodedProduct =
-            JSON.stringify(cartProduct)
-              .replace(
-                /&/g,
-                "\\u0026"
-              )
-              .replace(
-                /</g,
-                "\\u003c"
-              )
-              .replace(
-                />/g,
-                "\\u003e"
-              )
-              .replace(
-                /'/g,
-                "\\u0027"
-              );
-
+            JSON.stringify(
+              cartProduct
+            )
+            .replace(
+              /&/g,
+              "\\u0026"
+            )
+            .replace(
+              /</g,
+              "\\u003c"
+            )
+            .replace(
+              />/g,
+              "\\u003e"
+            )
+            .replace(
+              /'/g,
+              "\\u0027"
+            );
 
           if(
             stock > 0 &&
             Number.isFinite(price)
           ){
 
-            buttonHTML = `
-
-              <button
+            buttonHTML =
+              `<button
                 class="btn"
-                onclick='addCart(${encodedProduct})'
-              >
+                onclick='addCart(${encodedProduct})'>
                 Add to Cart
-              </button>
-
-            `;
+              </button>`;
 
           }
 
-
-          const detailsButton = `
-
-            <button
+          const detailsButton =
+            `<button
               class="details-btn"
-              onclick='showDetails(${encodedProduct})'
-            >
+              onclick='showDetails(${encodedProduct})'>
               View Details
-            </button>
-
-          `;
-
+            </button>`;
 
           return `
 
             <div class="card">
 
               <div class="pic">
-
                 ${imageHTML}
-
               </div>
-
 
               <div class="info">
 
@@ -4190,21 +3938,17 @@ async function loadProducts(){
                   ${safe(name)}
                 </h3>
 
-
                 <div class="category">
                   ${safe(category)}
                 </div>
-
 
                 <div class="price">
                   ${priceHTML}
                 </div>
 
-
                 <div class="stock">
                   ${safe(stockHTML)}
                 </div>
-
 
                 ${buttonHTML}
 
@@ -4219,7 +3963,6 @@ async function loadProducts(){
         }
       ).join("");
 
-
   }catch(error){
 
     console.error(
@@ -4227,20 +3970,12 @@ async function loadProducts(){
       error
     );
 
-
-    box.innerHTML = `
-
-      <div class="empty">
-
+    box.innerHTML =
+      `<div class="empty">
         Products could not be loaded.
-
         <br><br>
-
         Please check Supabase connection.
-
-      </div>
-
-    `;
+      </div>`;
 
   }
 
@@ -4248,8 +3983,612 @@ async function loadProducts(){
 
 
 /* =========================================================
+   AUTH MODAL
+========================================================= */
+
+function openAuthModal(){
+
+  document.getElementById(
+    "authOverlay"
+  ).classList.add(
+    "show"
+  );
+
+  clearAuthMessage();
+
+}
+
+
+function closeAuthModal(){
+
+  document.getElementById(
+    "authOverlay"
+  ).classList.remove(
+    "show"
+  );
+
+}
+
+
+function switchAuthTab(tab){
+
+  const loginTab =
+    document.getElementById(
+      "loginTab"
+    );
+
+  const signupTab =
+    document.getElementById(
+      "signupTab"
+    );
+
+  const loginForm =
+    document.getElementById(
+      "loginForm"
+    );
+
+  const signupForm =
+    document.getElementById(
+      "signupForm"
+    );
+
+  clearAuthMessage();
+
+  if(tab === "signup"){
+
+    loginTab.classList.remove(
+      "active"
+    );
+
+    signupTab.classList.add(
+      "active"
+    );
+
+    loginForm.classList.remove(
+      "active"
+    );
+
+    signupForm.classList.add(
+      "active"
+    );
+
+  }else{
+
+    signupTab.classList.remove(
+      "active"
+    );
+
+    loginTab.classList.add(
+      "active"
+    );
+
+    signupForm.classList.remove(
+      "active"
+    );
+
+    loginForm.classList.add(
+      "active"
+    );
+
+  }
+
+}
+
+
+function showAuthMessage(
+  message,
+  type
+){
+
+  const box =
+    document.getElementById(
+      "authMessage"
+    );
+
+  box.textContent =
+    message;
+
+  box.className =
+    "auth-message show " +
+    type;
+
+}
+
+
+function clearAuthMessage(){
+
+  const box =
+    document.getElementById(
+      "authMessage"
+    );
+
+  box.textContent = "";
+
+  box.className =
+    "auth-message";
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+async function loginUser(event){
+
+  event.preventDefault();
+
+  const email =
+    document.getElementById(
+      "loginEmail"
+    ).value.trim();
+
+  const password =
+    document.getElementById(
+      "loginPassword"
+    ).value;
+
+  const button =
+    document.getElementById(
+      "loginSubmit"
+    );
+
+  clearAuthMessage();
+
+  button.disabled = true;
+
+  button.textContent =
+    "Logging in...";
+
+  try{
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/auth/v1/token?grant_type=password",
+        {
+          method:"POST",
+
+          headers:{
+            "apikey":
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json"
+          },
+
+          body:JSON.stringify({
+
+            email:
+              email,
+
+            password:
+              password
+
+          })
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error_description ||
+        data.msg ||
+        data.message ||
+        "Login failed."
+      );
+
+    }
+
+    currentAuthSession =
+      data;
+
+    localStorage.setItem(
+      "cv_auth_session",
+      JSON.stringify(data)
+    );
+
+    updateAuthUI();
+
+    showAuthMessage(
+      "Login successful.",
+      "success"
+    );
+
+    setTimeout(
+      function(){
+        closeAuthModal();
+      },
+      900
+    );
+
+  }catch(error){
+
+    console.error(
+      "Login error:",
+      error
+    );
+
+    showAuthMessage(
+      error.message ||
+      "Login failed.",
+      "error"
+    );
+
+  }finally{
+
+    button.disabled = false;
+
+    button.textContent =
+      "Login";
+
+  }
+
+}
+
+
+/* =========================================================
+   SIGN UP
+========================================================= */
+
+async function signupUser(event){
+
+  event.preventDefault();
+
+  const email =
+    document.getElementById(
+      "signupEmail"
+    ).value.trim();
+
+  const password =
+    document.getElementById(
+      "signupPassword"
+    ).value;
+
+  const button =
+    document.getElementById(
+      "signupSubmit"
+    );
+
+  clearAuthMessage();
+
+  if(password.length < 6){
+
+    showAuthMessage(
+      "Password must be at least 6 characters.",
+      "error"
+    );
+
+    return;
+  }
+
+  button.disabled = true;
+
+  button.textContent =
+    "Creating...";
+
+  try{
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/auth/v1/signup",
+        {
+          method:"POST",
+
+          headers:{
+            "apikey":
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json"
+          },
+
+          body:JSON.stringify({
+
+            email:
+              email,
+
+            password:
+              password
+
+          })
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if(!response.ok){
+
+      throw new Error(
+        data.msg ||
+        data.message ||
+        data.error_description ||
+        "Sign up failed."
+      );
+
+    }
+
+    if(
+      data.access_token
+    ){
+
+      currentAuthSession =
+        data;
+
+      localStorage.setItem(
+        "cv_auth_session",
+        JSON.stringify(data)
+      );
+
+      updateAuthUI();
+
+      showAuthMessage(
+        "Account created successfully.",
+        "success"
+      );
+
+      setTimeout(
+        function(){
+          closeAuthModal();
+        },
+        900
+      );
+
+    }else{
+
+      showAuthMessage(
+        "Account created. Please check your email if confirmation is required, then login.",
+        "success"
+      );
+
+      switchAuthTab(
+        "login"
+      );
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Signup error:",
+      error
+    );
+
+    showAuthMessage(
+      error.message ||
+      "Sign up failed.",
+      "error"
+    );
+
+  }finally{
+
+    button.disabled = false;
+
+    button.textContent =
+      "Create Account";
+
+  }
+
+}
+
+
+/* =========================================================
+   RESTORE AUTH SESSION
+========================================================= */
+
+function restoreAuthSession(){
+
+  try{
+
+    const saved =
+      localStorage.getItem(
+        "cv_auth_session"
+      );
+
+    if(saved){
+
+      currentAuthSession =
+        JSON.parse(saved);
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Auth restore error:",
+      error
+    );
+
+    currentAuthSession =
+      null;
+
+  }
+
+  updateAuthUI();
+
+}
+
+
+/* =========================================================
+   AUTH UI
+========================================================= */
+
+function updateAuthUI(){
+
+  const loginButton =
+    document.getElementById(
+      "authHeaderButton"
+    );
+
+  const accountButton =
+    document.getElementById(
+      "userNameButton"
+    );
+
+  if(
+    currentAuthSession &&
+    currentAuthSession.user
+  ){
+
+    loginButton.style.display =
+      "none";
+
+    accountButton.style.display =
+      "block";
+
+    const email =
+      currentAuthSession.user.email ||
+      "Account";
+
+    accountButton.textContent =
+      "👤 " +
+      (
+        email.length > 16
+          ? email.slice(0,13) + "..."
+          : email
+      );
+
+  }else{
+
+    loginButton.style.display =
+      "block";
+
+    accountButton.style.display =
+      "none";
+
+  }
+
+}
+
+
+/* =========================================================
+   ACCOUNT MENU
+========================================================= */
+
+function openAccountMenu(){
+
+  if(
+    !currentAuthSession ||
+    !currentAuthSession.user
+  ){
+
+    openAuthModal();
+
+    return;
+  }
+
+  const email =
+    currentAuthSession.user.email ||
+    "your account";
+
+  const logout =
+    confirm(
+      "Logged in as:\n" +
+      email +
+      "\n\nDo you want to logout?"
+    );
+
+  if(logout){
+
+    logoutUser();
+
+  }
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+async function logoutUser(){
+
+  try{
+
+    if(
+      currentAuthSession &&
+      currentAuthSession.access_token
+    ){
+
+      await fetch(
+        SUPABASE_URL +
+        "/auth/v1/logout",
+        {
+          method:"POST",
+
+          headers:{
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              currentAuthSession.access_token
+          }
+        }
+      );
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Logout error:",
+      error
+    );
+
+  }
+
+  currentAuthSession =
+    null;
+
+  localStorage.removeItem(
+    "cv_auth_session"
+  );
+
+  updateAuthUI();
+
+  alert(
+    "You have been logged out."
+  );
+
+}
+
+
+/* =========================================================
+   CLOSE AUTH WHEN CLICK OUTSIDE
+========================================================= */
+
+document.getElementById(
+  "authOverlay"
+).addEventListener(
+  "click",
+  function(event){
+
+    if(
+      event.target ===
+      this
+    ){
+
+      closeAuthModal();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
    START
 ========================================================= */
+
+restoreLastOrder();
+
+restoreAuthSession();
 
 updateCartCount();
 
@@ -4260,5 +4599,4 @@ loadProducts();
 </script>
 
 </body>
-
 </html>
