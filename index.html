@@ -1,2019 +1,931 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CHRONO VAULT BD</title>
-<meta name="theme-color" content="#080808">
-
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#080808;
-  color:#fff;
-}
-
-button,input,textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-a{
-  text-decoration:none;
-  color:inherit;
-}
-
-.container{
-  width:min(1200px,92%);
-  margin:auto;
-}
-
-/* HEADER */
-
-header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:rgba(8,8,8,.95);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid #d4af37;
-}
-
-.header-inner{
-  min-height:70px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.logo{
-  width:44px;
-  height:44px;
-  border:1px solid #d4af37;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#d4af37;
-  font-weight:900;
-}
-
-.brand-text{
-  font-size:17px;
-  font-weight:800;
-  letter-spacing:1px;
-}
-
-.cart-btn{
-  background:#111;
-  color:#d4af37;
-  border:1px solid #d4af37;
-  border-radius:999px;
-  padding:10px 15px;
-  font-weight:700;
-}
-
-#cartCount{
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-  min-width:21px;
-  height:21px;
-  margin-left:5px;
-  border-radius:50%;
-  background:#d4af37;
-  color:#080808;
-  font-size:12px;
-}
-
-/* HERO */
-
-.hero{
-  text-align:center;
-  padding:75px 0 55px;
-  background:
-    radial-gradient(circle at center,rgba(212,175,55,.12),transparent 45%),
-    #080808;
-}
-
-.hero-tag{
-  color:#999;
-  font-size:12px;
-  letter-spacing:3px;
-  margin-bottom:15px;
-}
-
-.hero h1{
-  color:#d4af37;
-  font-size:clamp(35px,7vw,65px);
-  letter-spacing:3px;
-  margin-bottom:15px;
-}
-
-.hero p{
-  color:#bbb;
-  max-width:650px;
-  margin:auto;
-  line-height:1.7;
-}
-
-/* SECTION */
-
-section{
-  padding:55px 0;
-}
-
-.section-title{
-  text-align:center;
-  margin-bottom:30px;
-}
-
-.section-title h2{
-  color:#d4af37;
-  font-size:30px;
-  margin-bottom:8px;
-}
-
-.section-title p{
-  color:#888;
-}
-
-/* PRODUCTS */
-
-.products-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-
-.product-card{
-  background:#111;
-  border:1px solid #292929;
-  border-radius:16px;
-  overflow:hidden;
-  transition:.2s;
-}
-
-.product-card:hover{
-  border-color:#d4af37;
-  transform:translateY(-3px);
-}
-
-.product-image{
-  height:270px;
-  background:#0d0d0d;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-}
-
-.product-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.image-placeholder{
-  font-size:60px;
-  color:#d4af37;
-}
-
-.product-info{
-  padding:18px;
-}
-
-.product-category{
-  color:#d4af37;
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  margin-bottom:7px;
-}
-
-.product-name{
-  font-size:19px;
-  font-weight:800;
-  line-height:1.35;
-  margin-bottom:10px;
-}
-
-.price-row{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  margin-bottom:8px;
-}
-
-.price{
-  color:#d4af37;
-  font-size:22px;
-  font-weight:900;
-}
-
-.old-price{
-  color:#777;
-  text-decoration:line-through;
-  font-size:14px;
-}
-
-.stock{
-  color:#aaa;
-  font-size:13px;
-  margin-bottom:15px;
-}
-
-.stock.available{
-  color:#72d68a;
-}
-
-.stock.out{
-  color:#ff7070;
-}
-
-.product-actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-}
-
-.btn{
-  border:none;
-  border-radius:9px;
-  padding:12px;
-  font-weight:800;
-}
-
-.btn-gold{
-  background:#d4af37;
-  color:#080808;
-}
-
-.btn-dark{
-  background:#1b1b1b;
-  color:#fff;
-  border:1px solid #333;
-}
-
-.btn:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-}
-
-/* DETAILS */
-
-#detailsSection,
-#cartSection,
-#checkoutSection,
-#successSection{
-  display:none;
-}
-
-.details-box{
-  background:#111;
-  border:1px solid #292929;
-  border-radius:18px;
-  overflow:hidden;
-}
-
-.details-layout{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-}
-
-.details-image{
-  min-height:470px;
-  background:#0d0d0d;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.details-image img{
-  width:100%;
-  height:100%;
-  min-height:470px;
-  object-fit:cover;
-}
-
-.details-content{
-  padding:35px;
-}
-
-.details-category{
-  color:#d4af37;
-  font-size:12px;
-  letter-spacing:2px;
-  margin-bottom:10px;
-}
-
-.details-content h2{
-  font-size:34px;
-  line-height:1.2;
-  margin-bottom:15px;
-}
-
-.details-price{
-  display:flex;
-  gap:12px;
-  align-items:center;
-  margin-bottom:15px;
-}
-
-.details-description{
-  color:#bbb;
-  line-height:1.8;
-  white-space:pre-line;
-  margin:20px 0;
-}
-
-.specs{
-  border-top:1px solid #292929;
-  border-bottom:1px solid #292929;
-  margin-bottom:25px;
-}
-
-.spec-row{
-  display:flex;
-  justify-content:space-between;
-  padding:11px 0;
-  border-bottom:1px solid #1e1e1e;
-  font-size:14px;
-}
-
-.spec-row:last-child{
-  border-bottom:none;
-}
-
-.spec-label{
-  color:#888;
-}
-
-.spec-value{
-  color:#eee;
-}
-
-.details-actions{
-  display:flex;
-  gap:10px;
-}
-
-/* CART */
-
-.cart-box,
-.checkout-box,
-.success-box{
-  max-width:700px;
-  margin:auto;
-  background:#111;
-  border:1px solid #292929;
-  border-radius:16px;
-  padding:22px;
-}
-
-.cart-item{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:15px;
-  padding:17px 0;
-  border-bottom:1px solid #252525;
-}
-
-.cart-item-name{
-  font-weight:800;
-  margin-bottom:7px;
-}
-
-.cart-item-price{
-  color:#d4af37;
-  font-size:14px;
-}
-
-.qty-controls{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  margin-top:10px;
-}
-
-.qty-btn{
-  width:31px;
-  height:31px;
-  background:#181818;
-  color:#fff;
-  border:1px solid #444;
-  border-radius:6px;
-}
-
-.remove-btn{
-  background:none;
-  border:none;
-  color:#ff7070;
-  font-size:13px;
-  margin-top:8px;
-}
-
-.cart-right{
-  text-align:right;
-  color:#d4af37;
-  font-weight:800;
-}
-
-.cart-total,
-.checkout-total{
-  display:flex;
-  justify-content:space-between;
-  border-top:1px solid #333;
-  margin-top:18px;
-  padding-top:18px;
-  font-size:20px;
-  font-weight:900;
-}
-
-.empty-cart{
-  text-align:center;
-  color:#888;
-  padding:30px;
-}
-
-/* FORM */
-
-.form-group{
-  margin-bottom:18px;
-}
-
-.form-group label{
-  display:block;
-  color:#ccc;
-  font-size:14px;
-  margin-bottom:7px;
-}
-
-.form-group input,
-.form-group textarea{
-  width:100%;
-  background:#0b0b0b;
-  color:#fff;
-  border:1px solid #333;
-  border-radius:8px;
-  padding:13px;
-  outline:none;
-}
-
-.form-group input:focus,
-.form-group textarea:focus{
-  border-color:#d4af37;
-}
-
-.form-group textarea{
-  min-height:110px;
-  resize:vertical;
-}
-
-.payment-box{
-  padding:13px;
-  border:1px solid #333;
-  border-radius:9px;
-  color:#d4af37;
-  margin-bottom:20px;
-}
-
-.form-error{
-  display:none;
-  color:#ff7070;
-  font-size:13px;
-  margin-top:7px;
-}
-
-/* SUCCESS */
-
-.success-box{
-  text-align:center;
-  border-color:#d4af37;
-}
-
-.success-icon{
-  width:65px;
-  height:65px;
-  border:2px solid #d4af37;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:0 auto 18px;
-  color:#d4af37;
-  font-size:28px;
-}
-
-.success-box h2{
-  color:#d4af37;
-  margin-bottom:12px;
-}
-
-.success-box p{
-  color:#aaa;
-  line-height:1.7;
-}
-
-.order-id{
-  margin:18px 0;
-  background:#080808;
-  border:1px solid #333;
-  padding:13px;
-  border-radius:9px;
-  color:#d4af37;
-  font-weight:800;
-  word-break:break-word;
-}
-
-/* ERROR */
-
-.error-box{
-  grid-column:1/-1;
-  background:#180d0d;
-  border:1px solid #632626;
-  color:#ff8d8d;
-  padding:18px;
-  border-radius:10px;
-  text-align:center;
-}
-
-/* FOOTER */
-
-footer{
-  border-top:1px solid #292929;
-  padding:35px 0;
-  margin-top:30px;
-  text-align:center;
-}
-
-.footer-brand{
-  color:#d4af37;
-  font-weight:900;
-  letter-spacing:2px;
-}
-
-.footer-tagline{
-  color:#777;
-  font-size:13px;
-  margin:10px 0 18px;
-}
-
-.social-links{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:9px;
-}
-
-.social-links a{
-  border:1px solid #333;
-  border-radius:999px;
-  padding:8px 13px;
-  color:#bbb;
-  font-size:13px;
-}
-
-.social-links a:hover{
-  border-color:#d4af37;
-  color:#d4af37;
-}
-
-/* MOBILE */
-
-@media(max-width:900px){
-
-  .products-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .details-layout{
-    grid-template-columns:1fr;
-  }
-
-}
-
-@media(max-width:600px){
-
-  .brand-text{
-    font-size:14px;
-  }
-
-  .products-grid{
-    grid-template-columns:1fr;
-  }
-
-  .product-image{
-    height:300px;
-  }
-
-  .details-image,
-  .details-image img{
-    min-height:320px;
-  }
-
-  .details-content{
-    padding:22px;
-  }
-
-  .details-content h2{
-    font-size:27px;
-  }
-
-  .details-actions{
-    flex-direction:column;
-  }
-
-  .cart-item{
-    grid-template-columns:1fr;
-  }
-
-  .cart-right{
-    text-align:left;
-  }
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080808" />
+
+  <title>CHRONO VAULT BD</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #080808;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: auto;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(8, 8, 8, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #d4af37;
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid #d4af37;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d4af37;
+      font-weight: 900;
+      font-size: 15px;
+    }
+
+    .brand-text {
+      font-weight: 800;
+      letter-spacing: 1px;
+      font-size: 16px;
+    }
+
+    .cart-btn {
+      border: 1px solid #d4af37;
+      background: transparent;
+      color: #d4af37;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .cart-btn:hover {
+      background: #d4af37;
+      color: #000;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 80px 0;
+      text-align: center;
+      background:
+        radial-gradient(circle at top, rgba(212,175,55,0.16), transparent 45%),
+        #080808;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 8vw, 78px);
+      color: #d4af37;
+      letter-spacing: 4px;
+      line-height: 1.05;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: 20px auto 0;
+      color: #ccc;
+      font-size: 17px;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      margin-top: 30px;
+      background: #d4af37;
+      color: #000;
+      padding: 13px 24px;
+      border-radius: 8px;
+      font-weight: 800;
+    }
+
+    /* SECTION */
+    section {
+      padding: 55px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section-title h2 {
+      color: #d4af37;
+      font-size: 30px;
+    }
+
+    .section-title p {
+      color: #aaa;
+      margin-top: 5px;
+    }
+
+    /* PRODUCTS */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .product-card {
+      background: #111;
+      border: 1px solid #292929;
+      border-radius: 14px;
+      overflow: hidden;
+      transition: 0.25s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: #d4af37;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 260px;
+      background: #161616;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-placeholder {
+      color: #d4af37;
+      font-size: 55px;
+    }
+
+    .product-info {
+      padding: 18px;
+    }
+
+    .product-category {
+      color: #d4af37;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .product-name {
+      font-size: 18px;
+      font-weight: 800;
+      margin: 5px 0 10px;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .price {
+      color: #d4af37;
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .old-price {
+      color: #777;
+      text-decoration: line-through;
+      font-size: 14px;
+    }
+
+    .stock {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #aaa;
+    }
+
+    .stock.out {
+      color: #ff6666;
+    }
+
+    .add-btn {
+      width: 100%;
+      margin-top: 15px;
+      padding: 11px;
+      border: 1px solid #d4af37;
+      border-radius: 8px;
+      background: #d4af37;
+      color: #000;
+      font-weight: 800;
+    }
+
+    .add-btn:disabled {
+      background: #333;
+      color: #777;
+      border-color: #444;
+      cursor: not-allowed;
+    }
+
+    /* DETAILS */
+    .details-box {
+      background: #111;
+      border: 1px solid #292929;
+      border-radius: 14px;
+      padding: 25px;
+    }
+
+    .details-box h3 {
+      color: #d4af37;
+      margin-bottom: 15px;
+    }
+
+    .details-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .details-list div {
+      padding: 10px;
+      background: #171717;
+      border-radius: 7px;
+      color: #ccc;
+    }
+
+    /* CART */
+    .cart-section {
+      display: none;
+    }
+
+    .cart-box {
+      background: #111;
+      border: 1px solid #292929;
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      gap: 15px;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #292929;
+    }
+
+    .cart-item:last-child {
+      border-bottom: 0;
+    }
+
+    .cart-item-name {
+      font-weight: 800;
+    }
+
+    .cart-item-price {
+      color: #d4af37;
+      font-weight: 800;
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qty-btn {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #d4af37;
+      background: transparent;
+      color: #d4af37;
+      border-radius: 5px;
+    }
+
+    .remove-btn {
+      border: 0;
+      background: transparent;
+      color: #ff6666;
+      font-size: 13px;
+    }
+
+    .cart-total {
+      text-align: right;
+      margin-top: 20px;
+      font-size: 24px;
+      color: #d4af37;
+      font-weight: 900;
+    }
+
+    .checkout-btn {
+      margin-top: 15px;
+      width: 100%;
+      padding: 13px;
+      border: 0;
+      background: #d4af37;
+      color: #000;
+      border-radius: 8px;
+      font-weight: 900;
+    }
+
+    .clear-cart-btn {
+      margin-top: 10px;
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #555;
+      background: transparent;
+      color: #aaa;
+      border-radius: 8px;
+    }
+
+    /* CHECKOUT */
+    .checkout-section {
+      display: none;
+    }
+
+    .checkout-box {
+      max-width: 650px;
+      margin: auto;
+      background: #111;
+      border: 1px solid #292929;
+      border-radius: 14px;
+      padding: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      color: #ccc;
+      font-weight: 700;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: #080808;
+      border: 1px solid #333;
+      color: #fff;
+      border-radius: 8px;
+      padding: 12px;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #d4af37;
+    }
+
+    .form-group textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .place-order-btn {
+      width: 100%;
+      padding: 14px;
+      border: 0;
+      background: #d4af37;
+      color: #000;
+      border-radius: 8px;
+      font-weight: 900;
+    }
+
+    /* SUCCESS */
+    .success-section {
+      display: none;
+    }
+
+    .success-box {
+      max-width: 650px;
+      margin: auto;
+      text-align: center;
+      background: #111;
+      border: 1px solid #d4af37;
+      border-radius: 14px;
+      padding: 35px 20px;
+    }
+
+    .success-icon {
+      font-size: 55px;
+      color: #d4af37;
+    }
+
+    .success-box h2 {
+      color: #d4af37;
+      margin: 10px 0;
+    }
+
+    .order-id {
+      margin-top: 15px;
+      padding: 12px;
+      background: #080808;
+      border-radius: 8px;
+      color: #d4af37;
+      font-weight: 800;
+      word-break: break-word;
+    }
+
+    /* SOCIAL */
+    .social {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .social a {
+      border: 1px solid #333;
+      padding: 10px 14px;
+      border-radius: 7px;
+      color: #ccc;
+    }
+
+    .social a:hover {
+      border-color: #d4af37;
+      color: #d4af37;
+    }
+
+    /* LOADING / ERROR */
+    .message {
+      text-align: center;
+      padding: 30px;
+      color: #aaa;
+    }
+
+    .error-message {
+      color: #ff6666;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid #292929;
+      padding: 30px 0;
+      text-align: center;
+      color: #777;
+    }
+
+    footer strong {
+      color: #d4af37;
+    }
+
+    /* MOBILE */
+    @media (max-width: 850px) {
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav {
+        min-height: 64px;
+      }
+
+      .brand-text {
+        font-size: 13px;
+      }
+
+      .logo {
+        width: 40px;
+        height: 40px;
+      }
+
+      .hero {
+        padding: 60px 0;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-image {
+        height: 280px;
+      }
+
+      .details-list {
+        grid-template-columns: 1fr;
+      }
+
+      .cart-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .cart-total {
+        text-align: left;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <div class="container header-inner">
-
-    <a href="#" class="brand" onclick="goHome();return false;">
-      <div class="logo">CV</div>
-      <div class="brand-text">CHRONO VAULT BD</div>
-    </a>
-
-    <button class="cart-btn" onclick="toggleCart()">
-      🛒 Cart
-      <span id="cartCount">0</span>
-    </button>
-
-  </div>
-</header>
-
-
-<section class="hero" id="homeSection">
-
-  <div class="container">
-
-    <div class="hero-tag">
-      LUXURY • STYLE • TIME
-    </div>
-
-    <h1>CHRONO VAULT BD</h1>
-
-    <p>
-      More Than Just a Watch. It's a Lifestyle.
-      Discover our collection of premium timepieces.
-    </p>
-
-  </div>
-
-</section>
-
-
-<section id="productsSection">
-
-  <div class="container">
-
-    <div class="section-title">
-      <h2>Our Collection</h2>
-      <p>Choose your perfect timepiece.</p>
-    </div>
-
-    <div id="productsGrid" class="products-grid">
-      <div class="error-box">
-        Loading products...
-      </div>
-    </div>
-
-  </div>
-
-</section>
-
-
-<section id="detailsSection">
-
-  <div class="container">
-
-    <div class="section-title">
-      <h2>Product Details</h2>
-      <p>Everything you need to know.</p>
-    </div>
-
-    <div class="details-box">
-
-      <div class="details-layout">
-
-        <div class="details-image" id="detailsImage"></div>
-
-        <div class="details-content">
-
-          <div class="details-category" id="detailsCategory"></div>
-
-          <h2 id="detailsName"></h2>
-
-          <div class="details-price">
-            <span class="price" id="detailsPrice"></span>
-            <span class="old-price" id="detailsOldPrice"></span>
-          </div>
-
-          <div class="stock" id="detailsStock"></div>
-
-          <div class="details-description" id="detailsDescription"></div>
-
-          <div class="specs">
-
-            <div class="spec-row">
-              <span class="spec-label">Movement</span>
-              <span class="spec-value">Quartz</span>
-            </div>
-
-            <div class="spec-row">
-              <span class="spec-label">Dial</span>
-              <span class="spec-value">46 mm</span>
-            </div>
-
-            <div class="spec-row">
-              <span class="spec-label">Thickness</span>
-              <span class="spec-value">13 mm</span>
-            </div>
-
-            <div class="spec-row">
-              <span class="spec-label">Case</span>
-              <span class="spec-value">Alloy</span>
-            </div>
-
-            <div class="spec-row">
-              <span class="spec-label">Band</span>
-              <span class="spec-value">Alloy Steel</span>
-            </div>
-
-            <div class="spec-row">
-              <span class="spec-label">Dial Shape</span>
-              <span class="spec-value">Round</span>
-            </div>
-
-            <div class="spec-row">
-              <span class="spec-label">Style</span>
-              <span class="spec-value">Business</span>
-            </div>
-
-            <div class="spec-row">
-              <span class="spec-label">Waterproof</span>
-              <span class="spec-value">No</span>
-            </div>
-
-            <div class="spec-row">
-              <span class="spec-label">Warranty</span>
-              <span class="spec-value">Store Warranty</span>
-            </div>
-
-          </div>
-
-          <div class="details-actions">
-
-            <button
-              id="detailsAddBtn"
-              class="btn btn-gold"
-              onclick="addCurrentDetailsToCart()">
-              Add to Cart
-            </button>
-
-            <button
-              class="btn btn-dark"
-              onclick="closeDetails()">
-              ← Back
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section id="cartSection">
-
-  <div class="container">
-
-    <div class="section-title">
-      <h2>Your Cart</h2>
-      <p>Review your selected products.</p>
-    </div>
-
-    <div class="cart-box">
-
-      <div id="cartItems"></div>
-
-      <div id="cartBottom" style="display:none;">
-
-        <div class="cart-total">
-          <span>Total</span>
-          <span id="cartTotal">৳0</span>
-        </div>
-
-        <button
-          class="btn btn-gold"
-          style="width:100%;margin-top:18px;"
-          onclick="checkout()">
-          Proceed to Checkout
-        </button>
-
-        <button
-          class="btn btn-dark"
-          style="width:100%;margin-top:9px;"
-          onclick="goHome()">
-          Continue Shopping
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section id="checkoutSection">
-
-  <div class="container">
-
-    <div class="section-title">
-      <h2>Checkout</h2>
-      <p>Cash on Delivery</p>
-    </div>
-
-    <div class="checkout-box">
-
-      <div class="form-group">
-
-        <label for="customerName">
-          Full Name
-        </label>
-
-        <input
-          id="customerName"
-          type="text"
-          placeholder="Enter your full name">
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="customerPhone">
-          Phone Number
-        </label>
-
-        <input
-          id="customerPhone"
-          type="tel"
-          inputmode="numeric"
-          placeholder="01XXXXXXXXX">
-
-        <div id="phoneError" class="form-error">
-          Please enter a valid Bangladesh mobile number.
-        </div>
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="customerAddress">
-          Full Delivery Address
-        </label>
-
-        <textarea
-          id="customerAddress"
-          placeholder="House, Road, Area, Thana, District..."></textarea>
-
-      </div>
-
-
-      <div class="payment-box">
-        💵 Cash on Delivery
-      </div>
-
-
-      <div class="checkout-total">
-
-        <span>Total</span>
-
-        <span id="checkoutTotal">
-          ৳0
-        </span>
-
-      </div>
-
-
-      <button
-        id="placeOrderBtn"
-        class="btn btn-gold"
-        style="width:100%;"
-        onclick="placeOrder()">
-        Place Order
-      </button>
-
-
-      <button
-        class="btn btn-dark"
-        style="width:100%;margin-top:9px;"
-        onclick="cancelCheckout()">
-        ← Back to Cart
+  <!-- HEADER -->
+  <header>
+    <div class="container nav">
+
+      <a href="#" class="brand">
+        <div class="logo">CV</div>
+        <div class="brand-text">CHRONO VAULT BD</div>
+      </a>
+
+      <button class="cart-btn" onclick="showCart()">
+        🛒 Cart (<span id="cartCount">0</span>)
       </button>
 
     </div>
-
-  </div>
-
-</section>
+  </header>
 
 
-<section id="successSection">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
 
-  <div class="container">
-
-    <div class="success-box">
-
-      <div class="success-icon">
-        ✓
-      </div>
-
-      <h2>
-        Order Placed Successfully!
-      </h2>
+      <h1>CHRONO VAULT BD</h1>
 
       <p>
-        Thank you for ordering from CHRONO VAULT BD.
-        We will contact you soon for confirmation.
+        More Than Just a Watch. It's a Lifestyle.
       </p>
 
-      <div id="orderId" class="order-id">
-        Order ID: —
+      <a href="#products" class="hero-btn">
+        EXPLORE COLLECTION
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- PRODUCTS -->
+  <section id="products">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>OUR COLLECTION</h2>
+        <p>Premium watches for your everyday style.</p>
       </div>
 
-      <button
-        class="btn btn-gold"
-        style="width:100%;"
-        onclick="goHome()">
-        Continue Shopping
-      </button>
+      <div id="productsGrid" class="products-grid">
+
+        <div class="message">
+          Loading products...
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- PRODUCT DETAILS -->
+  <section>
+    <div class="container">
+
+      <div class="section-title">
+        <h2>PRODUCT DETAILS</h2>
+      </div>
+
+      <div class="details-box">
+
+        <h3>Watch Specifications</h3>
+
+        <div class="details-list">
+
+          <div><strong>Movement:</strong> Quartz</div>
+          <div><strong>Case:</strong> Alloy</div>
+          <div><strong>Band:</strong> Alloy</div>
+          <div><strong>Buckle:</strong> Single Folding</div>
+          <div><strong>Dial:</strong> 46mm Round</div>
+          <div><strong>Thickness:</strong> 13mm</div>
+          <div><strong>Style:</strong> Business</div>
+          <div><strong>Display:</strong> Pointer + Number</div>
+          <div><strong>Origin:</strong> China</div>
+          <div><strong>Packaging:</strong> OPP</div>
+          <div><strong>Warranty:</strong> Store Warranty</div>
+          <div><strong>Waterproof:</strong> No</div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- CART -->
+  <section id="cartSection" class="cart-section">
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>YOUR CART</h2>
+        <p>Review your selected products.</p>
+      </div>
+
+      <div class="cart-box">
+
+        <div id="cartItems"></div>
+
+        <div id="cartTotal" class="cart-total">
+          Total: ৳0
+        </div>
+
+        <button class="checkout-btn" onclick="showCheckout()">
+          PROCEED TO CHECKOUT
+        </button>
+
+        <button class="clear-cart-btn" onclick="clearCart()">
+          CLEAR CART
+        </button>
+
+      </div>
 
     </div>
 
-  </div>
-
-</section>
+  </section>
 
 
-<footer>
+  <!-- CHECKOUT -->
+  <section id="checkoutSection" class="checkout-section">
 
-  <div class="container">
+    <div class="container">
 
-    <div class="footer-brand">
-      CHRONO VAULT BD
+      <div class="section-title">
+        <h2>CHECKOUT</h2>
+        <p>Cash on Delivery</p>
+      </div>
+
+      <div class="checkout-box">
+
+        <form id="orderForm">
+
+          <div class="form-group">
+            <label for="customerName">
+              Full Name
+            </label>
+
+            <input
+              id="customerName"
+              type="text"
+              placeholder="Enter your full name"
+              required
+            />
+          </div>
+
+
+          <div class="form-group">
+            <label for="customerPhone">
+              Phone Number
+            </label>
+
+            <input
+              id="customerPhone"
+              type="tel"
+              inputmode="numeric"
+              placeholder="01XXXXXXXXX"
+              required
+            />
+          </div>
+
+
+          <div class="form-group">
+            <label for="customerAddress">
+              Delivery Address
+            </label>
+
+            <textarea
+              id="customerAddress"
+              placeholder="Enter your complete delivery address"
+              required
+            ></textarea>
+          </div>
+
+
+          <button
+            type="submit"
+            id="placeOrderBtn"
+            class="place-order-btn"
+          >
+            PLACE ORDER — CASH ON DELIVERY
+          </button>
+
+        </form>
+
+      </div>
+
     </div>
 
-    <div class="footer-tagline">
-      More Than Just a Watch. It's a Lifestyle.
+  </section>
+
+
+  <!-- SUCCESS -->
+  <section id="successSection" class="success-section">
+
+    <div class="container">
+
+      <div class="success-box">
+
+        <div class="success-icon">✓</div>
+
+        <h2>ORDER PLACED!</h2>
+
+        <p>
+          Thank you for shopping with CHRONO VAULT BD.
+        </p>
+
+        <p>
+          Your order has been received successfully.
+        </p>
+
+        <div id="orderIdDisplay" class="order-id"></div>
+
+        <button
+          class="hero-btn"
+          onclick="window.location.reload()"
+          style="border:0;"
+        >
+          CONTINUE SHOPPING
+        </button>
+
+      </div>
+
     </div>
 
-    <div class="social-links">
+  </section>
 
-      <a
-        href="https://www.facebook.com/share/1C3CqbjBXk/"
-        target="_blank"
-        rel="noopener noreferrer">
-        Facebook
-      </a>
 
-      <a
-        href="https://www.instagram.com/chronovaultbd?stkn=MWYxMjBxNXA1YTZ1bg=="
-        target="_blank"
-        rel="noopener noreferrer">
-        Instagram
-      </a>
+  <!-- SOCIAL -->
+  <section>
 
-      <a
-        href="https://www.tiktok.com/@chrono.vault.bd?_r=1&_t=ZS-99qPMd7PspQ"
-        target="_blank"
-        rel="noopener noreferrer">
-        TikTok
-      </a>
+    <div class="container">
 
-      <a
-        href="https://wa.me/8801326144735"
-        target="_blank"
-        rel="noopener noreferrer">
-        WhatsApp
-      </a>
+      <div class="section-title">
+        <h2>FOLLOW US</h2>
+      </div>
+
+      <div class="social">
+
+        <a
+          href="https://www.facebook.com/share/1C3CqbjBXk/"
+          target="_blank"
+          rel="noopener"
+        >
+          Facebook
+        </a>
+
+        <a
+          href="https://www.instagram.com/chronovaultbd?stkn=MWYxMjBxNXA1YTZ1bg=="
+          target="_blank"
+          rel="noopener"
+        >
+          Instagram
+        </a>
+
+        <a
+          href="https://www.tiktok.com/@chrono.vault.bd?_r=1&_t=ZS-99qPMd7PspQ"
+          target="_blank"
+          rel="noopener"
+        >
+          TikTok
+        </a>
+
+        <a
+          href="https://wa.me/8801326144735"
+          target="_blank"
+          rel="noopener"
+        >
+          WhatsApp
+        </a>
+
+      </div>
 
     </div>
 
-  </div>
+  </section>
 
-</footer>
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="container">
+
+      <p>
+        © 2026 <strong>CHRONO VAULT BD</strong>
+      </p>
+
+      <p>
+        More Than Just a Watch. It's a Lifestyle.
+      </p>
+
+    </div>
+
+  </footer>
 
 
 <script>
-
 /* =========================================================
-   SUPABASE
+   SUPABASE CONFIG
 ========================================================= */
 
 const SUPABASE_URL =
-"https://rufdvkelwzsmnuruvdko.supabase.co";
+  "https://rufdvkelwzsmnuruvdko.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_3j4Bs4rft9_w4r1j6uHo5w_fYLIJsNI";
+  "sb_publishable_3j4Bs4rft9_w4r1j6uHo5w_fYLIJsNI";
 
 
 /* =========================================================
-   STATE
+   GLOBAL DATA
 ========================================================= */
 
 let products = [];
-let cart = [];
-let currentDetailsProduct = null;
+let cart = JSON.parse(localStorage.getItem("chronoCart") || "[]");
 
 
 /* =========================================================
-   LOAD CART
+   SUPABASE REQUEST HELPER
 ========================================================= */
 
-try{
+async function supabaseRequest(path, options = {}) {
 
-  const saved =
-    localStorage.getItem("chronoCart");
+  const headers = {
+    "apikey": SUPABASE_KEY,
+    "Authorization": "Bearer " + SUPABASE_KEY,
+    "Content-Type": "application/json",
+    ...(options.headers || {})
+  };
 
-  if(saved){
+  const response = await fetch(
+    SUPABASE_URL + path,
+    {
+      ...options,
+      headers
+    }
+  );
 
-    cart = JSON.parse(saved);
+  const raw = await response.text();
 
-    if(!Array.isArray(cart)){
-      cart = [];
+  let data = null;
+
+  try {
+    data = raw ? JSON.parse(raw) : null;
+  } catch (e) {
+    data = raw;
+  }
+
+  if (!response.ok) {
+
+    let message = "Supabase request failed.";
+
+    if (data && typeof data === "object") {
+      message =
+        data.message ||
+        data.error_description ||
+        data.error ||
+        JSON.stringify(data);
+    } else if (data) {
+      message = data;
     }
 
+    throw new Error(
+      "HTTP " + response.status + ": " + message
+    );
   }
 
-}catch(error){
-
-  cart = [];
-
-}
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function safe(value){
-
-  if(value === null || value === undefined){
-    return "";
-  }
-
-  return String(value);
-
-}
-
-
-function formatPrice(value){
-
-  return "৳" +
-    Number(value || 0).toLocaleString("en-BD");
-
-}
-
-
-function getStock(product){
-
-  return Math.max(
-    0,
-    Number(product.Stock || 0)
-  );
-
-}
-
-
-function getPrice(product){
-
-  return Number(product.Price || 0);
-
-}
-
-
-function getOldPrice(product){
-
-  return Number(
-    product["Old price"] || 0
-  );
-
-}
-
-
-/* =========================================================
-   CART
-========================================================= */
-
-function saveCart(){
-
-  localStorage.setItem(
-    "chronoCart",
-    JSON.stringify(cart)
-  );
-
-  updateCartCount();
-
-}
-
-
-function updateCartCount(){
-
-  const count =
-    cart.reduce(
-      (sum,item) =>
-        sum + Number(item.quantity || 0),
-      0
-    );
-
-  document.getElementById(
-    "cartCount"
-  ).textContent = count;
-
-}
-
-
-function addToCart(product){
-
-  const stock =
-    getStock(product);
-
-  if(stock <= 0){
-
-    alert("This product is out of stock.");
-
-    return;
-
-  }
-
-
-  const existing =
-    cart.find(
-      item =>
-        String(item.id) ===
-        String(product.id)
-    );
-
-
-  if(existing){
-
-    if(existing.quantity >= stock){
-
-      alert(
-        "You cannot add more than available stock."
-      );
-
-      return;
-
-    }
-
-    existing.quantity++;
-
-  }else{
-
-    cart.push({
-
-      id:product.id,
-
-      name:safe(product.Name),
-
-      price:getPrice(product),
-
-      quantity:1,
-
-      stock:stock
-
-    });
-
-  }
-
-
-  saveCart();
-
-  alert("Added to cart.");
-
-}
-
-
-function addToCartById(id){
-
-  const product =
-    products.find(
-      p =>
-        String(p.id) ===
-        String(id)
-    );
-
-  if(!product){
-
-    alert("Product not found.");
-
-    return;
-
-  }
-
-  addToCart(product);
-
-}
-
-
-function changeQuantity(id,amount){
-
-  const item =
-    cart.find(
-      x =>
-        String(x.id) ===
-        String(id)
-    );
-
-  if(!item){
-    return;
-  }
-
-
-  const next =
-    Number(item.quantity) +
-    Number(amount);
-
-
-  if(next <= 0){
-
-    cart =
-      cart.filter(
-        x =>
-          String(x.id) !==
-          String(id)
-      );
-
-  }else if(next > Number(item.stock)){
-
-    alert(
-      "Maximum stock is " +
-      item.stock
-    );
-
-    return;
-
-  }else{
-
-    item.quantity = next;
-
-  }
-
-
-  saveCart();
-
-  renderCart();
-
-}
-
-
-function removeFromCart(id){
-
-  cart =
-    cart.filter(
-      x =>
-        String(x.id) !==
-        String(id)
-    );
-
-  saveCart();
-
-  renderCart();
-
-}
-
-
-function getCartTotal(){
-
-  return cart.reduce(
-    (total,item) =>
-      total +
-      Number(item.price || 0) *
-      Number(item.quantity || 0),
-    0
-  );
-
-}
-
-
-function renderCart(){
-
-  const container =
-    document.getElementById(
-      "cartItems"
-    );
-
-  const bottom =
-    document.getElementById(
-      "cartBottom"
-    );
-
-
-  if(cart.length === 0){
-
-    container.innerHTML =
-      `<div class="empty-cart">
-        Your cart is empty.
-      </div>`;
-
-    bottom.style.display =
-      "none";
-
-    return;
-
-  }
-
-
-  container.innerHTML =
-    cart.map(item => {
-
-      const subtotal =
-        Number(item.price) *
-        Number(item.quantity);
-
-
-      return `
-        <div class="cart-item">
-
-          <div>
-
-            <div class="cart-item-name">
-              ${safe(item.name)}
-            </div>
-
-            <div class="cart-item-price">
-              ${formatPrice(item.price)} each
-            </div>
-
-            <div class="qty-controls">
-
-              <button
-                class="qty-btn"
-                onclick="changeQuantity('${item.id}',-1)">
-                −
-              </button>
-
-              <span>
-                ${item.quantity}
-              </span>
-
-              <button
-                class="qty-btn"
-                onclick="changeQuantity('${item.id}',1)">
-                +
-              </button>
-
-            </div>
-
-            <button
-              class="remove-btn"
-              onclick="removeFromCart('${item.id}')">
-              Remove
-            </button>
-
-          </div>
-
-          <div class="cart-right">
-            ${formatPrice(subtotal)}
-          </div>
-
-        </div>
-      `;
-
-    }).join("");
-
-
-  document.getElementById(
-    "cartTotal"
-  ).textContent =
-    formatPrice(getCartTotal());
-
-
-  bottom.style.display =
-    "block";
-
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-function hideAll(){
-
-  document.getElementById(
-    "productsSection"
-  ).style.display = "none";
-
-  document.getElementById(
-    "detailsSection"
-  ).style.display = "none";
-
-  document.getElementById(
-    "cartSection"
-  ).style.display = "none";
-
-  document.getElementById(
-    "checkoutSection"
-  ).style.display = "none";
-
-  document.getElementById(
-    "successSection"
-  ).style.display = "none";
-
-}
-
-
-function goHome(){
-
-  hideAll();
-
-  document.getElementById(
-    "productsSection"
-  ).style.display = "block";
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-function toggleCart(){
-
-  hideAll();
-
-  document.getElementById(
-    "cartSection"
-  ).style.display = "block";
-
-  renderCart();
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-/* =========================================================
-   DETAILS
-========================================================= */
-
-function showDetails(id){
-
-  const product =
-    products.find(
-      p =>
-        String(p.id) ===
-        String(id)
-    );
-
-  if(!product){
-    return;
-  }
-
-
-  currentDetailsProduct =
-    product;
-
-
-  hideAll();
-
-
-  document.getElementById(
-    "detailsSection"
-  ).style.display = "block";
-
-
-  const image =
-    document.getElementById(
-      "detailsImage"
-    );
-
-
-  if(product.image_url){
-
-    image.innerHTML = `
-      <img
-        src="${safe(product.image_url)}"
-        alt="${safe(product.Name)}">
-    `;
-
-  }else{
-
-    image.innerHTML =
-      `<div class="image-placeholder">
-        ⌚
-      </div>`;
-
-  }
-
-
-  document.getElementById(
-    "detailsCategory"
-  ).textContent =
-    safe(product.Category) ||
-    "Watch";
-
-
-  document.getElementById(
-    "detailsName"
-  ).textContent =
-    safe(product.Name);
-
-
-  document.getElementById(
-    "detailsPrice"
-  ).textContent =
-    formatPrice(product.Price);
-
-
-  const old =
-    document.getElementById(
-      "detailsOldPrice"
-    );
-
-
-  if(getOldPrice(product) > 0){
-
-    old.textContent =
-      formatPrice(product["Old price"]);
-
-  }else{
-
-    old.textContent = "";
-
-  }
-
-
-  const stock =
-    getStock(product);
-
-
-  const stockElement =
-    document.getElementById(
-      "detailsStock"
-    );
-
-
-  if(stock > 0){
-
-    stockElement.textContent =
-      "In Stock: " + stock;
-
-    stockElement.className =
-      "stock available";
-
-  }else{
-
-    stockElement.textContent =
-      "Out of Stock";
-
-    stockElement.className =
-      "stock out";
-
-  }
-
-
-  document.getElementById(
-    "detailsDescription"
-  ).textContent =
-    safe(product.Description) ||
-    "Premium watch from CHRONO VAULT BD.";
-
-
-  const addButton =
-    document.getElementById(
-      "detailsAddBtn"
-    );
-
-
-  addButton.disabled =
-    stock <= 0;
-
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-function addCurrentDetailsToCart(){
-
-  if(currentDetailsProduct){
-
-    addToCart(
-      currentDetailsProduct
-    );
-
-  }
-
-}
-
-
-function closeDetails(){
-
-  goHome();
-
-}
-
-
-/* =========================================================
-   CHECKOUT
-========================================================= */
-
-function checkout(){
-
-  if(cart.length === 0){
-
-    alert("Your cart is empty.");
-
-    return;
-
-  }
-
-
-  hideAll();
-
-
-  document.getElementById(
-    "checkoutSection"
-  ).style.display = "block";
-
-
-  document.getElementById(
-    "checkoutTotal"
-  ).textContent =
-    formatPrice(
-      getCartTotal()
-    );
-
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-function cancelCheckout(){
-
-  toggleCart();
-
-}
-
-
-/* =========================================================
-   PLACE ORDER
-========================================================= */
-
-async function placeOrder(){
-
-  const name =
-    document.getElementById(
-      "customerName"
-    ).value.trim();
-
-
-  const phone =
-    document.getElementById(
-      "customerPhone"
-    ).value.trim()
-    .replace(/[\s-]/g,"");
-
-
-  const address =
-    document.getElementById(
-      "customerAddress"
-    ).value.trim();
-
-
-  const phoneError =
-    document.getElementById(
-      "phoneError"
-    );
-
-
-  const button =
-    document.getElementById(
-      "placeOrderBtn"
-    );
-
-
-  phoneError.style.display =
-    "none";
-
-
-  if(!name){
-
-    alert(
-      "Please enter your full name."
-    );
-
-    return;
-
-  }
-
-
-  if(!/^01\d{9}$/.test(phone)){
-
-    phoneError.style.display =
-      "block";
-
-    return;
-
-  }
-
-
-  if(!address){
-
-    alert(
-      "Please enter your full delivery address."
-    );
-
-    return;
-
-  }
-
-
-  if(cart.length === 0){
-
-    alert(
-      "Your cart is empty."
-    );
-
-    return;
-
-  }
-
-
-  const orderItems =
-    cart.map(item => ({
-
-      id:item.id,
-
-      name:item.name,
-
-      price:Number(item.price),
-
-      quantity:Number(item.quantity),
-
-      subtotal:
-        Number(item.price) *
-        Number(item.quantity)
-
-    }));
-
-
-  const total =
-    getCartTotal();
-
-
-  button.disabled =
-    true;
-
-  button.textContent =
-    "Placing Order...";
-
-
-  try{
-
-    const response =
-      await fetch(
-        `${SUPABASE_URL}/rest/v1/orders`,
-        {
-          method:"POST",
-
-          headers:{
-
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              `Bearer ${SUPABASE_KEY}`,
-
-            "Content-Type":
-              "application/json",
-
-            "Prefer":
-              "return=representation"
-
-          },
-
-          body:JSON.stringify({
-
-            /* IMPORTANT:
-               Your actual DB column
-               is customer_nam
-            */
-
-            customer_nam:name,
-
-            phone:phone,
-
-            address:address,
-
-            items:orderItems,
-
-            total:total,
-
-            status:"Pending"
-
-          })
-
-        }
-      );
-
-
-    const raw =
-      await response.text();
-
-
-    console.log(
-      "SUPABASE ORDER RESPONSE:",
-      response.status,
-      raw
-    );
-
-
-    if(!response.ok){
-
-      let errorMessage =
-        raw;
-
-
-      try{
-
-        const errorJson =
-          JSON.parse(raw);
-
-        errorMessage =
-          errorJson.message ||
-          errorJson.hint ||
-          errorJson.details ||
-          raw;
-
-      }catch(e){}
-
-
-      throw new Error(
-        "HTTP " +
-        response.status +
-        ": " +
-        errorMessage
-      );
-
-    }
-
-
-    let createdOrder =
-      null;
-
-
-    try{
-
-      const parsed =
-        JSON.parse(raw);
-
-      if(Array.isArray(parsed)){
-
-        createdOrder =
-          parsed[0];
-
-      }else{
-
-        createdOrder =
-          parsed;
-
-      }
-
-    }catch(e){}
-
-
-    const orderId =
-      createdOrder &&
-      createdOrder.id
-        ? createdOrder.id
-        : "Successfully received";
-
-
-    document.getElementById(
-      "orderId"
-    ).textContent =
-      "Order ID: " + orderId;
-
-
-    cart = [];
-
-    saveCart();
-
-
-    document.getElementById(
-      "customerName"
-    ).value = "";
-
-    document.getElementById(
-      "customerPhone"
-    ).value = "";
-
-    document.getElementById(
-      "customerAddress"
-    ).value = "";
-
-
-    hideAll();
-
-
-    document.getElementById(
-      "successSection"
-    ).style.display =
-      "block";
-
-
-    window.scrollTo({
-      top:0,
-      behavior:"smooth"
-    });
-
-
-  }catch(error){
-
-    console.error(
-      "ORDER PLACEMENT ERROR:",
-      error
-    );
-
-
-    /*
-      IMPORTANT:
-      এবার আসল error user-কে দেখাবে।
-      তাই problem লুকাবে না।
-    */
-
-    alert(
-      "ORDER ERROR:\n\n" +
-      error.message
-    );
-
-
-  }finally{
-
-    button.disabled =
-      false;
-
-    button.textContent =
-      "Place Order";
-
-  }
-
+  return data;
 }
 
 
@@ -2021,195 +933,30 @@ async function placeOrder(){
    LOAD PRODUCTS
 ========================================================= */
 
-async function loadProducts(){
+async function loadProducts() {
 
-  const grid =
-    document.getElementById(
-      "productsGrid"
+  const grid = document.getElementById("productsGrid");
+
+  try {
+
+    const data = await supabaseRequest(
+      "/rest/v1/products?select=*&order=created_at.asc"
     );
 
+    products = Array.isArray(data) ? data : [];
 
-  try{
+    renderProducts();
 
-    const response =
-      await fetch(
-        `${SUPABASE_URL}/rest/v1/products?select=*&order=created_at.desc`,
-        {
-          method:"GET",
+  } catch (error) {
 
-          headers:{
+    console.error("PRODUCT LOAD ERROR:", error);
 
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              `Bearer ${SUPABASE_KEY}`
-
-          }
-
-        }
-      );
-
-
-    const raw =
-      await response.text();
-
-
-    if(!response.ok){
-
-      throw new Error(
-        raw
-      );
-
-    }
-
-
-    products =
-      JSON.parse(raw);
-
-
-    if(!Array.isArray(products)){
-
-      products = [];
-
-    }
-
-
-    if(products.length === 0){
-
-      grid.innerHTML =
-        `<div class="error-box">
-          No products found.
-        </div>`;
-
-      return;
-
-    }
-
-
-    grid.innerHTML =
-      products.map(product => {
-
-        const stock =
-          getStock(product);
-
-
-        const image =
-          product.image_url
-
-          ? `
-            <img
-              src="${safe(product.image_url)}"
-              alt="${safe(product.Name)}">
-          `
-
-          : `
-            <div class="image-placeholder">
-              ⌚
-            </div>
-          `;
-
-
-        return `
-
-          <article class="product-card">
-
-            <div class="product-image">
-              ${image}
-            </div>
-
-            <div class="product-info">
-
-              <div class="product-category">
-                ${safe(product.Category) || "Watch"}
-              </div>
-
-              <div class="product-name">
-                ${safe(product.Name)}
-              </div>
-
-              <div class="price-row">
-
-                <span class="price">
-                  ${formatPrice(product.Price)}
-                </span>
-
-                ${
-                  getOldPrice(product) > 0
-                  ? `
-                    <span class="old-price">
-                      ${formatPrice(product["Old price"])}
-                    </span>
-                  `
-                  : ""
-                }
-
-              </div>
-
-
-              <div class="stock ${
-                stock > 0
-                ? "available"
-                : "out"
-              }">
-
-                ${
-                  stock > 0
-                  ? "In Stock: " + stock
-                  : "Out of Stock"
-                }
-
-              </div>
-
-
-              <div class="product-actions">
-
-                <button
-                  class="btn btn-dark"
-                  onclick="showDetails('${product.id}')">
-                  View Details
-                </button>
-
-                <button
-                  class="btn btn-gold"
-                  ${
-                    stock <= 0
-                    ? "disabled"
-                    : ""
-                  }
-                  onclick="addToCartById('${product.id}')">
-                  ${
-                    stock > 0
-                    ? "Add to Cart"
-                    : "Out of Stock"
-                  }
-                </button>
-
-              </div>
-
-            </div>
-
-          </article>
-
-        `;
-
-      }).join("");
-
-
-  }catch(error){
-
-    console.error(
-      "PRODUCT ERROR:",
-      error
-    );
-
-
-    grid.innerHTML =
-      `<div class="error-box">
-        Products could not be loaded.
-        <br>
-        ${safe(error.message)}
-      </div>`;
+    grid.innerHTML = `
+      <div class="message error-message">
+        Products could not be loaded.<br><br>
+        ${escapeHtml(error.message)}
+      </div>
+    `;
 
   }
 
@@ -2217,19 +964,833 @@ async function loadProducts(){
 
 
 /* =========================================================
-   START
+   RENDER PRODUCTS
 ========================================================= */
 
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
+function renderProducts() {
 
-    updateCartCount();
+  const grid = document.getElementById("productsGrid");
 
-    loadProducts();
+  if (!products.length) {
+
+    grid.innerHTML = `
+      <div class="message">
+        No products available right now.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  grid.innerHTML = products.map(product => {
+
+    const name =
+      product.Name ||
+      "Premium Watch";
+
+    const category =
+      product.Category ||
+      "Watch";
+
+    const price =
+      Number(product.Price || 0);
+
+    const oldPrice =
+      Number(product["Old price"] || 0);
+
+    const stock =
+      Number(product.Stock || 0);
+
+    const image =
+      product.image_url ||
+      "";
+
+
+    const safeId =
+      String(product.id);
+
+
+    return `
+
+      <div class="product-card">
+
+        <div class="product-image">
+
+          ${
+            image
+              ?
+              `
+              <img
+                src="${escapeAttribute(image)}"
+                alt="${escapeAttribute(name)}"
+                loading="lazy"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+              />
+
+              <div
+                class="image-placeholder"
+                style="display:none;"
+              >
+                ⌚
+              </div>
+              `
+              :
+              `
+              <div class="image-placeholder">
+                ⌚
+              </div>
+              `
+          }
+
+        </div>
+
+
+        <div class="product-info">
+
+          <div class="product-category">
+            ${escapeHtml(category)}
+          </div>
+
+
+          <div class="product-name">
+            ${escapeHtml(name)}
+          </div>
+
+
+          <div class="price-row">
+
+            <div class="price">
+              ৳${price.toLocaleString("en-BD")}
+            </div>
+
+            ${
+              oldPrice > price
+                ?
+                `
+                <div class="old-price">
+                  ৳${oldPrice.toLocaleString("en-BD")}
+                </div>
+                `
+                :
+                ""
+            }
+
+          </div>
+
+
+          <div
+            class="stock ${stock <= 0 ? "out" : ""}"
+          >
+
+            ${
+              stock > 0
+                ? `Stock: ${stock}`
+                : "Out of Stock"
+            }
+
+          </div>
+
+
+          <button
+            class="add-btn"
+            onclick="addToCart('${escapeAttribute(safeId)}')"
+            ${stock <= 0 ? "disabled" : ""}
+          >
+
+            ${
+              stock > 0
+                ? "ADD TO CART"
+                : "OUT OF STOCK"
+            }
+
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }).join("");
+
+}
+
+
+/* =========================================================
+   ADD TO CART
+========================================================= */
+
+function addToCart(productId) {
+
+  const product =
+    products.find(
+      item => String(item.id) === String(productId)
+    );
+
+  if (!product) {
+    alert("Product not found.");
+    return;
+  }
+
+
+  const stock =
+    Number(product.Stock || 0);
+
+  if (stock <= 0) {
+    alert("This product is out of stock.");
+    return;
+  }
+
+
+  const existing =
+    cart.find(
+      item => String(item.id) === String(product.id)
+    );
+
+
+  if (existing) {
+
+    if (existing.quantity >= stock) {
+
+      alert(
+        "You cannot add more than available stock."
+      );
+
+      return;
+    }
+
+    existing.quantity += 1;
+
+  } else {
+
+    cart.push({
+      id: product.id,
+      name: product.Name || "Premium Watch",
+      price: Number(product.Price || 0),
+      stock: stock,
+      quantity: 1
+    });
 
   }
-);
+
+
+  saveCart();
+
+  updateCartCount();
+
+  alert("Added to cart.");
+
+}
+
+
+/* =========================================================
+   SAVE CART
+========================================================= */
+
+function saveCart() {
+
+  localStorage.setItem(
+    "chronoCart",
+    JSON.stringify(cart)
+  );
+
+}
+
+
+/* =========================================================
+   CART COUNT
+========================================================= */
+
+function updateCartCount() {
+
+  const count =
+    cart.reduce(
+      (sum, item) => sum + Number(item.quantity || 0),
+      0
+    );
+
+  document.getElementById("cartCount").textContent =
+    count;
+
+}
+
+
+/* =========================================================
+   SHOW CART
+========================================================= */
+
+function showCart() {
+
+  const section =
+    document.getElementById("cartSection");
+
+  section.style.display = "block";
+
+  renderCart();
+
+  section.scrollIntoView({
+    behavior: "smooth"
+  });
+
+}
+
+
+/* =========================================================
+   RENDER CART
+========================================================= */
+
+function renderCart() {
+
+  const container =
+    document.getElementById("cartItems");
+
+  const totalElement =
+    document.getElementById("cartTotal");
+
+
+  if (!cart.length) {
+
+    container.innerHTML = `
+      <div class="message">
+        Your cart is empty.
+      </div>
+    `;
+
+    totalElement.textContent =
+      "Total: ৳0";
+
+    return;
+  }
+
+
+  let total = 0;
+
+
+  container.innerHTML =
+    cart.map((item, index) => {
+
+      const price =
+        Number(item.price || 0);
+
+      const quantity =
+        Number(item.quantity || 0);
+
+      const subtotal =
+        price * quantity;
+
+      total += subtotal;
+
+
+      return `
+
+        <div class="cart-item">
+
+          <div>
+            <div class="cart-item-name">
+              ${escapeHtml(item.name)}
+            </div>
+
+            <div class="cart-item-price">
+              ৳${price.toLocaleString("en-BD")}
+            </div>
+          </div>
+
+
+          <div class="qty-controls">
+
+            <button
+              class="qty-btn"
+              onclick="changeQuantity(${index}, -1)"
+            >
+              −
+            </button>
+
+            <strong>
+              ${quantity}
+            </strong>
+
+            <button
+              class="qty-btn"
+              onclick="changeQuantity(${index}, 1)"
+            >
+              +
+            </button>
+
+          </div>
+
+
+          <strong>
+            ৳${subtotal.toLocaleString("en-BD")}
+          </strong>
+
+
+          <button
+            class="remove-btn"
+            onclick="removeFromCart(${index})"
+          >
+            Remove
+          </button>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+
+  totalElement.textContent =
+    "Total: ৳" + total.toLocaleString("en-BD");
+
+}
+
+
+/* =========================================================
+   CHANGE QUANTITY
+========================================================= */
+
+function changeQuantity(index, change) {
+
+  if (!cart[index]) return;
+
+
+  const item =
+    cart[index];
+
+  const newQuantity =
+    Number(item.quantity) + change;
+
+
+  if (newQuantity <= 0) {
+
+    cart.splice(index, 1);
+
+  } else if (newQuantity > Number(item.stock)) {
+
+    alert(
+      "Maximum available stock is " +
+      item.stock
+    );
+
+    return;
+
+  } else {
+
+    item.quantity =
+      newQuantity;
+
+  }
+
+
+  saveCart();
+
+  updateCartCount();
+
+  renderCart();
+
+}
+
+
+/* =========================================================
+   REMOVE FROM CART
+========================================================= */
+
+function removeFromCart(index) {
+
+  if (!cart[index]) return;
+
+  cart.splice(index, 1);
+
+  saveCart();
+
+  updateCartCount();
+
+  renderCart();
+
+}
+
+
+/* =========================================================
+   CLEAR CART
+========================================================= */
+
+function clearCart() {
+
+  if (!cart.length) return;
+
+
+  const confirmed =
+    confirm(
+      "Are you sure you want to clear the cart?"
+    );
+
+
+  if (!confirmed) return;
+
+
+  cart = [];
+
+  saveCart();
+
+  updateCartCount();
+
+  renderCart();
+
+}
+
+
+/* =========================================================
+   SHOW CHECKOUT
+========================================================= */
+
+function showCheckout() {
+
+  if (!cart.length) {
+
+    alert("Your cart is empty.");
+
+    return;
+  }
+
+
+  document.getElementById(
+    "checkoutSection"
+  ).style.display = "block";
+
+
+  document.getElementById(
+    "checkoutSection"
+  ).scrollIntoView({
+    behavior: "smooth"
+  });
+
+}
+
+
+/* =========================================================
+   PHONE VALIDATION
+========================================================= */
+
+function isValidBangladeshPhone(phone) {
+
+  const cleaned =
+    phone.replace(/\s+/g, "");
+
+
+  return /^01[3-9]\d{8}$/.test(cleaned);
+
+}
+
+
+/* =========================================================
+   ORDER SUBMIT
+========================================================= */
+
+document
+  .getElementById("orderForm")
+  .addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+
+    if (!cart.length) {
+
+      alert("Your cart is empty.");
+
+      return;
+    }
+
+
+    const name =
+      document
+        .getElementById("customerName")
+        .value
+        .trim();
+
+
+    const phone =
+      document
+        .getElementById("customerPhone")
+        .value
+        .trim();
+
+
+    const address =
+      document
+        .getElementById("customerAddress")
+        .value
+        .trim();
+
+
+    if (!name) {
+
+      alert("Please enter your name.");
+
+      return;
+    }
+
+
+    if (!isValidBangladeshPhone(phone)) {
+
+      alert(
+        "Please enter a valid Bangladesh phone number.\nExample: 01712345678"
+      );
+
+      return;
+    }
+
+
+    if (!address) {
+
+      alert("Please enter your delivery address.");
+
+      return;
+    }
+
+
+    let total = 0;
+
+
+    const orderItems =
+      cart.map(item => {
+
+        const quantity =
+          Number(item.quantity || 0);
+
+        const price =
+          Number(item.price || 0);
+
+        const subtotal =
+          quantity * price;
+
+        total += subtotal;
+
+
+        return {
+          id: item.id,
+          name: item.name,
+          price: price,
+          quantity: quantity,
+          subtotal: subtotal
+        };
+
+      });
+
+
+    const placeOrderBtn =
+      document.getElementById(
+        "placeOrderBtn"
+      );
+
+
+    placeOrderBtn.disabled = true;
+
+    placeOrderBtn.textContent =
+      "PLACING ORDER...";
+
+
+    try {
+
+      /*
+        IMPORTANT:
+        Supabase orders table uses customer_name.
+        Do NOT change this to customer_nam.
+      */
+
+      const orderData = {
+
+        customer_name: name,
+
+        phone: phone,
+
+        address: address,
+
+        items: orderItems,
+
+        total: total,
+
+        status: "Pending"
+
+      };
+
+
+      console.log(
+        "ORDER DATA SENT TO SUPABASE:",
+        orderData
+      );
+
+
+      const result =
+        await supabaseRequest(
+          "/rest/v1/orders",
+          {
+            method: "POST",
+
+            headers: {
+              "Prefer": "return=representation"
+            },
+
+            body: JSON.stringify(orderData)
+
+          }
+        );
+
+
+      console.log(
+        "SUPABASE ORDER RESPONSE:",
+        result
+      );
+
+
+      let orderId = "";
+
+
+      if (Array.isArray(result) && result.length) {
+
+        orderId =
+          result[0].id || "";
+
+      } else if (
+        result &&
+        typeof result === "object"
+      ) {
+
+        orderId =
+          result.id || "";
+
+      }
+
+
+      /*
+        Clear cart only after successful order.
+      */
+
+      cart = [];
+
+      saveCart();
+
+      updateCartCount();
+
+
+      /*
+        Hide checkout/cart.
+      */
+
+      document.getElementById(
+        "checkoutSection"
+      ).style.display = "none";
+
+
+      document.getElementById(
+        "cartSection"
+      ).style.display = "none";
+
+
+      /*
+        Show success.
+      */
+
+      const successSection =
+        document.getElementById(
+          "successSection"
+        );
+
+
+      successSection.style.display =
+        "block";
+
+
+      const orderIdDisplay =
+        document.getElementById(
+          "orderIdDisplay"
+        );
+
+
+      if (orderId) {
+
+        orderIdDisplay.innerHTML =
+          "Order ID: #" +
+          escapeHtml(String(orderId));
+
+      } else {
+
+        orderIdDisplay.innerHTML =
+          "Order received successfully.";
+
+      }
+
+
+      successSection.scrollIntoView({
+        behavior: "smooth"
+      });
+
+
+      document
+        .getElementById("orderForm")
+        .reset();
+
+
+    } catch (error) {
+
+      console.error(
+        "ORDER ERROR:",
+        error
+      );
+
+
+      /*
+        IMPORTANT:
+        Show the real Supabase error.
+      */
+
+      alert(
+        "ORDER ERROR:\n\n" +
+        error.message
+      );
+
+
+    } finally {
+
+      placeOrderBtn.disabled = false;
+
+      placeOrderBtn.textContent =
+        "PLACE ORDER — CASH ON DELIVERY";
+
+    }
+
+  });
+
+
+/* =========================================================
+   HTML ESCAPE HELPERS
+========================================================= */
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+function escapeAttribute(value) {
+
+  return escapeHtml(value);
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+updateCartCount();
+
+loadProducts();
 
 </script>
 
