@@ -98,8 +98,8 @@ header{
 }
 
 .cart,
-.track-header-btn,
-.auth-header-btn{
+.auth-header-btn,
+.user-name-btn{
   border:1px solid #d4af37;
   color:#d4af37;
   background:transparent;
@@ -110,37 +110,17 @@ header{
 }
 
 .cart:hover,
-.track-header-btn:hover,
-.auth-header-btn:hover{
+.auth-header-btn:hover,
+.user-name-btn:hover{
   background:#d4af37;
   color:#080808;
 }
 
-.track-header-btn{
-  display:none;
-}
-
-.track-header-btn.show{
-  display:block;
-}
-
-.auth-header-btn{
-  display:block;
-}
-
 .user-name-btn{
-  border:1px solid #555;
+  display:none;
+  border-color:#555;
   color:#ddd;
   background:#111;
-  padding:9px 13px;
-  border-radius:20px;
-  font-weight:bold;
-  white-space:nowrap;
-}
-
-.user-name-btn:hover{
-  border-color:#d4af37;
-  color:#d4af37;
 }
 
 /* =========================
@@ -172,7 +152,7 @@ header{
 }
 
 /* =========================
-   GENERAL
+   COMMON
 ========================= */
 
 .section{
@@ -268,7 +248,10 @@ header{
   margin-top:5px;
 }
 
-.btn{
+.btn,
+.details-add,
+.place-order-btn,
+.checkout-btn{
   display:block;
   width:100%;
   margin-top:10px;
@@ -280,11 +263,24 @@ header{
   border-radius:8px;
 }
 
-.btn:hover{
+.btn:hover,
+.details-add:hover,
+.place-order-btn:hover,
+.checkout-btn:hover{
   opacity:.9;
 }
 
-.details-btn{
+.btn:disabled,
+.place-order-btn:disabled,
+.details-add:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+.details-btn,
+.details-close,
+.close-cart,
+.cancel-checkout{
   display:block;
   width:100%;
   margin-top:9px;
@@ -296,21 +292,23 @@ header{
   border-radius:8px;
 }
 
-.details-btn:hover{
+.details-btn:hover,
+.details-close:hover,
+.close-cart:hover,
+.cancel-checkout:hover{
   color:#d4af37;
   border-color:#d4af37;
 }
 
-.empty{
+.empty,
+.loading{
   text-align:center;
   color:#aaa;
   padding:40px;
 }
 
 .loading{
-  text-align:center;
   color:#d4af37;
-  padding:40px;
 }
 
 /* =========================
@@ -328,7 +326,9 @@ header{
   display:block;
 }
 
-.details-box{
+.details-box,
+.cart-box,
+.account-box{
   background:#111;
   border:1px solid #292929;
   border-radius:16px;
@@ -440,237 +440,12 @@ header{
 
 .details-add{
   flex:1;
-  padding:13px;
-  border:0;
-  background:#d4af37;
-  color:#080808;
-  font-weight:bold;
-  border-radius:8px;
+  margin-top:0;
 }
 
 .details-close{
-  padding:13px 18px;
-  border:1px solid #555;
-  background:#181818;
-  color:#aaa;
-  border-radius:8px;
-}
-
-.details-close:hover{
-  color:#d4af37;
-  border-color:#d4af37;
-}
-
-/* =========================
-   TRACK ORDER
-========================= */
-
-.track-section{
-  max-width:900px;
-  margin:0 auto;
-  padding:0 4% 50px;
-  display:none;
-}
-
-.track-section.show{
-  display:block;
-}
-
-.track-box{
-  background:#111;
-  border:1px solid #292929;
-  border-radius:16px;
-  padding:25px;
-}
-
-.track-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  margin-bottom:20px;
-}
-
-.track-header h2{
-  color:#d4af37;
-  font-size:25px;
-}
-
-.track-close{
-  border:1px solid #555;
-  background:transparent;
-  color:#aaa;
-  padding:8px 13px;
-  border-radius:7px;
-}
-
-.track-close:hover{
-  color:#d4af37;
-  border-color:#d4af37;
-}
-
-.track-intro{
-  color:#999;
-  font-size:14px;
-  margin-bottom:20px;
-}
-
-.track-form-group{
-  margin-bottom:15px;
-}
-
-.track-form-group label{
-  display:block;
-  color:#bbb;
-  font-size:14px;
-  margin-bottom:6px;
-}
-
-.track-form-group input{
-  width:100%;
-  padding:12px;
-  border:1px solid #444;
-  border-radius:8px;
-  background:#181818;
-  color:#fff;
-  outline:none;
-  font-size:15px;
-}
-
-.track-form-group input:focus{
-  border-color:#d4af37;
-}
-
-.track-btn{
-  width:100%;
-  padding:13px;
-  border:0;
-  border-radius:8px;
-  background:#d4af37;
-  color:#080808;
-  font-weight:bold;
-  font-size:15px;
-}
-
-.track-btn:disabled{
-  opacity:.5;
-  cursor:not-allowed;
-}
-
-.track-result{
-  display:none;
-  margin-top:25px;
-  padding-top:25px;
-  border-top:1px solid #292929;
-}
-
-.track-result.show{
-  display:block;
-}
-
-.track-success-title{
-  color:#d4af37;
-  font-size:21px;
-  font-weight:bold;
-  margin-bottom:15px;
-}
-
-.track-error{
-  display:none;
-  margin-top:20px;
-  padding:13px;
-  background:#1a1010;
-  border:1px solid #4a2929;
-  border-radius:8px;
-  color:#ff9b9b;
-  font-size:14px;
-}
-
-.track-error.show{
-  display:block;
-}
-
-.track-summary{
-  background:#181818;
-  border:1px solid #292929;
-  border-radius:10px;
-  padding:15px;
-  margin-bottom:20px;
-}
-
-.track-row{
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-  padding:9px 0;
-  border-bottom:1px solid #292929;
-  font-size:14px;
-}
-
-.track-row:last-child{
-  border-bottom:0;
-}
-
-.track-row span:first-child{
-  color:#777;
-}
-
-.track-row span:last-child{
-  color:#ddd;
-  text-align:right;
-  max-width:65%;
-  word-break:break-word;
-}
-
-.track-code{
-  color:#d4af37!important;
-  font-weight:bold;
-}
-
-.track-total{
-  color:#d4af37!important;
-  font-weight:bold;
-}
-
-.status-badge{
-  display:inline-block;
-  padding:5px 10px;
-  border-radius:20px;
-  background:#252010;
-  color:#d4af37!important;
-  border:1px solid #5a4b18;
-  font-weight:bold;
-}
-
-.track-products{
-  margin-top:15px;
-}
-
-.track-products h3{
-  color:#d4af37;
-  font-size:17px;
-  margin-bottom:10px;
-}
-
-.track-product{
-  padding:10px 0;
-  border-bottom:1px solid #222;
-  color:#bbb;
-  font-size:13px;
-}
-
-.track-product:last-child{
-  border-bottom:0;
-}
-
-.track-product strong{
-  color:#fff;
-}
-
-.track-note{
-  margin-top:15px;
-  color:#777;
-  font-size:12px;
+  width:auto;
+  margin-top:0;
 }
 
 /* =========================
@@ -689,13 +464,11 @@ header{
 }
 
 .cart-box{
-  background:#111;
-  border:1px solid #292929;
-  border-radius:14px;
   padding:20px;
 }
 
-.cart-header{
+.cart-header,
+.account-header{
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -703,16 +476,9 @@ header{
   margin-bottom:20px;
 }
 
-.cart-header h2{
+.cart-header h2,
+.account-header h2{
   color:#d4af37;
-}
-
-.close-cart{
-  border:1px solid #555;
-  background:transparent;
-  color:#aaa;
-  padding:7px 12px;
-  border-radius:7px;
 }
 
 .cart-item{
@@ -822,16 +588,9 @@ header{
   font-weight:bold;
 }
 
-.checkout-btn{
-  width:100%;
-  margin-top:20px;
-  padding:13px;
-  border:0;
-  border-radius:8px;
-  background:#d4af37;
-  color:#080808;
-  font-weight:bold;
-}
+/* =========================
+   CHECKOUT
+========================= */
 
 .checkout-box{
   display:none;
@@ -851,11 +610,13 @@ header{
   margin-bottom:20px;
 }
 
-.form-group{
+.form-group,
+.auth-form-group{
   margin-bottom:15px;
 }
 
-.form-group label{
+.form-group label,
+.auth-form-group label{
   display:block;
   color:#bbb;
   font-size:14px;
@@ -863,7 +624,8 @@ header{
 }
 
 .form-group input,
-.form-group textarea{
+.form-group textarea,
+.auth-form-group input{
   width:100%;
   padding:12px;
   border:1px solid #444;
@@ -875,7 +637,8 @@ header{
 }
 
 .form-group input:focus,
-.form-group textarea:focus{
+.form-group textarea:focus,
+.auth-form-group input:focus{
   border-color:#d4af37;
 }
 
@@ -902,29 +665,9 @@ header{
   margin-top:4px;
 }
 
-.place-order-btn{
-  width:100%;
-  padding:13px;
-  border:0;
-  border-radius:8px;
-  background:#d4af37;
-  color:#080808;
-  font-weight:bold;
-}
-
-.place-order-btn:disabled{
-  opacity:.5;
-}
-
-.cancel-checkout{
-  width:100%;
-  padding:12px;
-  margin-top:10px;
-  border:1px solid #555;
-  border-radius:8px;
-  background:#181818;
-  color:#aaa;
-}
+/* =========================
+   SUCCESS
+========================= */
 
 .order-success{
   display:none;
@@ -966,9 +709,10 @@ header{
 }
 
 .success-track-btn{
+  display:block;
   width:100%;
-  max-width:350px;
-  margin-top:15px;
+  max-width:300px;
+  margin:18px auto 0;
   padding:12px;
   border:0;
   border-radius:8px;
@@ -978,7 +722,138 @@ header{
 }
 
 /* =========================
-   WHY SECTION
+   ACCOUNT
+========================= */
+
+.account-section{
+  display:none;
+  max-width:900px;
+  margin:0 auto;
+  padding:30px 4% 60px;
+}
+
+.account-section.show{
+  display:block;
+}
+
+.account-box{
+  padding:20px;
+}
+
+.account-email{
+  color:#999;
+  font-size:13px;
+  margin-top:-12px;
+  margin-bottom:20px;
+}
+
+.account-actions{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.account-actions button{
+  flex:1;
+  padding:10px;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+.refresh-orders{
+  border:1px solid #555;
+  background:#181818;
+  color:#ccc;
+}
+
+.logout-btn{
+  border:1px solid #5a4b18;
+  background:#251f0b;
+  color:#d4af37;
+}
+
+.order-card{
+  background:#181818;
+  border:1px solid #292929;
+  border-radius:12px;
+  padding:16px;
+  margin-bottom:15px;
+}
+
+.order-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.order-code{
+  color:#d4af37;
+  font-weight:bold;
+  font-size:16px;
+}
+
+.order-date{
+  color:#777;
+  font-size:12px;
+}
+
+.order-status{
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:20px;
+  background:#252010;
+  color:#d4af37;
+  border:1px solid #5a4b18;
+  font-weight:bold;
+  font-size:12px;
+}
+
+.order-meta{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  color:#aaa;
+  font-size:13px;
+  margin:12px 0;
+}
+
+.order-meta strong{
+  color:#ddd;
+}
+
+.order-items{
+  border-top:1px solid #292929;
+  margin-top:12px;
+  padding-top:10px;
+}
+
+.order-item-row{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:6px 0;
+  color:#bbb;
+  font-size:13px;
+}
+
+.order-total{
+  border-top:1px solid #292929;
+  margin-top:8px;
+  padding-top:10px;
+  display:flex;
+  justify-content:space-between;
+  color:#ddd;
+}
+
+.order-total strong:last-child{
+  color:#d4af37;
+  font-size:18px;
+}
+
+/* =========================
+   WHY / FOOTER
 ========================= */
 
 .why{
@@ -1000,10 +875,6 @@ header{
   color:#d4af37;
   margin-bottom:8px;
 }
-
-/* =========================
-   FOOTER
-========================= */
 
 footer{
   text-align:center;
@@ -1043,7 +914,7 @@ footer b{
 }
 
 /* =========================
-   AUTH MODAL
+   AUTH
 ========================= */
 
 .auth-overlay{
@@ -1129,31 +1000,6 @@ footer b{
   display:block;
 }
 
-.auth-form-group{
-  margin-bottom:15px;
-}
-
-.auth-form-group label{
-  display:block;
-  color:#bbb;
-  font-size:14px;
-  margin-bottom:6px;
-}
-
-.auth-form-group input{
-  width:100%;
-  padding:12px;
-  border:1px solid #444;
-  border-radius:8px;
-  background:#181818;
-  color:#fff;
-  outline:none;
-}
-
-.auth-form-group input:focus{
-  border-color:#d4af37;
-}
-
 .auth-submit{
   width:100%;
   padding:13px;
@@ -1162,6 +1008,10 @@ footer b{
   background:#d4af37;
   color:#080808;
   font-weight:bold;
+}
+
+.auth-submit:disabled{
+  opacity:.5;
 }
 
 .auth-message{
@@ -1195,8 +1045,65 @@ footer b{
   text-align:center;
 }
 
+.verify-panel{
+  display:none;
+}
+
+.verify-panel.show{
+  display:block;
+}
+
+.verify-title{
+  color:#d4af37;
+  font-size:21px;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.verify-email{
+  color:#bbb;
+  margin-bottom:18px;
+  word-break:break-word;
+}
+
+.otp-input{
+  letter-spacing:8px;
+  text-align:center;
+  font-size:24px;
+  font-weight:bold;
+}
+
+.verify-actions{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+
+.verify-actions button{
+  flex:1;
+  padding:11px;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+.resend-btn{
+  border:1px solid #555;
+  background:#181818;
+  color:#ccc;
+}
+
+.back-login-btn{
+  border:1px solid #555;
+  background:#181818;
+  color:#aaa;
+}
+
+.hidden{
+  display:none!important;
+}
+
 /* =========================
-   RESPONSIVE
+   MOBILE
 ========================= */
 
 @media(max-width:700px){
@@ -1222,7 +1129,6 @@ footer b{
   }
 
   .cart,
-  .track-header-btn,
   .auth-header-btn,
   .user-name-btn{
     padding:7px 8px;
@@ -1296,26 +1202,8 @@ footer b{
     font-size:20px;
   }
 
-  .social-links{
-    gap:8px;
-  }
-
-  .track-box{
-    padding:18px;
-  }
-
-  .track-header h2{
-    font-size:21px;
-  }
-
-  .track-row{
-    flex-direction:column;
-    gap:4px;
-  }
-
-  .track-row span:last-child{
-    max-width:100%;
-    text-align:left;
+  .order-meta{
+    grid-template-columns:1fr;
   }
 }
 
@@ -1350,7 +1238,7 @@ footer b{
   }
 
   .header-actions{
-    max-width:210px;
+    max-width:220px;
   }
 }
 
@@ -1361,10 +1249,9 @@ footer b{
   }
 
   .cart,
-  .track-header-btn,
   .auth-header-btn,
   .user-name-btn{
-    padding:6px 6px;
+    padding:6px;
     font-size:10px;
   }
 
@@ -1386,46 +1273,42 @@ footer b{
 ========================= -->
 
 <header>
-  <div class="nav">
 
-    <div class="brand">
-      <div class="logo">CV</div>
-      <b>CHRONO VAULT BD</b>
-    </div>
+<div class="nav">
 
-    <div class="header-actions">
-
-      <button
-        id="headerTrackButton"
-        class="track-header-btn"
-        onclick="toggleTrackOrder()">
-        📦 Track Order
-      </button>
-
-      <button
-        id="authHeaderButton"
-        class="auth-header-btn"
-        onclick="openAuthModal()">
-        👤 Login / Sign Up
-      </button>
-
-      <button
-        id="userNameButton"
-        class="user-name-btn"
-        style="display:none"
-        onclick="openAccountMenu()">
-        👤 Account
-      </button>
-
-      <button
-        class="cart"
-        onclick="toggleCart()">
-        🛒 Cart: <span id="cartCount">0</span>
-      </button>
-
-    </div>
+  <div class="brand">
+    <div class="logo">CV</div>
+    <b>CHRONO VAULT BD</b>
   </div>
+
+  <div class="header-actions">
+
+    <button
+      class="auth-header-btn"
+      id="authHeaderButton"
+      onclick="openAuthModal('login')">
+      Login / Sign Up
+    </button>
+
+    <button
+      class="user-name-btn"
+      id="userNameButton"
+      onclick="openAccountSection()">
+      👤 Account
+    </button>
+
+    <button
+      class="cart"
+      onclick="toggleCart()">
+      Cart (<span id="cartCount">0</span>)
+    </button>
+
+  </div>
+
+</div>
+
 </header>
+
 
 <!-- =========================
      HERO
@@ -1433,68 +1316,74 @@ footer b{
 
 <section class="hero">
 
-  <small>WELCOME TO</small>
+  <small>MORE THAN JUST A WATCH</small>
 
   <h1>CHRONO VAULT BD</h1>
 
   <p>
-    More Than Just a Watch. It's a Lifestyle.
+    Premium watches, timeless style and a lifestyle built around every moment.
   </p>
 
 </section>
+
 
 <!-- =========================
      PRODUCTS
 ========================= -->
 
-<section id="productsSection" class="section">
+<section class="section" id="shop">
 
   <div class="title">
     <h2>Our Collection</h2>
   </div>
 
-  <div id="products" class="products">
+  <div
+    id="products"
+    class="products">
+
     <div class="loading">
       Loading products...
     </div>
+
   </div>
 
 </section>
+
 
 <!-- =========================
      PRODUCT DETAILS
 ========================= -->
 
-<section id="productDetails" class="product-details">
+<section
+  id="productDetails"
+  class="product-details">
 
   <div class="details-box">
 
     <div class="details-grid">
 
-      <div id="detailsImage" class="details-image"></div>
+      <div
+        id="detailsImage"
+        class="details-image">
+      </div>
 
       <div class="details-info">
 
         <div
           id="detailsCategory"
           class="details-category">
-          WATCHES
         </div>
 
-        <h2 id="detailsName">
-          Product
-        </h2>
+        <h2 id="detailsName"></h2>
 
         <div
           id="detailsPrice"
           class="details-price">
-          ৳0
         </div>
 
         <div
           id="detailsStock"
           class="details-stock">
-          Stock: 0
         </div>
 
         <div
@@ -1504,7 +1393,9 @@ footer b{
 
         <div class="specs">
 
-          <h3>Product Specifications</h3>
+          <h3>
+            Product Specifications
+          </h3>
 
           <div class="spec-row">
             <span>Movement</span>
@@ -1513,7 +1404,7 @@ footer b{
 
           <div class="spec-row">
             <span>Dial</span>
-            <span>46 mm</span>
+            <span>Round, 46 mm</span>
           </div>
 
           <div class="spec-row">
@@ -1528,17 +1419,7 @@ footer b{
 
           <div class="spec-row">
             <span>Band</span>
-            <span>Alloy Steel</span>
-          </div>
-
-          <div class="spec-row">
-            <span>Dial Shape</span>
-            <span>Round</span>
-          </div>
-
-          <div class="spec-row">
-            <span>Style</span>
-            <span>Business</span>
+            <span>Alloy / Steel style</span>
           </div>
 
           <div class="spec-row">
@@ -1548,7 +1429,7 @@ footer b{
 
           <div class="spec-row">
             <span>Warranty</span>
-            <span>Store Warranty</span>
+            <span>Store warranty</span>
           </div>
 
         </div>
@@ -1564,159 +1445,19 @@ footer b{
           <button
             class="details-close"
             onclick="closeDetails()">
-            Back to Collection
+            Close
           </button>
 
         </div>
 
       </div>
-    </div>
-  </div>
-
-</section>
-
-<!-- =========================
-     TRACK ORDER
-========================= -->
-
-<section
-  id="trackSection"
-  class="track-section">
-
-  <div class="track-box">
-
-    <div class="track-header">
-
-      <h2>📦 Track Your Order</h2>
-
-      <button
-        class="track-close"
-        onclick="toggleTrackOrder(false)">
-        Close
-      </button>
-
-    </div>
-
-    <p class="track-intro">
-      Enter your Order Number and phone number to check your order status.
-    </p>
-
-    <div class="track-form-group">
-
-      <label for="trackingCode">
-        Order Number
-      </label>
-
-      <input
-        type="text"
-        id="trackingCode"
-        placeholder="Example: CVBD-123456"
-        autocomplete="off">
-
-    </div>
-
-    <div class="track-form-group">
-
-      <label for="trackingPhone">
-        Phone Number
-      </label>
-
-      <input
-        type="tel"
-        id="trackingPhone"
-        placeholder="01XXXXXXXXX"
-        inputmode="tel"
-        autocomplete="tel">
-
-    </div>
-
-    <button
-      id="trackButton"
-      class="track-btn"
-      onclick="trackOrder()">
-      Track Order
-    </button>
-
-    <div
-      id="trackError"
-      class="track-error">
-    </div>
-
-    <div
-      id="trackResult"
-      class="track-result">
-
-      <div class="track-success-title">
-        Order Found
-      </div>
-
-      <div class="track-summary">
-
-        <div class="track-row">
-          <span>Customer Name</span>
-          <span id="resultCustomerName"></span>
-        </div>
-
-        <div class="track-row">
-          <span>Phone</span>
-          <span id="resultPhone"></span>
-        </div>
-
-        <div class="track-row">
-          <span>Delivery Address</span>
-          <span id="resultAddress"></span>
-        </div>
-
-        <div class="track-row">
-          <span>Order Number</span>
-          <span
-            id="resultTrackingCode"
-            class="track-code">
-          </span>
-        </div>
-
-        <div class="track-row">
-          <span>Order Date</span>
-          <span id="resultDate"></span>
-        </div>
-
-        <div class="track-row">
-          <span>Status</span>
-          <span>
-            <span
-              id="resultStatus"
-              class="status-badge">
-            </span>
-          </span>
-        </div>
-
-        <div class="track-row">
-          <span>Total</span>
-          <span
-            id="resultTotal"
-            class="track-total">
-          </span>
-        </div>
-
-      </div>
-
-      <div class="track-products">
-
-        <h3>Ordered Products</h3>
-
-        <div id="resultProducts"></div>
-
-      </div>
-
-      <p class="track-note">
-        Order status is updated by CHRONO VAULT BD after confirmation and processing.
-      </p>
 
     </div>
 
   </div>
 
 </section>
+
 
 <!-- =========================
      CART
@@ -1730,25 +1471,31 @@ footer b{
 
     <div class="cart-header">
 
-      <h2>🛒 Your Cart</h2>
+      <h2>
+        Your Cart
+      </h2>
 
       <button
         class="close-cart"
-        onclick="toggleCart()">
+        onclick="closeCart()">
         Close
       </button>
 
     </div>
 
-    <div id="cartItems">
-      <div class="empty">
-        Your cart is empty.
-      </div>
+    <div id="cartItems"></div>
+
+    <div
+      id="cartEmpty"
+      class="empty">
+      Your cart is empty.
     </div>
 
     <div class="cart-total">
 
-      <strong>Total</strong>
+      <strong>
+        Total
+      </strong>
 
       <span id="cartTotal">
         ৳0
@@ -1759,16 +1506,19 @@ footer b{
     <button
       id="checkoutButton"
       class="checkout-btn"
-      onclick="checkout()">
+      onclick="openCheckout()">
       Proceed to Checkout
     </button>
+
+
+    <!-- CHECKOUT -->
 
     <div
       id="checkoutBox"
       class="checkout-box">
 
       <div class="checkout-title">
-        📦 Delivery Information
+        Delivery Information
       </div>
 
       <div class="form-group">
@@ -1778,12 +1528,13 @@ footer b{
         </label>
 
         <input
-          type="text"
           id="customerName"
-          placeholder="Enter your full name"
+          type="text"
+          placeholder="Your full name"
           autocomplete="name">
 
       </div>
+
 
       <div class="form-group">
 
@@ -1792,13 +1543,13 @@ footer b{
         </label>
 
         <input
-          type="tel"
           id="customerPhone"
-          placeholder="01XXXXXXXXX"
-          inputmode="tel"
+          type="tel"
+          placeholder="01712345678"
           autocomplete="tel">
 
       </div>
+
 
       <div class="form-group">
 
@@ -1814,6 +1565,7 @@ footer b{
 
       </div>
 
+
       <div class="payment-box">
 
         <strong>
@@ -1826,12 +1578,14 @@ footer b{
 
       </div>
 
+
       <button
         id="placeOrderButton"
         class="place-order-btn"
         onclick="placeOrder()">
         Place Order
       </button>
+
 
       <button
         class="cancel-checkout"
@@ -1840,6 +1594,9 @@ footer b{
       </button>
 
     </div>
+
+
+    <!-- SUCCESS -->
 
     <div
       id="orderSuccess"
@@ -1850,27 +1607,26 @@ footer b{
       </div>
 
       <h2>
-        Order Placed Successfully!
+        Order Placed Successfully
       </h2>
 
       <p>
-        Thank you for shopping with CHRONO VAULT BD.
+        Your order has been saved to your account.
       </p>
 
       <div
         id="orderId"
         class="order-id">
-        Order received successfully.
       </div>
 
       <p>
-        We will contact you soon to confirm your order.
+        Open <b>Account</b> anytime to see your order status.
       </p>
 
       <button
         class="success-track-btn"
-        onclick="openTrackFromSuccess()">
-        📦 Track This Order
+        onclick="openAccountSection()">
+        View My Orders
       </button>
 
     </div>
@@ -1879,41 +1635,106 @@ footer b{
 
 </section>
 
+
 <!-- =========================
-     WHY US
+     ACCOUNT
+========================= -->
+
+<section
+  id="accountSection"
+  class="account-section">
+
+  <div class="account-box">
+
+    <div class="account-header">
+
+      <h2>
+        My Account
+      </h2>
+
+      <button
+        class="close-cart"
+        onclick="closeAccountSection()">
+        Close
+      </button>
+
+    </div>
+
+
+    <div
+      id="accountEmail"
+      class="account-email">
+    </div>
+
+
+    <div class="account-actions">
+
+      <button
+        class="refresh-orders"
+        onclick="loadMyOrders()">
+        ↻ Refresh Orders
+      </button>
+
+      <button
+        class="logout-btn"
+        onclick="logoutUser()">
+        Logout
+      </button>
+
+    </div>
+
+
+    <div id="myOrders">
+
+      <div class="loading">
+        Loading your orders...
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     WHY
 ========================= -->
 
 <section class="section">
 
   <div class="title">
-    <h2>Why CHRONO VAULT BD?</h2>
+    <h2>
+      Why CHRONO VAULT BD
+    </h2>
   </div>
 
   <div class="why">
 
     <div class="box">
       <strong>Premium Style</strong>
-      Elegant watches for your everyday lifestyle.
-    </div>
-
-    <div class="box">
-      <strong>Quality</strong>
-      Carefully selected products.
+      Clean designs made for everyday confidence.
     </div>
 
     <div class="box">
       <strong>Cash on Delivery</strong>
-      Easy ordering with convenient payment.
+      Pay when your order reaches you.
     </div>
 
     <div class="box">
-      <strong>Store Warranty</strong>
-      Warranty support on selected products.
+      <strong>Easy Ordering</strong>
+      Choose your watch, add it to cart and checkout.
+    </div>
+
+    <div class="box">
+      <strong>Account Tracking</strong>
+      See your orders and live status from your account.
     </div>
 
   </div>
 
 </section>
+
 
 <!-- =========================
      FOOTER
@@ -1921,12 +1742,12 @@ footer b{
 
 <footer>
 
-  <p>
-    © 2026 <b>CHRONO VAULT BD</b>
-  </p>
+  <b>
+    CHRONO VAULT BD
+  </b>
 
   <p>
-    More Than Just a Watch. It's a Lifestyle.
+    More Than Just a Watch. It’s a Lifestyle.
   </p>
 
   <div class="social-links">
@@ -1934,38 +1755,39 @@ footer b{
     <a
       href="https://www.facebook.com/share/1C3CqbjBXk/"
       target="_blank"
-      rel="noopener noreferrer">
+      rel="noopener">
       Facebook
     </a>
 
     <a
       href="https://www.instagram.com/chronovaultbd?stkn=MWYxMjBxNXA1YTZ1bg=="
       target="_blank"
-      rel="noopener noreferrer">
+      rel="noopener">
       Instagram
     </a>
 
     <a
       href="https://www.tiktok.com/@chrono.vault.bd?_r=1&_t=ZS-99qPMd7PspQ"
       target="_blank"
-      rel="noopener noreferrer">
+      rel="noopener">
       TikTok
     </a>
 
     <a
       href="https://wa.me/8801326144735"
       target="_blank"
-      rel="noopener noreferrer">
+      rel="noopener">
       WhatsApp
     </a>
 
   </div>
 
-  <p class="social-note">
-    Follow us & stay connected.
-  </p>
+  <div class="social-note">
+    © CHRONO VAULT BD. All rights reserved.
+  </div>
 
 </footer>
+
 
 <!-- =========================
      AUTH MODAL
@@ -1979,7 +1801,9 @@ footer b{
 
     <div class="auth-header">
 
-      <h2>👤 My Account</h2>
+      <h2>
+        Account
+      </h2>
 
       <button
         class="auth-close"
@@ -1989,135 +1813,231 @@ footer b{
 
     </div>
 
-    <div class="auth-tabs">
 
-      <button
-        id="loginTab"
-        class="auth-tab active"
-        onclick="switchAuthTab('login')">
-        Login
-      </button>
+    <div id="authMain">
 
-      <button
-        id="signupTab"
-        class="auth-tab"
-        onclick="switchAuthTab('signup')">
-        Sign Up
-      </button>
+      <div class="auth-tabs">
+
+        <button
+          id="loginTab"
+          class="auth-tab active"
+          onclick="switchAuthTab('login')">
+          Login
+        </button>
+
+        <button
+          id="signupTab"
+          class="auth-tab"
+          onclick="switchAuthTab('signup')">
+          Sign Up
+        </button>
+
+      </div>
+
+
+      <div
+        id="authMessage"
+        class="auth-message">
+      </div>
+
+
+      <!-- LOGIN -->
+
+      <form
+        id="loginForm"
+        class="auth-form active"
+        onsubmit="loginUser(event)">
+
+        <div class="auth-form-group">
+
+          <label>
+            Email
+          </label>
+
+          <input
+            id="loginEmail"
+            type="email"
+            required
+            autocomplete="email">
+
+        </div>
+
+
+        <div class="auth-form-group">
+
+          <label>
+            Password
+          </label>
+
+          <input
+            id="loginPassword"
+            type="password"
+            required
+            autocomplete="current-password">
+
+        </div>
+
+
+        <button
+          id="loginSubmit"
+          class="auth-submit"
+          type="submit">
+          Login
+        </button>
+
+
+        <p class="auth-note">
+          Verified account required to place orders.
+        </p>
+
+      </form>
+
+
+      <!-- SIGN UP -->
+
+      <form
+        id="signupForm"
+        class="auth-form"
+        onsubmit="signupUser(event)">
+
+        <div class="auth-form-group">
+
+          <label>
+            Email
+          </label>
+
+          <input
+            id="signupEmail"
+            type="email"
+            required
+            autocomplete="email">
+
+        </div>
+
+
+        <div class="auth-form-group">
+
+          <label>
+            Password
+          </label>
+
+          <input
+            id="signupPassword"
+            type="password"
+            minlength="6"
+            required
+            autocomplete="new-password">
+
+        </div>
+
+
+        <button
+          id="signupSubmit"
+          class="auth-submit"
+          type="submit">
+          Create Account
+        </button>
+
+
+        <p class="auth-note">
+          After signup, a 6-digit verification code will be sent to your email.
+        </p>
+
+      </form>
 
     </div>
+
+
+    <!-- VERIFY -->
 
     <div
-      id="authMessage"
-      class="auth-message">
+      id="verifyPanel"
+      class="verify-panel">
+
+      <div class="verify-title">
+        Verify Your Email
+      </div>
+
+
+      <div
+        id="verifyEmail"
+        class="verify-email">
+      </div>
+
+
+      <div
+        id="verifyMessage"
+        class="auth-message">
+      </div>
+
+
+      <form
+        onsubmit="verifySignupCode(event)">
+
+        <div class="auth-form-group">
+
+          <label>
+            6-Digit Verification Code
+          </label>
+
+          <input
+            id="signupOtp"
+            class="otp-input"
+            type="text"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            maxlength="6"
+            pattern="[0-9]{6}"
+            required>
+
+        </div>
+
+
+        <button
+          id="verifySubmit"
+          class="auth-submit"
+          type="submit">
+          Verify Email
+        </button>
+
+      </form>
+
+
+      <div class="verify-actions">
+
+        <button
+          class="resend-btn"
+          onclick="resendSignupCode(event)">
+          Resend Code
+        </button>
+
+        <button
+          class="back-login-btn"
+          onclick="backToLogin(event)">
+          Back to Login
+        </button>
+
+      </div>
+
+
+      <p class="auth-note">
+        Check Inbox, Spam or Promotions for the code.
+      </p>
+
     </div>
-
-    <!-- LOGIN -->
-
-    <form
-      id="loginForm"
-      class="auth-form active"
-      onsubmit="loginUser(event)">
-
-      <div class="auth-form-group">
-
-        <label for="loginEmail">
-          Email
-        </label>
-
-        <input
-          type="email"
-          id="loginEmail"
-          placeholder="Enter your email"
-          autocomplete="email"
-          required>
-
-      </div>
-
-      <div class="auth-form-group">
-
-        <label for="loginPassword">
-          Password
-        </label>
-
-        <input
-          type="password"
-          id="loginPassword"
-          placeholder="Enter your password"
-          autocomplete="current-password"
-          required>
-
-      </div>
-
-      <button
-        id="loginSubmit"
-        class="auth-submit"
-        type="submit">
-        Login
-      </button>
-
-    </form>
-
-    <!-- SIGN UP -->
-
-    <form
-      id="signupForm"
-      class="auth-form"
-      onsubmit="signupUser(event)">
-
-      <div class="auth-form-group">
-
-        <label for="signupEmail">
-          Email
-        </label>
-
-        <input
-          type="email"
-          id="signupEmail"
-          placeholder="Enter your email"
-          autocomplete="email"
-          required>
-
-      </div>
-
-      <div class="auth-form-group">
-
-        <label for="signupPassword">
-          Password
-        </label>
-
-        <input
-          type="password"
-          id="signupPassword"
-          placeholder="Minimum 6 characters"
-          autocomplete="new-password"
-          minlength="6"
-          required>
-
-      </div>
-
-      <button
-        id="signupSubmit"
-        class="auth-submit"
-        type="submit">
-        Create Account
-      </button>
-
-    </form>
-
-    <p class="auth-note">
-      Account login is optional for shopping.
-    </p>
 
   </div>
 
 </div>
 
-<script>
 
-/* =========================================================
-   SUPABASE
-========================================================= */
+<!-- =========================
+     SUPABASE
+========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
 
 const SUPABASE_URL =
   "https://rufdvkelwzsmnuruvdko.supabase.co";
@@ -2126,208 +2046,113 @@ const SUPABASE_KEY =
   "sb_publishable_3j4Bs4rft9_w4r1j6uHo5w_fYLIJsNI";
 
 
-/* =========================================================
-   CART
-========================================================= */
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY,
+    {
+      auth:{
+        persistSession:true,
+        autoRefreshToken:true,
+        detectSessionInUrl:true
+      }
+    }
+  );
+
+
+/* =========================
+   GLOBAL VARIABLES
+========================= */
 
 let cart = [];
 
-try{
+let currentSession = null;
 
-  const savedCart =
-    localStorage.getItem("chronoVaultCart");
+let pendingSignupEmail = "";
 
-  if(savedCart){
-    cart = JSON.parse(savedCart);
-  }
-
-  if(!Array.isArray(cart)){
-    cart = [];
-  }
-
-}catch(error){
-
-  console.error(
-    "Cart storage error:",
-    error
-  );
-
-  cart = [];
-}
+let currentDetailsProduct = null;
 
 
-/* =========================================================
-   GLOBAL VARIABLES
-========================================================= */
-
-let currentDetailProduct = null;
-
-let lastOrderTrackingCode = "";
-
-let lastOrderPhone = "";
-
-let currentAuthSession = null;
-
-
-/* =========================================================
+/* =========================
    SAFE HTML
-========================================================= */
+========================= */
 
 function safe(value){
 
-  if(value === null || value === undefined){
-    return "";
-  }
-
-  return String(value)
+  return String(value ?? "")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
-}
-
-
-/* =========================================================
-   LAST ORDER STORAGE
-========================================================= */
-
-function saveLastOrder(){
-
-  try{
-
-    if(
-      lastOrderTrackingCode &&
-      lastOrderPhone
-    ){
-
-      localStorage.setItem(
-        "cv_last_tracking_code",
-        lastOrderTrackingCode
-      );
-
-      localStorage.setItem(
-        "cv_last_order_phone",
-        lastOrderPhone
-      );
-
-    }
-
-  }catch(error){
-
-    console.error(
-      "Last order storage error:",
-      error
-    );
-
-  }
-}
-
-
-function restoreLastOrder(){
-
-  try{
-
-    const savedTrackingCode =
-      localStorage.getItem(
-        "cv_last_tracking_code"
-      ) || "";
-
-    const savedPhone =
-      localStorage.getItem(
-        "cv_last_order_phone"
-      ) || "";
-
-    if(
-      savedTrackingCode &&
-      savedPhone
-    ){
-
-      lastOrderTrackingCode =
-        savedTrackingCode;
-
-      lastOrderPhone =
-        savedPhone;
-
-      showHeaderTrackButton();
-
-    }
-
-  }catch(error){
-
-    console.error(
-      "Restore last order error:",
-      error
-    );
-
-  }
 
 }
 
 
-function clearLastOrder(){
+/* =========================
+   MONEY
+========================= */
 
-  try{
+function money(value){
 
-    localStorage.removeItem(
-      "cv_last_tracking_code"
-    );
+  const n = Number(value);
 
-    localStorage.removeItem(
-      "cv_last_order_phone"
-    );
-
-  }catch(error){
-
-    console.error(
-      "Clear last order error:",
-      error
-    );
-
-  }
+  return Number.isFinite(n)
+    ? "৳" + n.toLocaleString("en-BD")
+    : "৳0";
 
 }
 
 
-/* =========================================================
+/* =========================
    CART STORAGE
-========================================================= */
+========================= */
+
+function loadCart(){
+
+  try{
+
+    const saved =
+      localStorage.getItem("cv_cart");
+
+    cart =
+      saved
+        ? JSON.parse(saved)
+        : [];
+
+    if(!Array.isArray(cart)){
+      cart = [];
+    }
+
+  }catch(error){
+
+    cart = [];
+
+  }
+
+}
+
 
 function saveCart(){
 
-  try{
-
-    localStorage.setItem(
-      "chronoVaultCart",
-      JSON.stringify(cart)
-    );
-
-  }catch(error){
-
-    console.error(
-      "Could not save cart:",
-      error
-    );
-
-  }
+  localStorage.setItem(
+    "cv_cart",
+    JSON.stringify(cart)
+  );
 
 }
 
 
-/* =========================================================
+/* =========================
    CART COUNT
-========================================================= */
+========================= */
 
 function updateCartCount(){
 
   const count =
     cart.reduce(
-      function(total,item){
-
-        return total +
-          Number(item.quantity || 0);
-
-      },
+      (sum,item) =>
+        sum + Number(item.quantity || 0),
       0
     );
 
@@ -2338,322 +2163,26 @@ function updateCartCount(){
 }
 
 
-/* =========================================================
-   ADD CART
-========================================================= */
-
-function addCart(product){
-
-  const id =
-    String(product.id);
-
-  const stock =
-    Number(product.stock);
-
-  const price =
-    Number(product.price);
-
-  if(
-    !Number.isFinite(stock) ||
-    stock <= 0
-  ){
-
-    alert(
-      "This product is out of stock."
-    );
-
-    return;
-  }
-
-  if(!Number.isFinite(price)){
-
-    alert(
-      "Product price is unavailable."
-    );
-
-    return;
-  }
-
-  const existing =
-    cart.find(
-      function(item){
-        return String(item.id) === id;
-      }
-    );
-
-  if(existing){
-
-    if(
-      Number(existing.quantity) >= stock
-    ){
-
-      alert(
-        "Maximum available stock already added."
-      );
-
-      return;
-    }
-
-    existing.quantity++;
-
-  }else{
-
-    cart.push({
-
-      id:id,
-
-      name:product.name,
-
-      price:price,
-
-      image:product.image || "",
-
-      stock:stock,
-
-      quantity:1
-
-    });
-
-  }
-
-  saveCart();
-
-  updateCartCount();
-
-  renderCart();
-
-  alert(
-    product.name +
-    " added to cart."
-  );
-
-}
-
-
-/* =========================================================
-   QUANTITY
-========================================================= */
-
-function changeQuantity(id,change){
-
-  const item =
-    cart.find(
-      function(product){
-        return String(product.id) ===
-          String(id);
-      }
-    );
-
-  if(!item){
-    return;
-  }
-
-  const newQuantity =
-    Number(item.quantity) +
-    Number(change);
-
-  if(newQuantity <= 0){
-
-    removeFromCart(id);
-
-    return;
-  }
-
-  if(
-    newQuantity >
-    Number(item.stock)
-  ){
-
-    alert(
-      "Maximum available stock: " +
-      item.stock
-    );
-
-    return;
-  }
-
-  item.quantity =
-    newQuantity;
-
-  saveCart();
-
-  updateCartCount();
-
-  renderCart();
-
-}
-
-
-/* =========================================================
-   REMOVE CART
-========================================================= */
-
-function removeFromCart(id){
-
-  cart =
-    cart.filter(
-      function(item){
-
-        return String(item.id) !==
-          String(id);
-
-      }
-    );
-
-  saveCart();
-
-  updateCartCount();
-
-  renderCart();
-
-}
-
-
-/* =========================================================
+/* =========================
    CART TOTAL
-========================================================= */
+========================= */
 
 function getCartTotal(){
 
   return cart.reduce(
-    function(sum,item){
-
-      return sum +
-        (
-          Number(item.price) *
-          Number(item.quantity)
-        );
-
-    },
+    (sum,item) =>
+      sum +
+      Number(item.price || 0) *
+      Number(item.quantity || 0),
     0
   );
 
 }
 
 
-/* =========================================================
-   RENDER CART
-========================================================= */
-
-function renderCart(){
-
-  const box =
-    document.getElementById(
-      "cartItems"
-    );
-
-  if(cart.length === 0){
-
-    box.innerHTML =
-      '<div class="empty">Your cart is empty.</div>';
-
-    document.getElementById(
-      "cartTotal"
-    ).textContent = "৳0";
-
-    document.getElementById(
-      "checkoutButton"
-    ).style.display = "none";
-
-    return;
-  }
-
-  document.getElementById(
-    "checkoutButton"
-  ).style.display = "block";
-
-  box.innerHTML =
-    cart.map(
-      function(item){
-
-        const subtotal =
-          Number(item.price) *
-          Number(item.quantity);
-
-        let imageHTML = "";
-
-        if(item.image){
-
-          imageHTML =
-            `<img
-              src="${safe(item.image)}"
-              alt="${safe(item.name)}"
-              onerror="this.style.display='none';this.parentElement.innerHTML='<span>⌚</span>';">`;
-
-        }else{
-
-          imageHTML =
-            '<span>⌚</span>';
-
-        }
-
-        return `
-
-          <div class="cart-item">
-
-            <div class="cart-item-image">
-              ${imageHTML}
-            </div>
-
-            <div class="cart-item-info">
-
-              <h3>
-                ${safe(item.name)}
-              </h3>
-
-              <div class="cart-item-price">
-                ৳${Number(item.price).toLocaleString("en-BD")}
-                × ${item.quantity}
-                =
-                ৳${subtotal.toLocaleString("en-BD")}
-              </div>
-
-              <div class="quantity">
-
-                <button
-                  onclick="changeQuantity('${safe(item.id)}',-1)">
-                  −
-                </button>
-
-                <span>
-                  ${item.quantity}
-                </span>
-
-                <button
-                  onclick="changeQuantity('${safe(item.id)}',1)">
-                  +
-                </button>
-
-              </div>
-
-              <button
-                class="remove-btn"
-                onclick="removeFromCart('${safe(item.id)}')">
-                Remove
-              </button>
-
-            </div>
-
-          </div>
-
-        `;
-
-      }
-    ).join("");
-
-  document.getElementById(
-    "cartTotal"
-  ).textContent =
-    "৳" +
-    getCartTotal()
-      .toLocaleString("en-BD");
-
-}
-
-
-/* =========================================================
-   TOGGLE CART
-========================================================= */
+/* =========================
+   OPEN CART
+========================= */
 
 function toggleCart(){
 
@@ -2664,11 +2193,9 @@ function toggleCart(){
 
   section.classList.toggle("show");
 
-  if(
-    section.classList.contains("show")
-  ){
+  if(section.classList.contains("show")){
 
-    renderCart();
+    closeAccountSection();
 
     section.scrollIntoView({
       behavior:"smooth",
@@ -2680,751 +2207,416 @@ function toggleCart(){
 }
 
 
-/* =========================================================
-   TRACK HEADER BUTTON
-========================================================= */
+/* =========================
+   CLOSE CART
+========================= */
 
-function showHeaderTrackButton(){
+function closeCart(){
 
-  const button =
-    document.getElementById(
-      "headerTrackButton"
-    );
-
-  if(button){
-
-    button.classList.add("show");
-
-  }
+  document
+    .getElementById("cartSection")
+    .classList.remove("show");
 
 }
 
 
-/* =========================================================
-   TRACK ORDER TOGGLE
-========================================================= */
+/* =========================
+   ADD TO CART
+========================= */
 
-function toggleTrackOrder(force){
+function addCart(product){
 
-  const section =
-    document.getElementById(
-      "trackSection"
-    );
+  if(!product) return;
 
-  let shouldShow;
+  if(Number(product.stock) <= 0){
 
-  if(typeof force === "boolean"){
-
-    shouldShow = force;
-
-  }else{
-
-    shouldShow =
-      !section.classList.contains("show");
-
-  }
-
-  if(shouldShow){
-
-    section.classList.add("show");
-
-    section.scrollIntoView({
-      behavior:"smooth",
-      block:"start"
-    });
-
-  }else{
-
-    section.classList.remove("show");
-
-  }
-
-}
-
-
-/* =========================================================
-   OPEN TRACK FROM SUCCESS
-========================================================= */
-
-function openTrackFromSuccess(){
-
-  document.getElementById(
-    "orderSuccess"
-  ).classList.remove("show");
-
-  showHeaderTrackButton();
-
-  document.getElementById(
-    "trackingCode"
-  ).value =
-    lastOrderTrackingCode;
-
-  document.getElementById(
-    "trackingPhone"
-  ).value =
-    lastOrderPhone;
-
-  document.getElementById(
-    "trackError"
-  ).classList.remove("show");
-
-  document.getElementById(
-    "trackResult"
-  ).classList.remove("show");
-
-  toggleTrackOrder(true);
-
-  trackOrder();
-
-}
-
-
-/* =========================================================
-   TRACK ORDER
-========================================================= */
-
-async function trackOrder(){
-
-  const trackingInput =
-    document.getElementById(
-      "trackingCode"
-    );
-
-  const phoneInput =
-    document.getElementById(
-      "trackingPhone"
-    );
-
-  const errorBox =
-    document.getElementById(
-      "trackError"
-    );
-
-  const resultBox =
-    document.getElementById(
-      "trackResult"
-    );
-
-  const button =
-    document.getElementById(
-      "trackButton"
-    );
-
-  let trackingCode =
-    trackingInput.value.trim();
-
-  const phone =
-    phoneInput.value.trim();
-
-  errorBox.classList.remove(
-    "show"
-  );
-
-  resultBox.classList.remove(
-    "show"
-  );
-
-  if(!trackingCode){
-
-    errorBox.textContent =
-      "Please enter your Order Number.";
-
-    errorBox.classList.add(
-      "show"
-    );
-
-    trackingInput.focus();
+    alert("This product is out of stock.");
 
     return;
+
   }
 
-  if(!phone){
 
-    errorBox.textContent =
-      "Please enter your phone number.";
-
-    errorBox.classList.add(
-      "show"
+  const existing =
+    cart.find(
+      item =>
+        String(item.id) ===
+        String(product.id)
     );
 
-    phoneInput.focus();
 
-    return;
-  }
-
-  trackingCode =
-    trackingCode
-      .toUpperCase()
-      .replace(/\s+/g,"");
-
-  const cleanPhone =
-    phone.replace(
-      /[\s-]/g,
-      ""
-    );
-
-  if(!/^01\d{9}$/.test(cleanPhone)){
-
-    errorBox.textContent =
-      "Please enter a valid Bangladesh phone number.";
-
-    errorBox.classList.add(
-      "show"
-    );
-
-    phoneInput.focus();
-
-    return;
-  }
-
-  button.disabled = true;
-
-  button.textContent =
-    "Checking Order...";
-
-  try{
-
-    const response =
-      await fetch(
-        SUPABASE_URL +
-        "/rest/v1/rpc/track_order_v2",
-        {
-          method:"POST",
-          cache:"no-store",
-          headers:{
-            "apikey":SUPABASE_KEY,
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY,
-            "Content-Type":
-              "application/json"
-          },
-          body:JSON.stringify({
-
-            p_tracking_code:
-              trackingCode,
-
-            p_phone:
-              cleanPhone
-
-          })
-        }
-      );
-
-    const responseText =
-      await response.text();
-
-    console.log(
-      "TRACK ORDER STATUS:",
-      response.status
-    );
-
-    console.log(
-      "TRACK ORDER RESPONSE:",
-      responseText
-    );
-
-    if(!response.ok){
-
-      throw new Error(
-        responseText ||
-        "Unable to check order right now."
-      );
-
-    }
-
-    let orders = [];
-
-    if(responseText){
-
-      orders =
-        JSON.parse(
-          responseText
-        );
-
-    }
+  if(existing){
 
     if(
-      !Array.isArray(orders) ||
-      orders.length === 0
+      Number(existing.quantity) >=
+      Number(product.stock)
     ){
 
-      errorBox.textContent =
-        "No order found. Please check your Order Number and phone number.";
-
-      errorBox.classList.add(
-        "show"
+      alert(
+        "You cannot add more than available stock."
       );
 
       return;
-    }
-
-    const order =
-      orders[0];
-
-    document.getElementById(
-      "resultCustomerName"
-    ).textContent =
-      order.customer_name ||
-      "N/A";
-
-    document.getElementById(
-      "resultPhone"
-    ).textContent =
-      order.phone ||
-      cleanPhone;
-
-    document.getElementById(
-      "resultAddress"
-    ).textContent =
-      order.address ||
-      "N/A";
-
-    document.getElementById(
-      "resultTrackingCode"
-    ).textContent =
-      order.tracking_code ||
-      trackingCode;
-
-    const date =
-      order.created_at
-        ? new Date(
-            order.created_at
-          ).toLocaleString(
-            "en-BD",
-            {
-              dateStyle:"medium",
-              timeStyle:"short"
-            }
-          )
-        : "N/A";
-
-    document.getElementById(
-      "resultDate"
-    ).textContent =
-      date;
-
-    document.getElementById(
-      "resultStatus"
-    ).textContent =
-      order.status ||
-      "Pending";
-
-    document.getElementById(
-      "resultTotal"
-    ).textContent =
-      "৳" +
-      Number(
-        order.total || 0
-      ).toLocaleString(
-        "en-BD"
-      );
-
-    const productsBox =
-      document.getElementById(
-        "resultProducts"
-      );
-
-    let items = [];
-
-    if(Array.isArray(order.items)){
-
-      items =
-        order.items;
-
-    }else if(
-      typeof order.items ===
-      "string"
-    ){
-
-      try{
-
-        items =
-          JSON.parse(
-            order.items
-          );
-
-      }catch(error){
-
-        items = [];
-
-      }
 
     }
 
-    if(
-      !Array.isArray(items) ||
-      items.length === 0
-    ){
+    existing.quantity =
+      Number(existing.quantity) + 1;
 
-      productsBox.innerHTML =
-        '<div class="track-product">Order items unavailable.</div>';
+  }else{
 
-    }else{
+    cart.push({
 
-      productsBox.innerHTML =
-        items.map(
-          function(item){
+      id:product.id,
 
-            const name =
-              safe(
-                item.name ||
-                "Product"
-              );
+      name:product.name,
 
-            const quantity =
-              Number(
-                item.quantity || 0
-              );
+      price:Number(product.price),
 
-            const price =
-              Number(
-                item.price || 0
-              );
+      oldPrice:Number(
+        product.oldPrice || 0
+      ),
 
-            const subtotal =
-              Number(
-                item.subtotal ||
-                (
-                  price *
-                  quantity
-                )
-              );
+      image:product.image || "",
 
-            return `
+      stock:Number(product.stock),
 
-              <div class="track-product">
+      category:
+        product.category ||
+        "Watches",
 
-                <strong>
-                  ${name}
-                </strong>
+      description:
+        product.description || "",
 
-                <br>
+      quantity:1
 
-                Qty:
-                ${quantity}
-                ×
-                ৳${price.toLocaleString("en-BD")}
-                =
-                ৳${subtotal.toLocaleString("en-BD")}
+    });
 
-              </div>
+  }
 
-            `;
 
-          }
-        ).join("");
+  saveCart();
 
-    }
+  updateCartCount();
 
-    resultBox.classList.add(
-      "show"
+  renderCart();
+
+  alert("Added to cart.");
+
+}
+
+
+/* =========================
+   CHANGE QUANTITY
+========================= */
+
+function changeQuantity(id,delta){
+
+  const item =
+    cart.find(
+      x =>
+        String(x.id) ===
+        String(id)
     );
 
-    resultBox.scrollIntoView({
+  if(!item) return;
+
+
+  const next =
+    Number(item.quantity) +
+    Number(delta);
+
+
+  if(next < 1){
+
+    return;
+
+  }
+
+
+  if(
+    next >
+    Number(item.stock)
+  ){
+
+    alert(
+      "Only " +
+      item.stock +
+      " item(s) available."
+    );
+
+    return;
+
+  }
+
+
+  item.quantity = next;
+
+  saveCart();
+
+  updateCartCount();
+
+  renderCart();
+
+}
+
+
+/* =========================
+   REMOVE
+========================= */
+
+function removeCart(id){
+
+  cart =
+    cart.filter(
+      x =>
+        String(x.id) !==
+        String(id)
+    );
+
+  saveCart();
+
+  updateCartCount();
+
+  renderCart();
+
+}
+
+
+/* =========================
+   RENDER CART
+========================= */
+
+function renderCart(){
+
+  const box =
+    document.getElementById(
+      "cartItems"
+    );
+
+  const empty =
+    document.getElementById(
+      "cartEmpty"
+    );
+
+  const checkout =
+    document.getElementById(
+      "checkoutButton"
+    );
+
+  const total =
+    document.getElementById(
+      "cartTotal"
+    );
+
+
+  total.textContent =
+    money(getCartTotal());
+
+
+  if(cart.length === 0){
+
+    box.innerHTML = "";
+
+    empty.style.display =
+      "block";
+
+    checkout.style.display =
+      "none";
+
+    return;
+
+  }
+
+
+  empty.style.display =
+    "none";
+
+  checkout.style.display =
+    "block";
+
+
+  box.innerHTML =
+    cart.map(function(item){
+
+      const image =
+        item.image
+
+          ? '<img src="' +
+            safe(item.image) +
+            '" alt="' +
+            safe(item.name) +
+            '">'
+
+          : '<span>⌚</span>';
+
+
+      return (
+
+        '<div class="cart-item">' +
+
+          '<div class="cart-item-image">' +
+            image +
+          '</div>' +
+
+          '<div class="cart-item-info">' +
+
+            '<h3>' +
+              safe(item.name) +
+            '</h3>' +
+
+            '<div class="cart-item-price">' +
+              money(item.price) +
+            '</div>' +
+
+            '<div class="quantity">' +
+
+              '<button onclick="changeQuantity(' +
+                JSON.stringify(item.id) +
+                ',-1)">−</button>' +
+
+              '<span>' +
+                item.quantity +
+              '</span>' +
+
+              '<button onclick="changeQuantity(' +
+                JSON.stringify(item.id) +
+                ',1)">+</button>' +
+
+            '</div>' +
+
+            '<button class="remove-btn" onclick="removeCart(' +
+              JSON.stringify(item.id) +
+              ')">' +
+              'Remove' +
+            '</button>' +
+
+          '</div>' +
+
+        '</div>'
+
+      );
+
+    }).join("");
+
+}
+
+
+/* =========================
+   CHECKOUT
+========================= */
+
+function openCheckout(){
+
+  if(
+    !currentSession ||
+    !currentSession.user
+  ){
+
+    alert(
+      "Please login first to place an order."
+    );
+
+    openAuthModal("login");
+
+    return;
+
+  }
+
+
+  if(cart.length === 0){
+
+    alert("Your cart is empty.");
+
+    return;
+
+  }
+
+
+  document
+    .getElementById("checkoutBox")
+    .classList.add("show");
+
+
+  document
+    .getElementById("orderSuccess")
+    .classList.remove("show");
+
+
+  document
+    .getElementById("checkoutBox")
+    .scrollIntoView({
       behavior:"smooth",
       block:"start"
     });
 
-  }catch(error){
-
-    console.error(
-      "Track Order Error:",
-      error
-    );
-
-    errorBox.textContent =
-      "Could not check the order. Please try again.";
-
-    errorBox.classList.add(
-      "show"
-    );
-
-  }finally{
-
-    button.disabled = false;
-
-    button.textContent =
-      "Track Order";
-
-  }
-
 }
 
 
-/* =========================================================
-   PRODUCT DETAILS
-========================================================= */
-
-function showDetails(product){
-
-  currentDetailProduct =
-    product;
-
-  document.getElementById(
-    "detailsCategory"
-  ).textContent =
-    product.category ||
-    "WATCHES";
-
-  document.getElementById(
-    "detailsName"
-  ).textContent =
-    product.name ||
-    "Product";
-
-  const price =
-    Number(product.price);
-
-  const oldPrice =
-    Number(product.oldPrice);
-
-  let priceHTML =
-    Number.isFinite(price)
-      ? "৳" +
-        price.toLocaleString(
-          "en-BD"
-        )
-      : "Price unavailable";
-
-  if(
-    Number.isFinite(oldPrice) &&
-    oldPrice > 0 &&
-    oldPrice > price
-  ){
-
-    priceHTML +=
-      `<span class="details-old-price">
-        ৳${oldPrice.toLocaleString("en-BD")}
-      </span>`;
-
-  }
-
-  document.getElementById(
-    "detailsPrice"
-  ).innerHTML =
-    priceHTML;
-
-  const stock =
-    Number(product.stock);
-
-  document.getElementById(
-    "detailsStock"
-  ).textContent =
-    stock > 0
-      ? "Stock: " + stock
-      : "Out of stock";
-
-  document.getElementById(
-    "detailsDescription"
-  ).textContent =
-    product.description ||
-    "Premium three-eye men's watch set designed for a stylish and sophisticated look. Suitable for business and everyday wear.";
-
-  const imageBox =
-    document.getElementById(
-      "detailsImage"
-    );
-
-  if(product.image){
-
-    imageBox.innerHTML =
-      `<img
-        src="${safe(product.image)}"
-        alt="${safe(product.name)}"
-        onerror="this.style.display='none';this.parentElement.innerHTML='<div class=&quot;details-noimg&quot;>⌚</div>';">`;
-
-  }else{
-
-    imageBox.innerHTML =
-      '<div class="details-noimg">⌚</div>';
-
-  }
-
-  const addButton =
-    document.getElementById(
-      "detailsAddButton"
-    );
-
-  if(
-    stock > 0 &&
-    Number.isFinite(price)
-  ){
-
-    addButton.style.display =
-      "block";
-
-    addButton.textContent =
-      "Add to Cart";
-
-    addButton.onclick =
-      function(){
-
-        addCart(product);
-
-      };
-
-  }else{
-
-    addButton.style.display =
-      "none";
-
-  }
-
-  const details =
-    document.getElementById(
-      "productDetails"
-    );
-
-  details.classList.add(
-    "show"
-  );
-
-  details.scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
-
-}
-
-
-/* =========================================================
-   CLOSE DETAILS
-========================================================= */
-
-function closeDetails(){
-
-  document.getElementById(
-    "productDetails"
-  ).classList.remove(
-    "show"
-  );
-
-  currentDetailProduct =
-    null;
-
-  document.getElementById(
-    "productsSection"
-  ).scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
-
-}
-
-
-/* =========================================================
-   CHECKOUT
-========================================================= */
-
-function checkout(){
-
-  if(cart.length === 0){
-
-    alert(
-      "Your cart is empty."
-    );
-
-    return;
-  }
-
-  document.getElementById(
-    "checkoutBox"
-  ).classList.add(
-    "show"
-  );
-
-  document.getElementById(
-    "checkoutButton"
-  ).style.display =
-    "none";
-
-  document.getElementById(
-    "orderSuccess"
-  ).classList.remove(
-    "show"
-  );
-
-  document.getElementById(
-    "checkoutBox"
-  ).scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
-
-}
-
-
-/* =========================================================
+/* =========================
    CANCEL CHECKOUT
-========================================================= */
+========================= */
 
 function cancelCheckout(){
 
-  document.getElementById(
-    "checkoutBox"
-  ).classList.remove(
-    "show"
-  );
-
-  document.getElementById(
-    "checkoutButton"
-  ).style.display =
-    cart.length > 0
-      ? "block"
-      : "none";
+  document
+    .getElementById("checkoutBox")
+    .classList.remove("show");
 
 }
 
 
-/* =========================================================
-   TRACKING CODE
-========================================================= */
-
-function generateTrackingCode(){
-
-  const random =
-    Math.floor(
-      100000 +
-      Math.random() *
-      900000
-    );
-
-  return "CVBD-" +
-    random;
-
-}
-
-
-/* =========================================================
+/* =========================
    PLACE ORDER
-========================================================= */
+========================= */
 
 async function placeOrder(){
 
-  if(cart.length === 0){
+  if(
+    !currentSession ||
+    !currentSession.user
+  ){
 
     alert(
-      "Your cart is empty."
+      "Please login first to place an order."
     );
 
+    openAuthModal("login");
+
     return;
+
   }
 
+
+  if(cart.length === 0){
+
+    alert("Your cart is empty.");
+
+    return;
+
+  }
+
+
   const name =
-    document.getElementById(
-      "customerName"
-    ).value.trim();
+    document
+      .getElementById("customerName")
+      .value
+      .trim();
+
 
   const phone =
-    document.getElementById(
-      "customerPhone"
-    ).value.trim();
+    document
+      .getElementById("customerPhone")
+      .value
+      .trim();
+
 
   const address =
-    document.getElementById(
-      "customerAddress"
-    ).value.trim();
+    document
+      .getElementById("customerAddress")
+      .value
+      .trim();
+
 
   if(!name){
 
@@ -3432,12 +2624,10 @@ async function placeOrder(){
       "Please enter your full name."
     );
 
-    document.getElementById(
-      "customerName"
-    ).focus();
-
     return;
+
   }
+
 
   if(!phone){
 
@@ -3445,35 +2635,25 @@ async function placeOrder(){
       "Please enter your phone number."
     );
 
-    document.getElementById(
-      "customerPhone"
-    ).focus();
-
     return;
+
   }
 
-  const cleanPhone =
-    phone.replace(
-      /[\s-]/g,
-      ""
-    );
 
-  if(
-    !/^01\d{9}$/.test(
-      cleanPhone
-    )
-  ){
+  const cleanPhone =
+    phone.replace(/[\s-]/g,"");
+
+
+  if(!/^01\d{9}$/.test(cleanPhone)){
 
     alert(
       "Please enter a valid Bangladesh phone number. Example: 01712345678"
     );
 
-    document.getElementById(
-      "customerPhone"
-    ).focus();
-
     return;
+
   }
+
 
   if(!address){
 
@@ -3481,136 +2661,147 @@ async function placeOrder(){
       "Please enter your full delivery address."
     );
 
-    document.getElementById(
-      "customerAddress"
-    ).focus();
-
     return;
+
   }
+
+
+  const orderItems =
+    cart.map(function(item){
+
+      return {
+
+        product_id:item.id,
+
+        name:item.name,
+
+        price:Number(item.price),
+
+        quantity:Number(item.quantity),
+
+        subtotal:
+          Number(item.price) *
+          Number(item.quantity)
+
+      };
+
+    });
+
 
   const total =
     getCartTotal();
 
-  const orderItems =
-    cart.map(
-      function(item){
-
-        return {
-
-          product_id:
-            item.id,
-
-          name:
-            item.name,
-
-          price:
-            Number(item.price),
-
-          quantity:
-            Number(item.quantity),
-
-          subtotal:
-            Number(item.price) *
-            Number(item.quantity)
-
-        };
-
-      }
-    );
 
   const trackingCode =
-    generateTrackingCode();
+    "CVBD-" +
+    Math.floor(
+      100000 +
+      Math.random() * 900000
+    );
+
 
   const button =
     document.getElementById(
       "placeOrderButton"
     );
 
+
   button.disabled = true;
 
   button.textContent =
     "Placing Order...";
 
+
   try{
 
-    const response =
-      await fetch(
-        SUPABASE_URL +
-        "/rest/v1/orders",
-        {
-          method:"POST",
+    /*
+      IMPORTANT:
+      Get the real logged-in
+      Supabase session.
+    */
 
-          headers:{
-            "apikey":
-              SUPABASE_KEY,
+    const {
+      data:sessionData,
+      error:sessionError
+    } =
+      await supabaseClient
+        .auth
+        .getSession();
 
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY,
 
-            "Content-Type":
-              "application/json",
+    if(
+      sessionError ||
+      !sessionData.session ||
+      !sessionData.session.user
+    ){
 
-            "Prefer":
-              "return=minimal"
-          },
-
-          body:JSON.stringify({
-
-            customer_name:
-              name,
-
-            phone:
-              cleanPhone,
-
-            address:
-              address,
-
-            items:
-              orderItems,
-
-            total:
-              total,
-
-            status:
-              "Pending",
-
-            tracking_code:
-              trackingCode
-
-          })
-        }
+      throw new Error(
+        "Your login session has expired. Please login again."
       );
 
-    const responseText =
-      await response.text();
+    }
 
-    if(!response.ok){
+
+    currentSession =
+      sessionData.session;
+
+
+    /*
+      SAVE ORDER WITH USER ID
+    */
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("orders")
+        .insert({
+
+          user_id:
+            currentSession.user.id,
+
+          customer_name:
+            name,
+
+          phone:
+            cleanPhone,
+
+          address:
+            address,
+
+          items:
+            orderItems,
+
+          total:
+            total,
+
+          status:
+            "Pending",
+
+          tracking_code:
+            trackingCode
+
+        });
+
+
+    if(error){
 
       console.error(
         "Order Error:",
-        response.status,
-        responseText
+        error
       );
 
       throw new Error(
-        responseText ||
+        error.message ||
         "Order could not be placed."
       );
 
     }
 
-    lastOrderTrackingCode =
-      trackingCode;
 
-    lastOrderPhone =
-      cleanPhone;
-
-    /* SAVE TRACKING INFO */
-
-    saveLastOrder();
-
-    /* CLEAR CART */
+    /*
+      CLEAR CART
+    */
 
     cart = [];
 
@@ -3620,51 +2811,49 @@ async function placeOrder(){
 
     renderCart();
 
-    document.getElementById(
-      "checkoutBox"
-    ).classList.remove(
-      "show"
-    );
 
-    document.getElementById(
-      "checkoutButton"
-    ).style.display =
-      "none";
+    /*
+      SUCCESS
+    */
 
-    document.getElementById(
-      "orderId"
-    ).textContent =
-      "Order Number: " +
-      trackingCode;
+    document
+      .getElementById("checkoutBox")
+      .classList.remove("show");
 
-    document.getElementById(
-      "orderSuccess"
-    ).classList.add(
-      "show"
-    );
 
-    /* SHOW TRACK BUTTON */
+    document
+      .getElementById("orderId")
+      .textContent =
+        "Order Number: " +
+        trackingCode;
 
-    showHeaderTrackButton();
 
-    document.getElementById(
-      "orderSuccess"
-    ).scrollIntoView({
-      behavior:"smooth",
-      block:"start"
-    });
+    document
+      .getElementById("orderSuccess")
+      .classList.add("show");
 
-    document.getElementById(
-      "customerName"
-    ).value = "";
 
-    document.getElementById(
-      "customerPhone"
-    ).value = "";
+    document
+      .getElementById("customerName")
+      .value = "";
 
-    document.getElementById(
-      "customerAddress"
-    ).value = "";
+
+    document
+      .getElementById("customerPhone")
+      .value = "";
+
+
+    document
+      .getElementById("customerAddress")
+      .value = "";
+
+
+    document
+      .getElementById("orderSuccess")
+      .scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
 
   }catch(error){
 
@@ -3673,24 +2862,167 @@ async function placeOrder(){
       error
     );
 
+
     alert(
       "ORDER ERROR:\n\n" +
-      error.message
+      (
+        error.message ||
+        "Order could not be placed."
+      )
     );
 
+  }finally{
+
+    button.disabled = false;
+
+    button.textContent =
+      "Place Order";
+
   }
-
-  button.disabled = false;
-
-  button.textContent =
-    "Place Order";
 
 }
 
 
-/* =========================================================
+/* =========================
+   PRODUCT DETAILS
+========================= */
+
+function showDetails(product){
+
+  currentDetailsProduct =
+    product;
+
+
+  document
+    .getElementById("detailsCategory")
+    .textContent =
+      product.category ||
+      "Watches";
+
+
+  document
+    .getElementById("detailsName")
+    .textContent =
+      product.name ||
+      "Product";
+
+
+  document
+    .getElementById("detailsPrice")
+    .textContent =
+      money(product.price);
+
+
+  document
+    .getElementById("detailsStock")
+    .textContent =
+      Number(product.stock) > 0
+        ? "Stock: " +
+          product.stock
+        : "Out of stock";
+
+
+  document
+    .getElementById("detailsDescription")
+    .textContent =
+      product.description ||
+      "Premium quartz watch with alloy case and band. Store warranty included. Not waterproof.";
+
+
+  const imageBox =
+    document.getElementById(
+      "detailsImage"
+    );
+
+
+  if(product.image){
+
+    imageBox.innerHTML =
+      '<img src="' +
+      safe(product.image) +
+      '" alt="' +
+      safe(product.name) +
+      '">';
+
+  }else{
+
+    imageBox.innerHTML =
+      '<div class="details-noimg">⌚</div>';
+
+  }
+
+
+  const add =
+    document.getElementById(
+      "detailsAddButton"
+    );
+
+
+  add.disabled =
+    Number(product.stock) <= 0;
+
+
+  add.textContent =
+    Number(product.stock) > 0
+      ? "Add to Cart"
+      : "Out of Stock";
+
+
+  add.onclick =
+    function(){
+
+      if(
+        Number(product.stock) > 0
+      ){
+
+        addCart(product);
+
+      }
+
+    };
+
+
+  document
+    .getElementById(
+      "productDetails"
+    )
+    .classList.add("show");
+
+
+  document
+    .getElementById(
+      "productDetails"
+    )
+    .scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+}
+
+
+/* =========================
+   CLOSE DETAILS
+========================= */
+
+function closeDetails(){
+
+  document
+    .getElementById(
+      "productDetails"
+    )
+    .classList.remove("show");
+
+
+  currentDetailsProduct =
+    null;
+
+}
+
+
+/* =========================
    LOAD PRODUCTS
-========================================================= */
+========================= */
 
 async function loadProducts(){
 
@@ -3699,54 +3031,30 @@ async function loadProducts(){
       "products"
     );
 
+
   try{
 
-    const response =
-      await fetch(
-        SUPABASE_URL +
-        "/rest/v1/products?select=*&order=created_at.desc",
-        {
-          method:"GET",
-
-          headers:{
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY,
-
-            "Content-Type":
-              "application/json"
+    const {
+      data:products,
+      error
+    } =
+      await supabaseClient
+        .from("products")
+        .select("*")
+        .order(
+          "created_at",
+          {
+            ascending:false
           }
-        }
-      );
+        );
 
-    if(!response.ok){
 
-      const errorText =
-        await response.text();
+    if(error){
 
-      console.error(
-        "Supabase Error:",
-        response.status,
-        errorText
-      );
-
-      throw new Error(
-        "Supabase Error " +
-        response.status
-      );
+      throw error;
 
     }
 
-    const products =
-      await response.json();
-
-    console.log(
-      "Supabase Products:",
-      products
-    );
 
     if(
       !Array.isArray(products) ||
@@ -3754,214 +3062,184 @@ async function loadProducts(){
     ){
 
       box.innerHTML =
-        '<div class="empty">No products available yet.</div>';
+        '<div class="empty">' +
+        'No products available yet.' +
+        '</div>';
 
       return;
+
     }
 
+
     box.innerHTML =
-      products.map(
-        function(product){
+      products
+      .map(function(product){
 
-          /*
-            IMPORTANT:
-            Supabase exact column names:
-            Name
-            Price
-            Old price
-            Category
-            Stock
-            image_url
-          */
+        /*
+          EXACT SUPABASE COLUMN NAMES
+        */
 
-          const name =
-            product.Name ||
-            "Unnamed Product";
+        const name =
+          product.Name ||
+          "Unnamed Product";
 
-          const category =
-            product.Category ||
-            "Watches";
 
-          const price =
-            Number(
-              product.Price
-            );
+        const category =
+          product.Category ||
+          "Watches";
 
-          const oldPrice =
-            Number(
-              product["Old price"]
-            );
 
-          const stock =
-            Number(
-              product.Stock
-            );
+        const price =
+          Number(product.Price);
 
-          const imageUrl =
-            product.image_url ||
-            "";
 
-          const description =
-            product.Description ||
-            "";
+        const oldPrice =
+          Number(
+            product["Old price"]
+          );
 
-          const productId =
-            product.id;
 
-          let imageHTML;
+        const stock =
+          Number(product.Stock);
 
-          if(imageUrl){
 
-            imageHTML =
-              `<img
-                src="${safe(imageUrl)}"
-                alt="${safe(name)}"
-                loading="lazy"
-                onerror="this.style.display='none';this.parentElement.innerHTML='<div class=&quot;noimg&quot;>⌚</div>';">`;
+        const imageUrl =
+          product.image_url ||
+          "";
 
-          }else{
 
-            imageHTML =
-              '<div class="noimg">⌚</div>';
+        const description =
+          product.Description ||
+          "";
 
-          }
 
-          let priceHTML =
-            Number.isFinite(price)
-              ? "৳" +
-                price.toLocaleString(
-                  "en-BD"
-                )
-              : "Price unavailable";
+        const cartProduct = {
 
-          if(
-            Number.isFinite(oldPrice) &&
-            oldPrice > 0 &&
-            oldPrice > price
-          ){
+          id:product.id,
 
-            priceHTML +=
-              `<span class="old">
-                ৳${oldPrice.toLocaleString("en-BD")}
-              </span>`;
+          name:name,
 
-          }
+          price:price,
 
-          const stockHTML =
-            stock > 0
-              ? "Stock: " + stock
-              : "Out of stock";
+          oldPrice:oldPrice,
 
-          let buttonHTML = "";
+          image:imageUrl,
 
-          const cartProduct = {
+          stock:stock,
 
-            id:
-              productId,
+          category:category,
 
-            name:
-              name,
+          description:description
 
-            price:
-              price,
+        };
 
-            oldPrice:
-              oldPrice,
 
-            image:
-              imageUrl,
+        let priceHTML =
+          money(price);
 
-            stock:
-              stock,
 
-            category:
-              category,
+        if(
+          Number.isFinite(oldPrice) &&
+          oldPrice > price &&
+          oldPrice > 0
+        ){
 
-            description:
-              description
-
-          };
-
-          const encodedProduct =
-            JSON.stringify(
-              cartProduct
-            )
-            .replace(
-              /&/g,
-              "\\u0026"
-            )
-            .replace(
-              /</g,
-              "\\u003c"
-            )
-            .replace(
-              />/g,
-              "\\u003e"
-            )
-            .replace(
-              /'/g,
-              "\\u0027"
-            );
-
-          if(
-            stock > 0 &&
-            Number.isFinite(price)
-          ){
-
-            buttonHTML =
-              `<button
-                class="btn"
-                onclick='addCart(${encodedProduct})'>
-                Add to Cart
-              </button>`;
-
-          }
-
-          const detailsButton =
-            `<button
-              class="details-btn"
-              onclick='showDetails(${encodedProduct})'>
-              View Details
-            </button>`;
-
-          return `
-
-            <div class="card">
-
-              <div class="pic">
-                ${imageHTML}
-              </div>
-
-              <div class="info">
-
-                <h3>
-                  ${safe(name)}
-                </h3>
-
-                <div class="category">
-                  ${safe(category)}
-                </div>
-
-                <div class="price">
-                  ${priceHTML}
-                </div>
-
-                <div class="stock">
-                  ${safe(stockHTML)}
-                </div>
-
-                ${buttonHTML}
-
-                ${detailsButton}
-
-              </div>
-
-            </div>
-
-          `;
+          priceHTML +=
+            '<span class="old">' +
+            money(oldPrice) +
+            '</span>';
 
         }
-      ).join("");
+
+
+        const imageHTML =
+          imageUrl
+
+          ? '<img src="' +
+            safe(imageUrl) +
+            '" alt="' +
+            safe(name) +
+            '" loading="lazy" onerror="this.style.display=\\'none\\';this.parentElement.innerHTML=\\'<div class=&quot;noimg&quot;>⌚</div>\\';">'
+
+          : '<div class="noimg">⌚</div>';
+
+
+        const encoded =
+          JSON.stringify(cartProduct)
+          .replace(
+            /&/g,
+            "\\u0026"
+          )
+          .replace(
+            /</g,
+            "\\u003c"
+          )
+          .replace(
+            />/g,
+            "\\u003e"
+          )
+          .replace(
+            /'/g,
+            "\\u0027"
+          );
+
+
+        const buttonHTML =
+          stock > 0 &&
+          Number.isFinite(price)
+
+          ? '<button class="btn" onclick=\'addCart(' +
+            encoded +
+            ')\'>Add to Cart</button>'
+
+          : "";
+
+
+        return (
+
+          '<div class="card">' +
+
+            '<div class="pic">' +
+              imageHTML +
+            '</div>' +
+
+            '<div class="info">' +
+
+              '<h3>' +
+                safe(name) +
+              '</h3>' +
+
+              '<div class="category">' +
+                safe(category) +
+              '</div>' +
+
+              '<div class="price">' +
+                priceHTML +
+              '</div>' +
+
+              '<div class="stock">' +
+                (
+                  stock > 0
+                    ? "Stock: " + stock
+                    : "Out of stock"
+                ) +
+              '</div>' +
+
+              buttonHTML +
+
+              '<button class="details-btn" onclick=\'showDetails(' +
+                encoded +
+                ')\'>View Details</button>' +
+
+            '</div>' +
+
+          '</div>'
+
+        );
+
+      })
+      .join("");
+
 
   }catch(error){
 
@@ -3970,29 +3248,38 @@ async function loadProducts(){
       error
     );
 
+
     box.innerHTML =
-      `<div class="empty">
-        Products could not be loaded.
-        <br><br>
-        Please check Supabase connection.
-      </div>`;
+      '<div class="empty">' +
+      'Products could not be loaded.' +
+      '<br><br>' +
+      'Please check Supabase connection.' +
+      '</div>';
 
   }
 
 }
 
 
-/* =========================================================
+/* =========================
    AUTH MODAL
-========================================================= */
+========================= */
 
-function openAuthModal(){
+function openAuthModal(tab){
 
-  document.getElementById(
-    "authOverlay"
-  ).classList.add(
-    "show"
-  );
+  document
+    .getElementById(
+      "authOverlay"
+    )
+    .classList.add("show");
+
+
+  if(tab){
+
+    switchAuthTab(tab);
+
+  }
+
 
   clearAuthMessage();
 
@@ -4001,38 +3288,61 @@ function openAuthModal(){
 
 function closeAuthModal(){
 
-  document.getElementById(
-    "authOverlay"
-  ).classList.remove(
-    "show"
-  );
+  document
+    .getElementById(
+      "authOverlay"
+    )
+    .classList.remove("show");
 
 }
 
 
+/* =========================
+   AUTH TABS
+========================= */
+
 function switchAuthTab(tab){
+
+  document
+    .getElementById(
+      "verifyPanel"
+    )
+    .classList.remove("show");
+
+
+  document
+    .getElementById(
+      "authMain"
+    )
+    .classList.remove("hidden");
+
+
+  clearAuthMessage();
+
 
   const loginTab =
     document.getElementById(
       "loginTab"
     );
 
+
   const signupTab =
     document.getElementById(
       "signupTab"
     );
+
 
   const loginForm =
     document.getElementById(
       "loginForm"
     );
 
+
   const signupForm =
     document.getElementById(
       "signupForm"
     );
 
-  clearAuthMessage();
 
   if(tab === "signup"){
 
@@ -4075,6 +3385,10 @@ function switchAuthTab(tab){
 }
 
 
+/* =========================
+   AUTH MESSAGE
+========================= */
+
 function showAuthMessage(
   message,
   type
@@ -4085,8 +3399,10 @@ function showAuthMessage(
       "authMessage"
     );
 
+
   box.textContent =
     message;
+
 
   box.className =
     "auth-message show " +
@@ -4102,108 +3418,116 @@ function clearAuthMessage(){
       "authMessage"
     );
 
+
   box.textContent = "";
 
   box.className =
     "auth-message";
 
+
+  const verify =
+    document.getElementById(
+      "verifyMessage"
+    );
+
+
+  verify.textContent = "";
+
+  verify.className =
+    "auth-message";
+
 }
 
 
-/* =========================================================
+/* =========================
    LOGIN
-========================================================= */
+========================= */
 
 async function loginUser(event){
 
   event.preventDefault();
 
+
   const email =
-    document.getElementById(
-      "loginEmail"
-    ).value.trim();
+    document
+      .getElementById(
+        "loginEmail"
+      )
+      .value
+      .trim();
+
 
   const password =
-    document.getElementById(
-      "loginPassword"
-    ).value;
+    document
+      .getElementById(
+        "loginPassword"
+      )
+      .value;
+
 
   const button =
     document.getElementById(
       "loginSubmit"
     );
 
+
   clearAuthMessage();
+
 
   button.disabled = true;
 
   button.textContent =
     "Logging in...";
 
+
   try{
 
-    const response =
-      await fetch(
-        SUPABASE_URL +
-        "/auth/v1/token?grant_type=password",
-        {
-          method:"POST",
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .auth
+        .signInWithPassword({
 
-          headers:{
-            "apikey":
-              SUPABASE_KEY,
+          email:email,
 
-            "Content-Type":
-              "application/json"
-          },
+          password:password
 
-          body:JSON.stringify({
+        });
 
-            email:
-              email,
 
-            password:
-              password
+    if(error){
 
-          })
-        }
-      );
-
-    const data =
-      await response.json();
-
-    if(!response.ok){
-
-      throw new Error(
-        data.error_description ||
-        data.msg ||
-        data.message ||
-        "Login failed."
-      );
+      throw error;
 
     }
 
-    currentAuthSession =
-      data;
 
-    localStorage.setItem(
-      "cv_auth_session",
-      JSON.stringify(data)
-    );
+    currentSession =
+      data.session;
+
 
     updateAuthUI();
+
 
     showAuthMessage(
       "Login successful.",
       "success"
     );
 
+
     setTimeout(
       function(){
+
         closeAuthModal();
+
+        openAccountSection();
+
       },
-      900
+      700
     );
+
 
   }catch(error){
 
@@ -4212,11 +3536,13 @@ async function loginUser(event){
       error
     );
 
+
     showAuthMessage(
       error.message ||
       "Login failed.",
       "error"
     );
+
 
   }finally{
 
@@ -4230,30 +3556,40 @@ async function loginUser(event){
 }
 
 
-/* =========================================================
+/* =========================
    SIGN UP
-========================================================= */
+========================= */
 
 async function signupUser(event){
 
   event.preventDefault();
 
+
   const email =
-    document.getElementById(
-      "signupEmail"
-    ).value.trim();
+    document
+      .getElementById(
+        "signupEmail"
+      )
+      .value
+      .trim();
+
 
   const password =
-    document.getElementById(
-      "signupPassword"
-    ).value;
+    document
+      .getElementById(
+        "signupPassword"
+      )
+      .value;
+
 
   const button =
     document.getElementById(
       "signupSubmit"
     );
 
+
   clearAuthMessage();
+
 
   if(password.length < 6){
 
@@ -4263,94 +3599,111 @@ async function signupUser(event){
     );
 
     return;
+
   }
+
 
   button.disabled = true;
 
   button.textContent =
     "Creating...";
 
+
   try{
 
-    const response =
-      await fetch(
-        SUPABASE_URL +
-        "/auth/v1/signup",
-        {
-          method:"POST",
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .auth
+        .signUp({
 
-          headers:{
-            "apikey":
-              SUPABASE_KEY,
+          email:email,
 
-            "Content-Type":
-              "application/json"
-          },
+          password:password
 
-          body:JSON.stringify({
+        });
 
-            email:
-              email,
 
-            password:
-              password
+    if(error){
 
-          })
-        }
-      );
-
-    const data =
-      await response.json();
-
-    if(!response.ok){
-
-      throw new Error(
-        data.msg ||
-        data.message ||
-        data.error_description ||
-        "Sign up failed."
-      );
+      throw error;
 
     }
 
-    if(
-      data.access_token
-    ){
 
-      currentAuthSession =
-        data;
+    pendingSignupEmail =
+      email;
 
-      localStorage.setItem(
-        "cv_auth_session",
-        JSON.stringify(data)
-      );
 
-      updateAuthUI();
+    /*
+      If Supabase returned
+      a session immediately,
+      sign out so the user
+      must complete verification.
+    */
 
-      showAuthMessage(
-        "Account created successfully.",
-        "success"
-      );
+    if(data.session){
 
-      setTimeout(
-        function(){
-          closeAuthModal();
-        },
-        900
-      );
+      await supabaseClient
+        .auth
+        .signOut();
 
-    }else{
-
-      showAuthMessage(
-        "Account created. Please check your email if confirmation is required, then login.",
-        "success"
-      );
-
-      switchAuthTab(
-        "login"
-      );
+      currentSession =
+        null;
 
     }
+
+
+    document
+      .getElementById(
+        "authMain"
+      )
+      .classList.add(
+        "hidden"
+      );
+
+
+    document
+      .getElementById(
+        "verifyPanel"
+      )
+      .classList.add(
+        "show"
+      );
+
+
+    document
+      .getElementById(
+        "verifyEmail"
+      )
+      .textContent =
+        "We sent a 6-digit verification code to " +
+        email +
+        ".";
+
+
+    document
+      .getElementById(
+        "signupOtp"
+      )
+      .value = "";
+
+
+    const verifyMessage =
+      document.getElementById(
+        "verifyMessage"
+      );
+
+
+    verifyMessage.textContent =
+      "Check your email for the verification code.";
+
+
+    verifyMessage.className =
+      "auth-message show success";
+
 
   }catch(error){
 
@@ -4359,11 +3712,13 @@ async function signupUser(event){
       error
     );
 
+
     showAuthMessage(
       error.message ||
       "Sign up failed.",
       "error"
     );
+
 
   }finally{
 
@@ -4377,46 +3732,337 @@ async function signupUser(event){
 }
 
 
-/* =========================================================
-   RESTORE AUTH SESSION
-========================================================= */
+/* =========================
+   VERIFY OTP
+========================= */
 
-function restoreAuthSession(){
+async function verifySignupCode(event){
+
+  event.preventDefault();
+
+
+  const token =
+    document
+      .getElementById(
+        "signupOtp"
+      )
+      .value
+      .trim();
+
+
+  const button =
+    document.getElementById(
+      "verifySubmit"
+    );
+
+
+  if(!pendingSignupEmail){
+
+    showVerifyMessage(
+      "Please start the signup process again.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!/^\d{6}$/.test(token)){
+
+    showVerifyMessage(
+      "Please enter the 6-digit code from your email.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "Verifying...";
+
 
   try{
 
-    const saved =
-      localStorage.getItem(
-        "cv_auth_session"
-      );
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .auth
+        .verifyOtp({
 
-    if(saved){
+          email:
+            pendingSignupEmail,
 
-      currentAuthSession =
-        JSON.parse(saved);
+          token:
+            token,
+
+          type:
+            "email"
+
+        });
+
+
+    if(error){
+
+      throw error;
 
     }
+
+
+    /*
+      Verification complete.
+
+      User should login normally
+      afterwards.
+    */
+
+    if(data.session){
+
+      await supabaseClient
+        .auth
+        .signOut();
+
+    }
+
+
+    currentSession =
+      null;
+
+
+    const verifiedEmail =
+      pendingSignupEmail;
+
+
+    pendingSignupEmail =
+      "";
+
+
+    showVerifyMessage(
+      "Email verified successfully. Now login with your email and password.",
+      "success"
+    );
+
+
+    setTimeout(
+      function(){
+
+        document
+          .getElementById(
+            "authMain"
+          )
+          .classList.remove(
+            "hidden"
+          );
+
+
+        document
+          .getElementById(
+            "verifyPanel"
+          )
+          .classList.remove(
+            "show"
+          );
+
+
+        switchAuthTab(
+          "login"
+        );
+
+
+        document
+          .getElementById(
+            "loginEmail"
+          )
+          .value =
+            verifiedEmail;
+
+      },
+      900
+    );
+
 
   }catch(error){
 
     console.error(
-      "Auth restore error:",
+      "Verify error:",
       error
     );
 
-    currentAuthSession =
-      null;
+
+    showVerifyMessage(
+      error.message ||
+      "Verification failed. Please check the code.",
+      "error"
+    );
+
+
+  }finally{
+
+    button.disabled = false;
+
+    button.textContent =
+      "Verify Email";
 
   }
-
-  updateAuthUI();
 
 }
 
 
-/* =========================================================
+/* =========================
+   VERIFY MESSAGE
+========================= */
+
+function showVerifyMessage(
+  message,
+  type
+){
+
+  const box =
+    document.getElementById(
+      "verifyMessage"
+    );
+
+
+  box.textContent =
+    message;
+
+
+  box.className =
+    "auth-message show " +
+    type;
+
+}
+
+
+/* =========================
+   RESEND CODE
+========================= */
+
+async function resendSignupCode(event){
+
+  event.preventDefault();
+
+
+  if(!pendingSignupEmail){
+
+    showVerifyMessage(
+      "No signup email found. Please sign up again.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .auth
+        .resend({
+
+          type:"signup",
+
+          email:
+            pendingSignupEmail
+
+        });
+
+
+    if(error){
+
+      throw error;
+
+    }
+
+
+    showVerifyMessage(
+      "A new verification code has been sent.",
+      "success"
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "Resend error:",
+      error
+    );
+
+
+    showVerifyMessage(
+      error.message ||
+      "Could not resend the code.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================
+   BACK TO LOGIN
+========================= */
+
+function backToLogin(event){
+
+  event.preventDefault();
+
+
+  const savedEmail =
+    pendingSignupEmail;
+
+
+  document
+    .getElementById(
+      "authMain"
+    )
+    .classList.remove(
+      "hidden"
+    );
+
+
+  document
+    .getElementById(
+      "verifyPanel"
+    )
+    .classList.remove(
+      "show"
+    );
+
+
+  switchAuthTab(
+    "login"
+  );
+
+
+  if(savedEmail){
+
+    document
+      .getElementById(
+        "loginEmail"
+      )
+      .value =
+        savedEmail;
+
+  }
+
+}
+
+
+/* =========================
    AUTH UI
-========================================================= */
+========================= */
 
 function updateAuthUI(){
 
@@ -4425,31 +4071,37 @@ function updateAuthUI(){
       "authHeaderButton"
     );
 
+
   const accountButton =
     document.getElementById(
       "userNameButton"
     );
 
+
   if(
-    currentAuthSession &&
-    currentAuthSession.user
+    currentSession &&
+    currentSession.user
   ){
 
     loginButton.style.display =
       "none";
 
+
     accountButton.style.display =
       "block";
 
+
     const email =
-      currentAuthSession.user.email ||
+      currentSession.user.email ||
       "Account";
+
 
     accountButton.textContent =
       "👤 " +
       (
         email.length > 16
-          ? email.slice(0,13) + "..."
+          ? email.slice(0,13) +
+            "..."
           : email
       );
 
@@ -4458,6 +4110,7 @@ function updateAuthUI(){
     loginButton.style.display =
       "block";
 
+
     accountButton.style.display =
       "none";
 
@@ -4466,91 +4119,24 @@ function updateAuthUI(){
 }
 
 
-/* =========================================================
-   ACCOUNT MENU
-========================================================= */
-
-function openAccountMenu(){
-
-  if(
-    !currentAuthSession ||
-    !currentAuthSession.user
-  ){
-
-    openAuthModal();
-
-    return;
-  }
-
-  const email =
-    currentAuthSession.user.email ||
-    "your account";
-
-  const logout =
-    confirm(
-      "Logged in as:\n" +
-      email +
-      "\n\nDo you want to logout?"
-    );
-
-  if(logout){
-
-    logoutUser();
-
-  }
-
-}
-
-
-/* =========================================================
+/* =========================
    LOGOUT
-========================================================= */
+========================= */
 
 async function logoutUser(){
 
-  try{
+  await supabaseClient
+    .auth
+    .signOut();
 
-    if(
-      currentAuthSession &&
-      currentAuthSession.access_token
-    ){
 
-      await fetch(
-        SUPABASE_URL +
-        "/auth/v1/logout",
-        {
-          method:"POST",
-
-          headers:{
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              currentAuthSession.access_token
-          }
-        }
-      );
-
-    }
-
-  }catch(error){
-
-    console.error(
-      "Logout error:",
-      error
-    );
-
-  }
-
-  currentAuthSession =
+  currentSession =
     null;
 
-  localStorage.removeItem(
-    "cv_auth_session"
-  );
 
   updateAuthUI();
+
+  closeAccountSection();
 
   alert(
     "You have been logged out."
@@ -4559,42 +4145,472 @@ async function logoutUser(){
 }
 
 
-/* =========================================================
-   CLOSE AUTH WHEN CLICK OUTSIDE
-========================================================= */
+/* =========================
+   OPEN ACCOUNT
+========================= */
 
-document.getElementById(
-  "authOverlay"
-).addEventListener(
-  "click",
-  function(event){
+function openAccountSection(){
 
-    if(
-      event.target ===
-      this
-    ){
+  if(
+    !currentSession ||
+    !currentSession.user
+  ){
 
-      closeAuthModal();
+    openAuthModal(
+      "login"
+    );
+
+    return;
+
+  }
+
+
+  document
+    .getElementById(
+      "cartSection"
+    )
+    .classList.remove(
+      "show"
+    );
+
+
+  document
+    .getElementById(
+      "accountSection"
+    )
+    .classList.add(
+      "show"
+    );
+
+
+  document
+    .getElementById(
+      "accountEmail"
+    )
+    .textContent =
+      currentSession.user.email ||
+      "";
+
+
+  loadMyOrders();
+
+
+  document
+    .getElementById(
+      "accountSection"
+    )
+    .scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+}
+
+
+/* =========================
+   CLOSE ACCOUNT
+========================= */
+
+function closeAccountSection(){
+
+  document
+    .getElementById(
+      "accountSection"
+    )
+    .classList.remove(
+      "show"
+    );
+
+}
+
+
+/* =========================
+   LOAD MY ORDERS
+========================= */
+
+async function loadMyOrders(){
+
+  const box =
+    document.getElementById(
+      "myOrders"
+    );
+
+
+  if(
+    !currentSession ||
+    !currentSession.user
+  ){
+
+    box.innerHTML =
+      '<div class="empty">' +
+      'Please login to view your orders.' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+    '<div class="loading">' +
+    'Loading your orders...' +
+    '</div>';
+
+
+  try{
+
+    /*
+      RLS also protects this query.
+
+      Only orders where
+      user_id = logged-in user
+      will be returned.
+    */
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("orders")
+        .select("*")
+        .eq(
+          "user_id",
+          currentSession.user.id
+        )
+        .order(
+          "created_at",
+          {
+            ascending:false
+          }
+        );
+
+
+    if(error){
+
+      throw error;
 
     }
 
+
+    if(
+      !data ||
+      data.length === 0
+    ){
+
+      box.innerHTML =
+        '<div class="empty">' +
+        'You have no orders yet.' +
+        '</div>';
+
+      return;
+
+    }
+
+
+    box.innerHTML =
+      data
+      .map(function(order){
+
+        const items =
+          Array.isArray(
+            order.items
+          )
+            ? order.items
+            : [];
+
+
+        const itemsHTML =
+          items
+          .map(function(item){
+
+            const subtotal =
+              item.subtotal ||
+              (
+                Number(item.price || 0) *
+                Number(item.quantity || 0)
+              );
+
+
+            return (
+
+              '<div class="order-item-row">' +
+
+                '<span>' +
+
+                  safe(
+                    item.name ||
+                    "Product"
+                  ) +
+
+                  ' × ' +
+
+                  Number(
+                    item.quantity || 0
+                  ) +
+
+                '</span>' +
+
+                '<span>' +
+
+                  money(
+                    subtotal
+                  ) +
+
+                '</span>' +
+
+              '</div>'
+
+            );
+
+          })
+          .join("");
+
+
+        const date =
+          order.created_at
+
+            ? new Date(
+                order.created_at
+              ).toLocaleString(
+                "en-BD",
+                {
+                  dateStyle:"medium",
+                  timeStyle:"short"
+                }
+              )
+
+            : "";
+
+
+        return (
+
+          '<div class="order-card">' +
+
+            '<div class="order-top">' +
+
+              '<div>' +
+
+                '<div class="order-code">' +
+                  safe(
+                    order.tracking_code ||
+                    (
+                      "ORDER-" +
+                      order.id
+                    )
+                  ) +
+                '</div>' +
+
+                '<div class="order-date">' +
+                  safe(date) +
+                '</div>' +
+
+              '</div>' +
+
+              '<span class="order-status">' +
+                safe(
+                  order.status ||
+                  "Pending"
+                ) +
+              '</span>' +
+
+            '</div>' +
+
+
+            '<div class="order-meta">' +
+
+              '<div>' +
+                'Customer: ' +
+                '<strong>' +
+                  safe(
+                    order.customer_name
+                  ) +
+                '</strong>' +
+              '</div>' +
+
+              '<div>' +
+                'Phone: ' +
+                '<strong>' +
+                  safe(
+                    order.phone
+                  ) +
+                '</strong>' +
+              '</div>' +
+
+            '</div>' +
+
+
+            '<div class="order-items">' +
+              itemsHTML +
+            '</div>' +
+
+
+            '<div class="order-total">' +
+
+              '<strong>Total</strong>' +
+
+              '<strong>' +
+                money(order.total) +
+              '</strong>' +
+
+            '</div>' +
+
+          '</div>'
+
+        );
+
+      })
+      .join("");
+
+
+  }catch(error){
+
+    console.error(
+      "My orders error:",
+      error
+    );
+
+
+    box.innerHTML =
+      '<div class="empty">' +
+
+      'Could not load your orders.' +
+
+      '<br><br>' +
+
+      safe(
+        error.message ||
+        "Please try again."
+      ) +
+
+      '</div>';
+
   }
-);
+
+}
 
 
-/* =========================================================
-   START
-========================================================= */
+/* =========================
+   AUTH STATE LISTENER
+========================= */
 
-restoreLastOrder();
+supabaseClient
+  .auth
+  .onAuthStateChange(
+    function(
+      event,
+      session
+    ){
 
-restoreAuthSession();
+      currentSession =
+        session;
 
-updateCartCount();
 
-renderCart();
+      updateAuthUI();
 
-loadProducts();
+
+      if(
+        session &&
+        session.user
+      ){
+
+        document
+          .getElementById(
+            "accountEmail"
+          )
+          .textContent =
+            session.user.email ||
+            "";
+
+      }
+
+    }
+  );
+
+
+/* =========================
+   CLOSE MODAL OUTSIDE
+========================= */
+
+document
+  .getElementById(
+    "authOverlay"
+  )
+  .addEventListener(
+    "click",
+    function(event){
+
+      if(
+        event.target === this
+      ){
+
+        closeAuthModal();
+
+      }
+
+    }
+  );
+
+
+/* =========================
+   OTP INPUT
+========================= */
+
+document
+  .getElementById(
+    "signupOtp"
+  )
+  .addEventListener(
+    "input",
+    function(){
+
+      this.value =
+        this.value
+          .replace(/\D/g,"")
+          .slice(0,6);
+
+    }
+  );
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+async function init(){
+
+  loadCart();
+
+  updateCartCount();
+
+  renderCart();
+
+  loadProducts();
+
+
+  /*
+    Restore existing
+    Supabase session.
+  */
+
+  const {
+    data
+  } =
+    await supabaseClient
+      .auth
+      .getSession();
+
+
+  currentSession =
+    data.session;
+
+
+  updateAuthUI();
+
+}
+
+
+init();
 
 </script>
 
