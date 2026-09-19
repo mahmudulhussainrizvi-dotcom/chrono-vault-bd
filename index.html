@@ -1,4602 +1,4719 @@
-<!DOCTYPE html>    
-<html lang="en">    
-<head>    
-<meta charset="UTF-8">    
-<meta name="viewport" content="width=device-width,initial-scale=1">    
-<meta name="theme-color" content="#080808">    
-<title>CHRONO VAULT BD</title>    
-    
-<style>    
-*{    
-  box-sizing:border-box;    
-  margin:0;    
-  padding:0;    
-}    
-    
-html{    
-  scroll-behavior:smooth;    
-}    
-    
-body{    
-  font-family:Arial,Helvetica,sans-serif;    
-  background:#080808;    
-  color:#fff;    
-  line-height:1.5;    
-}    
-    
-a{    
-  text-decoration:none;    
-  color:inherit;    
-}    
-    
-button,    
-input,    
-textarea{    
-  font-family:inherit;    
-}    
-    
-button{    
-  cursor:pointer;    
-}    
-    
-/* =========================    
-   HEADER    
-========================= */    
-    
-header{    
-  position:sticky;    
-  top:0;    
-  z-index:1000;    
-  background:rgba(8,8,8,.97);    
-  border-bottom:1px solid #292929;    
-  backdrop-filter:blur(10px);    
-}    
-    
-.nav{    
-  max-width:1200px;    
-  margin:auto;    
-  min-height:70px;    
-  padding:10px 4%;    
-  display:flex;    
-  align-items:center;    
-  justify-content:space-between;    
-  gap:12px;    
-}    
-    
-.brand{    
-  display:flex;    
-  align-items:center;    
-  gap:10px;    
-  min-width:0;    
-}    
-    
-.logo{    
-  width:44px;    
-  height:44px;    
-  flex-shrink:0;    
-  border:1px solid #d4af37;    
-  border-radius:50%;    
-  display:grid;    
-  place-items:center;    
-  color:#d4af37;    
-  font-weight:bold;    
-  font-size:16px;    
-}    
-    
-.brand b{    
-  color:#d4af37;    
-  letter-spacing:2px;    
-  font-size:14px;    
-}    
-    
-.header-actions{    
-  display:flex;    
-  align-items:center;    
-  justify-content:flex-end;    
-  gap:7px;    
-  flex-wrap:wrap;    
-}    
-    
-.cart,    
-.track-header-btn,    
-.auth-header-btn{    
-  border:1px solid #d4af37;    
-  color:#d4af37;    
-  background:transparent;    
-  padding:9px 13px;    
-  border-radius:20px;    
-  font-weight:bold;    
-  white-space:nowrap;    
-}    
-    
-.cart:hover,    
-.track-header-btn:hover,    
-.auth-header-btn:hover{    
-  background:#d4af37;    
-  color:#080808;    
-}    
-    
-.track-header-btn{    
-  display:none;    
-}    
-    
-.track-header-btn.show{    
-  display:block;    
-}    
-    
-.auth-header-btn{    
-  display:block;    
-}    
-    
-.user-name-btn{    
-  border:1px solid #555;    
-  color:#ddd;    
-  background:#111;    
-  padding:9px 13px;    
-  border-radius:20px;    
-  font-weight:bold;    
-  white-space:nowrap;    
-}    
-    
-.user-name-btn:hover{    
-  border-color:#d4af37;    
-  color:#d4af37;    
-}    
-    
-/* =========================    
-   HERO    
-========================= */    
-    
-.hero{    
-  text-align:center;    
-  padding:80px 20px 65px;    
-  background:radial-gradient(circle,#252010 0,#080808 60%);    
-}    
-    
-.hero small{    
-  color:#d4af37;    
-  letter-spacing:4px;    
-}    
-    
-.hero h1{    
-  font-size:clamp(36px,9vw,72px);    
-  margin:12px 0;    
-  color:#d4af37;    
-  letter-spacing:3px;    
-}    
-    
-.hero p{    
-  color:#bbb;    
-  max-width:600px;    
-  margin:auto;    
-}    
-    
-/* =========================    
-   GENERAL    
-========================= */    
-    
-.section{    
-  max-width:1200px;    
-  margin:auto;    
-  padding:55px 4%;    
-}    
-    
-.title{    
-  text-align:center;    
-  margin-bottom:30px;    
-}    
-    
-.title h2{    
-  color:#d4af37;    
-  font-size:30px;    
-}    
-    
-/* =========================    
-   PRODUCTS    
-========================= */    
-    
-.products{    
-  display:grid;    
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));    
-  gap:20px;    
-}    
-    
-.card{    
-  background:#111;    
-  border:1px solid #292929;    
-  border-radius:14px;    
-  overflow:hidden;    
-  transition:.2s;    
-}    
-    
-.card:hover{    
-  border-color:#d4af37;    
-  transform:translateY(-2px);    
-}    
-    
-.pic{    
-  height:250px;    
-  background:#171717;    
-  display:flex;    
-  align-items:center;    
-  justify-content:center;    
-  overflow:hidden;    
-}    
-    
-.pic img{    
-  width:100%;    
-  height:100%;    
-  object-fit:contain;    
-}    
-    
-.noimg{    
-  font-size:55px;    
-  color:#d4af37;    
-}    
-    
-.info{    
-  padding:18px;    
-}    
-    
-.info h3{    
-  font-size:17px;    
-  margin-bottom:7px;    
-}    
-    
-.category{    
-  color:#999;    
-  font-size:13px;    
-}    
-    
-.price{    
-  color:#d4af37;    
-  font-size:22px;    
-  font-weight:bold;    
-  margin-top:10px;    
-}    
-    
-.old{    
-  text-decoration:line-through;    
-  color:#777;    
-  font-size:13px;    
-  margin-left:8px;    
-}    
-    
-.stock{    
-  font-size:13px;    
-  color:#aaa;    
-  margin-top:5px;    
-}    
-    
-.btn{    
-  display:block;    
-  width:100%;    
-  margin-top:10px;    
-  padding:11px;    
-  border:0;    
-  background:#d4af37;    
-  color:#080808;    
-  font-weight:bold;    
-  border-radius:8px;    
-}    
-    
-.btn:hover{    
-  opacity:.9;    
-}    
-    
-.details-btn{    
-  display:block;    
-  width:100%;    
-  margin-top:9px;    
-  padding:10px;    
-  border:1px solid #555;    
-  background:#181818;    
-  color:#ccc;    
-  font-weight:bold;    
-  border-radius:8px;    
-}    
-    
-.details-btn:hover{    
-  color:#d4af37;    
-  border-color:#d4af37;    
-}    
-    
-.empty{    
-  text-align:center;    
-  color:#aaa;    
-  padding:40px;    
-}    
-    
-.loading{    
-  text-align:center;    
-  color:#d4af37;    
-  padding:40px;    
-}    
-    
-/* =========================    
-   PRODUCT DETAILS    
-========================= */    
-    
-.product-details{    
-  display:none;    
-  max-width:1000px;    
-  margin:30px auto 0;    
-  padding:0 4% 50px;    
-}    
-    
-.product-details.show{    
-  display:block;    
-}    
-    
-.details-box{    
-  background:#111;    
-  border:1px solid #292929;    
-  border-radius:16px;    
-  overflow:hidden;    
-}    
-    
-.details-grid{    
-  display:grid;    
-  grid-template-columns:minmax(280px,1fr) minmax(280px,1fr);    
-}    
-    
-.details-image{    
-  min-height:420px;    
-  background:#171717;    
-  display:flex;    
-  align-items:center;    
-  justify-content:center;    
-  padding:25px;    
-}    
-    
-.details-image img{    
-  width:100%;    
-  height:100%;    
-  max-height:420px;    
-  object-fit:contain;    
-}    
-    
-.details-noimg{    
-  font-size:90px;    
-  color:#d4af37;    
-}    
-    
-.details-info{    
-  padding:35px;    
-}    
-    
-.details-category{    
-  color:#d4af37;    
-  font-size:13px;    
-  letter-spacing:2px;    
-  text-transform:uppercase;    
-}    
-    
-.details-info h2{    
-  font-size:30px;    
-  margin:8px 0 15px;    
-}    
-    
-.details-price{    
-  color:#d4af37;    
-  font-size:28px;    
-  font-weight:bold;    
-}    
-    
-.details-old-price{    
-  color:#777;    
-  text-decoration:line-through;    
-  font-size:15px;    
-  margin-left:8px;    
-}    
-    
-.details-stock{    
-  color:#aaa;    
-  margin-top:7px;    
-  font-size:14px;    
-}    
-    
-.details-description{    
-  margin-top:22px;    
-  color:#bbb;    
-  font-size:15px;    
-  line-height:1.7;    
-}    
-    
-.specs{    
-  margin-top:25px;    
-  border-top:1px solid #292929;    
-  padding-top:20px;    
-}    
-    
-.specs h3{    
-  color:#d4af37;    
-  margin-bottom:12px;    
-}    
-    
-.spec-row{    
-  display:flex;    
-  justify-content:space-between;    
-  gap:15px;    
-  padding:7px 0;    
-  border-bottom:1px solid #1f1f1f;    
-  font-size:13px;    
-}    
-    
-.spec-row span:first-child{    
-  color:#777;    
-}    
-    
-.spec-row span:last-child{    
-  color:#bbb;    
-  text-align:right;    
-}    
-    
-.details-actions{    
-  display:flex;    
-  gap:10px;    
-  margin-top:25px;    
-}    
-    
-.details-add{    
-  flex:1;    
-  padding:13px;    
-  border:0;    
-  background:#d4af37;    
-  color:#080808;    
-  font-weight:bold;    
-  border-radius:8px;    
-}    
-    
-.details-close{    
-  padding:13px 18px;    
-  border:1px solid #555;    
-  background:#181818;    
-  color:#aaa;    
-  border-radius:8px;    
-}    
-    
-.details-close:hover{    
-  color:#d4af37;    
-  border-color:#d4af37;    
-}    
-    
-/* =========================    
-   TRACK ORDER    
-========================= */    
-    
-.track-section{    
-  max-width:900px;    
-  margin:0 auto;    
-  padding:0 4% 50px;    
-  display:none;    
-}    
-    
-.track-section.show{    
-  display:block;    
-}    
-    
-.track-box{    
-  background:#111;    
-  border:1px solid #292929;    
-  border-radius:16px;    
-  padding:25px;    
-}    
-    
-.track-header{    
-  display:flex;    
-  align-items:center;    
-  justify-content:space-between;    
-  gap:15px;    
-  margin-bottom:20px;    
-}    
-    
-.track-header h2{    
-  color:#d4af37;    
-  font-size:25px;    
-}    
-    
-.track-close{    
-  border:1px solid #555;    
-  background:transparent;    
-  color:#aaa;    
-  padding:8px 13px;    
-  border-radius:7px;    
-}    
-    
-.track-close:hover{    
-  color:#d4af37;    
-  border-color:#d4af37;    
-}    
-    
-.track-intro{    
-  color:#999;    
-  font-size:14px;    
-  margin-bottom:20px;    
-}    
-    
-.track-form-group{    
-  margin-bottom:15px;    
-}    
-    
-.track-form-group label{    
-  display:block;    
-  color:#bbb;    
-  font-size:14px;    
-  margin-bottom:6px;    
-}    
-    
-.track-form-group input{    
-  width:100%;    
-  padding:12px;    
-  border:1px solid #444;    
-  border-radius:8px;    
-  background:#181818;    
-  color:#fff;    
-  outline:none;    
-  font-size:15px;    
-}    
-    
-.track-form-group input:focus{    
-  border-color:#d4af37;    
-}    
-    
-.track-btn{    
-  width:100%;    
-  padding:13px;    
-  border:0;    
-  border-radius:8px;    
-  background:#d4af37;    
-  color:#080808;    
-  font-weight:bold;    
-  font-size:15px;    
-}    
-    
-.track-btn:disabled{    
-  opacity:.5;    
-  cursor:not-allowed;    
-}    
-    
-.track-result{    
-  display:none;    
-  margin-top:25px;    
-  padding-top:25px;    
-  border-top:1px solid #292929;    
-}    
-    
-.track-result.show{    
-  display:block;    
-}    
-    
-.track-success-title{    
-  color:#d4af37;    
-  font-size:21px;    
-  font-weight:bold;    
-  margin-bottom:15px;    
-}    
-    
-.track-error{    
-  display:none;    
-  margin-top:20px;    
-  padding:13px;    
-  background:#1a1010;    
-  border:1px solid #4a2929;    
-  border-radius:8px;    
-  color:#ff9b9b;    
-  font-size:14px;    
-}    
-    
-.track-error.show{    
-  display:block;    
-}    
-    
-.track-summary{    
-  background:#181818;    
-  border:1px solid #292929;    
-  border-radius:10px;    
-  padding:15px;    
-  margin-bottom:20px;    
-}    
-    
-.track-row{    
-  display:flex;    
-  justify-content:space-between;    
-  gap:15px;    
-  padding:9px 0;    
-  border-bottom:1px solid #292929;    
-  font-size:14px;    
-}    
-    
-.track-row:last-child{    
-  border-bottom:0;    
-}    
-    
-.track-row span:first-child{    
-  color:#777;    
-}    
-    
-.track-row span:last-child{    
-  color:#ddd;    
-  text-align:right;    
-  max-width:65%;    
-  word-break:break-word;    
-}    
-    
-.track-code{    
-  color:#d4af37!important;    
-  font-weight:bold;    
-}    
-    
-.track-total{    
-  color:#d4af37!important;    
-  font-weight:bold;    
-}    
-    
-.status-badge{    
-  display:inline-block;    
-  padding:5px 10px;    
-  border-radius:20px;    
-  background:#252010;    
-  color:#d4af37!important;    
-  border:1px solid #5a4b18;    
-  font-weight:bold;    
-}    
-    
-.track-products{    
-  margin-top:15px;    
-}    
-    
-.track-products h3{    
-  color:#d4af37;    
-  font-size:17px;    
-  margin-bottom:10px;    
-}    
-    
-.track-product{    
-  padding:10px 0;    
-  border-bottom:1px solid #222;    
-  color:#bbb;    
-  font-size:13px;    
-}    
-    
-.track-product:last-child{    
-  border-bottom:0;    
-}    
-    
-.track-product strong{    
-  color:#fff;    
-}    
-    
-.track-note{    
-  margin-top:15px;    
-  color:#777;    
-  font-size:12px;    
-}    
-    
-/* =========================    
-   CART    
-========================= */    
-    
-.cart-section{    
-  display:none;    
-  max-width:900px;    
-  margin:0 auto;    
-  padding:30px 4% 60px;    
-}    
-    
-.cart-section.show{    
-  display:block;    
-}    
-    
-.cart-box{    
-  background:#111;    
-  border:1px solid #292929;    
-  border-radius:14px;    
-  padding:20px;    
-}    
-    
-.cart-header{    
-  display:flex;    
-  align-items:center;    
-  justify-content:space-between;    
-  gap:10px;    
-  margin-bottom:20px;    
-}    
-    
-.cart-header h2{    
-  color:#d4af37;    
-}    
-    
-.close-cart{    
-  border:1px solid #555;    
-  background:transparent;    
-  color:#aaa;    
-  padding:7px 12px;    
-  border-radius:7px;    
-}    
-    
-.cart-item{    
-  display:flex;    
-  align-items:center;    
-  gap:15px;    
-  padding:15px 0;    
-  border-bottom:1px solid #292929;    
-}    
-    
-.cart-item:last-child{    
-  border-bottom:0;    
-}    
-    
-.cart-item-image{    
-  width:75px;    
-  height:75px;    
-  flex-shrink:0;    
-  background:#171717;    
-  border-radius:10px;    
-  overflow:hidden;    
-  display:flex;    
-  align-items:center;    
-  justify-content:center;    
-}    
-    
-.cart-item-image img{    
-  width:100%;    
-  height:100%;    
-  object-fit:contain;    
-}    
-    
-.cart-item-image span{    
-  font-size:32px;    
-  color:#d4af37;    
-}    
-    
-.cart-item-info{    
-  flex:1;    
-  min-width:0;    
-}    
-    
-.cart-item-info h3{    
-  font-size:15px;    
-  margin-bottom:4px;    
-}    
-    
-.cart-item-price{    
-  color:#d4af37;    
-  font-weight:bold;    
-}    
-    
-.quantity{    
-  display:flex;    
-  align-items:center;    
-  gap:8px;    
-  margin-top:8px;    
-}    
-    
-.quantity button{    
-  width:30px;    
-  height:30px;    
-  border:1px solid #555;    
-  background:#181818;    
-  color:#fff;    
-  border-radius:6px;    
-}    
-    
-.quantity button:hover{    
-  border-color:#d4af37;    
-  color:#d4af37;    
-}    
-    
-.quantity span{    
-  min-width:25px;    
-  text-align:center;    
-}    
-    
-.remove-btn{    
-  margin-top:8px;    
-  border:0;    
-  background:transparent;    
-  color:#b66;    
-  font-size:12px;    
-}    
-    
-.remove-btn:hover{    
-  color:#ff7777;    
-}    
-    
-.cart-total{    
-  display:flex;    
-  align-items:center;    
-  justify-content:space-between;    
-  margin-top:20px;    
-  padding-top:15px;    
-  border-top:1px solid #292929;    
-}    
-    
-.cart-total strong{    
-  font-size:18px;    
-}    
-    
-.cart-total span{    
-  color:#d4af37;    
-  font-size:24px;    
-  font-weight:bold;    
-}    
-    
-.checkout-btn{    
-  width:100%;    
-  margin-top:20px;    
-  padding:13px;    
-  border:0;    
-  border-radius:8px;    
-  background:#d4af37;    
-  color:#080808;    
-  font-weight:bold;    
-}    
-    
-.checkout-box{    
-  display:none;    
-  margin-top:25px;    
-  border-top:1px solid #292929;    
-  padding-top:25px;    
-}    
-    
-.checkout-box.show{    
-  display:block;    
-}    
-    
-.checkout-title{    
-  color:#d4af37;    
-  font-size:20px;    
-  font-weight:bold;    
-  margin-bottom:20px;    
-}    
-    
-.form-group{    
-  margin-bottom:15px;    
-}    
-    
-.form-group label{    
-  display:block;    
-  color:#bbb;    
-  font-size:14px;    
-  margin-bottom:6px;    
-}    
-    
-.form-group input,    
-.form-group textarea{    
-  width:100%;    
-  padding:12px;    
-  border:1px solid #444;    
-  border-radius:8px;    
-  background:#181818;    
-  color:#fff;    
-  outline:none;    
-  font-size:15px;    
-}    
-    
-.form-group input:focus,    
-.form-group textarea:focus{    
-  border-color:#d4af37;    
-}    
-    
-.form-group textarea{    
-  min-height:100px;    
-  resize:vertical;    
-}    
-    
-.payment-box{    
-  padding:15px;    
-  background:#181818;    
-  border:1px solid #292929;    
-  border-radius:8px;    
-  margin:18px 0;    
-}    
-    
-.payment-box strong{    
-  color:#d4af37;    
-}    
-    
-.payment-box p{    
-  color:#999;    
-  font-size:13px;    
-  margin-top:4px;    
-}    
-    
-.place-order-btn{    
-  width:100%;    
-  padding:13px;    
-  border:0;    
-  border-radius:8px;    
-  background:#d4af37;    
-  color:#080808;    
-  font-weight:bold;    
-}    
-    
-.place-order-btn:disabled{    
-  opacity:.5;    
-}    
-    
-.cancel-checkout{    
-  width:100%;    
-  padding:12px;    
-  margin-top:10px;    
-  border:1px solid #555;    
-  border-radius:8px;    
-  background:#181818;    
-  color:#aaa;    
-}    
-    
-.order-success{    
-  display:none;    
-  text-align:center;    
-  margin-top:25px;    
-  padding:30px 20px;    
-  background:#15150f;    
-  border:1px solid #5a4b18;    
-  border-radius:12px;    
-}    
-    
-.order-success.show{    
-  display:block;    
-}    
-    
-.success-icon{    
-  font-size:50px;    
-  margin-bottom:10px;    
-}    
-    
-.order-success h2{    
-  color:#d4af37;    
-  margin-bottom:10px;    
-}    
-    
-.order-success p{    
-  color:#aaa;    
-  margin:6px 0;    
-}    
-    
-.order-id{    
-  margin:18px 0;    
-  color:#d4af37;    
-  font-size:20px;    
-  font-weight:bold;    
-  padding:12px;    
-  border:1px dashed #d4af37;    
-  border-radius:8px;    
-}    
-    
-.success-track-btn{    
-  width:100%;    
-  max-width:350px;    
-  margin-top:15px;    
-  padding:12px;    
-  border:0;    
-  border-radius:8px;    
-  background:#d4af37;    
-  color:#080808;    
-  font-weight:bold;    
-}    
-    
-/* =========================    
-   WHY SECTION    
-========================= */    
-    
-.why{    
-  display:grid;    
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));    
-  gap:15px;    
-}    
-    
-.box{    
-  background:#111;    
-  border:1px solid #292929;    
-  border-radius:12px;    
-  padding:20px;    
-  color:#aaa;    
-}    
-    
-.box strong{    
-  display:block;    
-  color:#d4af37;    
-  margin-bottom:8px;    
-}    
-    
-/* =========================    
-   FOOTER    
-========================= */    
-    
-footer{    
-  text-align:center;    
-  padding:40px 20px;    
-  border-top:1px solid #292929;    
-  color:#777;    
-}    
-    
-footer b{    
-  color:#d4af37;    
-}    
-    
-.social-links{    
-  display:flex;    
-  justify-content:center;    
-  flex-wrap:wrap;    
-  gap:10px;    
-  margin-top:20px;    
-}    
-    
-.social-links a{    
-  padding:9px 14px;    
-  border:1px solid #444;    
-  border-radius:20px;    
-  color:#aaa;    
-  font-size:13px;    
-}    
-    
-.social-links a:hover{    
-  border-color:#d4af37;    
-  color:#d4af37;    
-}    
-    
-.social-note{    
-  margin-top:12px;    
-  font-size:12px;    
-}    
-    
-/* =========================    
-   AUTH MODAL    
-========================= */    
-    
-.auth-overlay{    
-  display:none;    
-  position:fixed;    
-  inset:0;    
-  z-index:3000;    
-  background:rgba(0,0,0,.78);    
-  align-items:center;    
-  justify-content:center;    
-  padding:20px;    
-}    
-    
-.auth-overlay.show{    
-  display:flex;    
-}    
-    
-.auth-box{    
-  width:100%;    
-  max-width:430px;    
-  max-height:90vh;    
-  overflow:auto;    
-  background:#111;    
-  border:1px solid #5a4b18;    
-  border-radius:16px;    
-  padding:25px;    
-  box-shadow:0 20px 70px rgba(0,0,0,.6);    
-}    
-    
-.auth-header{    
-  display:flex;    
-  align-items:center;    
-  justify-content:space-between;    
-  gap:10px;    
-  margin-bottom:20px;    
-}    
-    
-.auth-header h2{    
-  color:#d4af37;    
-}    
-    
-.auth-close{    
-  width:35px;    
-  height:35px;    
-  border:1px solid #555;    
-  background:#181818;    
-  color:#aaa;    
-  border-radius:50%;    
-}    
-    
-.auth-close:hover{    
-  color:#d4af37;    
-  border-color:#d4af37;    
-}    
-    
-.auth-tabs{    
-  display:flex;    
-  gap:8px;    
-  margin-bottom:20px;    
-}    
-    
-.auth-tab{    
-  flex:1;    
-  padding:10px;    
-  border:1px solid #444;    
-  background:#181818;    
-  color:#aaa;    
-  border-radius:8px;    
-  font-weight:bold;    
-}    
-    
-.auth-tab.active{    
-  background:#d4af37;    
-  color:#080808;    
-  border-color:#d4af37;    
-}    
-    
-.auth-form{    
-  display:none;    
-}    
-    
-.auth-form.active{    
-  display:block;    
-}    
-    
-.auth-form-group{    
-  margin-bottom:15px;    
-}    
-    
-.auth-form-group label{    
-  display:block;    
-  color:#bbb;    
-  font-size:14px;    
-  margin-bottom:6px;    
-}    
-    
-.auth-form-group input{    
-  width:100%;    
-  padding:12px;    
-  border:1px solid #444;    
-  border-radius:8px;    
-  background:#181818;    
-  color:#fff;    
-  outline:none;    
-}    
-    
-.auth-form-group input:focus{    
-  border-color:#d4af37;    
-}    
-    
-.auth-submit{    
-  width:100%;    
-  padding:13px;    
-  border:0;    
-  border-radius:8px;    
-  background:#d4af37;    
-  color:#080808;    
-  font-weight:bold;    
-}    
-    
-.auth-message{    
-  display:none;    
-  margin-bottom:15px;    
-  padding:10px;    
-  border-radius:8px;    
-  font-size:13px;    
-}    
-    
-.auth-message.show{    
-  display:block;    
-}    
-    
-.auth-message.success{    
-  color:#c8e6c9;    
-  background:#102012;    
-  border:1px solid #28532b;    
-}    
-    
-.auth-message.error{    
-  color:#ffb3b3;    
-  background:#201010;    
-  border:1px solid #532828;    
-}    
-    
-.auth-note{    
-  color:#777;    
-  font-size:12px;    
-  margin-top:15px;    
-  text-align:center;    
-}    
-    
-/* =========================    
-   RESPONSIVE    
-========================= */    
-    
-@media(max-width:700px){    
-    
-  .nav{    
-    min-height:64px;    
-    padding:8px 3%;    
-  }    
-    
-  .brand b{    
-    font-size:11px;    
-    letter-spacing:1px;    
-  }    
-    
-  .logo{    
-    width:40px;    
-    height:40px;    
-    font-size:14px;    
-  }    
-    
-  .header-actions{    
-    gap:5px;    
-  }    
-    
-  .cart,    
-  .track-header-btn,    
-  .auth-header-btn,    
-  .user-name-btn{    
-    padding:7px 8px;    
-    font-size:11px;    
-  }    
-    
-  .hero{    
-    padding:60px 15px 50px;    
-  }    
-    
-  .hero h1{    
-    letter-spacing:1px;    
-  }    
-    
-  .products{    
-    grid-template-columns:repeat(2,minmax(0,1fr));    
-    gap:12px;    
-  }    
-    
-  .pic{    
-    height:190px;    
-  }    
-    
-  .info{    
-    padding:13px;    
-  }    
-    
-  .info h3{    
-    font-size:14px;    
-  }    
-    
-  .price{    
-    font-size:18px;    
-  }    
-    
-  .details-grid{    
-    grid-template-columns:1fr;    
-  }    
-    
-  .details-image{    
-    min-height:300px;    
-  }    
-    
-  .details-info{    
-    padding:22px;    
-  }    
-    
-  .details-actions{    
-    flex-direction:column;    
-  }    
-    
-  .details-close{    
-    width:100%;    
-  }    
-    
-  .cart-item{    
-    gap:10px;    
-    align-items:flex-start;    
-  }    
-    
-  .cart-item-image{    
-    width:65px;    
-    height:65px;    
-  }    
-    
-  .cart-item-info h3{    
-    font-size:13px;    
-  }    
-    
-  .cart-total span{    
-    font-size:20px;    
-  }    
-    
-  .social-links{    
-    gap:8px;    
-  }    
-    
-  .track-box{    
-    padding:18px;    
-  }    
-    
-  .track-header h2{    
-    font-size:21px;    
-  }    
-    
-  .track-row{    
-    flex-direction:column;    
-    gap:4px;    
-  }    
-    
-  .track-row span:last-child{    
-    max-width:100%;    
-    text-align:left;    
-  }    
-}    
-    
-@media(max-width:430px){    
-    
-  .brand{    
-    gap:6px;    
-  }    
-    
-  .brand b{    
-    font-size:9px;    
-  }    
-    
-  .logo{    
-    width:36px;    
-    height:36px;    
-    font-size:12px;    
-  }    
-    
-  .products{    
-    grid-template-columns:1fr 1fr;    
-  }    
-    
-  .pic{    
-    height:160px;    
-  }    
-    
-  .btn,    
-  .details-btn{    
-    font-size:12px;    
-    padding:9px;    
-  }    
-    
-  .header-actions{    
-    max-width:210px;    
-  }    
-}    
-    
-@media(max-width:380px){    
-    
-  .brand b{    
-    font-size:8px;    
-  }    
-    
-  .cart,    
-  .track-header-btn,    
-  .auth-header-btn,    
-  .user-name-btn{    
-    padding:6px 6px;    
-    font-size:10px;    
-  }    
-    
-  .products{    
-    grid-template-columns:1fr;    
-  }    
-    
-  .pic{    
-    height:230px;    
-  }    
-}    
-</style>    
-</head>    
-    
-<body>    
-    
-<!-- =========================    
-     HEADER    
-========================= -->    
-    
-<header>    
-  <div class="nav">    
-    
-    <div class="brand">    
-      <div class="logo">CV</div>    
-      <b>CHRONO VAULT BD</b>    
-    </div>    
-    
-    <div class="header-actions">    
-    
-      <button    
-        id="headerTrackButton"    
-        class="track-header-btn"    
-        onclick="toggleTrackOrder()">    
-        📦 Track Order    
-      </button>    
-    
-      <button    
-        id="authHeaderButton"    
-        class="auth-header-btn"    
-        onclick="openAuthModal()">    
-        👤 Login / Sign Up    
-      </button>    
-    
-      <button    
-        id="userNameButton"    
-        class="user-name-btn"    
-        style="display:none"    
-        onclick="openAccountMenu()">    
-        👤 Account    
-      </button>    
-    
-      <button    
-        class="cart"    
-        onclick="toggleCart()">    
-        🛒 Cart: <span id="cartCount">0</span>    
-      </button>    
-    
-    </div>    
-  </div>    
-</header>    
-    
-<!-- =========================    
-     HERO    
-========================= -->    
-    
-<section class="hero">    
-    
-  <small>WELCOME TO</small>    
-    
-  <h1>CHRONO VAULT BD</h1>    
-    
-  <p>    
-    More Than Just a Watch. It's a Lifestyle.    
-  </p>    
-    
-</section>    
-    
-<!-- =========================    
-     PRODUCTS    
-========================= -->    
-    
-<section id="productsSection" class="section">    
-    
-  <div class="title">    
-    <h2>Our Collection</h2>    
-  </div>    
-    
-  <div id="products" class="products">    
-    <div class="loading">    
-      Loading products...    
-    </div>    
-  </div>    
-    
-</section>    
-    
-<!-- =========================    
-     PRODUCT DETAILS    
-========================= -->    
-    
-<section id="productDetails" class="product-details">    
-    
-  <div class="details-box">    
-    
-    <div class="details-grid">    
-    
-      <div id="detailsImage" class="details-image"></div>    
-    
-      <div class="details-info">    
-    
-        <div    
-          id="detailsCategory"    
-          class="details-category">    
-          WATCHES    
-        </div>    
-    
-        <h2 id="detailsName">    
-          Product    
-        </h2>    
-    
-        <div    
-          id="detailsPrice"    
-          class="details-price">    
-          ৳0    
-        </div>    
-    
-        <div    
-          id="detailsStock"    
-          class="details-stock">    
-          Stock: 0    
-        </div>    
-    
-        <div    
-          id="detailsDescription"    
-          class="details-description">    
-        </div>    
-    
-        <div class="specs">    
-    
-          <h3>Product Specifications</h3>    
-    
-          <div class="spec-row">    
-            <span>Movement</span>    
-            <span>Quartz</span>    
-          </div>    
-    
-          <div class="spec-row">    
-            <span>Dial</span>    
-            <span>46 mm</span>    
-          </div>    
-    
-          <div class="spec-row">    
-            <span>Thickness</span>    
-            <span>13 mm</span>    
-          </div>    
-    
-          <div class="spec-row">    
-            <span>Case</span>    
-            <span>Alloy</span>    
-          </div>    
-    
-          <div class="spec-row">    
-            <span>Band</span>    
-            <span>Alloy Steel</span>    
-          </div>    
-    
-          <div class="spec-row">    
-            <span>Dial Shape</span>    
-            <span>Round</span>    
-          </div>    
-    
-          <div class="spec-row">    
-            <span>Style</span>    
-            <span>Business</span>    
-          </div>    
-    
-          <div class="spec-row">    
-            <span>Waterproof</span>    
-            <span>No</span>    
-          </div>    
-    
-          <div class="spec-row">    
-            <span>Warranty</span>    
-            <span>Store Warranty</span>    
-          </div>    
-    
-        </div>    
-    
-        <div class="details-actions">    
-    
-          <button    
-            id="detailsAddButton"    
-            class="details-add">    
-            Add to Cart    
-          </button>    
-    
-          <button    
-            class="details-close"    
-            onclick="closeDetails()">    
-            Back to Collection    
-          </button>    
-    
-        </div>    
-    
-      </div>    
-    </div>    
-  </div>    
-    
-</section>    
-    
-<!-- =========================    
-     TRACK ORDER    
-========================= -->    
-    
-<section    
-  id="trackSection"    
-  class="track-section">    
-    
-  <div class="track-box">    
-    
-    <div class="track-header">    
-    
-      <h2>📦 Track Your Order</h2>    
-    
-      <button    
-        class="track-close"    
-        onclick="toggleTrackOrder(false)">    
-        Close    
-      </button>    
-    
-    </div>    
-    
-    <p class="track-intro">    
-      Enter your Order Number and phone number to check your order status.    
-    </p>    
-    
-    <div class="track-form-group">    
-    
-      <label for="trackingCode">    
-        Order Number    
-      </label>    
-    
-      <input    
-        type="text"    
-        id="trackingCode"    
-        placeholder="Example: CVBD-123456"    
-        autocomplete="off">    
-    
-    </div>    
-    
-    <div class="track-form-group">    
-    
-      <label for="trackingPhone">    
-        Phone Number    
-      </label>    
-    
-      <input    
-        type="tel"    
-        id="trackingPhone"    
-        placeholder="01XXXXXXXXX"    
-        inputmode="tel"    
-        autocomplete="tel">    
-    
-    </div>    
-    
-    <button    
-      id="trackButton"    
-      class="track-btn"    
-      onclick="trackOrder()">    
-      Track Order    
-    </button>    
-    
-    <div    
-      id="trackError"    
-      class="track-error">    
-    </div>    
-    
-    <div    
-      id="trackResult"    
-      class="track-result">    
-    
-      <div class="track-success-title">    
-        Order Found    
-      </div>    
-    
-      <div class="track-summary">    
-    
-        <div class="track-row">    
-          <span>Customer Name</span>    
-          <span id="resultCustomerName"></span>    
-        </div>    
-    
-        <div class="track-row">    
-          <span>Phone</span>    
-          <span id="resultPhone"></span>    
-        </div>    
-    
-        <div class="track-row">    
-          <span>Delivery Address</span>    
-          <span id="resultAddress"></span>    
-        </div>    
-    
-        <div class="track-row">    
-          <span>Order Number</span>    
-          <span    
-            id="resultTrackingCode"    
-            class="track-code">    
-          </span>    
-        </div>    
-    
-        <div class="track-row">    
-          <span>Order Date</span>    
-          <span id="resultDate"></span>    
-        </div>    
-    
-        <div class="track-row">    
-          <span>Status</span>    
-          <span>    
-            <span    
-              id="resultStatus"    
-              class="status-badge">    
-            </span>    
-          </span>    
-        </div>    
-    
-        <div class="track-row">    
-          <span>Total</span>    
-          <span    
-            id="resultTotal"    
-            class="track-total">    
-          </span>    
-        </div>    
-    
-      </div>    
-    
-      <div class="track-products">    
-    
-        <h3>Ordered Products</h3>    
-    
-        <div id="resultProducts"></div>    
-    
-      </div>    
-    
-      <p class="track-note">    
-        Order status is updated by CHRONO VAULT BD after confirmation and processing.    
-      </p>    
-    
-    </div>    
-    
-  </div>    
-    
-</section>    
-    
-<!-- =========================    
-     CART    
-========================= -->    
-    
-<section    
-  id="cartSection"    
-  class="cart-section">    
-    
-  <div class="cart-box">    
-    
-    <div class="cart-header">    
-    
-      <h2>🛒 Your Cart</h2>    
-    
-      <button    
-        class="close-cart"    
-        onclick="toggleCart()">    
-        Close    
-      </button>    
-    
-    </div>    
-    
-    <div id="cartItems">    
-      <div class="empty">    
-        Your cart is empty.    
-      </div>    
-    </div>    
-    
-    <div class="cart-total">    
-    
-      <strong>Total</strong>    
-    
-      <span id="cartTotal">    
-        ৳0    
-      </span>    
-    
-    </div>    
-    
-    <button    
-      id="checkoutButton"    
-      class="checkout-btn"    
-      onclick="checkout()">    
-      Proceed to Checkout    
-    </button>    
-    
-    <div    
-      id="checkoutBox"    
-      class="checkout-box">    
-    
-      <div class="checkout-title">    
-        📦 Delivery Information    
-      </div>    
-    
-      <div class="form-group">    
-    
-        <label for="customerName">    
-          Full Name    
-        </label>    
-    
-        <input    
-          type="text"    
-          id="customerName"    
-          placeholder="Enter your full name"    
-          autocomplete="name">    
-    
-      </div>    
-    
-      <div class="form-group">    
-    
-        <label for="customerPhone">    
-          Phone Number    
-        </label>    
-    
-        <input    
-          type="tel"    
-          id="customerPhone"    
-          placeholder="01XXXXXXXXX"    
-          inputmode="tel"    
-          autocomplete="tel">    
-    
-      </div>    
-    
-      <div class="form-group">    
-    
-        <label for="customerAddress">    
-          Full Delivery Address    
-        </label>    
-    
-        <textarea    
-          id="customerAddress"    
-          placeholder="House/Road, Area, Thana, District"    
-          autocomplete="street-address">    
-        </textarea>    
-    
-      </div>    
-    
-      <div class="payment-box">    
-    
-        <strong>    
-          💵 Cash on Delivery    
-        </strong>    
-    
-        <p>    
-          Pay when your order is delivered.    
-        </p>    
-    
-      </div>    
-    
-      <button    
-        id="placeOrderButton"    
-        class="place-order-btn"    
-        onclick="placeOrder()">    
-        Place Order    
-      </button>    
-    
-      <button    
-        class="cancel-checkout"    
-        onclick="cancelCheckout()">    
-        Back to Cart    
-      </button>    
-    
-    </div>    
-    
-    <div    
-      id="orderSuccess"    
-      class="order-success">    
-    
-      <div class="success-icon">    
-        ✅    
-      </div>    
-    
-      <h2>    
-        Order Placed Successfully!    
-      </h2>    
-    
-      <p>    
-        Thank you for shopping with CHRONO VAULT BD.    
-      </p>    
-    
-      <div    
-        id="orderId"    
-        class="order-id">    
-        Order received successfully.    
-      </div>    
-    
-      <p>    
-        We will contact you soon to confirm your order.    
-      </p>    
-    
-      <button    
-        class="success-track-btn"    
-        onclick="openTrackFromSuccess()">    
-        📦 Track This Order    
-      </button>    
-    
-    </div>    
-    
-  </div>    
-    
-</section>    
-    
-<!-- =========================    
-     WHY US    
-========================= -->    
-    
-<section class="section">    
-    
-  <div class="title">    
-    <h2>Why CHRONO VAULT BD?</h2>    
-  </div>    
-    
-  <div class="why">    
-    
-    <div class="box">    
-      <strong>Premium Style</strong>    
-      Elegant watches for your everyday lifestyle.    
-    </div>    
-    
-    <div class="box">    
-      <strong>Quality</strong>    
-      Carefully selected products.    
-    </div>    
-    
-    <div class="box">    
-      <strong>Cash on Delivery</strong>    
-      Easy ordering with convenient payment.    
-    </div>    
-    
-    <div class="box">    
-      <strong>Store Warranty</strong>    
-      Warranty support on selected products.    
-    </div>    
-    
-  </div>    
-    
-</section>    
-    
-<!-- =========================    
-     FOOTER    
-========================= -->    
-    
-<footer>    
-    
-  <p>    
-    © 2026 <b>CHRONO VAULT BD</b>    
-  </p>    
-    
-  <p>    
-    More Than Just a Watch. It's a Lifestyle.    
-  </p>    
-    
-  <div class="social-links">    
-    
-    <a    
-      href="https://www.facebook.com/share/1C3CqbjBXk/"    
-      target="_blank"    
-      rel="noopener noreferrer">    
-      Facebook    
-    </a>    
-    
-    <a    
-      href="https://www.instagram.com/chronovaultbd?stkn=MWYxMjBxNXA1YTZ1bg=="    
-      target="_blank"    
-      rel="noopener noreferrer">    
-      Instagram    
-    </a>    
-    
-    <a    
-      href="https://www.tiktok.com/@chrono.vault.bd?_r=1&_t=ZS-99qPMd7PspQ"    
-      target="_blank"    
-      rel="noopener noreferrer">    
-      TikTok    
-    </a>    
-    
-    <a    
-      href="https://wa.me/8801326144735"    
-      target="_blank"    
-      rel="noopener noreferrer">    
-      WhatsApp    
-    </a>    
-    
-  </div>    
-    
-  <p class="social-note">    
-    Follow us & stay connected.    
-  </p>    
-    
-</footer>    
-    
-<!-- =========================    
-     AUTH MODAL    
-========================= -->    
-    
-<div    
-  id="authOverlay"    
-  class="auth-overlay">    
-    
-  <div class="auth-box">    
-    
-    <div class="auth-header">    
-    
-      <h2>👤 My Account</h2>    
-    
-      <button    
-        class="auth-close"    
-        onclick="closeAuthModal()">    
-        ×    
-      </button>    
-    
-    </div>    
-    
-    <div class="auth-tabs">    
-    
-      <button    
-        id="loginTab"    
-        class="auth-tab active"    
-        onclick="switchAuthTab('login')">    
-        Login    
-      </button>    
-    
-      <button    
-        id="signupTab"    
-        class="auth-tab"    
-        onclick="switchAuthTab('signup')">    
-        Sign Up    
-      </button>    
-    
-    </div>    
-    
-    <div    
-      id="authMessage"    
-      class="auth-message">    
-    </div>    
-    
-    <!-- LOGIN -->    
-    
-    <form    
-      id="loginForm"    
-      class="auth-form active"    
-      onsubmit="loginUser(event)">    
-    
-      <div class="auth-form-group">    
-    
-        <label for="loginEmail">    
-          Email    
-        </label>    
-    
-        <input    
-          type="email"    
-          id="loginEmail"    
-          placeholder="Enter your email"    
-          autocomplete="email"    
-          required>    
-    
-      </div>    
-    
-      <div class="auth-form-group">    
-    
-        <label for="loginPassword">    
-          Password    
-        </label>    
-    
-        <input    
-          type="password"    
-          id="loginPassword"    
-          placeholder="Enter your password"    
-          autocomplete="current-password"    
-          required>    
-    
-      </div>    
-    
-      <button    
-        id="loginSubmit"    
-        class="auth-submit"    
-        type="submit">    
-        Login    
-      </button>    
-    
-    </form>    
-    
-    <!-- SIGN UP -->    
-    
-    <form    
-      id="signupForm"    
-      class="auth-form"    
-      onsubmit="signupUser(event)">    
-    
-      <div class="auth-form-group">    
-    
-        <label for="signupEmail">    
-          Email    
-        </label>    
-    
-        <input    
-          type="email"    
-          id="signupEmail"    
-          placeholder="Enter your email"    
-          autocomplete="email"    
-          required>    
-    
-      </div>    
-    
-      <div class="auth-form-group">    
-    
-        <label for="signupPassword">    
-          Password    
-        </label>    
-    
-        <input    
-          type="password"    
-          id="signupPassword"    
-          placeholder="Minimum 6 characters"    
-          autocomplete="new-password"    
-          minlength="6"    
-          required>    
-    
-      </div>    
-    
-      <button    
-        id="signupSubmit"    
-        class="auth-submit"    
-        type="submit">    
-        Create Account    
-      </button>    
-    
-    </form>    
-    
-    <p class="auth-note">    
-      Account login is optional for shopping.    
-    </p>    
-    
-  </div>    
-    
-</div>    
-    
-<script>    
-    
-/* =========================================================    
-   SUPABASE    
-========================================================= */    
-    
-const SUPABASE_URL =    
-  "https://rufdvkelwzsmnuruvdko.supabase.co";    
-    
-const SUPABASE_KEY =    
-  "sb_publishable_3j4Bs4rft9_w4r1j6uHo5w_fYLIJsNI";    
-    
-    
-/* =========================================================    
-   CART    
-========================================================= */    
-    
-let cart = [];    
-    
-try{    
-    
-  const savedCart =    
-    localStorage.getItem("chronoVaultCart");    
-    
-  if(savedCart){    
-    cart = JSON.parse(savedCart);    
-  }    
-    
-  if(!Array.isArray(cart)){    
-    cart = [];    
-  }    
-    
-}catch(error){    
-    
-  console.error(    
-    "Cart storage error:",    
-    error    
-  );    
-    
-  cart = [];    
-}    
-    
-    
-/* =========================================================    
-   GLOBAL VARIABLES    
-========================================================= */    
-    
-let currentDetailProduct = null;    
-    
-let lastOrderTrackingCode = "";    
-    
-let lastOrderPhone = "";    
-    
-let currentAuthSession = null;    
-    
-    
-/* =========================================================    
-   SAFE HTML    
-========================================================= */    
-    
-function safe(value){    
-    
-  if(value === null || value === undefined){    
-    return "";    
-  }    
-    
-  return String(value)    
-    .replace(/&/g,"&amp;")    
-    .replace(/</g,"&lt;")    
-    .replace(/>/g,"&gt;")    
-    .replace(/"/g,"&quot;")    
-    .replace(/'/g,"&#039;");    
-}    
-    
-    
-/* =========================================================    
-   LAST ORDER STORAGE    
-========================================================= */    
-    
-function saveLastOrder(){    
-    
-  try{    
-    
-    if(    
-      lastOrderTrackingCode &&    
-      lastOrderPhone    
-    ){    
-    
-      localStorage.setItem(    
-        "cv_last_tracking_code",    
-        lastOrderTrackingCode    
-      );    
-    
-      localStorage.setItem(    
-        "cv_last_order_phone",    
-        lastOrderPhone    
-      );    
-    
-    }    
-    
-  }catch(error){    
-    
-    console.error(    
-      "Last order storage error:",    
-      error    
-    );    
-    
-  }    
-}    
-    
-    
-function restoreLastOrder(){    
-    
-  try{    
-    
-    const savedTrackingCode =    
-      localStorage.getItem(    
-        "cv_last_tracking_code"    
-      ) || "";    
-    
-    const savedPhone =    
-      localStorage.getItem(    
-        "cv_last_order_phone"    
-      ) || "";    
-    
-    if(    
-      savedTrackingCode &&    
-      savedPhone    
-    ){    
-    
-      lastOrderTrackingCode =    
-        savedTrackingCode;    
-    
-      lastOrderPhone =    
-        savedPhone;    
-    
-      showHeaderTrackButton();    
-    
-    }    
-    
-  }catch(error){    
-    
-    console.error(    
-      "Restore last order error:",    
-      error    
-    );    
-    
-  }    
-    
-}    
-    
-    
-function clearLastOrder(){    
-    
-  try{    
-    
-    localStorage.removeItem(    
-      "cv_last_tracking_code"    
-    );    
-    
-    localStorage.removeItem(    
-      "cv_last_order_phone"    
-    );    
-    
-  }catch(error){    
-    
-    console.error(    
-      "Clear last order error:",    
-      error    
-    );    
-    
-  }    
-    
-}    
-    
-    
-/* =========================================================    
-   CART STORAGE    
-========================================================= */    
-    
-function saveCart(){    
-    
-  try{    
-    
-    localStorage.setItem(    
-      "chronoVaultCart",    
-      JSON.stringify(cart)    
-    );    
-    
-  }catch(error){    
-    
-    console.error(    
-      "Could not save cart:",    
-      error    
-    );    
-    
-  }    
-    
-}    
-    
-    
-/* =========================================================    
-   CART COUNT    
-========================================================= */    
-    
-function updateCartCount(){    
-    
-  const count =    
-    cart.reduce(    
-      function(total,item){    
-    
-        return total +    
-          Number(item.quantity || 0);    
-    
-      },    
-      0    
-    );    
-    
-  document.getElementById(    
-    "cartCount"    
-  ).textContent = count;    
-    
-}    
-    
-    
-/* =========================================================    
-   ADD CART    
-========================================================= */    
-    
-function addCart(product){    
-    
-  const id =    
-    String(product.id);    
-    
-  const stock =    
-    Number(product.stock);    
-    
-  const price =    
-    Number(product.price);    
-    
-  if(    
-    !Number.isFinite(stock) ||    
-    stock <= 0    
-  ){    
-    
-    alert(    
-      "This product is out of stock."    
-    );    
-    
-    return;    
-  }    
-    
-  if(!Number.isFinite(price)){    
-    
-    alert(    
-      "Product price is unavailable."    
-    );    
-    
-    return;    
-  }    
-    
-  const existing =    
-    cart.find(    
-      function(item){    
-        return String(item.id) === id;    
-      }    
-    );    
-    
-  if(existing){    
-    
-    if(    
-      Number(existing.quantity) >= stock    
-    ){    
-    
-      alert(    
-        "Maximum available stock already added."    
-      );    
-    
-      return;    
-    }    
-    
-    existing.quantity++;    
-    
-  }else{    
-    
-    cart.push({    
-    
-      id:id,    
-    
-      name:product.name,    
-    
-      price:price,    
-    
-      image:product.image || "",    
-    
-      stock:stock,    
-    
-      quantity:1    
-    
-    });    
-    
-  }    
-    
-  saveCart();    
-    
-  updateCartCount();    
-    
-  renderCart();    
-    
-  alert(    
-    product.name +    
-    " added to cart."    
-  );    
-    
-}    
-    
-    
-/* =========================================================    
-   QUANTITY    
-========================================================= */    
-    
-function changeQuantity(id,change){    
-    
-  const item =    
-    cart.find(    
-      function(product){    
-        return String(product.id) ===    
-          String(id);    
-      }    
-    );    
-    
-  if(!item){    
-    return;    
-  }    
-    
-  const newQuantity =    
-    Number(item.quantity) +    
-    Number(change);    
-    
-  if(newQuantity <= 0){    
-    
-    removeFromCart(id);    
-    
-    return;    
-  }    
-    
-  if(    
-    newQuantity >    
-    Number(item.stock)    
-  ){    
-    
-    alert(    
-      "Maximum available stock: " +    
-      item.stock    
-    );    
-    
-    return;    
-  }    
-    
-  item.quantity =    
-    newQuantity;    
-    
-  saveCart();    
-    
-  updateCartCount();    
-    
-  renderCart();    
-    
-}    
-    
-    
-/* =========================================================    
-   REMOVE CART    
-========================================================= */    
-    
-function removeFromCart(id){    
-    
-  cart =    
-    cart.filter(    
-      function(item){    
-    
-        return String(item.id) !==    
-          String(id);    
-    
-      }    
-    );    
-    
-  saveCart();    
-    
-  updateCartCount();    
-    
-  renderCart();    
-    
-}    
-    
-    
-/* =========================================================    
-   CART TOTAL    
-========================================================= */    
-    
-function getCartTotal(){    
-    
-  return cart.reduce(    
-    function(sum,item){    
-    
-      return sum +    
-        (    
-          Number(item.price) *    
-          Number(item.quantity)    
-        );    
-    
-    },    
-    0    
-  );    
-    
-}    
-    
-    
-/* =========================================================    
-   RENDER CART    
-========================================================= */    
-    
-function renderCart(){    
-    
-  const box =    
-    document.getElementById(    
-      "cartItems"    
-    );    
-    
-  if(cart.length === 0){    
-    
-    box.innerHTML =    
-      '<div class="empty">Your cart is empty.</div>';    
-    
-    document.getElementById(    
-      "cartTotal"    
-    ).textContent = "৳0";    
-    
-    document.getElementById(    
-      "checkoutButton"    
-    ).style.display = "none";    
-    
-    return;    
-  }    
-    
-  document.getElementById(    
-    "checkoutButton"    
-  ).style.display = "block";    
-    
-  box.innerHTML =    
-    cart.map(    
-      function(item){    
-    
-        const subtotal =    
-          Number(item.price) *    
-          Number(item.quantity);    
-    
-        let imageHTML = "";    
-    
-        if(item.image){    
-    
-          imageHTML =    
-            `<img    
-              src="${safe(item.image)}"    
-              alt="${safe(item.name)}"    
-              onerror="this.style.display='none';this.parentElement.innerHTML='<span>⌚</span>';">`;    
-    
-        }else{    
-    
-          imageHTML =    
-            '<span>⌚</span>';    
-    
-        }    
-    
-        return `    
-    
-          <div class="cart-item">    
-    
-            <div class="cart-item-image">    
-              ${imageHTML}    
-            </div>    
-    
-            <div class="cart-item-info">    
-    
-              <h3>    
-                ${safe(item.name)}    
-              </h3>    
-    
-              <div class="cart-item-price">    
-                ৳${Number(item.price).toLocaleString("en-BD")}    
-                × ${item.quantity}    
-                =    
-                ৳${subtotal.toLocaleString("en-BD")}    
-              </div>    
-    
-              <div class="quantity">    
-    
-                <button    
-                  onclick="changeQuantity('${safe(item.id)}',-1)">    
-                  −    
-                </button>    
-    
-                <span>    
-                  ${item.quantity}    
-                </span>    
-    
-                <button    
-                  onclick="changeQuantity('${safe(item.id)}',1)">    
-                  +    
-                </button>    
-    
-              </div>    
-    
-              <button    
-                class="remove-btn"    
-                onclick="removeFromCart('${safe(item.id)}')">    
-                Remove    
-              </button>    
-    
-            </div>    
-    
-          </div>    
-    
-        `;    
-    
-      }    
-    ).join("");    
-    
-  document.getElementById(    
-    "cartTotal"    
-  ).textContent =    
-    "৳" +    
-    getCartTotal()    
-      .toLocaleString("en-BD");    
-    
-}    
-    
-    
-/* =========================================================    
-   TOGGLE CART    
-========================================================= */    
-    
-function toggleCart(){    
-    
-  const section =    
-    document.getElementById(    
-      "cartSection"    
-    );    
-    
-  section.classList.toggle("show");    
-    
-  if(    
-    section.classList.contains("show")    
-  ){    
-    
-    renderCart();    
-    
-    section.scrollIntoView({    
-      behavior:"smooth",    
-      block:"start"    
-    });    
-    
-  }    
-    
-}    
-    
-    
-/* =========================================================    
-   TRACK HEADER BUTTON    
-========================================================= */    
-    
-function showHeaderTrackButton(){    
-    
-  const button =    
-    document.getElementById(    
-      "headerTrackButton"    
-    );    
-    
-  if(button){    
-    
-    button.classList.add("show");    
-    
-  }    
-    
-}    
-    
-    
-/* =========================================================    
-   TRACK ORDER TOGGLE    
-========================================================= */    
-    
-function toggleTrackOrder(force){    
-    
-  const section =    
-    document.getElementById(    
-      "trackSection"    
-    );    
-    
-  let shouldShow;    
-    
-  if(typeof force === "boolean"){    
-    
-    shouldShow = force;    
-    
-  }else{    
-    
-    shouldShow =    
-      !section.classList.contains("show");    
-    
-  }    
-    
-  if(shouldShow){    
-    
-    section.classList.add("show");    
-    
-    section.scrollIntoView({    
-      behavior:"smooth",    
-      block:"start"    
-    });    
-    
-  }else{    
-    
-    section.classList.remove("show");    
-    
-  }    
-    
-}    
-    
-    
-/* =========================================================    
-   OPEN TRACK FROM SUCCESS    
-========================================================= */    
-    
-function openTrackFromSuccess(){    
-    
-  document.getElementById(    
-    "orderSuccess"    
-  ).classList.remove("show");    
-    
-  showHeaderTrackButton();    
-    
-  document.getElementById(    
-    "trackingCode"    
-  ).value =    
-    lastOrderTrackingCode;    
-    
-  document.getElementById(    
-    "trackingPhone"    
-  ).value =    
-    lastOrderPhone;    
-    
-  document.getElementById(    
-    "trackError"    
-  ).classList.remove("show");    
-    
-  document.getElementById(    
-    "trackResult"    
-  ).classList.remove("show");    
-    
-  toggleTrackOrder(true);    
-    
-  trackOrder();    
-    
-}    
-    
-    
-/* =========================================================    
-   TRACK ORDER    
-========================================================= */    
-    
-async function trackOrder(){    
-    
-  const trackingInput =    
-    document.getElementById(    
-      "trackingCode"    
-    );    
-    
-  const phoneInput =    
-    document.getElementById(    
-      "trackingPhone"    
-    );    
-    
-  const errorBox =    
-    document.getElementById(    
-      "trackError"    
-    );    
-    
-  const resultBox =    
-    document.getElementById(    
-      "trackResult"    
-    );    
-    
-  const button =    
-    document.getElementById(    
-      "trackButton"    
-    );    
-    
-  let trackingCode =    
-    trackingInput.value.trim();    
-    
-  const phone =    
-    phoneInput.value.trim();    
-    
-  errorBox.classList.remove(    
-    "show"    
-  );    
-    
-  resultBox.classList.remove(    
-    "show"    
-  );    
-    
-  if(!trackingCode){    
-    
-    errorBox.textContent =    
-      "Please enter your Order Number.";    
-    
-    errorBox.classList.add(    
-      "show"    
-    );    
-    
-    trackingInput.focus();    
-    
-    return;    
-  }    
-    
-  if(!phone){    
-    
-    errorBox.textContent =    
-      "Please enter your phone number.";    
-    
-    errorBox.classList.add(    
-      "show"    
-    );    
-    
-    phoneInput.focus();    
-    
-    return;    
-  }    
-    
-  trackingCode =    
-    trackingCode    
-      .toUpperCase()    
-      .replace(/\s+/g,"");    
-    
-  const cleanPhone =    
-    phone.replace(    
-      /[\s-]/g,    
-      ""    
-    );    
-    
-  if(!/^01\d{9}$/.test(cleanPhone)){    
-    
-    errorBox.textContent =    
-      "Please enter a valid Bangladesh phone number.";    
-    
-    errorBox.classList.add(    
-      "show"    
-    );    
-    
-    phoneInput.focus();    
-    
-    return;    
-  }    
-    
-  button.disabled = true;    
-    
-  button.textContent =    
-    "Checking Order...";    
-    
-  try{    
-    
-    const response =    
-      await fetch(    
-        SUPABASE_URL +    
-        "/rest/v1/rpc/track_order_v2",    
-        {    
-          method:"POST",    
-          cache:"no-store",    
-          headers:{    
-            "apikey":SUPABASE_KEY,    
-            "Authorization":    
-              "Bearer " +    
-              SUPABASE_KEY,    
-            "Content-Type":    
-              "application/json"    
-          },    
-          body:JSON.stringify({    
-    
-            p_tracking_code:    
-              trackingCode,    
-    
-            p_phone:    
-              cleanPhone    
-    
-          })    
-        }    
-      );    
-    
-    const responseText =    
-      await response.text();    
-    
-    console.log(    
-      "TRACK ORDER STATUS:",    
-      response.status    
-    );    
-    
-    console.log(    
-      "TRACK ORDER RESPONSE:",    
-      responseText    
-    );    
-    
-    if(!response.ok){    
-    
-      throw new Error(    
-        responseText ||    
-        "Unable to check order right now."    
-      );    
-    
-    }    
-    
-    let orders = [];    
-    
-    if(responseText){    
-    
-      orders =    
-        JSON.parse(    
-          responseText    
-        );    
-    
-    }    
-    
-    if(    
-      !Array.isArray(orders) ||    
-      orders.length === 0    
-    ){    
-    
-      errorBox.textContent =    
-        "No order found. Please check your Order Number and phone number.";    
-    
-      errorBox.classList.add(    
-        "show"    
-      );    
-    
-      return;    
-    }    
-    
-    const order =    
-      orders[0];    
-    
-    document.getElementById(    
-      "resultCustomerName"    
-    ).textContent =    
-      order.customer_name ||    
-      "N/A";    
-    
-    document.getElementById(    
-      "resultPhone"    
-    ).textContent =    
-      order.phone ||    
-      cleanPhone;    
-    
-    document.getElementById(    
-      "resultAddress"    
-    ).textContent =    
-      order.address ||    
-      "N/A";    
-    
-    document.getElementById(    
-      "resultTrackingCode"    
-    ).textContent =    
-      order.tracking_code ||    
-      trackingCode;    
-    
-    const date =    
-      order.created_at    
-        ? new Date(    
-            order.created_at    
-          ).toLocaleString(    
-            "en-BD",    
-            {    
-              dateStyle:"medium",    
-              timeStyle:"short"    
-            }    
-          )    
-        : "N/A";    
-    
-    document.getElementById(    
-      "resultDate"    
-    ).textContent =    
-      date;    
-    
-    document.getElementById(    
-      "resultStatus"    
-    ).textContent =    
-      order.status ||    
-      "Pending";    
-    
-    document.getElementById(    
-      "resultTotal"    
-    ).textContent =    
-      "৳" +    
-      Number(    
-        order.total || 0    
-      ).toLocaleString(    
-        "en-BD"    
-      );    
-    
-    const productsBox =    
-      document.getElementById(    
-        "resultProducts"    
-      );    
-    
-    let items = [];    
-    
-    if(Array.isArray(order.items)){    
-    
-      items =    
-        order.items;    
-    
-    }else if(    
-      typeof order.items ===    
-      "string"    
-    ){    
-    
-      try{    
-    
-        items =    
-          JSON.parse(    
-            order.items    
-          );    
-    
-      }catch(error){    
-    
-        items = [];    
-    
-      }    
-    
-    }    
-    
-    if(    
-      !Array.isArray(items) ||    
-      items.length === 0    
-    ){    
-    
-      productsBox.innerHTML =    
-        '<div class="track-product">Order items unavailable.</div>';    
-    
-    }else{    
-    
-      productsBox.innerHTML =    
-        items.map(    
-          function(item){    
-    
-            const name =    
-              safe(    
-                item.name ||    
-                "Product"    
-              );    
-    
-            const quantity =    
-              Number(    
-                item.quantity || 0    
-              );    
-    
-            const price =    
-              Number(    
-                item.price || 0    
-              );    
-    
-            const subtotal =    
-              Number(    
-                item.subtotal ||    
-                (    
-                  price *    
-                  quantity    
-                )    
-              );    
-    
-            return `    
-    
-              <div class="track-product">    
-    
-                <strong>    
-                  ${name}    
-                </strong>    
-    
-                <br>    
-    
-                Qty:    
-                ${quantity}    
-                ×    
-                ৳${price.toLocaleString("en-BD")}    
-                =    
-                ৳${subtotal.toLocaleString("en-BD")}    
-    
-              </div>    
-    
-            `;    
-    
-          }    
-        ).join("");    
-    
-    }    
-    
-    resultBox.classList.add(    
-      "show"    
-    );    
-    
-    resultBox.scrollIntoView({    
-      behavior:"smooth",    
-      block:"start"    
-    });    
-    
-  }catch(error){    
-    
-    console.error(    
-      "Track Order Error:",    
-      error    
-    );    
-    
-    errorBox.textContent =    
-      "Could not check the order. Please try again.";    
-    
-    errorBox.classList.add(    
-      "show"    
-    );    
-    
-  }finally{    
-    
-    button.disabled = false;    
-    
-    button.textContent =    
-      "Track Order";    
-    
-  }    
-    
-}    
-    
-    
-/* =========================================================    
-   PRODUCT DETAILS    
-========================================================= */    
-    
-function showDetails(product){    
-    
-  currentDetailProduct =    
-    product;    
-    
-  document.getElementById(    
-    "detailsCategory"    
-  ).textContent =    
-    product.category ||    
-    "WATCHES";    
-    
-  document.getElementById(    
-    "detailsName"    
-  ).textContent =    
-    product.name ||    
-    "Product";    
-    
-  const price =    
-    Number(product.price);    
-    
-  const oldPrice =    
-    Number(product.oldPrice);    
-    
-  let priceHTML =    
-    Number.isFinite(price)    
-      ? "৳" +    
-        price.toLocaleString(    
-          "en-BD"    
-        )    
-      : "Price unavailable";    
-    
-  if(    
-    Number.isFinite(oldPrice) &&    
-    oldPrice > 0 &&    
-    oldPrice > price    
-  ){    
-    
-    priceHTML +=    
-      `<span class="details-old-price">    
-        ৳${oldPrice.toLocaleString("en-BD")}    
-      </span>`;    
-    
-  }    
-    
-  document.getElementById(    
-    "detailsPrice"    
-  ).innerHTML =    
-    priceHTML;    
-    
-  const stock =    
-    Number(product.stock);    
-    
-  document.getElementById(    
-    "detailsStock"    
-  ).textContent =    
-    stock > 0    
-      ? "Stock: " + stock    
-      : "Out of stock";    
-    
-  document.getElementById(    
-    "detailsDescription"    
-  ).textContent =    
-    product.description ||    
-    "Premium three-eye men's watch set designed for a stylish and sophisticated look. Suitable for business and everyday wear.";    
-    
-  const imageBox =    
-    document.getElementById(    
-      "detailsImage"    
-    );    
-    
-  if(product.image){    
-    
-    imageBox.innerHTML =    
-      `<img    
-        src="${safe(product.image)}"    
-        alt="${safe(product.name)}"    
-        onerror="this.style.display='none';this.parentElement.innerHTML='<div class=&quot;details-noimg&quot;>⌚</div>';">`;    
-    
-  }else{    
-    
-    imageBox.innerHTML =    
-      '<div class="details-noimg">⌚</div>';    
-    
-  }    
-    
-  const addButton =    
-    document.getElementById(    
-      "detailsAddButton"    
-    );    
-    
-  if(    
-    stock > 0 &&    
-    Number.isFinite(price)    
-  ){    
-    
-    addButton.style.display =    
-      "block";    
-    
-    addButton.textContent =    
-      "Add to Cart";    
-    
-    addButton.onclick =    
-      function(){    
-    
-        addCart(product);    
-    
-      };    
-    
-  }else{    
-    
-    addButton.style.display =    
-      "none";    
-    
-  }    
-    
-  const details =    
-    document.getElementById(    
-      "productDetails"    
-    );    
-    
-  details.classList.add(    
-    "show"    
-  );    
-    
-  details.scrollIntoView({    
-    behavior:"smooth",    
-    block:"start"    
-  });    
-    
-}    
-    
-    
-/* =========================================================    
-   CLOSE DETAILS    
-========================================================= */    
-    
-function closeDetails(){    
-    
-  document.getElementById(    
-    "productDetails"    
-  ).classList.remove(    
-    "show"    
-  );    
-    
-  currentDetailProduct =    
-    null;    
-    
-  document.getElementById(    
-    "productsSection"    
-  ).scrollIntoView({    
-    behavior:"smooth",    
-    block:"start"    
-  });    
-    
-}    
-    
-    
-/* =========================================================    
-   CHECKOUT    
-========================================================= */    
-    
-function checkout(){    
-    
-  if(cart.length === 0){    
-    
-    alert(    
-      "Your cart is empty."    
-    );    
-    
-    return;    
-  }    
-    
-  document.getElementById(    
-    "checkoutBox"    
-  ).classList.add(    
-    "show"    
-  );    
-    
-  document.getElementById(    
-    "checkoutButton"    
-  ).style.display =    
-    "none";    
-    
-  document.getElementById(    
-    "orderSuccess"    
-  ).classList.remove(    
-    "show"    
-  );    
-    
-  document.getElementById(    
-    "checkoutBox"    
-  ).scrollIntoView({    
-    behavior:"smooth",    
-    block:"start"    
-  });    
-    
-}    
-    
-    
-/* =========================================================    
-   CANCEL CHECKOUT    
-========================================================= */    
-    
-function cancelCheckout(){    
-    
-  document.getElementById(    
-    "checkoutBox"    
-  ).classList.remove(    
-    "show"    
-  );    
-    
-  document.getElementById(    
-    "checkoutButton"    
-  ).style.display =    
-    cart.length > 0    
-      ? "block"    
-      : "none";    
-    
-}    
-    
-    
-/* =========================================================    
-   TRACKING CODE    
-========================================================= */    
-    
-function generateTrackingCode(){    
-    
-  const random =    
-    Math.floor(    
-      100000 +    
-      Math.random() *    
-      900000    
-    );    
-    
-  return "CVBD-" +    
-    random;    
-    
-}    
-    
-    
-/* =========================================================    
-   PLACE ORDER    
-========================================================= */    
-    
-async function placeOrder(){    
-    
-  if(cart.length === 0){    
-    
-    alert(    
-      "Your cart is empty."    
-    );    
-    
-    return;    
-  }    
-    
-  const name =    
-    document.getElementById(    
-      "customerName"    
-    ).value.trim();    
-    
-  const phone =    
-    document.getElementById(    
-      "customerPhone"    
-    ).value.trim();    
-    
-  const address =    
-    document.getElementById(    
-      "customerAddress"    
-    ).value.trim();    
-    
-  if(!name){    
-    
-    alert(    
-      "Please enter your full name."    
-    );    
-    
-    document.getElementById(    
-      "customerName"    
-    ).focus();    
-    
-    return;    
-  }    
-    
-  if(!phone){    
-    
-    alert(    
-      "Please enter your phone number."    
-    );    
-    
-    document.getElementById(    
-      "customerPhone"    
-    ).focus();    
-    
-    return;    
-  }    
-    
-  const cleanPhone =    
-    phone.replace(    
-      /[\s-]/g,    
-      ""    
-    );    
-    
-  if(    
-    !/^01\d{9}$/.test(    
-      cleanPhone    
-    )    
-  ){    
-    
-    alert(    
-      "Please enter a valid Bangladesh phone number. Example: 01712345678"    
-    );    
-    
-    document.getElementById(    
-      "customerPhone"    
-    ).focus();    
-    
-    return;    
-  }    
-    
-  if(!address){    
-    
-    alert(    
-      "Please enter your full delivery address."    
-    );    
-    
-    document.getElementById(    
-      "customerAddress"    
-    ).focus();    
-    
-    return;    
-  }    
-    
-  const total =    
-    getCartTotal();    
-    
-  const orderItems =    
-    cart.map(    
-      function(item){    
-    
-        return {    
-    
-          product_id:    
-            item.id,    
-    
-          name:    
-            item.name,    
-    
-          price:    
-            Number(item.price),    
-    
-          quantity:    
-            Number(item.quantity),    
-    
-          subtotal:    
-            Number(item.price) *    
-            Number(item.quantity)    
-    
-        };    
-    
-      }    
-    );    
-    
-  const trackingCode =    
-    generateTrackingCode();    
-    
-  const button =    
-    document.getElementById(    
-      "placeOrderButton"    
-    );    
-    
-  button.disabled = true;    
-    
-  button.textContent =    
-    "Placing Order...";    
-    
-  try{    
-    
-    const response =    
-      await fetch(    
-        SUPABASE_URL +    
-        "/rest/v1/orders",    
-        {    
-          method:"POST",    
-    
-          headers:{    
-            "apikey":    
-              SUPABASE_KEY,    
-    
-            "Authorization":    
-              "Bearer " +    
-              SUPABASE_KEY,    
-    
-            "Content-Type":    
-              "application/json",    
-    
-            "Prefer":    
-              "return=minimal"    
-          },    
-    
-          body:JSON.stringify({    
-    
-            customer_name:    
-              name,    
-    
-            phone:    
-              cleanPhone,    
-    
-            address:    
-              address,    
-    
-            items:    
-              orderItems,    
-    
-            total:    
-              total,    
-    
-            status:    
-              "Pending",    
-    
-            tracking_code:    
-              trackingCode    
-    
-          })    
-        }    
-      );    
-    
-    const responseText =    
-      await response.text();    
-    
-    if(!response.ok){    
-    
-      console.error(    
-        "Order Error:",    
-        response.status,    
-        responseText    
-      );    
-    
-      throw new Error(    
-        responseText ||    
-        "Order could not be placed."    
-      );    
-    
-    }    
-    
-    lastOrderTrackingCode =    
-      trackingCode;    
-    
-    lastOrderPhone =    
-      cleanPhone;    
-    
-    /* SAVE TRACKING INFO */    
-    
-    saveLastOrder();    
-    
-    /* CLEAR CART */    
-    
-    cart = [];    
-    
-    saveCart();    
-    
-    updateCartCount();    
-    
-    renderCart();    
-    
-    document.getElementById(    
-      "checkoutBox"    
-    ).classList.remove(    
-      "show"    
-    );    
-    
-    document.getElementById(    
-      "checkoutButton"    
-    ).style.display =    
-      "none";    
-    
-    document.getElementById(    
-      "orderId"    
-    ).textContent =    
-      "Order Number: " +    
-      trackingCode;    
-    
-    document.getElementById(    
-      "orderSuccess"    
-    ).classList.add(    
-      "show"    
-    );    
-    
-    /* SHOW TRACK BUTTON */    
-    
-    showHeaderTrackButton();    
-    
-    document.getElementById(    
-      "orderSuccess"    
-    ).scrollIntoView({    
-      behavior:"smooth",    
-      block:"start"    
-    });    
-    
-    document.getElementById(    
-      "customerName"    
-    ).value = "";    
-    
-    document.getElementById(    
-      "customerPhone"    
-    ).value = "";    
-    
-    document.getElementById(    
-      "customerAddress"    
-    ).value = "";    
-    
-  }catch(error){    
-    
-    console.error(    
-      "Checkout Error:",    
-      error    
-    );    
-    
-    alert(    
-      "ORDER ERROR:\n\n" +    
-      error.message    
-    );    
-    
-  }    
-    
-  button.disabled = false;    
-    
-  button.textContent =    
-    "Place Order";    
-    
-}    
-    
-    
-/* =========================================================    
-   LOAD PRODUCTS    
-========================================================= */    
-    
-async function loadProducts(){    
-    
-  const box =    
-    document.getElementById(    
-      "products"    
-    );    
-    
-  try{    
-    
-    const response =    
-      await fetch(    
-        SUPABASE_URL +    
-        "/rest/v1/products?select=*&order=created_at.desc",    
-        {    
-          method:"GET",    
-    
-          headers:{    
-            "apikey":    
-              SUPABASE_KEY,    
-    
-            "Authorization":    
-              "Bearer " +    
-              SUPABASE_KEY,    
-    
-            "Content-Type":    
-              "application/json"    
-          }    
-        }    
-      );    
-    
-    if(!response.ok){    
-    
-      const errorText =    
-        await response.text();    
-    
-      console.error(    
-        "Supabase Error:",    
-        response.status,    
-        errorText    
-      );    
-    
-      throw new Error(    
-        "Supabase Error " +    
-        response.status    
-      );    
-    
-    }    
-    
-    const products =    
-      await response.json();    
-    
-    console.log(    
-      "Supabase Products:",    
-      products    
-    );    
-    
-    if(    
-      !Array.isArray(products) ||    
-      products.length === 0    
-    ){    
-    
-      box.innerHTML =    
-        '<div class="empty">No products available yet.</div>';    
-    
-      return;    
-    }    
-    
-    box.innerHTML =    
-      products.map(    
-        function(product){    
-    
-          /*    
-            IMPORTANT:    
-            Supabase exact column names:    
-            Name    
-            Price    
-            Old price    
-            Category    
-            Stock    
-            image_url    
-          */    
-    
-          const name =    
-            product.Name ||    
-            "Unnamed Product";    
-    
-          const category =    
-            product.Category ||    
-            "Watches";    
-    
-          const price =    
-            Number(    
-              product.Price    
-            );    
-    
-          const oldPrice =    
-            Number(    
-              product["Old price"]    
-            );    
-    
-          const stock =    
-            Number(    
-              product.Stock    
-            );    
-    
-          const imageUrl =    
-            product.image_url ||    
-            "";    
-    
-          const description =    
-            product.Description ||    
-            "";    
-    
-          const productId =    
-            product.id;    
-    
-          let imageHTML;    
-    
-          if(imageUrl){    
-    
-            imageHTML =    
-              `<img    
-                src="${safe(imageUrl)}"    
-                alt="${safe(name)}"    
-                loading="lazy"    
-                onerror="this.style.display='none';this.parentElement.innerHTML='<div class=&quot;noimg&quot;>⌚</div>';">`;    
-    
-          }else{    
-    
-            imageHTML =    
-              '<div class="noimg">⌚</div>';    
-    
-          }    
-    
-          let priceHTML =    
-            Number.isFinite(price)    
-              ? "৳" +    
-                price.toLocaleString(    
-                  "en-BD"    
-                )    
-              : "Price unavailable";    
-    
-          if(    
-            Number.isFinite(oldPrice) &&    
-            oldPrice > 0 &&    
-            oldPrice > price    
-          ){    
-    
-            priceHTML +=    
-              `<span class="old">    
-                ৳${oldPrice.toLocaleString("en-BD")}    
-              </span>`;    
-    
-          }    
-    
-          const stockHTML =    
-            stock > 0    
-              ? "Stock: " + stock    
-              : "Out of stock";    
-    
-          let buttonHTML = "";    
-    
-          const cartProduct = {    
-    
-            id:    
-              productId,    
-    
-            name:    
-              name,    
-    
-            price:    
-              price,    
-    
-            oldPrice:    
-              oldPrice,    
-    
-            image:    
-              imageUrl,    
-    
-            stock:    
-              stock,    
-    
-            category:    
-              category,    
-    
-            description:    
-              description    
-    
-          };    
-    
-          const encodedProduct =    
-            JSON.stringify(    
-              cartProduct    
-            )    
-            .replace(    
-              /&/g,    
-              "\\u0026"    
-            )    
-            .replace(    
-              /</g,    
-              "\\u003c"    
-            )    
-            .replace(    
-              />/g,    
-              "\\u003e"    
-            )    
-            .replace(    
-              /'/g,    
-              "\\u0027"    
-            );    
-    
-          if(    
-            stock > 0 &&    
-            Number.isFinite(price)    
-          ){    
-    
-            buttonHTML =    
-              `<button    
-                class="btn"    
-                onclick='addCart(${encodedProduct})'>    
-                Add to Cart    
-              </button>`;    
-    
-          }    
-    
-          const detailsButton =    
-            `<button    
-              class="details-btn"    
-              onclick='showDetails(${encodedProduct})'>    
-              View Details    
-            </button>`;    
-    
-          return `    
-    
-            <div class="card">    
-    
-              <div class="pic">    
-                ${imageHTML}    
-              </div>    
-    
-              <div class="info">    
-    
-                <h3>    
-                  ${safe(name)}    
-                </h3>    
-    
-                <div class="category">    
-                  ${safe(category)}    
-                </div>    
-    
-                <div class="price">    
-                  ${priceHTML}    
-                </div>    
-    
-                <div class="stock">    
-                  ${safe(stockHTML)}    
-                </div>    
-    
-                ${buttonHTML}    
-    
-                ${detailsButton}    
-    
-              </div>    
-    
-            </div>    
-    
-          `;    
-    
-        }    
-      ).join("");    
-    
-  }catch(error){    
-    
-    console.error(    
-      "Product loading failed:",    
-      error    
-    );    
-    
-    box.innerHTML =    
-      `<div class="empty">    
-        Products could not be loaded.    
-        <br><br>    
-        Please check Supabase connection.    
-      </div>`;    
-    
-  }    
-    
-}    
-    
-    
-/* =========================================================    
-   AUTH MODAL    
-========================================================= */    
-    
-function openAuthModal(){    
-    
-  document.getElementById(    
-    "authOverlay"    
-  ).classList.add(    
-    "show"    
-  );    
-    
-  clearAuthMessage();    
-    
-}    
-    
-    
-function closeAuthModal(){    
-    
-  document.getElementById(    
-    "authOverlay"    
-  ).classList.remove(    
-    "show"    
-  );    
-    
-}    
-    
-    
-function switchAuthTab(tab){    
-    
-  const loginTab =    
-    document.getElementById(    
-      "loginTab"    
-    );    
-    
-  const signupTab =    
-    document.getElementById(    
-      "signupTab"    
-    );    
-    
-  const loginForm =    
-    document.getElementById(    
-      "loginForm"    
-    );    
-    
-  const signupForm =    
-    document.getElementById(    
-      "signupForm"    
-    );    
-    
-  clearAuthMessage();    
-    
-  if(tab === "signup"){    
-    
-    loginTab.classList.remove(    
-      "active"    
-    );    
-    
-    signupTab.classList.add(    
-      "active"    
-    );    
-    
-    loginForm.classList.remove(    
-      "active"    
-    );    
-    
-    signupForm.classList.add(    
-      "active"    
-    );    
-    
-  }else{    
-    
-    signupTab.classList.remove(    
-      "active"    
-    );    
-    
-    loginTab.classList.add(    
-      "active"    
-    );    
-    
-    signupForm.classList.remove(    
-      "active"    
-    );    
-    
-    loginForm.classList.add(    
-      "active"    
-    );    
-    
-  }    
-    
-}    
-    
-    
-function showAuthMessage(    
-  message,    
-  type    
-){    
-    
-  const box =    
-    document.getElementById(    
-      "authMessage"    
-    );    
-    
-  box.textContent =    
-    message;    
-    
-  box.className =    
-    "auth-message show " +    
-    type;    
-    
-}    
-    
-    
-function clearAuthMessage(){    
-    
-  const box =    
-    document.getElementById(    
-      "authMessage"    
-    );    
-    
-  box.textContent = "";    
-    
-  box.className =    
-    "auth-message";    
-    
-}    
-    
-    
-/* =========================================================    
-   LOGIN    
-========================================================= */    
-    
-async function loginUser(event){    
-    
-  event.preventDefault();    
-    
-  const email =    
-    document.getElementById(    
-      "loginEmail"    
-    ).value.trim();    
-    
-  const password =    
-    document.getElementById(    
-      "loginPassword"    
-    ).value;    
-    
-  const button =    
-    document.getElementById(    
-      "loginSubmit"    
-    );    
-    
-  clearAuthMessage();    
-    
-  button.disabled = true;    
-    
-  button.textContent =    
-    "Logging in...";    
-    
-  try{    
-    
-    const response =    
-      await fetch(    
-        SUPABASE_URL +    
-        "/auth/v1/token?grant_type=password",    
-        {    
-          method:"POST",    
-    
-          headers:{    
-            "apikey":    
-              SUPABASE_KEY,    
-    
-            "Content-Type":    
-              "application/json"    
-          },    
-    
-          body:JSON.stringify({    
-    
-            email:    
-              email,    
-    
-            password:    
-              password    
-    
-          })    
-        }    
-      );    
-    
-    const data =    
-      await response.json();    
-    
-    if(!response.ok){    
-    
-      throw new Error(    
-        data.error_description ||    
-        data.msg ||    
-        data.message ||    
-        "Login failed."    
-      );    
-    
-    }    
-    
-    currentAuthSession =    
-      data;    
-    
-    localStorage.setItem(    
-      "cv_auth_session",    
-      JSON.stringify(data)    
-    );    
-    
-    updateAuthUI();    
-    
-    showAuthMessage(    
-      "Login successful.",    
-      "success"    
-    );    
-    
-    setTimeout(    
-      function(){    
-        closeAuthModal();    
-      },    
-      900    
-    );    
-    
-  }catch(error){    
-    
-    console.error(    
-      "Login error:",    
-      error    
-    );    
-    
-    showAuthMessage(    
-      error.message ||    
-      "Login failed.",    
-      "error"    
-    );    
-    
-  }finally{    
-    
-    button.disabled = false;    
-    
-    button.textContent =    
-      "Login";    
-    
-  }    
-    
-}    
-    
-    
-/* =========================================================    
-   SIGN UP    
-========================================================= */    
-    
-async function signupUser(event){    
-    
-  event.preventDefault();    
-    
-  const email =    
-    document.getElementById(    
-      "signupEmail"    
-    ).value.trim();    
-    
-  const password =    
-    document.getElementById(    
-      "signupPassword"    
-    ).value;    
-    
-  const button =    
-    document.getElementById(    
-      "signupSubmit"    
-    );    
-    
-  clearAuthMessage();    
-    
-  if(password.length < 6){    
-    
-    showAuthMessage(    
-      "Password must be at least 6 characters.",    
-      "error"    
-    );    
-    
-    return;    
-  }    
-    
-  button.disabled = true;    
-    
-  button.textContent =    
-    "Creating...";    
-    
-  try{    
-    
-    const response =    
-      await fetch(    
-        SUPABASE_URL +    
-        "/auth/v1/signup",    
-        {    
-          method:"POST",    
-    
-          headers:{    
-            "apikey":    
-              SUPABASE_KEY,    
-    
-            "Content-Type":    
-              "application/json"    
-          },    
-    
-          body:JSON.stringify({    
-    
-            email:    
-              email,    
-    
-            password:    
-              password    
-    
-          })    
-        }    
-      );    
-    
-    const data =    
-      await response.json();    
-    
-    if(!response.ok){    
-    
-      throw new Error(    
-        data.msg ||    
-        data.message ||    
-        data.error_description ||    
-        "Sign up failed."    
-      );    
-    
-    }    
-    
-    if(    
-      data.access_token    
-    ){    
-    
-      currentAuthSession =    
-        data;    
-    
-      localStorage.setItem(    
-        "cv_auth_session",    
-        JSON.stringify(data)    
-      );    
-    
-      updateAuthUI();    
-    
-      showAuthMessage(    
-        "Account created successfully.",    
-        "success"    
-      );    
-    
-      setTimeout(    
-        function(){    
-          closeAuthModal();    
-        },    
-        900    
-      );    
-    
-    }else{    
-    
-      showAuthMessage(    
-        "Account created. Please check your email if confirmation is required, then login.",    
-        "success"    
-      );    
-    
-      switchAuthTab(    
-        "login"    
-      );    
-    
-    }    
-    
-  }catch(error){    
-    
-    console.error(    
-      "Signup error:",    
-      error    
-    );    
-    
-    showAuthMessage(    
-      error.message ||    
-      "Sign up failed.",    
-      "error"    
-    );    
-    
-  }finally{    
-    
-    button.disabled = false;    
-    
-    button.textContent =    
-      "Create Account";    
-    
-  }    
-    
-}    
-    
-    
-/* =========================================================    
-   RESTORE AUTH SESSION    
-========================================================= */    
-    
-function restoreAuthSession(){    
-    
-  try{    
-    
-    const saved =    
-      localStorage.getItem(    
-        "cv_auth_session"    
-      );    
-    
-    if(saved){    
-    
-      currentAuthSession =    
-        JSON.parse(saved);    
-    
-    }    
-    
-  }catch(error){    
-    
-    console.error(    
-      "Auth restore error:",    
-      error    
-    );    
-    
-    currentAuthSession =    
-      null;    
-    
-  }    
-    
-  updateAuthUI();    
-    
-}    
-    
-    
-/* =========================================================    
-   AUTH UI    
-========================================================= */    
-    
-function updateAuthUI(){    
-    
-  const loginButton =    
-    document.getElementById(    
-      "authHeaderButton"    
-    );    
-    
-  const accountButton =    
-    document.getElementById(    
-      "userNameButton"    
-    );    
-    
-  if(    
-    currentAuthSession &&    
-    currentAuthSession.user    
-  ){    
-    
-    loginButton.style.display =    
-      "none";    
-    
-    accountButton.style.display =    
-      "block";    
-    
-    const email =    
-      currentAuthSession.user.email ||    
-      "Account";    
-    
-    accountButton.textContent =    
-      "👤 " +    
-      (    
-        email.length > 16    
-          ? email.slice(0,13) + "..."    
-          : email    
-      );    
-    
-  }else{    
-    
-    loginButton.style.display =    
-      "block";    
-    
-    accountButton.style.display =    
-      "none";    
-    
-  }    
-    
-}    
-    
-    
-/* =========================================================    
-   ACCOUNT MENU    
-========================================================= */    
-    
-function openAccountMenu(){    
-    
-  if(    
-    !currentAuthSession ||    
-    !currentAuthSession.user    
-  ){    
-    
-    openAuthModal();    
-    
-    return;    
-  }    
-    
-  const email =    
-    currentAuthSession.user.email ||    
-    "your account";    
-    
-  const logout =    
-    confirm(    
-      "Logged in as:\n" +    
-      email +    
-      "\n\nDo you want to logout?"    
-    );    
-    
-  if(logout){    
-    
-    logoutUser();    
-    
-  }    
-    
-}    
-    
-    
-/* =========================================================    
-   LOGOUT    
-========================================================= */    
-    
-async function logoutUser(){    
-    
-  try{    
-    
-    if(    
-      currentAuthSession &&    
-      currentAuthSession.access_token    
-    ){    
-    
-      await fetch(    
-        SUPABASE_URL +    
-        "/auth/v1/logout",    
-        {    
-          method:"POST",    
-    
-          headers:{    
-            "apikey":    
-              SUPABASE_KEY,    
-    
-            "Authorization":    
-              "Bearer " +    
-              currentAuthSession.access_token    
-          }    
-        }    
-      );    
-    
-    }    
-    
-  }catch(error){    
-    
-    console.error(    
-      "Logout error:",    
-      error    
-    );    
-    
-  }    
-    
-  currentAuthSession =    
-    null;    
-    
-  localStorage.removeItem(    
-    "cv_auth_session"    
-  );    
-    
-  updateAuthUI();    
-    
-  alert(    
-    "You have been logged out."    
-  );    
-    
-}    
-    
-    
-/* =========================================================    
-   CLOSE AUTH WHEN CLICK OUTSIDE    
-========================================================= */    
-    
-document.getElementById(    
-  "authOverlay"    
-).addEventListener(    
-  "click",    
-  function(event){    
-    
-    if(    
-      event.target ===    
-      this    
-    ){    
-    
-      closeAuthModal();    
-    
-    }    
-    
-  }    
-);    
-    
-    
-/* =========================================================    
-   START    
-========================================================= */    
-    
-restoreLastOrder();    
-    
-restoreAuthSession();    
-    
-updateCartCount();    
-    
-renderCart();    
-    
-loadProducts();    
-    
-</script>    
-    
-</body>    
-</html>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>CHRONO VAULT BD</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#080808;
+  color:#fff;
+  line-height:1.5;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+button,
+input,
+textarea{
+  font-family:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(8,8,8,.97);
+  border-bottom:1px solid #292929;
+  backdrop-filter:blur(10px);
+}
+
+.nav{
+  max-width:1200px;
+  margin:auto;
+  min-height:70px;
+  padding:10px 4%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+
+.logo{
+  width:44px;
+  height:44px;
+  flex-shrink:0;
+  border:1px solid #d4af37;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:#d4af37;
+  font-weight:bold;
+  font-size:16px;
+}
+
+.brand b{
+  color:#d4af37;
+  letter-spacing:2px;
+  font-size:14px;
+}
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.cart,
+.track-header-btn,
+.auth-header-btn{
+  border:1px solid #d4af37;
+  color:#d4af37;
+  background:transparent;
+  padding:9px 13px;
+  border-radius:20px;
+  font-weight:bold;
+  white-space:nowrap;
+}
+
+.cart:hover,
+.track-header-btn:hover,
+.auth-header-btn:hover{
+  background:#d4af37;
+  color:#080808;
+}
+
+.track-header-btn{
+  display:none;
+}
+
+.track-header-btn.show{
+  display:block;
+}
+
+.auth-header-btn{
+  display:block;
+}
+
+.user-name-btn{
+  border:1px solid #555;
+  color:#ddd;
+  background:#111;
+  padding:9px 13px;
+  border-radius:20px;
+  font-weight:bold;
+  white-space:nowrap;
+}
+
+.user-name-btn:hover{
+  border-color:#d4af37;
+  color:#d4af37;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  text-align:center;
+  padding:80px 20px 65px;
+  background:radial-gradient(circle,#252010 0,#080808 60%);
+}
+
+.hero small{
+  color:#d4af37;
+  letter-spacing:4px;
+}
+
+.hero h1{
+  font-size:clamp(36px,9vw,72px);
+  margin:12px 0;
+  color:#d4af37;
+  letter-spacing:3px;
+}
+
+.hero p{
+  color:#bbb;
+  max-width:600px;
+  margin:auto;
+}
+
+/* =========================
+   GENERAL
+========================= */
+
+.section{
+  max-width:1200px;
+  margin:auto;
+  padding:55px 4%;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.title h2{
+  color:#d4af37;
+  font-size:30px;
+}
+
+/* =========================
+   PRODUCTS
+========================= */
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:14px;
+  overflow:hidden;
+  transition:.2s;
+}
+
+.card:hover{
+  border-color:#d4af37;
+  transform:translateY(-2px);
+}
+
+.pic{
+  height:250px;
+  background:#171717;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.pic img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.noimg{
+  font-size:55px;
+  color:#d4af37;
+}
+
+.info{
+  padding:18px;
+}
+
+.info h3{
+  font-size:17px;
+  margin-bottom:7px;
+}
+
+.category{
+  color:#999;
+  font-size:13px;
+}
+
+.price{
+  color:#d4af37;
+  font-size:22px;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+.old{
+  text-decoration:line-through;
+  color:#777;
+  font-size:13px;
+  margin-left:8px;
+}
+
+.stock{
+  font-size:13px;
+  color:#aaa;
+  margin-top:5px;
+}
+
+.btn{
+  display:block;
+  width:100%;
+  margin-top:10px;
+  padding:11px;
+  border:0;
+  background:#d4af37;
+  color:#080808;
+  font-weight:bold;
+  border-radius:8px;
+}
+
+.btn:hover{
+  opacity:.9;
+}
+
+.details-btn{
+  display:block;
+  width:100%;
+  margin-top:9px;
+  padding:10px;
+  border:1px solid #555;
+  background:#181818;
+  color:#ccc;
+  font-weight:bold;
+  border-radius:8px;
+}
+
+.details-btn:hover{
+  color:#d4af37;
+  border-color:#d4af37;
+}
+
+.empty{
+  text-align:center;
+  color:#aaa;
+  padding:40px;
+}
+
+.loading{
+  text-align:center;
+  color:#d4af37;
+  padding:40px;
+}
+
+/* =========================
+   PREMIUM CART TOAST
+========================= */
+
+.cv-toast{
+  position:fixed;
+  left:50%;
+  bottom:28px;
+  transform:translate(-50%,20px);
+
+  z-index:99999;
+
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  padding:13px 18px;
+
+  background:rgba(8,8,8,.97);
+
+  border:1px solid rgba(212,175,55,.7);
+
+  border-radius:14px;
+
+  color:#fff;
+
+  font-size:14px;
+  font-weight:600;
+
+  box-shadow:
+    0 10px 35px rgba(0,0,0,.55),
+    0 0 20px rgba(212,175,55,.12);
+
+  opacity:0;
+  visibility:hidden;
+
+  transition:
+    opacity .3s ease,
+    transform .3s ease,
+    visibility .3s ease;
+
+  pointer-events:none;
+
+  white-space:nowrap;
+}
+
+.cv-toast.show{
+  opacity:1;
+  visibility:visible;
+  transform:translate(-50%,0);
+}
+
+.cv-toast-icon{
+  width:24px;
+  height:24px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:#d4af37;
+  color:#080808;
+
+  font-size:15px;
+  font-weight:900;
+}
+
+/* =========================
+   PRODUCT DETAILS
+========================= */
+
+.product-details{
+  display:none;
+  max-width:1000px;
+  margin:30px auto 0;
+  padding:0 4% 50px;
+}
+
+.product-details.show{
+  display:block;
+}
+
+.details-box{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:16px;
+  overflow:hidden;
+}
+
+.details-grid{
+  display:grid;
+  grid-template-columns:minmax(280px,1fr) minmax(280px,1fr);
+}
+
+.details-image{
+  min-height:420px;
+  background:#171717;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+}
+
+.details-image img{
+  width:100%;
+  height:100%;
+  max-height:420px;
+  object-fit:contain;
+}
+
+.details-noimg{
+  font-size:90px;
+  color:#d4af37;
+}
+
+.details-info{
+  padding:35px;
+}
+
+.details-category{
+  color:#d4af37;
+  font-size:13px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.details-info h2{
+  font-size:30px;
+  margin:8px 0 15px;
+}
+
+.details-price{
+  color:#d4af37;
+  font-size:28px;
+  font-weight:bold;
+}
+
+.details-old-price{
+  color:#777;
+  text-decoration:line-through;
+  font-size:15px;
+  margin-left:8px;
+}
+
+.details-stock{
+  color:#aaa;
+  margin-top:7px;
+  font-size:14px;
+}
+
+.details-description{
+  margin-top:22px;
+  color:#bbb;
+  font-size:15px;
+  line-height:1.7;
+}
+
+.specs{
+  margin-top:25px;
+  border-top:1px solid #292929;
+  padding-top:20px;
+}
+
+.specs h3{
+  color:#d4af37;
+  margin-bottom:12px;
+}
+
+.spec-row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:7px 0;
+  border-bottom:1px solid #1f1f1f;
+  font-size:13px;
+}
+
+.spec-row span:first-child{
+  color:#777;
+}
+
+.spec-row span:last-child{
+  color:#bbb;
+  text-align:right;
+}
+
+.details-actions{
+  display:flex;
+  gap:10px;
+  margin-top:25px;
+}
+
+.details-add{
+  flex:1;
+  padding:13px;
+  border:0;
+  background:#d4af37;
+  color:#080808;
+  font-weight:bold;
+  border-radius:8px;
+}
+
+.details-close{
+  padding:13px 18px;
+  border:1px solid #555;
+  background:#181818;
+  color:#aaa;
+  border-radius:8px;
+}
+
+.details-close:hover{
+  color:#d4af37;
+  border-color:#d4af37;
+}
+
+/* =========================
+   TRACK ORDER
+========================= */
+
+.track-section{
+  max-width:900px;
+  margin:0 auto;
+  padding:0 4% 50px;
+  display:none;
+}
+
+.track-section.show{
+  display:block;
+}
+
+.track-box{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:16px;
+  padding:25px;
+}
+
+.track-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.track-header h2{
+  color:#d4af37;
+  font-size:25px;
+}
+
+.track-close{
+  border:1px solid #555;
+  background:transparent;
+  color:#aaa;
+  padding:8px 13px;
+  border-radius:7px;
+}
+
+.track-close:hover{
+  color:#d4af37;
+  border-color:#d4af37;
+}
+
+.track-intro{
+  color:#999;
+  font-size:14px;
+  margin-bottom:20px;
+}
+
+.track-form-group{
+  margin-bottom:15px;
+}
+
+.track-form-group label{
+  display:block;
+  color:#bbb;
+  font-size:14px;
+  margin-bottom:6px;
+}
+
+.track-form-group input{
+  width:100%;
+  padding:12px;
+  border:1px solid #444;
+  border-radius:8px;
+  background:#181818;
+  color:#fff;
+  outline:none;
+  font-size:15px;
+}
+
+.track-form-group input:focus{
+  border-color:#d4af37;
+}
+
+.track-btn{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:8px;
+  background:#d4af37;
+  color:#080808;
+  font-weight:bold;
+  font-size:15px;
+}
+
+.track-btn:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+.track-result{
+  display:none;
+  margin-top:25px;
+  padding-top:25px;
+  border-top:1px solid #292929;
+}
+
+.track-result.show{
+  display:block;
+}
+
+.track-success-title{
+  color:#d4af37;
+  font-size:21px;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.track-error{
+  display:none;
+  margin-top:20px;
+  padding:13px;
+  background:#1a1010;
+  border:1px solid #4a2929;
+  border-radius:8px;
+  color:#ff9b9b;
+  font-size:14px;
+}
+
+.track-error.show{
+  display:block;
+}
+
+.track-summary{
+  background:#181818;
+  border:1px solid #292929;
+  border-radius:10px;
+  padding:15px;
+  margin-bottom:20px;
+}
+
+.track-row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:9px 0;
+  border-bottom:1px solid #292929;
+  font-size:14px;
+}
+
+.track-row:last-child{
+  border-bottom:0;
+}
+
+.track-row span:first-child{
+  color:#777;
+}
+
+.track-row span:last-child{
+  color:#ddd;
+  text-align:right;
+  max-width:65%;
+  word-break:break-word;
+}
+
+.track-code{
+  color:#d4af37!important;
+  font-weight:bold;
+}
+
+.track-total{
+  color:#d4af37!important;
+  font-weight:bold;
+}
+
+.status-badge{
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:20px;
+  background:#252010;
+  color:#d4af37!important;
+  border:1px solid #5a4b18;
+  font-weight:bold;
+}
+
+.track-products{
+  margin-top:15px;
+}
+
+.track-products h3{
+  color:#d4af37;
+  font-size:17px;
+  margin-bottom:10px;
+}
+
+.track-product{
+  padding:10px 0;
+  border-bottom:1px solid #222;
+  color:#bbb;
+  font-size:13px;
+}
+
+.track-product:last-child{
+  border-bottom:0;
+}
+
+.track-product strong{
+  color:#fff;
+}
+
+.track-note{
+  margin-top:15px;
+  color:#777;
+  font-size:12px;
+}
+
+/* =========================
+   CART
+========================= */
+
+.cart-section{
+  display:none;
+  max-width:900px;
+  margin:0 auto;
+  padding:30px 4% 60px;
+}
+
+.cart-section.show{
+  display:block;
+}
+
+.cart-box{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:14px;
+  padding:20px;
+}
+
+.cart-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.cart-header h2{
+  color:#d4af37;
+}
+
+.close-cart{
+  border:1px solid #555;
+  background:transparent;
+  color:#aaa;
+  padding:7px 12px;
+  border-radius:7px;
+}
+
+.cart-item{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:15px 0;
+  border-bottom:1px solid #292929;
+}
+
+.cart-item:last-child{
+  border-bottom:0;
+}
+
+.cart-item-image{
+  width:75px;
+  height:75px;
+  flex-shrink:0;
+  background:#171717;
+  border-radius:10px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.cart-item-image img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.cart-item-image span{
+  font-size:32px;
+  color:#d4af37;
+}
+
+.cart-item-info{
+  flex:1;
+  min-width:0;
+}
+
+.cart-item-info h3{
+  font-size:15px;
+  margin-bottom:4px;
+}
+
+.cart-item-price{
+  color:#d4af37;
+  font-weight:bold;
+}
+
+.quantity{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:8px;
+}
+
+.quantity button{
+  width:30px;
+  height:30px;
+  border:1px solid #555;
+  background:#181818;
+  color:#fff;
+  border-radius:6px;
+}
+
+.quantity button:hover{
+  border-color:#d4af37;
+  color:#d4af37;
+}
+
+.quantity span{
+  min-width:25px;
+  text-align:center;
+}
+
+.remove-btn{
+  margin-top:8px;
+  border:0;
+  background:transparent;
+  color:#b66;
+  font-size:12px;
+}
+
+.remove-btn:hover{
+  color:#ff7777;
+}
+
+.cart-total{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:20px;
+  padding-top:15px;
+  border-top:1px solid #292929;
+}
+
+.cart-total strong{
+  font-size:18px;
+}
+
+.cart-total span{
+  color:#d4af37;
+  font-size:24px;
+  font-weight:bold;
+}
+
+.checkout-btn{
+  width:100%;
+  margin-top:20px;
+  padding:13px;
+  border:0;
+  border-radius:8px;
+  background:#d4af37;
+  color:#080808;
+  font-weight:bold;
+}
+
+.checkout-box{
+  display:none;
+  margin-top:25px;
+  border-top:1px solid #292929;
+  padding-top:25px;
+}
+
+.checkout-box.show{
+  display:block;
+}
+
+.checkout-title{
+  color:#d4af37;
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:20px;
+}
+
+.form-group{
+  margin-bottom:15px;
+}
+
+.form-group label{
+  display:block;
+  color:#bbb;
+  font-size:14px;
+  margin-bottom:6px;
+}
+
+.form-group input,
+.form-group textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #444;
+  border-radius:8px;
+  background:#181818;
+  color:#fff;
+  outline:none;
+  font-size:15px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+  border-color:#d4af37;
+}
+
+.form-group textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+.payment-box{
+  padding:15px;
+  background:#181818;
+  border:1px solid #292929;
+  border-radius:8px;
+  margin:18px 0;
+}
+
+.payment-box strong{
+  color:#d4af37;
+}
+
+.payment-box p{
+  color:#999;
+  font-size:13px;
+  margin-top:4px;
+}
+
+.place-order-btn{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:8px;
+  background:#d4af37;
+  color:#080808;
+  font-weight:bold;
+}
+
+.place-order-btn:disabled{
+  opacity:.5;
+}
+
+.cancel-checkout{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:1px solid #555;
+  border-radius:8px;
+  background:#181818;
+  color:#aaa;
+}
+
+.order-success{
+  display:none;
+  text-align:center;
+  margin-top:25px;
+  padding:30px 20px;
+  background:#15150f;
+  border:1px solid #5a4b18;
+  border-radius:12px;
+}
+
+.order-success.show{
+  display:block;
+}
+
+.success-icon{
+  font-size:50px;
+  margin-bottom:10px;
+}
+
+.order-success h2{
+  color:#d4af37;
+  margin-bottom:10px;
+}
+
+.order-success p{
+  color:#aaa;
+  margin:6px 0;
+}
+
+.order-id{
+  margin:18px 0;
+  color:#d4af37;
+  font-size:20px;
+  font-weight:bold;
+  padding:12px;
+  border:1px dashed #d4af37;
+  border-radius:8px;
+}
+
+.success-track-btn{
+  width:100%;
+  max-width:350px;
+  margin-top:15px;
+  padding:12px;
+  border:0;
+  border-radius:8px;
+  background:#d4af37;
+  color:#080808;
+  font-weight:bold;
+}
+
+/* =========================
+   WHY SECTION
+========================= */
+
+.why{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+}
+
+.box{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:12px;
+  padding:20px;
+  color:#aaa;
+}
+
+.box strong{
+  display:block;
+  color:#d4af37;
+  margin-bottom:8px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  text-align:center;
+  padding:40px 20px;
+  border-top:1px solid #292929;
+  color:#777;
+}
+
+footer b{
+  color:#d4af37;
+}
+
+.social-links{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px;
+}
+
+.social-links a{
+  padding:9px 14px;
+  border:1px solid #444;
+  border-radius:20px;
+  color:#aaa;
+  font-size:13px;
+}
+
+.social-links a:hover{
+  border-color:#d4af37;
+  color:#d4af37;
+}
+
+.social-note{
+  margin-top:12px;
+  font-size:12px;
+}
+
+/* =========================
+   AUTH MODAL
+========================= */
+
+.auth-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:3000;
+  background:rgba(0,0,0,.78);
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.auth-overlay.show{
+  display:flex;
+}
+
+.auth-box{
+  width:100%;
+  max-width:430px;
+  max-height:90vh;
+  overflow:auto;
+  background:#111;
+  border:1px solid #5a4b18;
+  border-radius:16px;
+  padding:25px;
+  box-shadow:0 20px 70px rgba(0,0,0,.6);
+}
+
+.auth-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.auth-header h2{
+  color:#d4af37;
+}
+
+.auth-close{
+  width:35px;
+  height:35px;
+  border:1px solid #555;
+  background:#181818;
+  color:#aaa;
+  border-radius:50%;
+}
+
+.auth-close:hover{
+  color:#d4af37;
+  border-color:#d4af37;
+}
+
+.auth-tabs{
+  display:flex;
+  gap:8px;
+  margin-bottom:20px;
+}
+
+.auth-tab{
+  flex:1;
+  padding:10px;
+  border:1px solid #444;
+  background:#181818;
+  color:#aaa;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+.auth-tab.active{
+  background:#d4af37;
+  color:#080808;
+  border-color:#d4af37;
+}
+
+.auth-form{
+  display:none;
+}
+
+.auth-form.active{
+  display:block;
+}
+
+.auth-form-group{
+  margin-bottom:15px;
+}
+
+.auth-form-group label{
+  display:block;
+  color:#bbb;
+  font-size:14px;
+  margin-bottom:6px;
+}
+
+.auth-form-group input{
+  width:100%;
+  padding:12px;
+  border:1px solid #444;
+  border-radius:8px;
+  background:#181818;
+  color:#fff;
+  outline:none;
+}
+
+.auth-form-group input:focus{
+  border-color:#d4af37;
+}
+
+.auth-submit{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:8px;
+  background:#d4af37;
+  color:#080808;
+  font-weight:bold;
+}
+
+.auth-message{
+  display:none;
+  margin-bottom:15px;
+  padding:10px;
+  border-radius:8px;
+  font-size:13px;
+}
+
+.auth-message.show{
+  display:block;
+}
+
+.auth-message.success{
+  color:#c8e6c9;
+  background:#102012;
+  border:1px solid #28532b;
+}
+
+.auth-message.error{
+  color:#ffb3b3;
+  background:#201010;
+  border:1px solid #532828;
+}
+
+.auth-note{
+  color:#777;
+  font-size:12px;
+  margin-top:15px;
+  text-align:center;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:700px){
+
+  .nav{
+    min-height:64px;
+    padding:8px 3%;
+  }
+
+  .brand b{
+    font-size:11px;
+    letter-spacing:1px;
+  }
+
+  .logo{
+    width:40px;
+    height:40px;
+    font-size:14px;
+  }
+
+  .header-actions{
+    gap:5px;
+  }
+
+  .cart,
+  .track-header-btn,
+  .auth-header-btn,
+  .user-name-btn{
+    padding:7px 8px;
+    font-size:11px;
+  }
+
+  .hero{
+    padding:60px 15px 50px;
+  }
+
+  .hero h1{
+    letter-spacing:1px;
+  }
+
+  .products{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+  }
+
+  .pic{
+    height:190px;
+  }
+
+  .info{
+    padding:13px;
+  }
+
+  .info h3{
+    font-size:14px;
+  }
+
+  .price{
+    font-size:18px;
+  }
+
+  .details-grid{
+    grid-template-columns:1fr;
+  }
+
+  .details-image{
+    min-height:300px;
+  }
+
+  .details-info{
+    padding:22px;
+  }
+
+  .details-actions{
+    flex-direction:column;
+  }
+
+  .details-close{
+    width:100%;
+  }
+
+  .cart-item{
+    gap:10px;
+    align-items:flex-start;
+  }
+
+  .cart-item-image{
+    width:65px;
+    height:65px;
+  }
+
+  .cart-item-info h3{
+    font-size:13px;
+  }
+
+  .cart-total span{
+    font-size:20px;
+  }
+
+  .social-links{
+    gap:8px;
+  }
+
+  .track-box{
+    padding:18px;
+  }
+
+  .track-header h2{
+    font-size:21px;
+  }
+
+  .track-row{
+    flex-direction:column;
+    gap:4px;
+  }
+
+  .track-row span:last-child{
+    max-width:100%;
+    text-align:left;
+  }
+
+  .cv-toast{
+    bottom:22px;
+    max-width:calc(100vw - 30px);
+    font-size:13px;
+    padding:12px 15px;
+  }
+}
+
+@media(max-width:430px){
+
+  .brand{
+    gap:6px;
+  }
+
+  .brand b{
+    font-size:9px;
+  }
+
+  .logo{
+    width:36px;
+    height:36px;
+    font-size:12px;
+  }
+
+  .products{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .pic{
+    height:160px;
+  }
+
+  .btn,
+  .details-btn{
+    font-size:12px;
+    padding:9px;
+  }
+
+  .header-actions{
+    max-width:210px;
+  }
+}
+
+@media(max-width:380px){
+
+  .brand b{
+    font-size:8px;
+  }
+
+  .cart,
+  .track-header-btn,
+  .auth-header-btn,
+  .user-name-btn{
+    padding:6px 6px;
+    font-size:10px;
+  }
+
+  .products{
+    grid-template-columns:1fr;
+  }
+
+  .pic{
+    height:230px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+  <div class="nav">
+
+    <div class="brand">
+      <div class="logo">CV</div>
+      <b>CHRONO VAULT BD</b>
+    </div>
+
+    <div class="header-actions">
+
+      <button
+        id="headerTrackButton"
+        class="track-header-btn"
+        onclick="toggleTrackOrder()">
+        📦 Track Order
+      </button>
+
+      <button
+        id="authHeaderButton"
+        class="auth-header-btn"
+        onclick="openAuthModal()">
+        👤 Login / Sign Up
+      </button>
+
+      <button
+        id="userNameButton"
+        class="user-name-btn"
+        style="display:none"
+        onclick="openAccountMenu()">
+        👤 Account
+      </button>
+
+      <button
+        class="cart"
+        onclick="toggleCart()">
+        🛒 Cart: <span id="cartCount">0</span>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+  <small>WELCOME TO</small>
+
+  <h1>CHRONO VAULT BD</h1>
+
+  <p>
+    More Than Just a Watch. It's a Lifestyle.
+  </p>
+
+</section>
+
+<!-- =========================
+     PRODUCTS
+========================= -->
+
+<section id="productsSection" class="section">
+
+  <div class="title">
+    <h2>Our Collection</h2>
+  </div>
+
+  <div id="products" class="products">
+    <div class="loading">
+      Loading products...
+    </div>
+  </div>
+
+</section>
+
+<!-- =========================
+     PRODUCT DETAILS
+========================= -->
+
+<section id="productDetails" class="product-details">
+
+  <div class="details-box">
+
+    <div class="details-grid">
+
+      <div id="detailsImage" class="details-image"></div>
+
+      <div class="details-info">
+
+        <div
+          id="detailsCategory"
+          class="details-category">
+          WATCHES
+        </div>
+
+        <h2 id="detailsName">
+          Product
+        </h2>
+
+        <div
+          id="detailsPrice"
+          class="details-price">
+          ৳0
+        </div>
+
+        <div
+          id="detailsStock"
+          class="details-stock">
+          Stock: 0
+        </div>
+
+        <div
+          id="detailsDescription"
+          class="details-description">
+        </div>
+
+        <div class="specs">
+
+          <h3>Product Specifications</h3>
+
+          <div class="spec-row">
+            <span>Movement</span>
+            <span>Quartz</span>
+          </div>
+
+          <div class="spec-row">
+            <span>Dial</span>
+            <span>46 mm</span>
+          </div>
+
+          <div class="spec-row">
+            <span>Thickness</span>
+            <span>13 mm</span>
+          </div>
+
+          <div class="spec-row">
+            <span>Case</span>
+            <span>Alloy</span>
+          </div>
+
+          <div class="spec-row">
+            <span>Band</span>
+            <span>Alloy Steel</span>
+          </div>
+
+          <div class="spec-row">
+            <span>Dial Shape</span>
+            <span>Round</span>
+          </div>
+
+          <div class="spec-row">
+            <span>Style</span>
+            <span>Business</span>
+          </div>
+
+          <div class="spec-row">
+            <span>Waterproof</span>
+            <span>No</span>
+          </div>
+
+          <div class="spec-row">
+            <span>Warranty</span>
+            <span>Store Warranty</span>
+          </div>
+
+        </div>
+
+        <div class="details-actions">
+
+          <button
+            id="detailsAddButton"
+            class="details-add">
+            Add to Cart
+          </button>
+
+          <button
+            class="details-close"
+            onclick="closeDetails()">
+            Back to Collection
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- =========================
+     TRACK ORDER
+========================= -->
+
+<section
+  id="trackSection"
+  class="track-section">
+
+  <div class="track-box">
+
+    <div class="track-header">
+
+      <h2>📦 Track Your Order</h2>
+
+      <button
+        class="track-close"
+        onclick="toggleTrackOrder(false)">
+        Close
+      </button>
+
+    </div>
+
+    <p class="track-intro">
+      Enter your Order Number and phone number to check your order status.
+    </p>
+
+    <div class="track-form-group">
+
+      <label for="trackingCode">
+        Order Number
+      </label>
+
+      <input
+        type="text"
+        id="trackingCode"
+        placeholder="Example: CVBD-123456"
+        autocomplete="off">
+
+    </div>
+
+    <div class="track-form-group">
+
+      <label for="trackingPhone">
+        Phone Number
+      </label>
+
+      <input
+        type="tel"
+        id="trackingPhone"
+        placeholder="01XXXXXXXXX"
+        inputmode="tel"
+        autocomplete="tel">
+
+    </div>
+
+    <button
+      id="trackButton"
+      class="track-btn"
+      onclick="trackOrder()">
+      Track Order
+    </button>
+
+    <div
+      id="trackError"
+      class="track-error">
+    </div>
+
+    <div
+      id="trackResult"
+      class="track-result">
+
+      <div class="track-success-title">
+        Order Found
+      </div>
+
+      <div class="track-summary">
+
+        <div class="track-row">
+          <span>Customer Name</span>
+          <span id="resultCustomerName"></span>
+        </div>
+
+        <div class="track-row">
+          <span>Phone</span>
+          <span id="resultPhone"></span>
+        </div>
+
+        <div class="track-row">
+          <span>Delivery Address</span>
+          <span id="resultAddress"></span>
+        </div>
+
+        <div class="track-row">
+          <span>Order Number</span>
+          <span
+            id="resultTrackingCode"
+            class="track-code">
+          </span>
+        </div>
+
+        <div class="track-row">
+          <span>Order Date</span>
+          <span id="resultDate"></span>
+        </div>
+
+        <div class="track-row">
+          <span>Status</span>
+          <span>
+            <span
+              id="resultStatus"
+              class="status-badge">
+            </span>
+          </span>
+        </div>
+
+        <div class="track-row">
+          <span>Total</span>
+          <span
+            id="resultTotal"
+            class="track-total">
+          </span>
+        </div>
+
+      </div>
+
+      <div class="track-products">
+
+        <h3>Ordered Products</h3>
+
+        <div id="resultProducts"></div>
+
+      </div>
+
+      <p class="track-note">
+        Order status is updated by CHRONO VAULT BD after confirmation and processing.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     CART
+========================= -->
+
+<section
+  id="cartSection"
+  class="cart-section">
+
+  <div class="cart-box">
+
+    <div class="cart-header">
+
+      <h2>🛒 Your Cart</h2>
+
+      <button
+        class="close-cart"
+        onclick="toggleCart()">
+        Close
+      </button>
+
+    </div>
+
+    <div id="cartItems">
+      <div class="empty">
+        Your cart is empty.
+      </div>
+    </div>
+
+    <div class="cart-total">
+
+      <strong>Total</strong>
+
+      <span id="cartTotal">
+        ৳0
+      </span>
+
+    </div>
+
+    <button
+      id="checkoutButton"
+      class="checkout-btn"
+      onclick="checkout()">
+      Proceed to Checkout
+    </button>
+
+    <div
+      id="checkoutBox"
+      class="checkout-box">
+
+      <div class="checkout-title">
+        📦 Delivery Information
+      </div>
+
+      <div class="form-group">
+
+        <label for="customerName">
+          Full Name
+        </label>
+
+        <input
+          type="text"
+          id="customerName"
+          placeholder="Enter your full name"
+          autocomplete="name">
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="customerPhone">
+          Phone Number
+        </label>
+
+        <input
+          type="tel"
+          id="customerPhone"
+          placeholder="01XXXXXXXXX"
+          inputmode="tel"
+          autocomplete="tel">
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="customerAddress">
+          Full Delivery Address
+        </label>
+
+        <textarea
+          id="customerAddress"
+          placeholder="House/Road, Area, Thana, District"
+          autocomplete="street-address">
+        </textarea>
+
+      </div>
+
+      <div class="payment-box">
+
+        <strong>
+          💵 Cash on Delivery
+        </strong>
+
+        <p>
+          Pay when your order is delivered.
+        </p>
+
+      </div>
+
+      <button
+        id="placeOrderButton"
+        class="place-order-btn"
+        onclick="placeOrder()">
+        Place Order
+      </button>
+
+      <button
+        class="cancel-checkout"
+        onclick="cancelCheckout()">
+        Back to Cart
+      </button>
+
+    </div>
+
+    <div
+      id="orderSuccess"
+      class="order-success">
+
+      <div class="success-icon">
+        ✅
+      </div>
+
+      <h2>
+        Order Placed Successfully!
+      </h2>
+
+      <p>
+        Thank you for shopping with CHRONO VAULT BD.
+      </p>
+
+      <div
+        id="orderId"
+        class="order-id">
+        Order received successfully.
+      </div>
+
+      <p>
+        We will contact you soon to confirm your order.
+      </p>
+
+      <button
+        class="success-track-btn"
+        onclick="openTrackFromSuccess()">
+        📦 Track This Order
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     WHY US
+========================= -->
+
+<section class="section">
+
+  <div class="title">
+    <h2>Why CHRONO VAULT BD?</h2>
+  </div>
+
+  <div class="why">
+
+    <div class="box">
+      <strong>Premium Style</strong>
+      Elegant watches for your everyday lifestyle.
+    </div>
+
+    <div class="box">
+      <strong>Quality</strong>
+      Carefully selected products.
+    </div>
+
+    <div class="box">
+      <strong>Cash on Delivery</strong>
+      Easy ordering with convenient payment.
+    </div>
+
+    <div class="box">
+      <strong>Store Warranty</strong>
+      Warranty support on selected products.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+  <p>
+    © 2026 <b>CHRONO VAULT BD</b>
+  </p>
+
+  <p>
+    More Than Just a Watch. It's a Lifestyle.
+  </p>
+
+  <div class="social-links">
+
+    <a
+      href="https://www.facebook.com/share/1C3CqbjBXk/"
+      target="_blank"
+      rel="noopener noreferrer">
+      Facebook
+    </a>
+
+    <a
+      href="https://www.instagram.com/chronovaultbd?stkn=MWYxMjBxNXA1YTZ1bg=="
+      target="_blank"
+      rel="noopener noreferrer">
+      Instagram
+    </a>
+
+    <a
+      href="https://www.tiktok.com/@chrono.vault.bd?_r=1&_t=ZS-99qPMd7PspQ"
+      target="_blank"
+      rel="noopener noreferrer">
+      TikTok
+    </a>
+
+    <a
+      href="https://wa.me/8801326144735"
+      target="_blank"
+      rel="noopener noreferrer">
+      WhatsApp
+    </a>
+
+  </div>
+
+  <p class="social-note">
+    Follow us & stay connected.
+  </p>
+
+</footer>
+
+<!-- =========================
+     PREMIUM TOAST
+========================= -->
+
+<div id="cvToast" class="cv-toast">
+  <span class="cv-toast-icon">✓</span>
+  <span id="cvToastMessage">
+    Added to cart successfully
+  </span>
+</div>
+
+<!-- =========================
+     AUTH MODAL
+========================= -->
+
+<div
+  id="authOverlay"
+  class="auth-overlay">
+
+  <div class="auth-box">
+
+    <div class="auth-header">
+
+      <h2>👤 My Account</h2>
+
+      <button
+        class="auth-close"
+        onclick="closeAuthModal()">
+        ×
+      </button>
+
+    </div>
+
+    <div class="auth-tabs">
+
+      <button
+        id="loginTab"
+        class="auth-tab active"
+        onclick="switchAuthTab('login')">
+        Login
+      </button>
+
+      <button
+        id="signupTab"
+        class="auth-tab"
+        onclick="switchAuthTab('signup')">
+        Sign Up
+      </button>
+
+    </div>
+
+    <div
+      id="authMessage"
+      class="auth-message">
+    </div>
+
+    <!-- LOGIN -->
+
+    <form
+      id="loginForm"
+      class="auth-form active"
+      onsubmit="loginUser(event)">
+
+      <div class="auth-form-group">
+
+        <label for="loginEmail">
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="loginEmail"
+          placeholder="Enter your email"
+          autocomplete="email"
+          required>
+
+      </div>
+
+      <div class="auth-form-group">
+
+        <label for="loginPassword">
+          Password
+        </label>
+
+        <input
+          type="password"
+          id="loginPassword"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+          required>
+
+      </div>
+
+      <button
+        id="loginSubmit"
+        class="auth-submit"
+        type="submit">
+        Login
+      </button>
+
+    </form>
+
+    <!-- SIGN UP -->
+
+    <form
+      id="signupForm"
+      class="auth-form"
+      onsubmit="signupUser(event)">
+
+      <div class="auth-form-group">
+
+        <label for="signupEmail">
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="signupEmail"
+          placeholder="Enter your email"
+          autocomplete="email"
+          required>
+
+      </div>
+
+      <div class="auth-form-group">
+
+        <label for="signupPassword">
+          Password
+        </label>
+
+        <input
+          type="password"
+          id="signupPassword"
+          placeholder="Minimum 6 characters"
+          autocomplete="new-password"
+          minlength="6"
+          required>
+
+      </div>
+
+      <button
+        id="signupSubmit"
+        class="auth-submit"
+        type="submit">
+        Create Account
+      </button>
+
+    </form>
+
+    <p class="auth-note">
+      Account login is optional for shopping.
+    </p>
+
+  </div>
+
+</div>
+
+<script>
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL =
+  "https://rufdvkelwzsmnuruvdko.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_3j4Bs4rft9_w4r1j6uHo5w_fYLIJsNI";
+
+
+/* =========================================================
+   CART
+========================================================= */
+
+let cart = [];
+
+try{
+
+  const savedCart =
+    localStorage.getItem("chronoVaultCart");
+
+  if(savedCart){
+    cart = JSON.parse(savedCart);
+  }
+
+  if(!Array.isArray(cart)){
+    cart = [];
+  }
+
+}catch(error){
+
+  console.error(
+    "Cart storage error:",
+    error
+  );
+
+  cart = [];
+
+}
+
+
+/* =========================================================
+   GLOBAL VARIABLES
+========================================================= */
+
+let currentDetailProduct = null;
+
+let lastOrderTrackingCode = "";
+
+let lastOrderPhone = "";
+
+let currentAuthSession = null;
+
+
+/* =========================================================
+   SAFE HTML
+========================================================= */
+
+function safe(value){
+
+  if(value === null || value === undefined){
+    return "";
+  }
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   PREMIUM CART TOAST
+========================================================= */
+
+let cvToastTimer = null;
+
+function showCartToast(message){
+
+  const toast =
+    document.getElementById("cvToast");
+
+  const messageElement =
+    document.getElementById("cvToastMessage");
+
+  if(!toast || !messageElement){
+    return;
+  }
+
+  messageElement.textContent =
+    message || "Added to cart successfully";
+
+  toast.classList.add("show");
+
+  clearTimeout(cvToastTimer);
+
+  cvToastTimer =
+    setTimeout(function(){
+
+      toast.classList.remove("show");
+
+    },2500);
+
+}
+
+
+/* =========================================================
+   LAST ORDER STORAGE
+========================================================= */
+
+function saveLastOrder(){
+
+  try{
+
+    if(
+      lastOrderTrackingCode &&
+      lastOrderPhone
+    ){
+
+      localStorage.setItem(
+        "cv_last_tracking_code",
+        lastOrderTrackingCode
+      );
+
+      localStorage.setItem(
+        "cv_last_order_phone",
+        lastOrderPhone
+      );
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Last order storage error:",
+      error
+    );
+
+  }
+
+}
+
+
+function restoreLastOrder(){
+
+  try{
+
+    const savedTrackingCode =
+      localStorage.getItem(
+        "cv_last_tracking_code"
+      ) || "";
+
+    const savedPhone =
+      localStorage.getItem(
+        "cv_last_order_phone"
+      ) || "";
+
+    if(
+      savedTrackingCode &&
+      savedPhone
+    ){
+
+      lastOrderTrackingCode =
+        savedTrackingCode;
+
+      lastOrderPhone =
+        savedPhone;
+
+      showHeaderTrackButton();
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Restore last order error:",
+      error
+    );
+
+  }
+
+}
+
+
+function clearLastOrder(){
+
+  try{
+
+    localStorage.removeItem(
+      "cv_last_tracking_code"
+    );
+
+    localStorage.removeItem(
+      "cv_last_order_phone"
+    );
+
+  }catch(error){
+
+    console.error(
+      "Clear last order error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   CART STORAGE
+========================================================= */
+
+function saveCart(){
+
+  try{
+
+    localStorage.setItem(
+      "chronoVaultCart",
+      JSON.stringify(cart)
+    );
+
+  }catch(error){
+
+    console.error(
+      "Could not save cart:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   CART COUNT
+========================================================= */
+
+function updateCartCount(){
+
+  const count =
+    cart.reduce(
+      function(total,item){
+
+        return total +
+          Number(item.quantity || 0);
+
+      },
+      0
+    );
+
+  document.getElementById(
+    "cartCount"
+  ).textContent = count;
+
+}
+
+
+/* =========================================================
+   ADD CART
+========================================================= */
+
+function addCart(product){
+
+  const id =
+    String(product.id);
+
+  const stock =
+    Number(product.stock);
+
+  const price =
+    Number(product.price);
+
+  if(
+    !Number.isFinite(stock) ||
+    stock <= 0
+  ){
+
+    alert(
+      "This product is out of stock."
+    );
+
+    return;
+  }
+
+  if(!Number.isFinite(price)){
+
+    alert(
+      "Product price is unavailable."
+    );
+
+    return;
+  }
+
+  const existing =
+    cart.find(
+      function(item){
+
+        return String(item.id) === id;
+
+      }
+    );
+
+  if(existing){
+
+    if(
+      Number(existing.quantity) >= stock
+    ){
+
+      alert(
+        "Maximum available stock already added."
+      );
+
+      return;
+    }
+
+    existing.quantity++;
+
+  }else{
+
+    cart.push({
+
+      id:id,
+
+      name:product.name,
+
+      price:price,
+
+      image:product.image || "",
+
+      stock:stock,
+
+      quantity:1
+
+    });
+
+  }
+
+  saveCart();
+
+  updateCartCount();
+
+  renderCart();
+
+  /* PREMIUM SUCCESS TOAST */
+
+  showCartToast(
+    "Added to cart successfully"
+  );
+
+}
+
+
+/* =========================================================
+   QUANTITY
+========================================================= */
+
+function changeQuantity(id,change){
+
+  const item =
+    cart.find(
+      function(product){
+
+        return String(product.id) ===
+          String(id);
+
+      }
+    );
+
+  if(!item){
+    return;
+  }
+
+  const newQuantity =
+    Number(item.quantity) +
+    Number(change);
+
+  if(newQuantity <= 0){
+
+    removeFromCart(id);
+
+    return;
+  }
+
+  if(
+    newQuantity >
+    Number(item.stock)
+  ){
+
+    alert(
+      "Maximum available stock: " +
+      item.stock
+    );
+
+    return;
+  }
+
+  item.quantity =
+    newQuantity;
+
+  saveCart();
+
+  updateCartCount();
+
+  renderCart();
+
+}
+
+
+/* =========================================================
+   REMOVE CART
+========================================================= */
+
+function removeFromCart(id){
+
+  cart =
+    cart.filter(
+      function(item){
+
+        return String(item.id) !==
+          String(id);
+
+      }
+    );
+
+  saveCart();
+
+  updateCartCount();
+
+  renderCart();
+
+}
+
+
+/* =========================================================
+   CART TOTAL
+========================================================= */
+
+function getCartTotal(){
+
+  return cart.reduce(
+    function(sum,item){
+
+      return sum +
+        (
+          Number(item.price) *
+          Number(item.quantity)
+        );
+
+    },
+    0
+  );
+
+}
+
+
+/* =========================================================
+   RENDER CART
+========================================================= */
+
+function renderCart(){
+
+  const box =
+    document.getElementById(
+      "cartItems"
+    );
+
+  if(cart.length === 0){
+
+    box.innerHTML =
+      '<div class="empty">Your cart is empty.</div>';
+
+    document.getElementById(
+      "cartTotal"
+    ).textContent = "৳0";
+
+    document.getElementById(
+      "checkoutButton"
+    ).style.display = "none";
+
+    return;
+  }
+
+  document.getElementById(
+    "checkoutButton"
+  ).style.display = "block";
+
+  box.innerHTML =
+    cart.map(
+      function(item){
+
+        const subtotal =
+          Number(item.price) *
+          Number(item.quantity);
+
+        let imageHTML = "";
+
+        if(item.image){
+
+          imageHTML =
+            `<img
+              src="${safe(item.image)}"
+              alt="${safe(item.name)}"
+              onerror="this.style.display='none';this.parentElement.innerHTML='<span>⌚</span>';">`;
+
+        }else{
+
+          imageHTML =
+            '<span>⌚</span>';
+
+        }
+
+        return `
+
+          <div class="cart-item">
+
+            <div class="cart-item-image">
+              ${imageHTML}
+            </div>
+
+            <div class="cart-item-info">
+
+              <h3>
+                ${safe(item.name)}
+              </h3>
+
+              <div class="cart-item-price">
+                ৳${Number(item.price).toLocaleString("en-BD")}
+                × ${item.quantity}
+                =
+                ৳${subtotal.toLocaleString("en-BD")}
+              </div>
+
+              <div class="quantity">
+
+                <button
+                  onclick="changeQuantity('${safe(item.id)}',-1)">
+                  −
+                </button>
+
+                <span>
+                  ${item.quantity}
+                </span>
+
+                <button
+                  onclick="changeQuantity('${safe(item.id)}',1)">
+                  +
+                </button>
+
+              </div>
+
+              <button
+                class="remove-btn"
+                onclick="removeFromCart('${safe(item.id)}')">
+                Remove
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    ).join("");
+
+  document.getElementById(
+    "cartTotal"
+  ).textContent =
+    "৳" +
+    getCartTotal()
+      .toLocaleString("en-BD");
+
+}
+
+
+/* =========================================================
+   TOGGLE CART
+========================================================= */
+
+function toggleCart(){
+
+  const section =
+    document.getElementById(
+      "cartSection"
+    );
+
+  section.classList.toggle("show");
+
+  if(
+    section.classList.contains("show")
+  ){
+
+    renderCart();
+
+    section.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+  }
+
+}
+
+
+/* =========================================================
+   TRACK HEADER BUTTON
+========================================================= */
+
+function showHeaderTrackButton(){
+
+  const button =
+    document.getElementById(
+      "headerTrackButton"
+    );
+
+  if(button){
+
+    button.classList.add("show");
+
+  }
+
+}
+
+
+/* =========================================================
+   TRACK ORDER TOGGLE
+========================================================= */
+
+function toggleTrackOrder(force){
+
+  const section =
+    document.getElementById(
+      "trackSection"
+    );
+
+  let shouldShow;
+
+  if(typeof force === "boolean"){
+
+    shouldShow = force;
+
+  }else{
+
+    shouldShow =
+      !section.classList.contains("show");
+
+  }
+
+  if(shouldShow){
+
+    section.classList.add("show");
+
+    section.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+  }else{
+
+    section.classList.remove("show");
+
+  }
+
+}
+
+
+/* =========================================================
+   OPEN TRACK FROM SUCCESS
+========================================================= */
+
+function openTrackFromSuccess(){
+
+  document.getElementById(
+    "orderSuccess"
+  ).classList.remove("show");
+
+  showHeaderTrackButton();
+
+  document.getElementById(
+    "trackingCode"
+  ).value =
+    lastOrderTrackingCode;
+
+  document.getElementById(
+    "trackingPhone"
+  ).value =
+    lastOrderPhone;
+
+  document.getElementById(
+    "trackError"
+  ).classList.remove("show");
+
+  document.getElementById(
+    "trackResult"
+  ).classList.remove("show");
+
+  toggleTrackOrder(true);
+
+  trackOrder();
+
+}
+
+
+/* =========================================================
+   TRACK ORDER
+========================================================= */
+
+async function trackOrder(){
+
+  const trackingInput =
+    document.getElementById(
+      "trackingCode"
+    );
+
+  const phoneInput =
+    document.getElementById(
+      "trackingPhone"
+    );
+
+  const errorBox =
+    document.getElementById(
+      "trackError"
+    );
+
+  const resultBox =
+    document.getElementById(
+      "trackResult"
+    );
+
+  const button =
+    document.getElementById(
+      "trackButton"
+    );
+
+  let trackingCode =
+    trackingInput.value.trim();
+
+  const phone =
+    phoneInput.value.trim();
+
+  errorBox.classList.remove(
+    "show"
+  );
+
+  resultBox.classList.remove(
+    "show"
+  );
+
+  if(!trackingCode){
+
+    errorBox.textContent =
+      "Please enter your Order Number.";
+
+    errorBox.classList.add(
+      "show"
+    );
+
+    trackingInput.focus();
+
+    return;
+  }
+
+  if(!phone){
+
+    errorBox.textContent =
+      "Please enter your phone number.";
+
+    errorBox.classList.add(
+      "show"
+    );
+
+    phoneInput.focus();
+
+    return;
+  }
+
+  trackingCode =
+    trackingCode
+      .toUpperCase()
+      .replace(/\s+/g,"");
+
+  const cleanPhone =
+    phone.replace(
+      /[\s-]/g,
+      ""
+    );
+
+  if(!/^01\d{9}$/.test(cleanPhone)){
+
+    errorBox.textContent =
+      "Please enter a valid Bangladesh phone number.";
+
+    errorBox.classList.add(
+      "show"
+    );
+
+    phoneInput.focus();
+
+    return;
+  }
+
+  button.disabled = true;
+
+  button.textContent =
+    "Checking Order...";
+
+  try{
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/rpc/track_order_v2",
+        {
+          method:"POST",
+          cache:"no-store",
+
+          headers:{
+            "apikey":SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json"
+          },
+
+          body:JSON.stringify({
+
+            p_tracking_code:
+              trackingCode,
+
+            p_phone:
+              cleanPhone
+
+          })
+        }
+      );
+
+    const responseText =
+      await response.text();
+
+    console.log(
+      "TRACK ORDER STATUS:",
+      response.status
+    );
+
+    console.log(
+      "TRACK ORDER RESPONSE:",
+      responseText
+    );
+
+    if(!response.ok){
+
+      throw new Error(
+        responseText ||
+        "Unable to check order right now."
+      );
+
+    }
+
+    let orders = [];
+
+    if(responseText){
+
+      orders =
+        JSON.parse(
+          responseText
+        );
+
+    }
+
+    if(
+      !Array.isArray(orders) ||
+      orders.length === 0
+    ){
+
+      errorBox.textContent =
+        "No order found. Please check your Order Number and phone number.";
+
+      errorBox.classList.add(
+        "show"
+      );
+
+      return;
+    }
+
+    const order =
+      orders[0];
+
+    document.getElementById(
+      "resultCustomerName"
+    ).textContent =
+      order.customer_name ||
+      "N/A";
+
+    document.getElementById(
+      "resultPhone"
+    ).textContent =
+      order.phone ||
+      cleanPhone;
+
+    document.getElementById(
+      "resultAddress"
+    ).textContent =
+      order.address ||
+      "N/A";
+
+    document.getElementById(
+      "resultTrackingCode"
+    ).textContent =
+      order.tracking_code ||
+      trackingCode;
+
+    const date =
+      order.created_at
+        ? new Date(
+            order.created_at
+          ).toLocaleString(
+            "en-BD",
+            {
+              dateStyle:"medium",
+              timeStyle:"short"
+            }
+          )
+        : "N/A";
+
+    document.getElementById(
+      "resultDate"
+    ).textContent =
+      date;
+
+    document.getElementById(
+      "resultStatus"
+    ).textContent =
+      order.status ||
+      "Pending";
+
+    document.getElementById(
+      "resultTotal"
+    ).textContent =
+      "৳" +
+      Number(
+        order.total || 0
+      ).toLocaleString(
+        "en-BD"
+      );
+
+    const productsBox =
+      document.getElementById(
+        "resultProducts"
+      );
+
+    let items = [];
+
+    if(Array.isArray(order.items)){
+
+      items =
+        order.items;
+
+    }else if(
+      typeof order.items ===
+      "string"
+    ){
+
+      try{
+
+        items =
+          JSON.parse(
+            order.items
+          );
+
+      }catch(error){
+
+        items = [];
+
+      }
+
+    }
+
+    if(
+      !Array.isArray(items) ||
+      items.length === 0
+    ){
+
+      productsBox.innerHTML =
+        '<div class="track-product">Order items unavailable.</div>';
+
+    }else{
+
+      productsBox.innerHTML =
+        items.map(
+          function(item){
+
+            const name =
+              safe(
+                item.name ||
+                "Product"
+              );
+
+            const quantity =
+              Number(
+                item.quantity || 0
+              );
+
+            const price =
+              Number(
+                item.price || 0
+              );
+
+            const subtotal =
+              Number(
+                item.subtotal ||
+                (
+                  price *
+                  quantity
+                )
+              );
+
+            return `
+
+              <div class="track-product">
+
+                <strong>
+                  ${name}
+                </strong>
+
+                <br>
+
+                Qty:
+                ${quantity}
+                ×
+                ৳${price.toLocaleString("en-BD")}
+                =
+                ৳${subtotal.toLocaleString("en-BD")}
+
+              </div>
+
+            `;
+
+          }
+        ).join("");
+
+    }
+
+    resultBox.classList.add(
+      "show"
+    );
+
+    resultBox.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+  }catch(error){
+
+    console.error(
+      "Track Order Error:",
+      error
+    );
+
+    errorBox.textContent =
+      "Could not check the order. Please try again.";
+
+    errorBox.classList.add(
+      "show"
+    );
+
+  }finally{
+
+    button.disabled = false;
+
+    button.textContent =
+      "Track Order";
+
+  }
+
+}
+
+
+/* =========================================================
+   PRODUCT DETAILS
+========================================================= */
+
+function showDetails(product){
+
+  currentDetailProduct =
+    product;
+
+  document.getElementById(
+    "detailsCategory"
+  ).textContent =
+    product.category ||
+    "WATCHES";
+
+  document.getElementById(
+    "detailsName"
+  ).textContent =
+    product.name ||
+    "Product";
+
+  const price =
+    Number(product.price);
+
+  const oldPrice =
+    Number(product.oldPrice);
+
+  let priceHTML =
+    Number.isFinite(price)
+      ? "৳" +
+        price.toLocaleString(
+          "en-BD"
+        )
+      : "Price unavailable";
+
+  if(
+    Number.isFinite(oldPrice) &&
+    oldPrice > 0 &&
+    oldPrice > price
+  ){
+
+    priceHTML +=
+      `<span class="details-old-price">
+        ৳${oldPrice.toLocaleString("en-BD")}
+      </span>`;
+
+  }
+
+  document.getElementById(
+    "detailsPrice"
+  ).innerHTML =
+    priceHTML;
+
+  const stock =
+    Number(product.stock);
+
+  document.getElementById(
+    "detailsStock"
+  ).textContent =
+    stock > 0
+      ? "Stock: " + stock
+      : "Out of stock";
+
+  document.getElementById(
+    "detailsDescription"
+  ).textContent =
+    product.description ||
+    "Premium three-eye men's watch set designed for a stylish and sophisticated look. Suitable for business and everyday wear.";
+
+  const imageBox =
+    document.getElementById(
+      "detailsImage"
+    );
+
+  if(product.image){
+
+    imageBox.innerHTML =
+      `<img
+        src="${safe(product.image)}"
+        alt="${safe(product.name)}"
+        onerror="this.style.display='none';this.parentElement.innerHTML='<div class=&quot;details-noimg&quot;>⌚</div>';">`;
+
+  }else{
+
+    imageBox.innerHTML =
+      '<div class="details-noimg">⌚</div>';
+
+  }
+
+  const addButton =
+    document.getElementById(
+      "detailsAddButton"
+    );
+
+  if(
+    stock > 0 &&
+    Number.isFinite(price)
+  ){
+
+    addButton.style.display =
+      "block";
+
+    addButton.textContent =
+      "Add to Cart";
+
+    addButton.onclick =
+      function(){
+
+        addCart(product);
+
+      };
+
+  }else{
+
+    addButton.style.display =
+      "none";
+
+  }
+
+  const details =
+    document.getElementById(
+      "productDetails"
+    );
+
+  details.classList.add(
+    "show"
+  );
+
+  details.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+}
+
+
+/* =========================================================
+   CLOSE DETAILS
+========================================================= */
+
+function closeDetails(){
+
+  document.getElementById(
+    "productDetails"
+  ).classList.remove(
+    "show"
+  );
+
+  currentDetailProduct =
+    null;
+
+  document.getElementById(
+    "productsSection"
+  ).scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+}
+
+
+/* =========================================================
+   CHECKOUT
+========================================================= */
+
+function checkout(){
+
+  if(cart.length === 0){
+
+    alert(
+      "Your cart is empty."
+    );
+
+    return;
+  }
+
+  document.getElementById(
+    "checkoutBox"
+  ).classList.add(
+    "show"
+  );
+
+  document.getElementById(
+    "checkoutButton"
+  ).style.display =
+    "none";
+
+  document.getElementById(
+    "orderSuccess"
+  ).classList.remove(
+    "show"
+  );
+
+  document.getElementById(
+    "checkoutBox"
+  ).scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+}
+
+
+/* =========================================================
+   CANCEL CHECKOUT
+========================================================= */
+
+function cancelCheckout(){
+
+  document.getElementById(
+    "checkoutBox"
+  ).classList.remove(
+    "show"
+  );
+
+  document.getElementById(
+    "checkoutButton"
+  ).style.display =
+    cart.length > 0
+      ? "block"
+      : "none";
+
+}
+
+
+/* =========================================================
+   TRACKING CODE
+========================================================= */
+
+function generateTrackingCode(){
+
+  const random =
+    Math.floor(
+      100000 +
+      Math.random() *
+      900000
+    );
+
+  return "CVBD-" +
+    random;
+
+}
+
+
+/* =========================================================
+   PLACE ORDER
+========================================================= */
+
+async function placeOrder(){
+
+  if(cart.length === 0){
+
+    alert(
+      "Your cart is empty."
+    );
+
+    return;
+  }
+
+  const name =
+    document.getElementById(
+      "customerName"
+    ).value.trim();
+
+  const phone =
+    document.getElementById(
+      "customerPhone"
+    ).value.trim();
+
+  const address =
+    document.getElementById(
+      "customerAddress"
+    ).value.trim();
+
+  if(!name){
+
+    alert(
+      "Please enter your full name."
+    );
+
+    document.getElementById(
+      "customerName"
+    ).focus();
+
+    return;
+  }
+
+  if(!phone){
+
+    alert(
+      "Please enter your phone number."
+    );
+
+    document.getElementById(
+      "customerPhone"
+    ).focus();
+
+    return;
+  }
+
+  const cleanPhone =
+    phone.replace(
+      /[\s-]/g,
+      ""
+    );
+
+  if(
+    !/^01\d{9}$/.test(
+      cleanPhone
+    )
+  ){
+
+    alert(
+      "Please enter a valid Bangladesh phone number. Example: 01712345678"
+    );
+
+    document.getElementById(
+      "customerPhone"
+    ).focus();
+
+    return;
+  }
+
+  if(!address){
+
+    alert(
+      "Please enter your full delivery address."
+    );
+
+    document.getElementById(
+      "customerAddress"
+    ).focus();
+
+    return;
+  }
+
+  const total =
+    getCartTotal();
+
+  const orderItems =
+    cart.map(
+      function(item){
+
+        return {
+
+          product_id:
+            item.id,
+
+          name:
+            item.name,
+
+          price:
+            Number(item.price),
+
+          quantity:
+            Number(item.quantity),
+
+          subtotal:
+            Number(item.price) *
+            Number(item.quantity)
+
+        };
+
+      }
+    );
+
+  const trackingCode =
+    generateTrackingCode();
+
+  const button =
+    document.getElementById(
+      "placeOrderButton"
+    );
+
+  button.disabled = true;
+
+  button.textContent =
+    "Placing Order...";
+
+  try{
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/orders",
+        {
+          method:"POST",
+
+          headers:{
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json",
+
+            "Prefer":
+              "return=minimal"
+          },
+
+          body:JSON.stringify({
+
+            customer_name:
+              name,
+
+            phone:
+              cleanPhone,
+
+            address:
+              address,
+
+            items:
+              orderItems,
+
+            total:
+              total,
+
+            status:
+              "Pending",
+
+            tracking_code:
+              trackingCode
+
+          })
+        }
+      );
+
+    const responseText =
+      await response.text();
+
+    if(!response.ok){
+
+      console.error(
+        "Order Error:",
+        response.status,
+        responseText
+      );
+
+      throw new Error(
+        responseText ||
+        "Order could not be placed."
+      );
+
+    }
+
+    lastOrderTrackingCode =
+      trackingCode;
+
+    lastOrderPhone =
+      cleanPhone;
+
+    saveLastOrder();
+
+    cart = [];
+
+    saveCart();
+
+    updateCartCount();
+
+    renderCart();
+
+    document.getElementById(
+      "checkoutBox"
+    ).classList.remove(
+      "show"
+    );
+
+    document.getElementById(
+      "checkoutButton"
+    ).style.display =
+      "none";
+
+    document.getElementById(
+      "orderId"
+    ).textContent =
+      "Order Number: " +
+      trackingCode;
+
+    document.getElementById(
+      "orderSuccess"
+    ).classList.add(
+      "show"
+    );
+
+    showHeaderTrackButton();
+
+    document.getElementById(
+      "orderSuccess"
+    ).scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+    document.getElementById(
+      "customerName"
+    ).value = "";
+
+    document.getElementById(
+      "customerPhone"
+    ).value = "";
+
+    document.getElementById(
+      "customerAddress"
+    ).value = "";
+
+  }catch(error){
+
+    console.error(
+      "Checkout Error:",
+      error
+    );
+
+    alert(
+      "ORDER ERROR:\n\n" +
+      error.message
+    );
+
+  }
+
+  button.disabled = false;
+
+  button.textContent =
+    "Place Order";
+
+}
+
+
+/* =========================================================
+   LOAD PRODUCTS
+========================================================= */
+
+async function loadProducts(){
+
+  const box =
+    document.getElementById(
+      "products"
+    );
+
+  try{
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/products?select=*&order=created_at.desc",
+        {
+          method:"GET",
+
+          headers:{
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json"
+          }
+        }
+      );
+
+    if(!response.ok){
+
+      const errorText =
+        await response.text();
+
+      console.error(
+        "Supabase Error:",
+        response.status,
+        errorText
+      );
+
+      throw new Error(
+        "Supabase Error " +
+        response.status
+      );
+
+    }
+
+    const products =
+      await response.json();
+
+    console.log(
+      "Supabase Products:",
+      products
+    );
+
+    if(
+      !Array.isArray(products) ||
+      products.length === 0
+    ){
+
+      box.innerHTML =
+        '<div class="empty">No products available yet.</div>';
+
+      return;
+    }
+
+    box.innerHTML =
+      products.map(
+        function(product){
+
+          const name =
+            product.Name ||
+            "Unnamed Product";
+
+          const category =
+            product.Category ||
+            "Watches";
+
+          const price =
+            Number(
+              product.Price
+            );
+
+          const oldPrice =
+            Number(
+              product["Old price"]
+            );
+
+          const stock =
+            Number(
+              product.Stock
+            );
+
+          const imageUrl =
+            product.image_url ||
+            "";
+
+          const description =
+            product.Description ||
+            "";
+
+          const productId =
+            product.id;
+
+          let imageHTML;
+
+          if(imageUrl){
+
+            imageHTML =
+              `<img
+                src="${safe(imageUrl)}"
+                alt="${safe(name)}"
+                loading="lazy"
+                onerror="this.style.display='none';this.parentElement.innerHTML='<div class=&quot;noimg&quot;>⌚</div>';">`;
+
+          }else{
+
+            imageHTML =
+              '<div class="noimg">⌚</div>';
+
+          }
+
+          let priceHTML =
+            Number.isFinite(price)
+              ? "৳" +
+                price.toLocaleString(
+                  "en-BD"
+                )
+              : "Price unavailable";
+
+          if(
+            Number.isFinite(oldPrice) &&
+            oldPrice > 0 &&
+            oldPrice > price
+          ){
+
+            priceHTML +=
+              `<span class="old">
+                ৳${oldPrice.toLocaleString("en-BD")}
+              </span>`;
+
+          }
+
+          const stockHTML =
+            stock > 0
+              ? "Stock: " + stock
+              : "Out of stock";
+
+          let buttonHTML = "";
+
+          const cartProduct = {
+
+            id:
+              productId,
+
+            name:
+              name,
+
+            price:
+              price,
+
+            oldPrice:
+              oldPrice,
+
+            image:
+              imageUrl,
+
+            stock:
+              stock,
+
+            category:
+              category,
+
+            description:
+              description
+
+          };
+
+          const encodedProduct =
+            JSON.stringify(
+              cartProduct
+            )
+            .replace(
+              /&/g,
+              "\\u0026"
+            )
+            .replace(
+              /</g,
+              "\\u003c"
+            )
+            .replace(
+              />/g,
+              "\\u003e"
+            )
+            .replace(
+              /'/g,
+              "\\u0027"
+            );
+
+          if(
+            stock > 0 &&
+            Number.isFinite(price)
+          ){
+
+            buttonHTML =
+              `<button
+                class="btn"
+                onclick='addCart(${encodedProduct})'>
+                Add to Cart
+              </button>`;
+
+          }
+
+          const detailsButton =
+            `<button
+              class="details-btn"
+              onclick='showDetails(${encodedProduct})'>
+              View Details
+            </button>`;
+
+          return `
+
+            <div class="card">
+
+              <div class="pic">
+                ${imageHTML}
+              </div>
+
+              <div class="info">
+
+                <h3>
+                  ${safe(name)}
+                </h3>
+
+                <div class="category">
+                  ${safe(category)}
+                </div>
+
+                <div class="price">
+                  ${priceHTML}
+                </div>
+
+                <div class="stock">
+                  ${safe(stockHTML)}
+                </div>
+
+                ${buttonHTML}
+
+                ${detailsButton}
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      ).join("");
+
+  }catch(error){
+
+    console.error(
+      "Product loading failed:",
+      error
+    );
+
+    box.innerHTML =
+      `<div class="empty">
+        Products could not be loaded.
+        <br><br>
+        Please check Supabase connection.
+      </div>`;
+
+  }
+
+}
+
+
+/* =========================================================
+   AUTH MODAL
+========================================================= */
+
+function openAuthModal(){
+
+  document.getElementById(
+    "authOverlay"
+  ).classList.add(
+    "show"
+  );
+
+  clearAuthMessage();
+
+}
+
+
+function closeAuthModal(){
+
+  document.getElementById(
+    "authOverlay"
+  ).classList.remove(
+    "show"
+  );
+
+}
+
+
+function switchAuthTab(tab){
+
+  const loginTab =
+    document.getElementById(
+      "loginTab"
+    );
+
+  const signupTab =
+    document.getElementById(
+      "signupTab"
+    );
+
+  const loginForm =
+    document.getElementById(
+      "loginForm"
+    );
+
+  const signupForm =
+    document.getElementById(
+      "signupForm"
+    );
+
+  clearAuthMessage();
+
+  if(tab === "signup"){
+
+    loginTab.classList.remove(
+      "active"
+    );
+
+    signupTab.classList.add(
+      "active"
+    );
+
+    loginForm.classList.remove(
+      "active"
+    );
+
+    signupForm.classList.add(
+      "active"
+    );
+
+  }else{
+
+    signupTab.classList.remove(
+      "active"
+    );
+
+    loginTab.classList.add(
+      "active"
+    );
+
+    signupForm.classList.remove(
+      "active"
+    );
+
+    loginForm.classList.add(
+      "active"
+    );
+
+  }
+
+}
+
+
+function showAuthMessage(
+  message,
+  type
+){
+
+  const box =
+    document.getElementById(
+      "authMessage"
+    );
+
+  box.textContent =
+    message;
+
+  box.className =
+    "auth-message show " +
+    type;
+
+}
+
+
+function clearAuthMessage(){
+
+  const box =
+    document.getElementById(
+      "authMessage"
+    );
+
+  box.textContent = "";
+
+  box.className =
+    "auth-message";
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+async function loginUser(event){
+
+  event.preventDefault();
+
+  const email =
+    document.getElementById(
+      "loginEmail"
+    ).value.trim();
+
+  const password =
+    document.getElementById(
+      "loginPassword"
+    ).value;
+
+  const button =
+    document.getElementById(
+      "loginSubmit"
+    );
+
+  clearAuthMessage();
+
+  button.disabled = true;
+
+  button.textContent =
+    "Logging in...";
+
+  try{
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/auth/v1/token?grant_type=password",
+        {
+          method:"POST",
+
+          headers:{
+            "apikey":
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json"
+          },
+
+          body:JSON.stringify({
+
+            email:
+              email,
+
+            password:
+              password
+
+          })
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error_description ||
+        data.msg ||
+        data.message ||
+        "Login failed."
+      );
+
+    }
+
+    currentAuthSession =
+      data;
+
+    localStorage.setItem(
+      "cv_auth_session",
+      JSON.stringify(data)
+    );
+
+    updateAuthUI();
+
+    showAuthMessage(
+      "Login successful.",
+      "success"
+    );
+
+    setTimeout(
+      function(){
+        closeAuthModal();
+      },
+      900
+    );
+
+  }catch(error){
+
+    console.error(
+      "Login error:",
+      error
+    );
+
+    showAuthMessage(
+      error.message ||
+      "Login failed.",
+      "error"
+    );
+
+  }finally{
+
+    button.disabled = false;
+
+    button.textContent =
+      "Login";
+
+  }
+
+}
+
+
+/* =========================================================
+   SIGN UP
+========================================================= */
+
+async function signupUser(event){
+
+  event.preventDefault();
+
+  const email =
+    document.getElementById(
+      "signupEmail"
+    ).value.trim();
+
+  const password =
+    document.getElementById(
+      "signupPassword"
+    ).value;
+
+  const button =
+    document.getElementById(
+      "signupSubmit"
+    );
+
+  clearAuthMessage();
+
+  if(password.length < 6){
+
+    showAuthMessage(
+      "Password must be at least 6 characters.",
+      "error"
+    );
+
+    return;
+  }
+
+  button.disabled = true;
+
+  button.textContent =
+    "Creating...";
+
+  try{
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/auth/v1/signup",
+        {
+          method:"POST",
+
+          headers:{
+            "apikey":
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json"
+          },
+
+          body:JSON.stringify({
+
+            email:
+              email,
+
+            password:
+              password
+
+          })
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if(!response.ok){
+
+      throw new Error(
+        data.msg ||
+        data.message ||
+        data.error_description ||
+        "Sign up failed."
+      );
+
+    }
+
+    if(
+      data.access_token
+    ){
+
+      currentAuthSession =
+        data;
+
+      localStorage.setItem(
+        "cv_auth_session",
+        JSON.stringify(data)
+      );
+
+      updateAuthUI();
+
+      showAuthMessage(
+        "Account created successfully.",
+        "success"
+      );
+
+      setTimeout(
+        function(){
+          closeAuthModal();
+        },
+        900
+      );
+
+    }else{
+
+      showAuthMessage(
+        "Account created. Please check your email if confirmation is required, then login.",
+        "success"
+      );
+
+      switchAuthTab(
+        "login"
+      );
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Signup error:",
+      error
+    );
+
+    showAuthMessage(
+      error.message ||
+      "Sign up failed.",
+      "error"
+    );
+
+  }finally{
+
+    button.disabled = false;
+
+    button.textContent =
+      "Create Account";
+
+  }
+
+}
+
+
+/* =========================================================
+   RESTORE AUTH SESSION
+========================================================= */
+
+function restoreAuthSession(){
+
+  try{
+
+    const saved =
+      localStorage.getItem(
+        "cv_auth_session"
+      );
+
+    if(saved){
+
+      currentAuthSession =
+        JSON.parse(saved);
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Auth restore error:",
+      error
+    );
+
+    currentAuthSession =
+      null;
+
+  }
+
+  updateAuthUI();
+
+}
+
+
+/* =========================================================
+   AUTH UI
+========================================================= */
+
+function updateAuthUI(){
+
+  const loginButton =
+    document.getElementById(
+      "authHeaderButton"
+    );
+
+  const accountButton =
+    document.getElementById(
+      "userNameButton"
+    );
+
+  if(
+    currentAuthSession &&
+    currentAuthSession.user
+  ){
+
+    loginButton.style.display =
+      "none";
+
+    accountButton.style.display =
+      "block";
+
+    const email =
+      currentAuthSession.user.email ||
+      "Account";
+
+    accountButton.textContent =
+      "👤 " +
+      (
+        email.length > 16
+          ? email.slice(0,13) + "..."
+          : email
+      );
+
+  }else{
+
+    loginButton.style.display =
+      "block";
+
+    accountButton.style.display =
+      "none";
+
+  }
+
+}
+
+
+/* =========================================================
+   ACCOUNT MENU
+========================================================= */
+
+function openAccountMenu(){
+
+  if(
+    !currentAuthSession ||
+    !currentAuthSession.user
+  ){
+
+    openAuthModal();
+
+    return;
+  }
+
+  const email =
+    currentAuthSession.user.email ||
+    "your account";
+
+  const logout =
+    confirm(
+      "Logged in as:\n" +
+      email +
+      "\n\nDo you want to logout?"
+    );
+
+  if(logout){
+
+    logoutUser();
+
+  }
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+async function logoutUser(){
+
+  try{
+
+    if(
+      currentAuthSession &&
+      currentAuthSession.access_token
+    ){
+
+      await fetch(
+        SUPABASE_URL +
+        "/auth/v1/logout",
+        {
+          method:"POST",
+
+          headers:{
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              currentAuthSession.access_token
+          }
+        }
+      );
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Logout error:",
+      error
+    );
+
+  }
+
+  currentAuthSession =
+    null;
+
+  localStorage.removeItem(
+    "cv_auth_session"
+  );
+
+  updateAuthUI();
+
+  alert(
+    "You have been logged out."
+  );
+
+}
+
+
+/* =========================================================
+   CLOSE AUTH WHEN CLICK OUTSIDE
+========================================================= */
+
+document.getElementById(
+  "authOverlay"
+).addEventListener(
+  "click",
+  function(event){
+
+    if(
+      event.target ===
+      this
+    ){
+
+      closeAuthModal();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   START
+========================================================= */
+
+restoreLastOrder();
+
+restoreAuthSession();
+
+updateCartCount();
+
+renderCart();
+
+loadProducts();
+
+</script>
+
+</body>
+</html>
