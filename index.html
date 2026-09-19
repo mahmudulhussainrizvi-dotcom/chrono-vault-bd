@@ -1,1175 +1,1770 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#080808" />
-
-  <title>CHRONO VAULT BD</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #080808;
-      color: #fff;
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input,
-    textarea,
-    select {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .container {
-      width: min(1200px, 92%);
-      margin: auto;
-    }
-
-    /* HEADER */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(8, 8, 8, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid #d4af37;
-    }
-
-    .nav {
-      min-height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 2px solid #d4af37;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #d4af37;
-      font-weight: 900;
-      font-size: 15px;
-    }
-
-    .brand-text {
-      font-weight: 800;
-      letter-spacing: 1px;
-      font-size: 16px;
-    }
-
-    .cart-btn {
-      border: 1px solid #d4af37;
-      background: transparent;
-      color: #d4af37;
-      padding: 9px 14px;
-      border-radius: 8px;
-      font-weight: 700;
-    }
-
-    .cart-btn:hover {
-      background: #d4af37;
-      color: #000;
-    }
-
-    /* HERO */
-    .hero {
-      padding: 80px 0;
-      text-align: center;
-      background:
-        radial-gradient(circle at top, rgba(212,175,55,0.16), transparent 45%),
-        #080808;
-    }
-
-    .hero h1 {
-      font-size: clamp(38px, 8vw, 78px);
-      color: #d4af37;
-      letter-spacing: 4px;
-      line-height: 1.05;
-    }
-
-    .hero p {
-      max-width: 650px;
-      margin: 20px auto 0;
-      color: #ccc;
-      font-size: 17px;
-    }
-
-    .hero-btn {
-      display: inline-block;
-      margin-top: 30px;
-      background: #d4af37;
-      color: #000;
-      padding: 13px 24px;
-      border-radius: 8px;
-      font-weight: 800;
-    }
-
-    /* SECTION */
-    section {
-      padding: 55px 0;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .section-title h2 {
-      color: #d4af37;
-      font-size: 30px;
-    }
-
-    .section-title p {
-      color: #aaa;
-      margin-top: 5px;
-    }
-
-    /* PRODUCTS */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .product-card {
-      background: #111;
-      border: 1px solid #292929;
-      border-radius: 14px;
-      overflow: hidden;
-      transition: 0.25s;
-    }
-
-    .product-card:hover {
-      transform: translateY(-4px);
-      border-color: #d4af37;
-    }
-
-    .product-image {
-      width: 100%;
-      height: 260px;
-      background: #161616;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .image-placeholder {
-      color: #d4af37;
-      font-size: 55px;
-    }
-
-    .product-info {
-      padding: 18px;
-    }
-
-    .product-category {
-      color: #d4af37;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .product-name {
-      font-size: 18px;
-      font-weight: 800;
-      margin: 5px 0 10px;
-    }
-
-    .price-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .price {
-      color: #d4af37;
-      font-size: 22px;
-      font-weight: 900;
-    }
-
-    .old-price {
-      color: #777;
-      text-decoration: line-through;
-      font-size: 14px;
-    }
-
-    .stock {
-      margin-top: 8px;
-      font-size: 13px;
-      color: #aaa;
-    }
-
-    .stock.out {
-      color: #ff6666;
-    }
-
-    .add-btn {
-      width: 100%;
-      margin-top: 15px;
-      padding: 11px;
-      border: 1px solid #d4af37;
-      border-radius: 8px;
-      background: #d4af37;
-      color: #000;
-      font-weight: 800;
-    }
-
-    .add-btn:disabled {
-      background: #333;
-      color: #777;
-      border-color: #444;
-      cursor: not-allowed;
-    }
-
-    /* DETAILS */
-    .details-box {
-      background: #111;
-      border: 1px solid #292929;
-      border-radius: 14px;
-      padding: 25px;
-    }
-
-    .details-box h3 {
-      color: #d4af37;
-      margin-bottom: 15px;
-    }
-
-    .details-list {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-
-    .details-list div {
-      padding: 10px;
-      background: #171717;
-      border-radius: 7px;
-      color: #ccc;
-    }
-
-    /* CART */
-    .cart-section {
-      display: none;
-    }
-
-    .cart-box {
-      background: #111;
-      border: 1px solid #292929;
-      border-radius: 14px;
-      padding: 20px;
-    }
-
-    .cart-item {
-      display: grid;
-      grid-template-columns: 1fr auto auto auto;
-      gap: 15px;
-      align-items: center;
-      padding: 15px 0;
-      border-bottom: 1px solid #292929;
-    }
-
-    .cart-item:last-child {
-      border-bottom: 0;
-    }
-
-    .cart-item-name {
-      font-weight: 800;
-    }
-
-    .cart-item-price {
-      color: #d4af37;
-      font-weight: 800;
-    }
-
-    .qty-controls {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .qty-btn {
-      width: 30px;
-      height: 30px;
-      border: 1px solid #d4af37;
-      background: transparent;
-      color: #d4af37;
-      border-radius: 5px;
-    }
-
-    .remove-btn {
-      border: 0;
-      background: transparent;
-      color: #ff6666;
-      font-size: 13px;
-    }
-
-    .cart-total {
-      text-align: right;
-      margin-top: 20px;
-      font-size: 24px;
-      color: #d4af37;
-      font-weight: 900;
-    }
-
-    .checkout-btn {
-      margin-top: 15px;
-      width: 100%;
-      padding: 13px;
-      border: 0;
-      background: #d4af37;
-      color: #000;
-      border-radius: 8px;
-      font-weight: 900;
-    }
-
-    .clear-cart-btn {
-      margin-top: 10px;
-      width: 100%;
-      padding: 11px;
-      border: 1px solid #555;
-      background: transparent;
-      color: #aaa;
-      border-radius: 8px;
-    }
-
-    /* CHECKOUT */
-    .checkout-section {
-      display: none;
-    }
-
-    .checkout-box {
-      max-width: 650px;
-      margin: auto;
-      background: #111;
-      border: 1px solid #292929;
-      border-radius: 14px;
-      padding: 25px;
-    }
-
-    .form-group {
-      margin-bottom: 16px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 7px;
-      color: #ccc;
-      font-weight: 700;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      background: #080808;
-      border: 1px solid #333;
-      color: #fff;
-      border-radius: 8px;
-      padding: 12px;
-      outline: none;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: #d4af37;
-    }
-
-    .form-group textarea {
-      min-height: 110px;
-      resize: vertical;
-    }
-
-    .place-order-btn {
-      width: 100%;
-      padding: 14px;
-      border: 0;
-      background: #d4af37;
-      color: #000;
-      border-radius: 8px;
-      font-weight: 900;
-    }
-
-    /* SUCCESS */
-    .success-section {
-      display: none;
-    }
-
-    .success-box {
-      max-width: 650px;
-      margin: auto;
-      text-align: center;
-      background: #111;
-      border: 1px solid #d4af37;
-      border-radius: 14px;
-      padding: 35px 20px;
-    }
-
-    .success-icon {
-      font-size: 55px;
-      color: #d4af37;
-    }
-
-    .success-box h2 {
-      color: #d4af37;
-      margin: 10px 0;
-    }
-
-    .order-id {
-      margin-top: 15px;
-      padding: 12px;
-      background: #080808;
-      border-radius: 8px;
-      color: #d4af37;
-      font-weight: 800;
-      word-break: break-word;
-    }
-
-    /* SOCIAL */
-    .social {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-
-    .social a {
-      border: 1px solid #333;
-      padding: 10px 14px;
-      border-radius: 7px;
-      color: #ccc;
-    }
-
-    .social a:hover {
-      border-color: #d4af37;
-      color: #d4af37;
-    }
-
-    /* LOADING / ERROR */
-    .message {
-      text-align: center;
-      padding: 30px;
-      color: #aaa;
-    }
-
-    .error-message {
-      color: #ff6666;
-    }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid #292929;
-      padding: 30px 0;
-      text-align: center;
-      color: #777;
-    }
-
-    footer strong {
-      color: #d4af37;
-    }
-
-    /* MOBILE */
-    @media (max-width: 850px) {
-      .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .nav {
-        min-height: 64px;
-      }
-
-      .brand-text {
-        font-size: 13px;
-      }
-
-      .logo {
-        width: 40px;
-        height: 40px;
-      }
-
-      .hero {
-        padding: 60px 0;
-      }
-
-      .products-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .product-image {
-        height: 280px;
-      }
-
-      .details-list {
-        grid-template-columns: 1fr;
-      }
-
-      .cart-item {
-        grid-template-columns: 1fr;
-        gap: 8px;
-      }
-
-      .cart-total {
-        text-align: left;
-      }
-    }
-  </style>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
+<meta
+  name="theme-color"
+  content="#080808"
+>
+
+<title>CHRONO VAULT BD</title>
+
+<style>
+
+/* ================================
+   RESET
+================================ */
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0
+}
+
+html{
+  scroll-behavior:smooth
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#080808;
+  color:#fff;
+  line-height:1.5
+}
+
+a{
+  text-decoration:none;
+  color:inherit
+}
+
+button,
+input,
+textarea{
+  font-family:inherit
+}
+
+button{
+  cursor:pointer
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(8,8,8,.97);
+  border-bottom:1px solid #292929;
+  backdrop-filter:blur(10px)
+}
+
+.nav{
+  max-width:1200px;
+  margin:auto;
+  min-height:70px;
+  padding:10px 4%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0
+}
+
+.logo{
+  width:44px;
+  height:44px;
+  flex-shrink:0;
+  border:1px solid #d4af37;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:#d4af37;
+  font-weight:bold;
+  font-size:16px
+}
+
+.brand b{
+  color:#d4af37;
+  letter-spacing:2px;
+  font-size:14px
+}
+
+.cart{
+  border:1px solid #d4af37;
+  color:#d4af37;
+  background:transparent;
+  padding:9px 15px;
+  border-radius:20px;
+  font-weight:bold;
+  white-space:nowrap
+}
+
+.cart:hover{
+  background:#d4af37;
+  color:#080808
+}
+
+
+/* ================================
+   HERO
+================================ */
+
+.hero{
+  text-align:center;
+  padding:80px 20px 65px;
+  background:
+    radial-gradient(
+      circle,
+      #252010 0,
+      #080808 60%
+    )
+}
+
+.hero small{
+  color:#d4af37;
+  letter-spacing:4px
+}
+
+.hero h1{
+  font-size:clamp(36px,9vw,72px);
+  margin:12px 0;
+  color:#d4af37;
+  letter-spacing:3px
+}
+
+.hero p{
+  color:#bbb;
+  max-width:600px;
+  margin:auto
+}
+
+
+/* ================================
+   SECTIONS
+================================ */
+
+.section{
+  max-width:1200px;
+  margin:auto;
+  padding:55px 4%
+}
+
+.title{
+  text-align:center;
+  margin-bottom:30px
+}
+
+.title h2{
+  color:#d4af37;
+  font-size:30px
+}
+
+
+/* ================================
+   PRODUCTS
+================================ */
+
+.products{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+  gap:20px
+}
+
+.card{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:14px;
+  overflow:hidden;
+  transition:.2s
+}
+
+.card:hover{
+  border-color:#d4af37;
+  transform:translateY(-2px)
+}
+
+.pic{
+  height:250px;
+  background:#171717;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden
+}
+
+.pic img{
+  width:100%;
+  height:100%;
+  object-fit:contain
+}
+
+.noimg{
+  font-size:55px;
+  color:#d4af37
+}
+
+.info{
+  padding:18px
+}
+
+.info h3{
+  font-size:17px;
+  margin-bottom:7px
+}
+
+.category{
+  color:#999;
+  font-size:13px
+}
+
+.price{
+  color:#d4af37;
+  font-size:22px;
+  font-weight:bold;
+  margin-top:10px
+}
+
+.old{
+  text-decoration:line-through;
+  color:#777;
+  font-size:13px;
+  margin-left:8px
+}
+
+.stock{
+  font-size:13px;
+  color:#aaa;
+  margin-top:5px
+}
+
+.btn{
+  display:block;
+  width:100%;
+  margin-top:10px;
+  padding:11px;
+  border:0;
+  background:#d4af37;
+  color:#080808;
+  font-weight:bold;
+  border-radius:8px
+}
+
+.btn:hover{
+  opacity:.9
+}
+
+.details-btn{
+  display:block;
+  width:100%;
+  margin-top:9px;
+  padding:10px;
+  border:1px solid #555;
+  background:#181818;
+  color:#ccc;
+  font-weight:bold;
+  border-radius:8px
+}
+
+.details-btn:hover{
+  color:#d4af37;
+  border-color:#d4af37
+}
+
+.empty{
+  text-align:center;
+  color:#aaa;
+  padding:40px
+}
+
+.loading{
+  text-align:center;
+  color:#d4af37;
+  padding:40px
+}
+
+
+/* ================================
+   PRODUCT DETAILS
+================================ */
+
+.product-details{
+  display:none;
+  max-width:1000px;
+  margin:30px auto 0;
+  padding:0 4% 50px
+}
+
+.product-details.show{
+  display:block
+}
+
+.details-box{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:16px;
+  overflow:hidden
+}
+
+.details-grid{
+  display:grid;
+  grid-template-columns:
+    minmax(280px,1fr)
+    minmax(280px,1fr)
+}
+
+.details-image{
+  min-height:420px;
+  background:#171717;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px
+}
+
+.details-image img{
+  width:100%;
+  height:100%;
+  max-height:420px;
+  object-fit:contain
+}
+
+.details-noimg{
+  font-size:90px;
+  color:#d4af37
+}
+
+.details-info{
+  padding:35px
+}
+
+.details-category{
+  color:#d4af37;
+  font-size:13px;
+  letter-spacing:2px;
+  text-transform:uppercase
+}
+
+.details-info h2{
+  font-size:30px;
+  margin:8px 0 15px
+}
+
+.details-price{
+  color:#d4af37;
+  font-size:28px;
+  font-weight:bold
+}
+
+.details-old-price{
+  color:#777;
+  text-decoration:line-through;
+  font-size:15px;
+  margin-left:8px
+}
+
+.details-stock{
+  color:#aaa;
+  margin-top:7px;
+  font-size:14px
+}
+
+.details-description{
+  margin-top:22px;
+  color:#bbb;
+  font-size:15px;
+  line-height:1.7
+}
+
+.specs{
+  margin-top:25px;
+  border-top:1px solid #292929;
+  padding-top:20px
+}
+
+.specs h3{
+  color:#d4af37;
+  margin-bottom:12px
+}
+
+.spec-row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:7px 0;
+  border-bottom:1px solid #1f1f1f;
+  font-size:13px
+}
+
+.spec-row span:first-child{
+  color:#777
+}
+
+.spec-row span:last-child{
+  color:#bbb;
+  text-align:right
+}
+
+.details-actions{
+  display:flex;
+  gap:10px;
+  margin-top:25px
+}
+
+.details-add{
+  flex:1;
+  padding:13px;
+  border:0;
+  background:#d4af37;
+  color:#080808;
+  font-weight:bold;
+  border-radius:8px
+}
+
+.details-close{
+  padding:13px 18px;
+  border:1px solid #555;
+  background:#181818;
+  color:#aaa;
+  border-radius:8px
+}
+
+.details-close:hover{
+  color:#d4af37;
+  border-color:#d4af37
+}
+
+
+/* ================================
+   WHY
+================================ */
+
+.why{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(180px,1fr));
+  gap:15px
+}
+
+.box{
+  background:#111;
+  border:1px solid #292929;
+  padding:25px;
+  border-radius:12px;
+  text-align:center
+}
+
+.box strong{
+  display:block;
+  color:#d4af37;
+  margin-bottom:8px
+}
+
+
+/* ================================
+   CART
+================================ */
+
+.cart-section{
+  display:none;
+  max-width:900px;
+  margin:0 auto;
+  padding:30px 4% 60px
+}
+
+.cart-section.show{
+  display:block
+}
+
+.cart-box{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:14px;
+  padding:20px
+}
+
+.cart-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:20px
+}
+
+.cart-header h2{
+  color:#d4af37
+}
+
+.close-cart{
+  border:1px solid #555;
+  background:transparent;
+  color:#aaa;
+  padding:7px 12px;
+  border-radius:7px
+}
+
+.cart-item{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:15px 0;
+  border-bottom:1px solid #292929
+}
+
+.cart-item:last-child{
+  border-bottom:0
+}
+
+.cart-item-image{
+  width:75px;
+  height:75px;
+  flex-shrink:0;
+  background:#171717;
+  border-radius:10px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+
+.cart-item-image img{
+  width:100%;
+  height:100%;
+  object-fit:contain
+}
+
+.cart-item-image span{
+  font-size:32px;
+  color:#d4af37
+}
+
+.cart-item-info{
+  flex:1;
+  min-width:0
+}
+
+.cart-item-info h3{
+  font-size:15px;
+  margin-bottom:4px
+}
+
+.cart-item-price{
+  color:#d4af37;
+  font-weight:bold
+}
+
+.quantity{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:8px
+}
+
+.quantity button{
+  width:28px;
+  height:28px;
+  border:1px solid #555;
+  background:#181818;
+  color:#fff;
+  border-radius:5px;
+  font-size:18px
+}
+
+.quantity span{
+  min-width:25px;
+  text-align:center
+}
+
+.remove-btn{
+  border:0;
+  background:transparent;
+  color:#888;
+  font-size:13px;
+  margin-top:5px
+}
+
+.remove-btn:hover{
+  color:#d4af37
+}
+
+.cart-total{
+  border-top:1px solid #292929;
+  margin-top:20px;
+  padding-top:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center
+}
+
+.cart-total strong{
+  color:#aaa
+}
+
+.cart-total span{
+  color:#d4af37;
+  font-size:24px;
+  font-weight:bold
+}
+
+.checkout-btn{
+  width:100%;
+  margin-top:20px;
+  padding:13px;
+  border:0;
+  border-radius:8px;
+  background:#d4af37;
+  color:#080808;
+  font-weight:bold
+}
+
+
+/* ================================
+   CHECKOUT
+================================ */
+
+.checkout-box{
+  display:none;
+  margin-top:25px;
+  padding-top:25px;
+  border-top:1px solid #292929
+}
+
+.checkout-box.show{
+  display:block
+}
+
+.checkout-title{
+  color:#d4af37;
+  font-size:22px;
+  margin-bottom:18px
+}
+
+.form-group{
+  margin-bottom:15px
+}
+
+.form-group label{
+  display:block;
+  color:#bbb;
+  font-size:14px;
+  margin-bottom:6px
+}
+
+.form-group input,
+.form-group textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #444;
+  border-radius:8px;
+  background:#181818;
+  color:#fff;
+  outline:none;
+  font-size:15px
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+  border-color:#d4af37
+}
+
+.form-group textarea{
+  min-height:100px;
+  resize:vertical
+}
+
+.payment-box{
+  background:#181818;
+  border:1px solid #292929;
+  border-radius:8px;
+  padding:13px;
+  margin-bottom:15px
+}
+
+.payment-box strong{
+  color:#d4af37
+}
+
+.payment-box p{
+  color:#aaa;
+  font-size:13px;
+  margin-top:3px
+}
+
+.place-order-btn{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:8px;
+  background:#d4af37;
+  color:#080808;
+  font-weight:bold;
+  font-size:16px
+}
+
+.place-order-btn:disabled{
+  opacity:.5;
+  cursor:not-allowed
+}
+
+.cancel-checkout{
+  width:100%;
+  margin-top:10px;
+  padding:11px;
+  border:1px solid #555;
+  border-radius:8px;
+  background:transparent;
+  color:#aaa
+}
+
+
+/* ================================
+   SUCCESS
+================================ */
+
+.order-success{
+  display:none;
+  text-align:center;
+  padding:30px 10px
+}
+
+.order-success.show{
+  display:block
+}
+
+.success-icon{
+  font-size:55px;
+  margin-bottom:10px
+}
+
+.order-success h2{
+  color:#d4af37;
+  margin-bottom:10px
+}
+
+.order-success p{
+  color:#bbb;
+  margin-bottom:6px
+}
+
+.order-id{
+  color:#d4af37;
+  font-weight:bold;
+  font-size:18px;
+  margin:12px 0
+}
+
+
+/* ================================
+   FOOTER
+================================ */
+
+footer{
+  text-align:center;
+  padding:40px 20px;
+  border-top:1px solid #292929;
+  color:#888
+}
+
+footer b{
+  color:#d4af37
+}
+
+.social-links{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px
+}
+
+.social-links a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:9px 15px;
+  border:1px solid #444;
+  border-radius:20px;
+  color:#bbb;
+  font-size:13px;
+  transition:.2s
+}
+
+.social-links a:hover{
+  color:#d4af37;
+  border-color:#d4af37;
+  transform:translateY(-1px)
+}
+
+.social-note{
+  margin-top:15px;
+  color:#666;
+  font-size:12px
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media(max-width:700px){
+
+  .nav{
+    min-height:64px;
+    padding:9px 4%
+  }
+
+  .brand b{
+    font-size:11px;
+    letter-spacing:1.5px
+  }
+
+  .logo{
+    width:40px;
+    height:40px
+  }
+
+  .cart{
+    padding:8px 11px;
+    font-size:13px
+  }
+
+  .hero{
+    padding:60px 18px 50px
+  }
+
+  .hero h1{
+    font-size:35px;
+    letter-spacing:2px
+  }
+
+  .section{
+    padding:45px 4%
+  }
+
+  .products{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+    gap:12px
+  }
+
+  .pic{
+    height:190px
+  }
+
+  .info{
+    padding:13px
+  }
+
+  .info h3{
+    font-size:14px
+  }
+
+  .price{
+    font-size:18px
+  }
+
+  .btn,
+  .details-btn{
+    padding:9px 5px;
+    font-size:12px
+  }
+
+  .details-grid{
+    grid-template-columns:1fr
+  }
+
+  .details-image{
+    min-height:300px
+  }
+
+  .details-info{
+    padding:22px
+  }
+
+  .details-info h2{
+    font-size:24px
+  }
+
+  .details-price{
+    font-size:24px
+  }
+
+  .details-actions{
+    flex-direction:column
+  }
+
+  .details-close{
+    width:100%
+  }
+
+  .cart-item{
+    gap:10px;
+    align-items:flex-start
+  }
+
+  .cart-item-image{
+    width:65px;
+    height:65px
+  }
+
+  .cart-item-info h3{
+    font-size:13px
+  }
+
+  .cart-total span{
+    font-size:20px
+  }
+
+  .social-links{
+    gap:8px
+  }
+
+  .social-links a{
+    padding:8px 12px;
+    font-size:12px
+  }
+
+}
+
+
+/* ================================
+   EXTRA SMALL
+================================ */
+
+@media(max-width:380px){
+
+  .brand b{
+    font-size:10px
+  }
+
+  .cart{
+    padding:7px 9px;
+    font-size:12px
+  }
+
+  .social-links a{
+    padding:7px 10px;
+    font-size:11px
+  }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="container nav">
 
-      <a href="#" class="brand">
-        <div class="logo">CV</div>
-        <div class="brand-text">CHRONO VAULT BD</div>
-      </a>
+<!-- ================================
+     HEADER
+================================ -->
 
-      <button class="cart-btn" onclick="showCart()">
-        🛒 Cart (<span id="cartCount">0</span>)
+<header>
+
+  <div class="nav">
+
+    <div class="brand">
+
+      <div class="logo">
+        CV
+      </div>
+
+      <b>
+        CHRONO VAULT BD
+      </b>
+
+    </div>
+
+
+    <button
+      class="cart"
+      onclick="toggleCart()"
+    >
+
+      🛒 Cart:
+
+      <span id="cartCount">
+        0
+      </span>
+
+    </button>
+
+  </div>
+
+</header>
+
+
+<!-- ================================
+     HERO
+================================ -->
+
+<section class="hero">
+
+  <small>
+    WELCOME TO
+  </small>
+
+  <h1>
+    CHRONO VAULT BD
+  </h1>
+
+  <p>
+    More Than Just a Watch. It's a Lifestyle.
+  </p>
+
+</section>
+
+
+<!-- ================================
+     PRODUCTS
+================================ -->
+
+<section
+  id="productsSection"
+  class="section"
+>
+
+  <div class="title">
+
+    <h2>
+      Our Collection
+    </h2>
+
+  </div>
+
+
+  <div
+    id="products"
+    class="products"
+  >
+
+    <div class="loading">
+      Loading products...
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================================
+     PRODUCT DETAILS
+================================ -->
+
+<section
+  id="productDetails"
+  class="product-details"
+>
+
+  <div class="details-box">
+
+    <div class="details-grid">
+
+
+      <!-- IMAGE -->
+
+      <div
+        id="detailsImage"
+        class="details-image"
+      >
+      </div>
+
+
+      <!-- INFO -->
+
+      <div class="details-info">
+
+        <div
+          id="detailsCategory"
+          class="details-category"
+        >
+          WATCHES
+        </div>
+
+
+        <h2 id="detailsName">
+          Product
+        </h2>
+
+
+        <div
+          id="detailsPrice"
+          class="details-price"
+        >
+          ৳0
+        </div>
+
+
+        <div
+          id="detailsStock"
+          class="details-stock"
+        >
+          Stock: 0
+        </div>
+
+
+        <div
+          id="detailsDescription"
+          class="details-description"
+        >
+        </div>
+
+
+        <!-- SPECIFICATIONS -->
+
+        <div class="specs">
+
+          <h3>
+            Product Specifications
+          </h3>
+
+
+          <div class="spec-row">
+            <span>Movement</span>
+            <span>Quartz</span>
+          </div>
+
+
+          <div class="spec-row">
+            <span>Dial</span>
+            <span>46 mm</span>
+          </div>
+
+
+          <div class="spec-row">
+            <span>Thickness</span>
+            <span>13 mm</span>
+          </div>
+
+
+          <div class="spec-row">
+            <span>Case</span>
+            <span>Alloy</span>
+          </div>
+
+
+          <div class="spec-row">
+            <span>Band</span>
+            <span>Alloy Steel</span>
+          </div>
+
+
+          <div class="spec-row">
+            <span>Dial Shape</span>
+            <span>Round</span>
+          </div>
+
+
+          <div class="spec-row">
+            <span>Style</span>
+            <span>Business</span>
+          </div>
+
+
+          <div class="spec-row">
+            <span>Waterproof</span>
+            <span>No</span>
+          </div>
+
+
+          <div class="spec-row">
+            <span>Warranty</span>
+            <span>Store Warranty</span>
+          </div>
+
+        </div>
+
+
+        <div class="details-actions">
+
+          <button
+            id="detailsAddButton"
+            class="details-add"
+          >
+            Add to Cart
+          </button>
+
+
+          <button
+            class="details-close"
+            onclick="closeDetails()"
+          >
+            Back to Collection
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================================
+     CART
+================================ -->
+
+<section
+  id="cartSection"
+  class="cart-section"
+>
+
+  <div class="cart-box">
+
+
+    <div class="cart-header">
+
+      <h2>
+        🛒 Your Cart
+      </h2>
+
+      <button
+        class="close-cart"
+        onclick="toggleCart()"
+      >
+        Close
       </button>
 
     </div>
-  </header>
 
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container">
+    <div id="cartItems">
 
-      <h1>CHRONO VAULT BD</h1>
-
-      <p>
-        More Than Just a Watch. It's a Lifestyle.
-      </p>
-
-      <a href="#products" class="hero-btn">
-        EXPLORE COLLECTION
-      </a>
-
-    </div>
-  </section>
-
-
-  <!-- PRODUCTS -->
-  <section id="products">
-    <div class="container">
-
-      <div class="section-title">
-        <h2>OUR COLLECTION</h2>
-        <p>Premium watches for your everyday style.</p>
-      </div>
-
-      <div id="productsGrid" class="products-grid">
-
-        <div class="message">
-          Loading products...
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- PRODUCT DETAILS -->
-  <section>
-    <div class="container">
-
-      <div class="section-title">
-        <h2>PRODUCT DETAILS</h2>
-      </div>
-
-      <div class="details-box">
-
-        <h3>Watch Specifications</h3>
-
-        <div class="details-list">
-
-          <div><strong>Movement:</strong> Quartz</div>
-          <div><strong>Case:</strong> Alloy</div>
-          <div><strong>Band:</strong> Alloy</div>
-          <div><strong>Buckle:</strong> Single Folding</div>
-          <div><strong>Dial:</strong> 46mm Round</div>
-          <div><strong>Thickness:</strong> 13mm</div>
-          <div><strong>Style:</strong> Business</div>
-          <div><strong>Display:</strong> Pointer + Number</div>
-          <div><strong>Origin:</strong> China</div>
-          <div><strong>Packaging:</strong> OPP</div>
-          <div><strong>Warranty:</strong> Store Warranty</div>
-          <div><strong>Waterproof:</strong> No</div>
-
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- CART -->
-  <section id="cartSection" class="cart-section">
-
-    <div class="container">
-
-      <div class="section-title">
-        <h2>YOUR CART</h2>
-        <p>Review your selected products.</p>
-      </div>
-
-      <div class="cart-box">
-
-        <div id="cartItems"></div>
-
-        <div id="cartTotal" class="cart-total">
-          Total: ৳0
-        </div>
-
-        <button class="checkout-btn" onclick="showCheckout()">
-          PROCEED TO CHECKOUT
-        </button>
-
-        <button class="clear-cart-btn" onclick="clearCart()">
-          CLEAR CART
-        </button>
-
+      <div class="empty">
+        Your cart is empty.
       </div>
 
     </div>
 
-  </section>
 
+    <div class="cart-total">
 
-  <!-- CHECKOUT -->
-  <section id="checkoutSection" class="checkout-section">
+      <strong>
+        Total
+      </strong>
 
-    <div class="container">
-
-      <div class="section-title">
-        <h2>CHECKOUT</h2>
-        <p>Cash on Delivery</p>
-      </div>
-
-      <div class="checkout-box">
-
-        <form id="orderForm">
-
-          <div class="form-group">
-            <label for="customerName">
-              Full Name
-            </label>
-
-            <input
-              id="customerName"
-              type="text"
-              placeholder="Enter your full name"
-              required
-            />
-          </div>
-
-
-          <div class="form-group">
-            <label for="customerPhone">
-              Phone Number
-            </label>
-
-            <input
-              id="customerPhone"
-              type="tel"
-              inputmode="numeric"
-              placeholder="01XXXXXXXXX"
-              required
-            />
-          </div>
-
-
-          <div class="form-group">
-            <label for="customerAddress">
-              Delivery Address
-            </label>
-
-            <textarea
-              id="customerAddress"
-              placeholder="Enter your complete delivery address"
-              required
-            ></textarea>
-          </div>
-
-
-          <button
-            type="submit"
-            id="placeOrderBtn"
-            class="place-order-btn"
-          >
-            PLACE ORDER — CASH ON DELIVERY
-          </button>
-
-        </form>
-
-      </div>
+      <span id="cartTotal">
+        ৳0
+      </span>
 
     </div>
 
-  </section>
+
+    <button
+      id="checkoutButton"
+      class="checkout-btn"
+      onclick="checkout()"
+    >
+      Proceed to Checkout
+    </button>
 
 
-  <!-- SUCCESS -->
-  <section id="successSection" class="success-section">
+    <!-- CHECKOUT -->
 
-    <div class="container">
+    <div
+      id="checkoutBox"
+      class="checkout-box"
+    >
 
-      <div class="success-box">
+      <div class="checkout-title">
+        📦 Delivery Information
+      </div>
 
-        <div class="success-icon">✓</div>
 
-        <h2>ORDER PLACED!</h2>
+      <div class="form-group">
+
+        <label for="customerName">
+          Full Name
+        </label>
+
+        <input
+          type="text"
+          id="customerName"
+          placeholder="Enter your full name"
+          autocomplete="name"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="customerPhone">
+          Phone Number
+        </label>
+
+        <input
+          type="tel"
+          id="customerPhone"
+          placeholder="01XXXXXXXXX"
+          inputmode="tel"
+          autocomplete="tel"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="customerAddress">
+          Full Delivery Address
+        </label>
+
+        <textarea
+          id="customerAddress"
+          placeholder="House/Road, Area, Thana, District"
+          autocomplete="street-address"
+        ></textarea>
+
+      </div>
+
+
+      <div class="payment-box">
+
+        <strong>
+          💵 Cash on Delivery
+        </strong>
 
         <p>
-          Thank you for shopping with CHRONO VAULT BD.
+          Pay when your order is delivered.
         </p>
-
-        <p>
-          Your order has been received successfully.
-        </p>
-
-        <div id="orderIdDisplay" class="order-id"></div>
-
-        <button
-          class="hero-btn"
-          onclick="window.location.reload()"
-          style="border:0;"
-        >
-          CONTINUE SHOPPING
-        </button>
 
       </div>
+
+
+      <button
+        id="placeOrderButton"
+        class="place-order-btn"
+        onclick="placeOrder()"
+      >
+        Place Order
+      </button>
+
+
+      <button
+        class="cancel-checkout"
+        onclick="cancelCheckout()"
+      >
+        Back to Cart
+      </button>
 
     </div>
 
-  </section>
 
+    <!-- SUCCESS -->
 
-  <!-- SOCIAL -->
-  <section>
+    <div
+      id="orderSuccess"
+      class="order-success"
+    >
 
-    <div class="container">
-
-      <div class="section-title">
-        <h2>FOLLOW US</h2>
+      <div class="success-icon">
+        ✅
       </div>
 
-      <div class="social">
-
-        <a
-          href="https://www.facebook.com/share/1C3CqbjBXk/"
-          target="_blank"
-          rel="noopener"
-        >
-          Facebook
-        </a>
-
-        <a
-          href="https://www.instagram.com/chronovaultbd?stkn=MWYxMjBxNXA1YTZ1bg=="
-          target="_blank"
-          rel="noopener"
-        >
-          Instagram
-        </a>
-
-        <a
-          href="https://www.tiktok.com/@chrono.vault.bd?_r=1&_t=ZS-99qPMd7PspQ"
-          target="_blank"
-          rel="noopener"
-        >
-          TikTok
-        </a>
-
-        <a
-          href="https://wa.me/8801326144735"
-          target="_blank"
-          rel="noopener"
-        >
-          WhatsApp
-        </a>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- FOOTER -->
-  <footer>
-
-    <div class="container">
+      <h2>
+        Order Placed Successfully!
+      </h2>
 
       <p>
-        © 2026 <strong>CHRONO VAULT BD</strong>
+        Thank you for shopping with
+        CHRONO VAULT BD.
       </p>
 
+      <div
+        id="orderId"
+        class="order-id"
+      >
+        Order received successfully.
+      </div>
+
       <p>
-        More Than Just a Watch. It's a Lifestyle.
+        We will contact you soon to confirm your order.
       </p>
 
     </div>
 
-  </footer>
+  </div>
+
+</section>
+
+
+<!-- ================================
+     WHY
+================================ -->
+
+<section class="section">
+
+  <div class="title">
+
+    <h2>
+      Why CHRONO VAULT BD?
+    </h2>
+
+  </div>
+
+
+  <div class="why">
+
+
+    <div class="box">
+
+      <strong>
+        Premium Style
+      </strong>
+
+      Elegant watches for your
+      everyday lifestyle.
+
+    </div>
+
+
+    <div class="box">
+
+      <strong>
+        Quality
+      </strong>
+
+      Carefully selected products.
+
+    </div>
+
+
+    <div class="box">
+
+      <strong>
+        Cash on Delivery
+      </strong>
+
+      Easy ordering with convenient payment.
+
+    </div>
+
+
+    <div class="box">
+
+      <strong>
+        Store Warranty
+      </strong>
+
+      Warranty support on selected products.
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- ================================
+     FOOTER
+================================ -->
+
+<footer>
+
+  <p>
+    © 2026 <b>CHRONO VAULT BD</b>
+  </p>
+
+  <p>
+    More Than Just a Watch. It's a Lifestyle.
+  </p>
+
+
+  <div class="social-links">
+
+    <a
+      href="https://www.facebook.com/share/1C3CqbjBXk/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Facebook
+    </a>
+
+
+    <a
+      href="https://www.instagram.com/chronovaultbd?stkn=MWYxMjBxNXA1YTZ1bg=="
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Instagram
+    </a>
+
+
+    <a
+      href="https://www.tiktok.com/@chrono.vault.bd?_r=1&_t=ZS-99qPMd7PspQ"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      TikTok
+    </a>
+
+
+    <a
+      href="https://wa.me/8801326144735"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      WhatsApp
+    </a>
+
+  </div>
+
+
+  <p class="social-note">
+    Follow us & stay connected.
+  </p>
+
+</footer>
 
 
 <script>
-/* =========================================================
-   SUPABASE CONFIG
-========================================================= */
+
+/* ================================
+   SUPABASE
+================================ */
 
 const SUPABASE_URL =
-  "https://rufdvkelwzsmnuruvdko.supabase.co";
+"https://rufdvkelwzsmnuruvdko.supabase.co";
 
 const SUPABASE_KEY =
-  "sb_publishable_3j4Bs4rft9_w4r1j6uHo5w_fYLIJsNI";
+"sb_publishable_3j4Bs4rft9_w4r1j6uHo5w_fYLIJsNI";
 
 
-/* =========================================================
-   GLOBAL DATA
-========================================================= */
+/* ================================
+   CART
+================================ */
 
-let products = [];
-let cart = JSON.parse(localStorage.getItem("chronoCart") || "[]");
+let cart = [];
 
 
-/* =========================================================
-   SUPABASE REQUEST HELPER
-========================================================= */
+try{
 
-async function supabaseRequest(path, options = {}) {
+  const savedCart =
+    localStorage.getItem(
+      "chronoVaultCart"
+    );
 
-  const headers = {
-    "apikey": SUPABASE_KEY,
-    "Authorization": "Bearer " + SUPABASE_KEY,
-    "Content-Type": "application/json",
-    ...(options.headers || {})
-  };
 
-  const response = await fetch(
-    SUPABASE_URL + path,
-    {
-      ...options,
-      headers
-    }
+  if(savedCart){
+
+    cart =
+      JSON.parse(savedCart);
+
+  }
+
+
+  if(!Array.isArray(cart)){
+
+    cart = [];
+
+  }
+
+}catch(error){
+
+  console.error(
+    "Cart storage error:",
+    error
   );
 
-  const raw = await response.text();
+  cart = [];
 
-  let data = null;
-
-  try {
-    data = raw ? JSON.parse(raw) : null;
-  } catch (e) {
-    data = raw;
-  }
-
-  if (!response.ok) {
-
-    let message = "Supabase request failed.";
-
-    if (data && typeof data === "object") {
-      message =
-        data.message ||
-        data.error_description ||
-        data.error ||
-        JSON.stringify(data);
-    } else if (data) {
-      message = data;
-    }
-
-    throw new Error(
-      "HTTP " + response.status + ": " + message
-    );
-  }
-
-  return data;
 }
 
 
-/* =========================================================
-   LOAD PRODUCTS
-========================================================= */
+/* ================================
+   CURRENT DETAIL PRODUCT
+================================ */
 
-async function loadProducts() {
+let currentDetailProduct = null;
 
-  const grid = document.getElementById("productsGrid");
 
-  try {
+/* ================================
+   SAFE TEXT
+================================ */
 
-    const data = await supabaseRequest(
-      "/rest/v1/products?select=*&order=created_at.asc"
+function safe(value){
+
+  if(
+    value === null ||
+    value === undefined
+  ){
+
+    return "";
+
+  }
+
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* ================================
+   SAVE CART
+================================ */
+
+function saveCart(){
+
+  try{
+
+    localStorage.setItem(
+      "chronoVaultCart",
+      JSON.stringify(cart)
     );
 
-    products = Array.isArray(data) ? data : [];
+  }catch(error){
 
-    renderProducts();
-
-  } catch (error) {
-
-    console.error("PRODUCT LOAD ERROR:", error);
-
-    grid.innerHTML = `
-      <div class="message error-message">
-        Products could not be loaded.<br><br>
-        ${escapeHtml(error.message)}
-      </div>
-    `;
+    console.error(
+      "Could not save cart:",
+      error
+    );
 
   }
 
 }
 
 
-/* =========================================================
-   RENDER PRODUCTS
-========================================================= */
+/* ================================
+   CART COUNT
+================================ */
 
-function renderProducts() {
+function updateCartCount(){
 
-  const grid = document.getElementById("productsGrid");
+  const count =
+    cart.reduce(
+      function(total,item){
 
-  if (!products.length) {
+        return total +
+          Number(item.quantity || 0);
 
-    grid.innerHTML = `
-      <div class="message">
-        No products available right now.
-      </div>
-    `;
-
-    return;
-  }
+      },
+      0
+    );
 
 
-  grid.innerHTML = products.map(product => {
-
-    const name =
-      product.Name ||
-      "Premium Watch";
-
-    const category =
-      product.Category ||
-      "Watch";
-
-    const price =
-      Number(product.Price || 0);
-
-    const oldPrice =
-      Number(product["Old price"] || 0);
-
-    const stock =
-      Number(product.Stock || 0);
-
-    const image =
-      product.image_url ||
-      "";
-
-
-    const safeId =
-      String(product.id);
-
-
-    return `
-
-      <div class="product-card">
-
-        <div class="product-image">
-
-          ${
-            image
-              ?
-              `
-              <img
-                src="${escapeAttribute(image)}"
-                alt="${escapeAttribute(name)}"
-                loading="lazy"
-                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-              />
-
-              <div
-                class="image-placeholder"
-                style="display:none;"
-              >
-                ⌚
-              </div>
-              `
-              :
-              `
-              <div class="image-placeholder">
-                ⌚
-              </div>
-              `
-          }
-
-        </div>
-
-
-        <div class="product-info">
-
-          <div class="product-category">
-            ${escapeHtml(category)}
-          </div>
-
-
-          <div class="product-name">
-            ${escapeHtml(name)}
-          </div>
-
-
-          <div class="price-row">
-
-            <div class="price">
-              ৳${price.toLocaleString("en-BD")}
-            </div>
-
-            ${
-              oldPrice > price
-                ?
-                `
-                <div class="old-price">
-                  ৳${oldPrice.toLocaleString("en-BD")}
-                </div>
-                `
-                :
-                ""
-            }
-
-          </div>
-
-
-          <div
-            class="stock ${stock <= 0 ? "out" : ""}"
-          >
-
-            ${
-              stock > 0
-                ? `Stock: ${stock}`
-                : "Out of Stock"
-            }
-
-          </div>
-
-
-          <button
-            class="add-btn"
-            onclick="addToCart('${escapeAttribute(safeId)}')"
-            ${stock <= 0 ? "disabled" : ""}
-          >
-
-            ${
-              stock > 0
-                ? "ADD TO CART"
-                : "OUT OF STOCK"
-            }
-
-          </button>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }).join("");
+  document.getElementById(
+    "cartCount"
+  ).textContent = count;
 
 }
 
 
-/* =========================================================
-   ADD TO CART
-========================================================= */
+/* ================================
+   ADD CART
+================================ */
 
-function addToCart(productId) {
+function addCart(product){
 
-  const product =
-    products.find(
-      item => String(item.id) === String(productId)
-    );
-
-  if (!product) {
-    alert("Product not found.");
-    return;
-  }
+  const id =
+    String(product.id);
 
 
   const stock =
-    Number(product.Stock || 0);
+    Number(product.stock);
 
-  if (stock <= 0) {
-    alert("This product is out of stock.");
+
+  const price =
+    Number(product.price);
+
+
+  if(
+    !Number.isFinite(stock) ||
+    stock <= 0
+  ){
+
+    alert(
+      "This product is out of stock."
+    );
+
     return;
+
+  }
+
+
+  if(
+    !Number.isFinite(price)
+  ){
+
+    alert(
+      "Product price is unavailable."
+    );
+
+    return;
+
   }
 
 
   const existing =
     cart.find(
-      item => String(item.id) === String(product.id)
+      function(item){
+
+        return String(item.id) === id;
+
+      }
     );
 
 
-  if (existing) {
+  if(existing){
 
-    if (existing.quantity >= stock) {
+    if(
+      existing.quantity >= stock
+    ){
 
       alert(
-        "You cannot add more than available stock."
+        "Maximum available stock already added."
       );
 
       return;
+
     }
 
-    existing.quantity += 1;
 
-  } else {
+    existing.quantity++;
+
+  }else{
 
     cart.push({
-      id: product.id,
-      name: product.Name || "Premium Watch",
-      price: Number(product.Price || 0),
-      stock: stock,
-      quantity: 1
+
+      id:id,
+
+      name:product.name,
+
+      price:price,
+
+      image:product.image || "",
+
+      stock:stock,
+
+      quantity:1
+
     });
 
   }
@@ -1179,227 +1774,75 @@ function addToCart(productId) {
 
   updateCartCount();
 
-  alert("Added to cart.");
-
-}
+  renderCart();
 
 
-/* =========================================================
-   SAVE CART
-========================================================= */
-
-function saveCart() {
-
-  localStorage.setItem(
-    "chronoCart",
-    JSON.stringify(cart)
+  alert(
+    product.name +
+    " added to cart."
   );
 
 }
 
 
-/* =========================================================
-   CART COUNT
-========================================================= */
+/* ================================
+   CHANGE QUANTITY
+================================ */
 
-function updateCartCount() {
+function changeQuantity(
+  id,
+  change
+){
 
-  const count =
-    cart.reduce(
-      (sum, item) => sum + Number(item.quantity || 0),
-      0
+  const item =
+    cart.find(
+      function(product){
+
+        return String(product.id) ===
+          String(id);
+
+      }
     );
 
-  document.getElementById("cartCount").textContent =
-    count;
 
-}
-
-
-/* =========================================================
-   SHOW CART
-========================================================= */
-
-function showCart() {
-
-  const section =
-    document.getElementById("cartSection");
-
-  section.style.display = "block";
-
-  renderCart();
-
-  section.scrollIntoView({
-    behavior: "smooth"
-  });
-
-}
-
-
-/* =========================================================
-   RENDER CART
-========================================================= */
-
-function renderCart() {
-
-  const container =
-    document.getElementById("cartItems");
-
-  const totalElement =
-    document.getElementById("cartTotal");
-
-
-  if (!cart.length) {
-
-    container.innerHTML = `
-      <div class="message">
-        Your cart is empty.
-      </div>
-    `;
-
-    totalElement.textContent =
-      "Total: ৳0";
+  if(!item){
 
     return;
+
   }
 
 
-  let total = 0;
-
-
-  container.innerHTML =
-    cart.map((item, index) => {
-
-      const price =
-        Number(item.price || 0);
-
-      const quantity =
-        Number(item.quantity || 0);
-
-      const subtotal =
-        price * quantity;
-
-      total += subtotal;
-
-
-      return `
-
-        <div class="cart-item">
-
-          <div>
-            <div class="cart-item-name">
-              ${escapeHtml(item.name)}
-            </div>
-
-            <div class="cart-item-price">
-              ৳${price.toLocaleString("en-BD")}
-            </div>
-          </div>
-
-
-          <div class="qty-controls">
-
-            <button
-              class="qty-btn"
-              onclick="changeQuantity(${index}, -1)"
-            >
-              −
-            </button>
-
-            <strong>
-              ${quantity}
-            </strong>
-
-            <button
-              class="qty-btn"
-              onclick="changeQuantity(${index}, 1)"
-            >
-              +
-            </button>
-
-          </div>
-
-
-          <strong>
-            ৳${subtotal.toLocaleString("en-BD")}
-          </strong>
-
-
-          <button
-            class="remove-btn"
-            onclick="removeFromCart(${index})"
-          >
-            Remove
-          </button>
-
-        </div>
-
-      `;
-
-    }).join("");
-
-
-  totalElement.textContent =
-    "Total: ৳" + total.toLocaleString("en-BD");
-
-}
-
-
-/* =========================================================
-   CHANGE QUANTITY
-========================================================= */
-
-function changeQuantity(index, change) {
-
-  if (!cart[index]) return;
-
-
-  const item =
-    cart[index];
-
   const newQuantity =
-    Number(item.quantity) + change;
+    Number(item.quantity) +
+    Number(change);
 
 
-  if (newQuantity <= 0) {
+  if(newQuantity <= 0){
 
-    cart.splice(index, 1);
+    removeFromCart(id);
 
-  } else if (newQuantity > Number(item.stock)) {
+    return;
+
+  }
+
+
+  if(
+    newQuantity > Number(item.stock)
+  ){
 
     alert(
-      "Maximum available stock is " +
+      "Maximum available stock: " +
       item.stock
     );
 
     return;
 
-  } else {
-
-    item.quantity =
-      newQuantity;
-
   }
 
 
-  saveCart();
+  item.quantity =
+    newQuantity;
 
-  updateCartCount();
-
-  renderCart();
-
-}
-
-
-/* =========================================================
-   REMOVE FROM CART
-========================================================= */
-
-function removeFromCart(index) {
-
-  if (!cart[index]) return;
-
-  cart.splice(index, 1);
 
   saveCart();
 
@@ -1410,26 +1853,23 @@ function removeFromCart(index) {
 }
 
 
-/* =========================================================
-   CLEAR CART
-========================================================= */
+/* ================================
+   REMOVE
+================================ */
 
-function clearCart() {
+function removeFromCart(id){
 
-  if (!cart.length) return;
+  cart =
+    cart.filter(
+      function(item){
 
+        return String(item.id) !==
+          String(id);
 
-  const confirmed =
-    confirm(
-      "Are you sure you want to clear the cart?"
+      }
     );
 
 
-  if (!confirmed) return;
-
-
-  cart = [];
-
   saveCart();
 
   updateCartCount();
@@ -1439,356 +1879,1220 @@ function clearCart() {
 }
 
 
-/* =========================================================
-   SHOW CHECKOUT
-========================================================= */
+/* ================================
+   CART TOTAL
+================================ */
 
-function showCheckout() {
+function getCartTotal(){
 
-  if (!cart.length) {
+  return cart.reduce(
+    function(sum,item){
 
-    alert("Your cart is empty.");
+      return sum +
+        (
+          Number(item.price) *
+          Number(item.quantity)
+        );
+
+    },
+    0
+  );
+
+}
+
+
+/* ================================
+   RENDER CART
+================================ */
+
+function renderCart(){
+
+  const box =
+    document.getElementById(
+      "cartItems"
+    );
+
+
+  if(
+    cart.length === 0
+  ){
+
+    box.innerHTML = `
+
+      <div class="empty">
+        Your cart is empty.
+      </div>
+
+    `;
+
+
+    document.getElementById(
+      "cartTotal"
+    ).textContent =
+      "৳0";
+
+
+    document.getElementById(
+      "checkoutButton"
+    ).style.display =
+      "none";
+
 
     return;
+
   }
 
 
   document.getElementById(
-    "checkoutSection"
-  ).style.display = "block";
+    "checkoutButton"
+  ).style.display =
+    "block";
+
+
+  box.innerHTML =
+    cart.map(
+      function(item){
+
+        const subtotal =
+          Number(item.price) *
+          Number(item.quantity);
+
+
+        let imageHTML = "";
+
+
+        if(item.image){
+
+          imageHTML = `
+
+            <img
+              src="${safe(item.image)}"
+              alt="${safe(item.name)}"
+              onerror="
+                this.style.display='none';
+                this.parentElement.innerHTML='<span>⌚</span>';
+              "
+            >
+
+          `;
+
+        }else{
+
+          imageHTML = `
+            <span>⌚</span>
+          `;
+
+        }
+
+
+        return `
+
+          <div class="cart-item">
+
+            <div class="cart-item-image">
+
+              ${imageHTML}
+
+            </div>
+
+
+            <div class="cart-item-info">
+
+              <h3>
+                ${safe(item.name)}
+              </h3>
+
+
+              <div class="cart-item-price">
+
+                ৳${Number(item.price)
+                  .toLocaleString("en-BD")}
+
+                ×
+
+                ${item.quantity}
+
+                =
+
+                ৳${subtotal
+                  .toLocaleString("en-BD")}
+
+              </div>
+
+
+              <div class="quantity">
+
+                <button
+                  onclick="changeQuantity(
+                    '${safe(item.id)}',
+                    -1
+                  )"
+                >
+                  −
+                </button>
+
+
+                <span>
+                  ${item.quantity}
+                </span>
+
+
+                <button
+                  onclick="changeQuantity(
+                    '${safe(item.id)}',
+                    1
+                  )"
+                >
+                  +
+                </button>
+
+              </div>
+
+
+              <button
+                class="remove-btn"
+                onclick="removeFromCart(
+                  '${safe(item.id)}'
+                )"
+              >
+                Remove
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    ).join("");
 
 
   document.getElementById(
-    "checkoutSection"
-  ).scrollIntoView({
-    behavior: "smooth"
-  });
+    "cartTotal"
+  ).textContent =
+    "৳" +
+    getCartTotal()
+      .toLocaleString("en-BD");
 
 }
 
 
-/* =========================================================
-   PHONE VALIDATION
-========================================================= */
+/* ================================
+   TOGGLE CART
+================================ */
 
-function isValidBangladeshPhone(phone) {
+function toggleCart(){
 
-  const cleaned =
-    phone.replace(/\s+/g, "");
+  const section =
+    document.getElementById(
+      "cartSection"
+    );
 
 
-  return /^01[3-9]\d{8}$/.test(cleaned);
+  section.classList.toggle(
+    "show"
+  );
+
+
+  if(
+    section.classList.contains("show")
+  ){
+
+    renderCart();
+
+
+    section.scrollIntoView({
+
+      behavior:"smooth",
+
+      block:"start"
+
+    });
+
+  }
 
 }
 
 
-/* =========================================================
-   ORDER SUBMIT
-========================================================= */
+/* ================================
+   SHOW PRODUCT DETAILS
+================================ */
 
-document
-  .getElementById("orderForm")
-  .addEventListener("submit", async function(event) {
+function showDetails(product){
 
-    event.preventDefault();
-
-
-    if (!cart.length) {
-
-      alert("Your cart is empty.");
-
-      return;
-    }
+  currentDetailProduct =
+    product;
 
 
-    const name =
-      document
-        .getElementById("customerName")
-        .value
-        .trim();
+  document.getElementById(
+    "detailsCategory"
+  ).textContent =
+    product.category ||
+    "WATCHES";
 
 
-    const phone =
-      document
-        .getElementById("customerPhone")
-        .value
-        .trim();
+  document.getElementById(
+    "detailsName"
+  ).textContent =
+    product.name ||
+    "Product";
 
 
-    const address =
-      document
-        .getElementById("customerAddress")
-        .value
-        .trim();
+  const price =
+    Number(product.price);
 
 
-    if (!name) {
-
-      alert("Please enter your name.");
-
-      return;
-    }
+  const oldPrice =
+    Number(product.oldPrice);
 
 
-    if (!isValidBangladeshPhone(phone)) {
-
-      alert(
-        "Please enter a valid Bangladesh phone number.\nExample: 01712345678"
-      );
-
-      return;
-    }
+  let priceHTML =
+    Number.isFinite(price)
+      ? "৳" +
+        price.toLocaleString("en-BD")
+      : "Price unavailable";
 
 
-    if (!address) {
+  if(
+    Number.isFinite(oldPrice) &&
+    oldPrice > 0 &&
+    oldPrice > price
+  ){
 
-      alert("Please enter your delivery address.");
+    priceHTML += `
 
-      return;
-    }
+      <span class="details-old-price">
+        ৳${oldPrice.toLocaleString("en-BD")}
+      </span>
 
+    `;
 
-    let total = 0;
-
-
-    const orderItems =
-      cart.map(item => {
-
-        const quantity =
-          Number(item.quantity || 0);
-
-        const price =
-          Number(item.price || 0);
-
-        const subtotal =
-          quantity * price;
-
-        total += subtotal;
+  }
 
 
-        return {
-          id: item.id,
-          name: item.name,
-          price: price,
-          quantity: quantity,
-          subtotal: subtotal
-        };
-
-      });
+  document.getElementById(
+    "detailsPrice"
+  ).innerHTML =
+    priceHTML;
 
 
-    const placeOrderBtn =
-      document.getElementById(
-        "placeOrderBtn"
-      );
+  const stock =
+    Number(product.stock);
 
 
-    placeOrderBtn.disabled = true;
+  document.getElementById(
+    "detailsStock"
+  ).textContent =
+    stock > 0
+      ? "Stock: " + stock
+      : "Out of stock";
 
-    placeOrderBtn.textContent =
-      "PLACING ORDER...";
+
+  document.getElementById(
+    "detailsDescription"
+  ).textContent =
+    product.description ||
+    "Premium three-eye men's watch set designed for a stylish and sophisticated look. Suitable for business and everyday wear.";
 
 
-    try {
+  /* ==========================
+     IMAGE
+  ========================== */
 
-      /*
-        IMPORTANT:
-        Supabase orders table uses customer_name.
-        Do NOT change this to customer_nam.
-      */
+  const imageBox =
+    document.getElementById(
+      "detailsImage"
+    );
 
-      const orderData = {
 
-        customer_name: name,
+  if(product.image){
 
-        phone: phone,
+    imageBox.innerHTML = `
 
-        address: address,
+      <img
+        src="${safe(product.image)}"
+        alt="${safe(product.name)}"
+        onerror="
+          this.style.display='none';
+          this.parentElement.innerHTML='<div class=&quot;details-noimg&quot;>⌚</div>';
+        "
+      >
 
-        items: orderItems,
+    `;
 
-        total: total,
+  }else{
 
-        status: "Pending"
+    imageBox.innerHTML = `
+
+      <div class="details-noimg">
+        ⌚
+      </div>
+
+    `;
+
+  }
+
+
+  /* ==========================
+     ADD BUTTON
+  ========================== */
+
+  const addButton =
+    document.getElementById(
+      "detailsAddButton"
+    );
+
+
+  if(
+    stock > 0 &&
+    Number.isFinite(price)
+  ){
+
+    addButton.style.display =
+      "block";
+
+
+    addButton.textContent =
+      "Add to Cart";
+
+
+    addButton.onclick =
+      function(){
+
+        addCart(product);
 
       };
 
+  }else{
 
-      console.log(
-        "ORDER DATA SENT TO SUPABASE:",
-        orderData
-      );
+    addButton.style.display =
+      "none";
 
-
-      const result =
-        await supabaseRequest(
-          "/rest/v1/orders",
-          {
-            method: "POST",
-
-            headers: {
-              "Prefer": "return=representation"
-            },
-
-            body: JSON.stringify(orderData)
-
-          }
-        );
+  }
 
 
-      console.log(
-        "SUPABASE ORDER RESPONSE:",
-        result
-      );
+  /* ==========================
+     SHOW
+  ========================== */
+
+  const details =
+    document.getElementById(
+      "productDetails"
+    );
 
 
-      let orderId = "";
+  details.classList.add(
+    "show"
+  );
 
 
-      if (Array.isArray(result) && result.length) {
+  details.scrollIntoView({
 
-        orderId =
-          result[0].id || "";
+    behavior:"smooth",
 
-      } else if (
-        result &&
-        typeof result === "object"
-      ) {
-
-        orderId =
-          result.id || "";
-
-      }
-
-
-      /*
-        Clear cart only after successful order.
-      */
-
-      cart = [];
-
-      saveCart();
-
-      updateCartCount();
-
-
-      /*
-        Hide checkout/cart.
-      */
-
-      document.getElementById(
-        "checkoutSection"
-      ).style.display = "none";
-
-
-      document.getElementById(
-        "cartSection"
-      ).style.display = "none";
-
-
-      /*
-        Show success.
-      */
-
-      const successSection =
-        document.getElementById(
-          "successSection"
-        );
-
-
-      successSection.style.display =
-        "block";
-
-
-      const orderIdDisplay =
-        document.getElementById(
-          "orderIdDisplay"
-        );
-
-
-      if (orderId) {
-
-        orderIdDisplay.innerHTML =
-          "Order ID: #" +
-          escapeHtml(String(orderId));
-
-      } else {
-
-        orderIdDisplay.innerHTML =
-          "Order received successfully.";
-
-      }
-
-
-      successSection.scrollIntoView({
-        behavior: "smooth"
-      });
-
-
-      document
-        .getElementById("orderForm")
-        .reset();
-
-
-    } catch (error) {
-
-      console.error(
-        "ORDER ERROR:",
-        error
-      );
-
-
-      /*
-        IMPORTANT:
-        Show the real Supabase error.
-      */
-
-      alert(
-        "ORDER ERROR:\n\n" +
-        error.message
-      );
-
-
-    } finally {
-
-      placeOrderBtn.disabled = false;
-
-      placeOrderBtn.textContent =
-        "PLACE ORDER — CASH ON DELIVERY";
-
-    }
+    block:"start"
 
   });
 
+}
 
-/* =========================================================
-   HTML ESCAPE HELPERS
-========================================================= */
 
-function escapeHtml(value) {
+/* ================================
+   CLOSE DETAILS
+================================ */
 
-  return String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+function closeDetails(){
+
+  const details =
+    document.getElementById(
+      "productDetails"
+    );
+
+
+  details.classList.remove(
+    "show"
+  );
+
+
+  currentDetailProduct =
+    null;
+
+
+  document.getElementById(
+    "productsSection"
+  ).scrollIntoView({
+
+    behavior:"smooth",
+
+    block:"start"
+
+  });
 
 }
 
 
-function escapeAttribute(value) {
+/* ================================
+   CHECKOUT
+================================ */
 
-  return escapeHtml(value);
+function checkout(){
+
+  if(
+    cart.length === 0
+  ){
+
+    alert(
+      "Your cart is empty."
+    );
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "checkoutBox"
+  ).classList.add("show");
+
+
+  document.getElementById(
+    "checkoutButton"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "orderSuccess"
+  ).classList.remove("show");
+
+
+  document.getElementById(
+    "checkoutBox"
+  ).scrollIntoView({
+
+    behavior:"smooth",
+
+    block:"start"
+
+  });
 
 }
 
 
-/* =========================================================
-   INITIALIZE
-========================================================= */
+/* ================================
+   CANCEL CHECKOUT
+================================ */
+
+function cancelCheckout(){
+
+  document.getElementById(
+    "checkoutBox"
+  ).classList.remove("show");
+
+
+  document.getElementById(
+    "checkoutButton"
+  ).style.display =
+    cart.length > 0
+      ? "block"
+      : "none";
+
+}
+
+
+/* ================================
+   PLACE ORDER
+================================ */
+
+async function placeOrder(){
+
+  if(
+    cart.length === 0
+  ){
+
+    alert(
+      "Your cart is empty."
+    );
+
+    return;
+
+  }
+
+
+  const name =
+    document.getElementById(
+      "customerName"
+    ).value.trim();
+
+
+  const phone =
+    document.getElementById(
+      "customerPhone"
+    ).value.trim();
+
+
+  const address =
+    document.getElementById(
+      "customerAddress"
+    ).value.trim();
+
+
+  if(!name){
+
+    alert(
+      "Please enter your full name."
+    );
+
+    document.getElementById(
+      "customerName"
+    ).focus();
+
+    return;
+
+  }
+
+
+  if(!phone){
+
+    alert(
+      "Please enter your phone number."
+    );
+
+    document.getElementById(
+      "customerPhone"
+    ).focus();
+
+    return;
+
+  }
+
+
+  const cleanPhone =
+    phone.replace(
+      /[\s-]/g,
+      ""
+    );
+
+
+  if(
+    !/^01\d{9}$/.test(cleanPhone)
+  ){
+
+    alert(
+      "Please enter a valid Bangladesh phone number. Example: 01712345678"
+    );
+
+    document.getElementById(
+      "customerPhone"
+    ).focus();
+
+    return;
+
+  }
+
+
+  if(!address){
+
+    alert(
+      "Please enter your full delivery address."
+    );
+
+    document.getElementById(
+      "customerAddress"
+    ).focus();
+
+    return;
+
+  }
+
+
+  const total =
+    getCartTotal();
+
+
+  const orderItems =
+    cart.map(
+      function(item){
+
+        return {
+
+          product_id:item.id,
+
+          name:item.name,
+
+          price:Number(item.price),
+
+          quantity:Number(item.quantity),
+
+          subtotal:
+            Number(item.price) *
+            Number(item.quantity)
+
+        };
+
+      }
+    );
+
+
+  const button =
+    document.getElementById(
+      "placeOrderButton"
+    );
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "Placing Order...";
+
+
+  try{
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/orders",
+
+        {
+
+          method:"POST",
+
+          headers:{
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json",
+
+            "Prefer":
+              "return=minimal"
+
+          },
+
+
+          body:JSON.stringify({
+
+            customer_name:name,
+
+            phone:cleanPhone,
+
+            address:address,
+
+            items:orderItems,
+
+            total:total,
+
+            status:"Pending"
+
+          })
+
+        }
+
+      );
+
+
+    const responseText =
+      await response.text();
+
+
+    if(!response.ok){
+
+      console.error(
+        "Order Error:",
+        response.status,
+        responseText
+      );
+
+
+      throw new Error(
+        "Order could not be placed."
+      );
+
+    }
+
+
+    cart = [];
+
+
+    saveCart();
+
+    updateCartCount();
+
+    renderCart();
+
+
+    document.getElementById(
+      "checkoutBox"
+    ).classList.remove("show");
+
+
+    document.getElementById(
+      "checkoutButton"
+    ).style.display =
+      "none";
+
+
+    document.getElementById(
+      "orderId"
+    ).textContent =
+      "Order received successfully.";
+
+
+    document.getElementById(
+      "orderSuccess"
+    ).classList.add("show");
+
+
+    document.getElementById(
+      "orderSuccess"
+    ).scrollIntoView({
+
+      behavior:"smooth",
+
+      block:"start"
+
+    });
+
+
+    document.getElementById(
+      "customerName"
+    ).value = "";
+
+
+    document.getElementById(
+      "customerPhone"
+    ).value = "";
+
+
+    document.getElementById(
+      "customerAddress"
+    ).value = "";
+
+
+  }catch(error){
+
+    console.error(
+      "Checkout Error:",
+      error
+    );
+
+
+    alert(
+      "Order could not be placed. Please try again."
+    );
+
+  }
+
+
+  button.disabled = false;
+
+  button.textContent =
+    "Place Order";
+
+}
+
+
+/* ================================
+   LOAD PRODUCTS
+================================ */
+
+async function loadProducts(){
+
+  const box =
+    document.getElementById(
+      "products"
+    );
+
+
+  try{
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/products?select=*&order=created_at.desc",
+
+        {
+
+          method:"GET",
+
+          headers:{
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json"
+
+          }
+
+        }
+
+      );
+
+
+    if(!response.ok){
+
+      const errorText =
+        await response.text();
+
+
+      console.error(
+        "Supabase Error:",
+        response.status,
+        errorText
+      );
+
+
+      throw new Error(
+        "Supabase Error " +
+        response.status
+      );
+
+    }
+
+
+    const products =
+      await response.json();
+
+
+    console.log(
+      "Supabase Products:",
+      products
+    );
+
+
+    if(
+      !Array.isArray(products) ||
+      products.length === 0
+    ){
+
+      box.innerHTML = `
+
+        <div class="empty">
+          No products available yet.
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    box.innerHTML =
+      products.map(
+        function(product){
+
+          /* ======================
+             SUPABASE COLUMNS
+          ====================== */
+
+          const name =
+            product.Name ||
+            "Unnamed Product";
+
+
+          const category =
+            product.Category ||
+            "Watches";
+
+
+          const price =
+            Number(product.Price);
+
+
+          const oldPrice =
+            Number(product["Old price"]);
+
+
+          const stock =
+            Number(product.Stock);
+
+
+          const imageUrl =
+            product.image_url ||
+            "";
+
+
+          const description =
+            product.Description ||
+            "";
+
+
+          const productId =
+            product.id;
+
+
+          /* ======================
+             IMAGE
+          ====================== */
+
+          let imageHTML;
+
+
+          if(imageUrl){
+
+            imageHTML = `
+
+              <img
+                src="${safe(imageUrl)}"
+                alt="${safe(name)}"
+                loading="lazy"
+                onerror="
+                  this.style.display='none';
+                  this.parentElement.innerHTML='<div class=&quot;noimg&quot;>⌚</div>';
+                "
+              >
+
+            `;
+
+          }else{
+
+            imageHTML = `
+
+              <div class="noimg">
+                ⌚
+              </div>
+
+            `;
+
+          }
+
+
+          /* ======================
+             PRICE
+          ====================== */
+
+          let priceHTML;
+
+
+          if(
+            Number.isFinite(price)
+          ){
+
+            priceHTML =
+              "৳" +
+              price.toLocaleString(
+                "en-BD"
+              );
+
+          }else{
+
+            priceHTML =
+              "Price unavailable";
+
+          }
+
+
+          if(
+            Number.isFinite(oldPrice) &&
+            oldPrice > 0 &&
+            oldPrice > price
+          ){
+
+            priceHTML += `
+
+              <span class="old">
+                ৳${oldPrice.toLocaleString(
+                  "en-BD"
+                )}
+              </span>
+
+            `;
+
+          }
+
+
+          /* ======================
+             STOCK
+          ====================== */
+
+          const stockHTML =
+            stock > 0
+              ? "Stock: " + stock
+              : "Out of stock";
+
+
+          /* ======================
+             BUTTON
+          ====================== */
+
+          let buttonHTML = "";
+
+
+          const cartProduct = {
+
+            id:productId,
+
+            name:name,
+
+            price:price,
+
+            oldPrice:oldPrice,
+
+            image:imageUrl,
+
+            stock:stock,
+
+            category:category,
+
+            description:description
+
+          };
+
+
+          const encodedProduct =
+            JSON.stringify(cartProduct)
+              .replace(
+                /&/g,
+                "\\u0026"
+              )
+              .replace(
+                /</g,
+                "\\u003c"
+              )
+              .replace(
+                />/g,
+                "\\u003e"
+              )
+              .replace(
+                /'/g,
+                "\\u0027"
+              );
+
+
+          if(
+            stock > 0 &&
+            Number.isFinite(price)
+          ){
+
+            buttonHTML = `
+
+              <button
+                class="btn"
+                onclick='addCart(${encodedProduct})'
+              >
+                Add to Cart
+              </button>
+
+            `;
+
+          }
+
+
+          /* ======================
+             DETAILS BUTTON
+          ====================== */
+
+          const detailsButton = `
+
+            <button
+              class="details-btn"
+              onclick='showDetails(${encodedProduct})'
+            >
+              View Details
+            </button>
+
+          `;
+
+
+          /* ======================
+             CARD
+          ====================== */
+
+          return `
+
+            <div class="card">
+
+              <div class="pic">
+
+                ${imageHTML}
+
+              </div>
+
+
+              <div class="info">
+
+                <h3>
+                  ${safe(name)}
+                </h3>
+
+
+                <div class="category">
+                  ${safe(category)}
+                </div>
+
+
+                <div class="price">
+                  ${priceHTML}
+                </div>
+
+
+                <div class="stock">
+                  ${safe(stockHTML)}
+                </div>
+
+
+                ${buttonHTML}
+
+                ${detailsButton}
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      ).join("");
+
+
+  }catch(error){
+
+    console.error(
+      "Product loading failed:",
+      error
+    );
+
+
+    box.innerHTML = `
+
+      <div class="empty">
+
+        Products could not be loaded.
+
+        <br><br>
+
+        Please check Supabase connection.
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/* ================================
+   START
+================================ */
 
 updateCartCount();
+
+renderCart();
 
 loadProducts();
 
