@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -18,46 +19,46 @@
 
 <style>
 
-/* ================================
+/* =========================================================
    RESET
-================================ */
+========================================================= */
 
 *{
   box-sizing:border-box;
   margin:0;
-  padding:0
+  padding:0;
 }
 
 html{
-  scroll-behavior:smooth
+  scroll-behavior:smooth;
 }
 
 body{
   font-family:Arial,Helvetica,sans-serif;
   background:#080808;
   color:#fff;
-  line-height:1.5
+  line-height:1.5;
 }
 
 a{
   text-decoration:none;
-  color:inherit
+  color:inherit;
 }
 
 button,
 input,
 textarea{
-  font-family:inherit
+  font-family:inherit;
 }
 
 button{
-  cursor:pointer
+  cursor:pointer;
 }
 
 
-/* ================================
+/* =========================================================
    HEADER
-================================ */
+========================================================= */
 
 header{
   position:sticky;
@@ -65,7 +66,7 @@ header{
   z-index:1000;
   background:rgba(8,8,8,.97);
   border-bottom:1px solid #292929;
-  backdrop-filter:blur(10px)
+  backdrop-filter:blur(10px);
 }
 
 .nav{
@@ -76,14 +77,14 @@ header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:15px
+  gap:15px;
 }
 
 .brand{
   display:flex;
   align-items:center;
   gap:10px;
-  min-width:0
+  min-width:0;
 }
 
 .logo{
@@ -96,19 +97,19 @@ header{
   place-items:center;
   color:#d4af37;
   font-weight:bold;
-  font-size:16px
+  font-size:16px;
 }
 
 .brand b{
   color:#d4af37;
   letter-spacing:2px;
-  font-size:14px
+  font-size:14px;
 }
 
 .header-actions{
   display:flex;
   align-items:center;
-  gap:8px
+  gap:8px;
 }
 
 .cart,
@@ -119,28 +120,28 @@ header{
   padding:9px 15px;
   border-radius:20px;
   font-weight:bold;
-  white-space:nowrap
+  white-space:nowrap;
 }
 
 .cart:hover,
 .track-header-btn:hover{
   background:#d4af37;
-  color:#080808
+  color:#080808;
 }
 
-/* Track Order hidden until order is placed */
+/* Hidden until successful order */
 .track-header-btn{
-  display:none
+  display:none;
 }
 
 .track-header-btn.show{
-  display:block
+  display:block;
 }
 
 
-/* ================================
+/* =========================================================
    HERO
-================================ */
+========================================================= */
 
 .hero{
   text-align:center;
@@ -150,58 +151,58 @@ header{
       circle,
       #252010 0,
       #080808 60%
-    )
+    );
 }
 
 .hero small{
   color:#d4af37;
-  letter-spacing:4px
+  letter-spacing:4px;
 }
 
 .hero h1{
   font-size:clamp(36px,9vw,72px);
   margin:12px 0;
   color:#d4af37;
-  letter-spacing:3px
+  letter-spacing:3px;
 }
 
 .hero p{
   color:#bbb;
   max-width:600px;
-  margin:auto
+  margin:auto;
 }
 
 
-/* ================================
+/* =========================================================
    SECTIONS
-================================ */
+========================================================= */
 
 .section{
   max-width:1200px;
   margin:auto;
-  padding:55px 4%
+  padding:55px 4%;
 }
 
 .title{
   text-align:center;
-  margin-bottom:30px
+  margin-bottom:30px;
 }
 
 .title h2{
   color:#d4af37;
-  font-size:30px
+  font-size:30px;
 }
 
 
-/* ================================
+/* =========================================================
    PRODUCTS
-================================ */
+========================================================= */
 
 .products{
   display:grid;
   grid-template-columns:
     repeat(auto-fit,minmax(220px,1fr));
-  gap:20px
+  gap:20px;
 }
 
 .card{
@@ -209,12 +210,12 @@ header{
   border:1px solid #292929;
   border-radius:14px;
   overflow:hidden;
-  transition:.2s
+  transition:.2s;
 }
 
 .card:hover{
   border-color:#d4af37;
-  transform:translateY(-2px)
+  transform:translateY(-2px);
 }
 
 .pic{
@@ -223,52 +224,52 @@ header{
   display:flex;
   align-items:center;
   justify-content:center;
-  overflow:hidden
+  overflow:hidden;
 }
 
 .pic img{
   width:100%;
   height:100%;
-  object-fit:contain
+  object-fit:contain;
 }
 
 .noimg{
   font-size:55px;
-  color:#d4af37
+  color:#d4af37;
 }
 
 .info{
-  padding:18px
+  padding:18px;
 }
 
 .info h3{
   font-size:17px;
-  margin-bottom:7px
+  margin-bottom:7px;
 }
 
 .category{
   color:#999;
-  font-size:13px
+  font-size:13px;
 }
 
 .price{
   color:#d4af37;
   font-size:22px;
   font-weight:bold;
-  margin-top:10px
+  margin-top:10px;
 }
 
 .old{
   text-decoration:line-through;
   color:#777;
   font-size:13px;
-  margin-left:8px
+  margin-left:8px;
 }
 
 .stock{
   font-size:13px;
   color:#aaa;
-  margin-top:5px
+  margin-top:5px;
 }
 
 .btn{
@@ -280,11 +281,11 @@ header{
   background:#d4af37;
   color:#080808;
   font-weight:bold;
-  border-radius:8px
+  border-radius:8px;
 }
 
 .btn:hover{
-  opacity:.9
+  opacity:.9;
 }
 
 .details-btn{
@@ -296,54 +297,54 @@ header{
   background:#181818;
   color:#ccc;
   font-weight:bold;
-  border-radius:8px
+  border-radius:8px;
 }
 
 .details-btn:hover{
   color:#d4af37;
-  border-color:#d4af37
+  border-color:#d4af37;
 }
 
 .empty{
   text-align:center;
   color:#aaa;
-  padding:40px
+  padding:40px;
 }
 
 .loading{
   text-align:center;
   color:#d4af37;
-  padding:40px
+  padding:40px;
 }
 
 
-/* ================================
+/* =========================================================
    PRODUCT DETAILS
-================================ */
+========================================================= */
 
 .product-details{
   display:none;
   max-width:1000px;
   margin:30px auto 0;
-  padding:0 4% 50px
+  padding:0 4% 50px;
 }
 
 .product-details.show{
-  display:block
+  display:block;
 }
 
 .details-box{
   background:#111;
   border:1px solid #292929;
   border-radius:16px;
-  overflow:hidden
+  overflow:hidden;
 }
 
 .details-grid{
   display:grid;
   grid-template-columns:
     minmax(280px,1fr)
-    minmax(280px,1fr)
+    minmax(280px,1fr);
 }
 
 .details-image{
@@ -352,72 +353,72 @@ header{
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:25px
+  padding:25px;
 }
 
 .details-image img{
   width:100%;
   height:100%;
   max-height:420px;
-  object-fit:contain
+  object-fit:contain;
 }
 
 .details-noimg{
   font-size:90px;
-  color:#d4af37
+  color:#d4af37;
 }
 
 .details-info{
-  padding:35px
+  padding:35px;
 }
 
 .details-category{
   color:#d4af37;
   font-size:13px;
   letter-spacing:2px;
-  text-transform:uppercase
+  text-transform:uppercase;
 }
 
 .details-info h2{
   font-size:30px;
-  margin:8px 0 15px
+  margin:8px 0 15px;
 }
 
 .details-price{
   color:#d4af37;
   font-size:28px;
-  font-weight:bold
+  font-weight:bold;
 }
 
 .details-old-price{
   color:#777;
   text-decoration:line-through;
   font-size:15px;
-  margin-left:8px
+  margin-left:8px;
 }
 
 .details-stock{
   color:#aaa;
   margin-top:7px;
-  font-size:14px
+  font-size:14px;
 }
 
 .details-description{
   margin-top:22px;
   color:#bbb;
   font-size:15px;
-  line-height:1.7
+  line-height:1.7;
 }
 
 .specs{
   margin-top:25px;
   border-top:1px solid #292929;
-  padding-top:20px
+  padding-top:20px;
 }
 
 .specs h3{
   color:#d4af37;
-  margin-bottom:12px
+  margin-bottom:12px;
 }
 
 .spec-row{
@@ -426,22 +427,22 @@ header{
   gap:15px;
   padding:7px 0;
   border-bottom:1px solid #1f1f1f;
-  font-size:13px
+  font-size:13px;
 }
 
 .spec-row span:first-child{
-  color:#777
+  color:#777;
 }
 
 .spec-row span:last-child{
   color:#bbb;
-  text-align:right
+  text-align:right;
 }
 
 .details-actions{
   display:flex;
   gap:10px;
-  margin-top:25px
+  margin-top:25px;
 }
 
 .details-add{
@@ -451,7 +452,7 @@ header{
   background:#d4af37;
   color:#080808;
   font-weight:bold;
-  border-radius:8px
+  border-radius:8px;
 }
 
 .details-close{
@@ -459,35 +460,35 @@ header{
   border:1px solid #555;
   background:#181818;
   color:#aaa;
-  border-radius:8px
+  border-radius:8px;
 }
 
 .details-close:hover{
   color:#d4af37;
-  border-color:#d4af37
+  border-color:#d4af37;
 }
 
 
-/* ================================
+/* =========================================================
    TRACK ORDER
-================================ */
+========================================================= */
 
 .track-section{
   max-width:900px;
   margin:0 auto;
   padding:0 4% 50px;
-  display:none
+  display:none;
 }
 
 .track-section.show{
-  display:block
+  display:block;
 }
 
 .track-box{
   background:#111;
   border:1px solid #292929;
   border-radius:16px;
-  padding:25px
+  padding:25px;
 }
 
 .track-header{
@@ -495,12 +496,12 @@ header{
   align-items:center;
   justify-content:space-between;
   gap:15px;
-  margin-bottom:20px
+  margin-bottom:20px;
 }
 
 .track-header h2{
   color:#d4af37;
-  font-size:25px
+  font-size:25px;
 }
 
 .track-close{
@@ -508,29 +509,29 @@ header{
   background:transparent;
   color:#aaa;
   padding:8px 13px;
-  border-radius:7px
+  border-radius:7px;
 }
 
 .track-close:hover{
   color:#d4af37;
-  border-color:#d4af37
+  border-color:#d4af37;
 }
 
 .track-intro{
   color:#999;
   font-size:14px;
-  margin-bottom:20px
+  margin-bottom:20px;
 }
 
 .track-form-group{
-  margin-bottom:15px
+  margin-bottom:15px;
 }
 
 .track-form-group label{
   display:block;
   color:#bbb;
   font-size:14px;
-  margin-bottom:6px
+  margin-bottom:6px;
 }
 
 .track-form-group input{
@@ -541,11 +542,11 @@ header{
   background:#181818;
   color:#fff;
   outline:none;
-  font-size:15px
+  font-size:15px;
 }
 
 .track-form-group input:focus{
-  border-color:#d4af37
+  border-color:#d4af37;
 }
 
 .track-btn{
@@ -556,30 +557,30 @@ header{
   background:#d4af37;
   color:#080808;
   font-weight:bold;
-  font-size:15px
+  font-size:15px;
 }
 
 .track-btn:disabled{
   opacity:.5;
-  cursor:not-allowed
+  cursor:not-allowed;
 }
 
 .track-result{
   display:none;
   margin-top:25px;
   padding-top:25px;
-  border-top:1px solid #292929
+  border-top:1px solid #292929;
 }
 
 .track-result.show{
-  display:block
+  display:block;
 }
 
 .track-success-title{
   color:#d4af37;
   font-size:21px;
   font-weight:bold;
-  margin-bottom:15px
+  margin-bottom:15px;
 }
 
 .track-error{
@@ -590,11 +591,11 @@ header{
   border:1px solid #4a2929;
   border-radius:8px;
   color:#ff9b9b;
-  font-size:14px
+  font-size:14px;
 }
 
 .track-error.show{
-  display:block
+  display:block;
 }
 
 .track-summary{
@@ -602,39 +603,41 @@ header{
   border:1px solid #292929;
   border-radius:10px;
   padding:15px;
-  margin-bottom:20px
+  margin-bottom:20px;
 }
 
 .track-row{
   display:flex;
   justify-content:space-between;
   gap:15px;
-  padding:8px 0;
+  padding:9px 0;
   border-bottom:1px solid #292929;
-  font-size:14px
+  font-size:14px;
 }
 
 .track-row:last-child{
-  border-bottom:0
+  border-bottom:0;
 }
 
 .track-row span:first-child{
-  color:#777
+  color:#777;
 }
 
 .track-row span:last-child{
   color:#ddd;
-  text-align:right
+  text-align:right;
+  max-width:65%;
+  word-break:break-word;
 }
 
 .track-code{
   color:#d4af37 !important;
-  font-weight:bold
+  font-weight:bold;
 }
 
 .track-total{
   color:#d4af37 !important;
-  font-weight:bold
+  font-weight:bold;
 }
 
 .status-badge{
@@ -644,61 +647,61 @@ header{
   background:#252010;
   color:#d4af37 !important;
   border:1px solid #5a4b18;
-  font-weight:bold
+  font-weight:bold;
 }
 
 .track-products{
-  margin-top:15px
+  margin-top:15px;
 }
 
 .track-products h3{
   color:#d4af37;
   font-size:17px;
-  margin-bottom:10px
+  margin-bottom:10px;
 }
 
 .track-product{
   padding:10px 0;
   border-bottom:1px solid #222;
   color:#bbb;
-  font-size:13px
+  font-size:13px;
 }
 
 .track-product:last-child{
-  border-bottom:0
+  border-bottom:0;
 }
 
 .track-product strong{
-  color:#fff
+  color:#fff;
 }
 
 .track-note{
   margin-top:15px;
   color:#777;
-  font-size:12px
+  font-size:12px;
 }
 
 
-/* ================================
+/* =========================================================
    CART
-================================ */
+========================================================= */
 
 .cart-section{
   display:none;
   max-width:900px;
   margin:0 auto;
-  padding:30px 4% 60px
+  padding:30px 4% 60px;
 }
 
 .cart-section.show{
-  display:block
+  display:block;
 }
 
 .cart-box{
   background:#111;
   border:1px solid #292929;
   border-radius:14px;
-  padding:20px
+  padding:20px;
 }
 
 .cart-header{
@@ -706,11 +709,11 @@ header{
   align-items:center;
   justify-content:space-between;
   gap:10px;
-  margin-bottom:20px
+  margin-bottom:20px;
 }
 
 .cart-header h2{
-  color:#d4af37
+  color:#d4af37;
 }
 
 .close-cart{
@@ -718,7 +721,7 @@ header{
   background:transparent;
   color:#aaa;
   padding:7px 12px;
-  border-radius:7px
+  border-radius:7px;
 }
 
 .cart-item{
@@ -726,11 +729,11 @@ header{
   align-items:center;
   gap:15px;
   padding:15px 0;
-  border-bottom:1px solid #292929
+  border-bottom:1px solid #292929;
 }
 
 .cart-item:last-child{
-  border-bottom:0
+  border-bottom:0;
 }
 
 .cart-item-image{
@@ -742,40 +745,40 @@ header{
   overflow:hidden;
   display:flex;
   align-items:center;
-  justify-content:center
+  justify-content:center;
 }
 
 .cart-item-image img{
   width:100%;
   height:100%;
-  object-fit:contain
+  object-fit:contain;
 }
 
 .cart-item-image span{
   font-size:32px;
-  color:#d4af37
+  color:#d4af37;
 }
 
 .cart-item-info{
   flex:1;
-  min-width:0
+  min-width:0;
 }
 
 .cart-item-info h3{
   font-size:15px;
-  margin-bottom:4px
+  margin-bottom:4px;
 }
 
 .cart-item-price{
   color:#d4af37;
-  font-weight:bold
+  font-weight:bold;
 }
 
 .quantity{
   display:flex;
   align-items:center;
   gap:8px;
-  margin-top:8px
+  margin-top:8px;
 }
 
 .quantity button{
@@ -785,12 +788,12 @@ header{
   background:#181818;
   color:#fff;
   border-radius:5px;
-  font-size:18px
+  font-size:18px;
 }
 
 .quantity span{
   min-width:25px;
-  text-align:center
+  text-align:center;
 }
 
 .remove-btn{
@@ -798,11 +801,11 @@ header{
   background:transparent;
   color:#888;
   font-size:13px;
-  margin-top:5px
+  margin-top:5px;
 }
 
 .remove-btn:hover{
-  color:#d4af37
+  color:#d4af37;
 }
 
 .cart-total{
@@ -811,17 +814,17 @@ header{
   padding-top:20px;
   display:flex;
   justify-content:space-between;
-  align-items:center
+  align-items:center;
 }
 
 .cart-total strong{
-  color:#aaa
+  color:#aaa;
 }
 
 .cart-total span{
   color:#d4af37;
   font-size:24px;
-  font-weight:bold
+  font-weight:bold;
 }
 
 .checkout-btn{
@@ -832,40 +835,40 @@ header{
   border-radius:8px;
   background:#d4af37;
   color:#080808;
-  font-weight:bold
+  font-weight:bold;
 }
 
 
-/* ================================
+/* =========================================================
    CHECKOUT
-================================ */
+========================================================= */
 
 .checkout-box{
   display:none;
   margin-top:25px;
   padding-top:25px;
-  border-top:1px solid #292929
+  border-top:1px solid #292929;
 }
 
 .checkout-box.show{
-  display:block
+  display:block;
 }
 
 .checkout-title{
   color:#d4af37;
   font-size:22px;
-  margin-bottom:18px
+  margin-bottom:18px;
 }
 
 .form-group{
-  margin-bottom:15px
+  margin-bottom:15px;
 }
 
 .form-group label{
   display:block;
   color:#bbb;
   font-size:14px;
-  margin-bottom:6px
+  margin-bottom:6px;
 }
 
 .form-group input,
@@ -877,17 +880,17 @@ header{
   background:#181818;
   color:#fff;
   outline:none;
-  font-size:15px
+  font-size:15px;
 }
 
 .form-group input:focus,
 .form-group textarea:focus{
-  border-color:#d4af37
+  border-color:#d4af37;
 }
 
 .form-group textarea{
   min-height:100px;
-  resize:vertical
+  resize:vertical;
 }
 
 .payment-box{
@@ -895,17 +898,17 @@ header{
   border:1px solid #292929;
   border-radius:8px;
   padding:13px;
-  margin-bottom:15px
+  margin-bottom:15px;
 }
 
 .payment-box strong{
-  color:#d4af37
+  color:#d4af37;
 }
 
 .payment-box p{
   color:#aaa;
   font-size:13px;
-  margin-top:3px
+  margin-top:3px;
 }
 
 .place-order-btn{
@@ -916,12 +919,12 @@ header{
   background:#d4af37;
   color:#080808;
   font-weight:bold;
-  font-size:16px
+  font-size:16px;
 }
 
 .place-order-btn:disabled{
   opacity:.5;
-  cursor:not-allowed
+  cursor:not-allowed;
 }
 
 .cancel-checkout{
@@ -931,44 +934,44 @@ header{
   border:1px solid #555;
   border-radius:8px;
   background:transparent;
-  color:#aaa
+  color:#aaa;
 }
 
 
-/* ================================
+/* =========================================================
    SUCCESS
-================================ */
+========================================================= */
 
 .order-success{
   display:none;
   text-align:center;
-  padding:30px 10px
+  padding:30px 10px;
 }
 
 .order-success.show{
-  display:block
+  display:block;
 }
 
 .success-icon{
   font-size:55px;
-  margin-bottom:10px
+  margin-bottom:10px;
 }
 
 .order-success h2{
   color:#d4af37;
-  margin-bottom:10px
+  margin-bottom:10px;
 }
 
 .order-success p{
   color:#bbb;
-  margin-bottom:6px
+  margin-bottom:6px;
 }
 
 .order-id{
   color:#d4af37;
   font-weight:bold;
   font-size:18px;
-  margin:12px 0
+  margin:12px 0;
 }
 
 .success-track-btn{
@@ -979,24 +982,24 @@ header{
   background:transparent;
   color:#d4af37;
   border-radius:8px;
-  font-weight:bold
+  font-weight:bold;
 }
 
 .success-track-btn:hover{
   background:#d4af37;
-  color:#080808
+  color:#080808;
 }
 
 
-/* ================================
+/* =========================================================
    WHY
-================================ */
+========================================================= */
 
 .why{
   display:grid;
   grid-template-columns:
     repeat(auto-fit,minmax(180px,1fr));
-  gap:15px
+  gap:15px;
 }
 
 .box{
@@ -1004,29 +1007,29 @@ header{
   border:1px solid #292929;
   padding:25px;
   border-radius:12px;
-  text-align:center
+  text-align:center;
 }
 
 .box strong{
   display:block;
   color:#d4af37;
-  margin-bottom:8px
+  margin-bottom:8px;
 }
 
 
-/* ================================
+/* =========================================================
    FOOTER
-================================ */
+========================================================= */
 
 footer{
   text-align:center;
   padding:40px 20px;
   border-top:1px solid #292929;
-  color:#888
+  color:#888;
 }
 
 footer b{
-  color:#d4af37
+  color:#d4af37;
 }
 
 .social-links{
@@ -1035,7 +1038,7 @@ footer b{
   align-items:center;
   flex-wrap:wrap;
   gap:10px;
-  margin-top:20px
+  margin-top:20px;
 }
 
 .social-links a{
@@ -1047,193 +1050,204 @@ footer b{
   border-radius:20px;
   color:#bbb;
   font-size:13px;
-  transition:.2s
+  transition:.2s;
 }
 
 .social-links a:hover{
   color:#d4af37;
   border-color:#d4af37;
-  transform:translateY(-1px)
+  transform:translateY(-1px);
 }
 
 .social-note{
   margin-top:15px;
   color:#666;
-  font-size:12px
+  font-size:12px;
 }
 
 
-/* ================================
+/* =========================================================
    MOBILE
-================================ */
+========================================================= */
 
 @media(max-width:700px){
 
   .nav{
     min-height:64px;
-    padding:9px 4%
+    padding:9px 4%;
   }
 
   .brand b{
     font-size:11px;
-    letter-spacing:1.5px
+    letter-spacing:1.5px;
   }
 
   .logo{
     width:40px;
-    height:40px
+    height:40px;
   }
 
   .header-actions{
-    gap:5px
+    gap:5px;
   }
 
   .cart,
   .track-header-btn{
     padding:8px 9px;
-    font-size:12px
+    font-size:12px;
   }
 
   .hero{
-    padding:60px 18px 50px
+    padding:60px 18px 50px;
   }
 
   .hero h1{
     font-size:35px;
-    letter-spacing:2px
+    letter-spacing:2px;
   }
 
   .section{
-    padding:45px 4%
+    padding:45px 4%;
   }
 
   .products{
     grid-template-columns:
       repeat(2,minmax(0,1fr));
-    gap:12px
+    gap:12px;
   }
 
   .pic{
-    height:190px
+    height:190px;
   }
 
   .info{
-    padding:13px
+    padding:13px;
   }
 
   .info h3{
-    font-size:14px
+    font-size:14px;
   }
 
   .price{
-    font-size:18px
+    font-size:18px;
   }
 
   .btn,
   .details-btn{
     padding:9px 5px;
-    font-size:12px
+    font-size:12px;
   }
 
   .details-grid{
-    grid-template-columns:1fr
+    grid-template-columns:1fr;
   }
 
   .details-image{
-    min-height:300px
+    min-height:300px;
   }
 
   .details-info{
-    padding:22px
+    padding:22px;
   }
 
   .details-info h2{
-    font-size:24px
+    font-size:24px;
   }
 
   .details-price{
-    font-size:24px
+    font-size:24px;
   }
 
   .details-actions{
-    flex-direction:column
+    flex-direction:column;
   }
 
   .details-close{
-    width:100%
+    width:100%;
   }
 
   .cart-item{
     gap:10px;
-    align-items:flex-start
+    align-items:flex-start;
   }
 
   .cart-item-image{
     width:65px;
-    height:65px
+    height:65px;
   }
 
   .cart-item-info h3{
-    font-size:13px
+    font-size:13px;
   }
 
   .cart-total span{
-    font-size:20px
+    font-size:20px;
   }
 
   .social-links{
-    gap:8px
+    gap:8px;
   }
 
   .social-links a{
     padding:8px 12px;
-    font-size:12px
+    font-size:12px;
   }
 
   .track-box{
-    padding:18px
+    padding:18px;
   }
 
   .track-header h2{
-    font-size:21px
+    font-size:21px;
+  }
+
+  .track-row{
+    flex-direction:column;
+    gap:4px;
+  }
+
+  .track-row span:last-child{
+    max-width:100%;
+    text-align:left;
   }
 
 }
 
 
-/* ================================
+/* =========================================================
    EXTRA SMALL
-================================ */
+========================================================= */
 
 @media(max-width:380px){
 
   .brand b{
-    font-size:10px
+    font-size:10px;
   }
 
   .cart,
   .track-header-btn{
     padding:7px 7px;
-    font-size:11px
+    font-size:11px;
   }
 
   .social-links a{
     padding:7px 10px;
-    font-size:11px
+    font-size:11px;
   }
 
 }
 
 </style>
+
 </head>
 
 
 <body>
 
 
-<!-- ================================
+<!-- =======================================================
      HEADER
-================================ -->
+======================================================= -->
 
 <header>
 
@@ -1254,6 +1268,7 @@ footer b{
 
     <div class="header-actions">
 
+      <!-- Hidden initially -->
       <button
         id="headerTrackButton"
         class="track-header-btn"
@@ -1268,10 +1283,7 @@ footer b{
         onclick="toggleCart()"
       >
         🛒 Cart:
-
-        <span id="cartCount">
-          0
-        </span>
+        <span id="cartCount">0</span>
       </button>
 
     </div>
@@ -1281,9 +1293,9 @@ footer b{
 </header>
 
 
-<!-- ================================
+<!-- =======================================================
      HERO
-================================ -->
+======================================================= -->
 
 <section class="hero">
 
@@ -1302,9 +1314,9 @@ footer b{
 </section>
 
 
-<!-- ================================
+<!-- =======================================================
      PRODUCTS
-================================ -->
+======================================================= -->
 
 <section
   id="productsSection"
@@ -1334,9 +1346,9 @@ footer b{
 </section>
 
 
-<!-- ================================
+<!-- =======================================================
      PRODUCT DETAILS
-================================ -->
+======================================================= -->
 
 <section
   id="productDetails"
@@ -1474,9 +1486,9 @@ footer b{
 </section>
 
 
-<!-- ================================
+<!-- =======================================================
      TRACK ORDER
-================================ -->
+======================================================= -->
 
 <section
   id="trackSection"
@@ -1571,6 +1583,42 @@ footer b{
         <div class="track-row">
 
           <span>
+            Customer Name
+          </span>
+
+          <span id="resultCustomerName">
+          </span>
+
+        </div>
+
+
+        <div class="track-row">
+
+          <span>
+            Phone
+          </span>
+
+          <span id="resultPhone">
+          </span>
+
+        </div>
+
+
+        <div class="track-row">
+
+          <span>
+            Delivery Address
+          </span>
+
+          <span id="resultAddress">
+          </span>
+
+        </div>
+
+
+        <div class="track-row">
+
+          <span>
             Order Number
           </span>
 
@@ -1653,9 +1701,9 @@ footer b{
 </section>
 
 
-<!-- ================================
+<!-- =======================================================
      CART
-================================ -->
+======================================================= -->
 
 <section
   id="cartSection"
@@ -1711,7 +1759,9 @@ footer b{
     </button>
 
 
-    <!-- CHECKOUT -->
+    <!-- =====================================================
+         CHECKOUT
+    ====================================================== -->
 
     <div
       id="checkoutBox"
@@ -1803,7 +1853,9 @@ footer b{
     </div>
 
 
-    <!-- SUCCESS -->
+    <!-- =====================================================
+         SUCCESS
+    ====================================================== -->
 
     <div
       id="orderSuccess"
@@ -1851,9 +1903,9 @@ footer b{
 </section>
 
 
-<!-- ================================
+<!-- =======================================================
      WHY
-================================ -->
+======================================================= -->
 
 <section class="section">
 
@@ -1917,9 +1969,9 @@ footer b{
 </section>
 
 
-<!-- ================================
+<!-- =======================================================
      FOOTER
-================================ -->
+======================================================= -->
 
 <footer>
 
@@ -1981,9 +2033,9 @@ footer b{
 
 <script>
 
-/* ================================
+/* =========================================================
    SUPABASE
-================================ */
+========================================================= */
 
 const SUPABASE_URL =
 "https://rufdvkelwzsmnuruvdko.supabase.co";
@@ -1992,9 +2044,9 @@ const SUPABASE_KEY =
 "sb_publishable_3j4Bs4rft9_w4r1j6uHo5w_fYLIJsNI";
 
 
-/* ================================
+/* =========================================================
    CART
-================================ */
+========================================================= */
 
 let cart = [];
 
@@ -2030,23 +2082,25 @@ try{
 }
 
 
-/* ================================
+/* =========================================================
    CURRENT DETAIL PRODUCT
-================================ */
+========================================================= */
 
 let currentDetailProduct = null;
 
 
-/* ================================
-   LAST ORDER TRACKING
-================================ */
+/* =========================================================
+   LAST ORDER
+========================================================= */
 
 let lastOrderTrackingCode = "";
 
+let lastOrderPhone = "";
 
-/* ================================
+
+/* =========================================================
    SAFE TEXT
-================================ */
+========================================================= */
 
 function safe(value){
 
@@ -2069,9 +2123,9 @@ function safe(value){
 }
 
 
-/* ================================
+/* =========================================================
    SAVE CART
-================================ */
+========================================================= */
 
 function saveCart(){
 
@@ -2094,9 +2148,9 @@ function saveCart(){
 }
 
 
-/* ================================
+/* =========================================================
    CART COUNT
-================================ */
+========================================================= */
 
 function updateCartCount(){
 
@@ -2119,9 +2173,9 @@ function updateCartCount(){
 }
 
 
-/* ================================
-   ADD CART
-================================ */
+/* =========================================================
+   ADD TO CART
+========================================================= */
 
 function addCart(product){
 
@@ -2224,9 +2278,9 @@ function addCart(product){
 }
 
 
-/* ================================
+/* =========================================================
    CHANGE QUANTITY
-================================ */
+========================================================= */
 
 function changeQuantity(
   id,
@@ -2292,9 +2346,9 @@ function changeQuantity(
 }
 
 
-/* ================================
-   REMOVE
-================================ */
+/* =========================================================
+   REMOVE FROM CART
+========================================================= */
 
 function removeFromCart(id){
 
@@ -2318,9 +2372,9 @@ function removeFromCart(id){
 }
 
 
-/* ================================
+/* =========================================================
    CART TOTAL
-================================ */
+========================================================= */
 
 function getCartTotal(){
 
@@ -2340,9 +2394,9 @@ function getCartTotal(){
 }
 
 
-/* ================================
+/* =========================================================
    RENDER CART
-================================ */
+========================================================= */
 
 function renderCart(){
 
@@ -2517,9 +2571,9 @@ function renderCart(){
 }
 
 
-/* ================================
+/* =========================================================
    TOGGLE CART
-================================ */
+========================================================= */
 
 function toggleCart(){
 
@@ -2554,9 +2608,9 @@ function toggleCart(){
 }
 
 
-/* ================================
-   SHOW HEADER TRACK BUTTON
-================================ */
+/* =========================================================
+   SHOW TRACK BUTTON
+========================================================= */
 
 function showHeaderTrackButton(){
 
@@ -2577,9 +2631,9 @@ function showHeaderTrackButton(){
 }
 
 
-/* ================================
-   TRACK ORDER TOGGLE
-================================ */
+/* =========================================================
+   TOGGLE TRACK ORDER
+========================================================= */
 
 function toggleTrackOrder(force){
 
@@ -2626,9 +2680,9 @@ function toggleTrackOrder(force){
 }
 
 
-/* ================================
+/* =========================================================
    OPEN TRACK FROM SUCCESS
-================================ */
+========================================================= */
 
 function openTrackFromSuccess(){
 
@@ -2645,42 +2699,58 @@ function openTrackFromSuccess(){
 
   showHeaderTrackButton();
 
-  toggleTrackOrder(true);
 
-
-  if(lastOrderTrackingCode){
-
+  const trackingInput =
     document.getElementById(
       "trackingCode"
-    ).value =
-      lastOrderTrackingCode;
+    );
 
-  }
+
+  const phoneInput =
+    document.getElementById(
+      "trackingPhone"
+    );
+
+
+  trackingInput.value =
+    lastOrderTrackingCode;
+
+
+  phoneInput.value =
+    lastOrderPhone;
 
 
   document.getElementById(
-    "trackingPhone"
-  ).focus();
+    "trackError"
+  ).classList.remove("show");
+
+
+  document.getElementById(
+    "trackResult"
+  ).classList.remove("show");
+
+
+  toggleTrackOrder(true);
 
 }
 
 
-/* ================================
+/* =========================================================
    TRACK ORDER
-================================ */
+========================================================= */
 
 async function trackOrder(){
 
-  const trackingCode =
+  const trackingInput =
     document.getElementById(
       "trackingCode"
-    ).value.trim();
+    );
 
 
-  const phone =
+  const phoneInput =
     document.getElementById(
       "trackingPhone"
-    ).value.trim();
+    );
 
 
   const errorBox =
@@ -2699,6 +2769,14 @@ async function trackOrder(){
     document.getElementById(
       "trackButton"
     );
+
+
+  let trackingCode =
+    trackingInput.value.trim();
+
+
+  const phone =
+    phoneInput.value.trim();
 
 
   errorBox.classList.remove(
@@ -2720,9 +2798,7 @@ async function trackOrder(){
       "show"
     );
 
-    document.getElementById(
-      "trackingCode"
-    ).focus();
+    trackingInput.focus();
 
     return;
 
@@ -2738,14 +2814,22 @@ async function trackOrder(){
       "show"
     );
 
-    document.getElementById(
-      "trackingPhone"
-    ).focus();
+    phoneInput.focus();
 
     return;
 
   }
 
+
+  /* Normalize tracking code */
+
+  trackingCode =
+    trackingCode
+      .toUpperCase()
+      .replace(/\s+/g,"");
+
+
+  /* Normalize phone */
 
   const cleanPhone =
     phone.replace(
@@ -2765,9 +2849,7 @@ async function trackOrder(){
       "show"
     );
 
-    document.getElementById(
-      "trackingPhone"
-    ).focus();
+    phoneInput.focus();
 
     return;
 
@@ -2782,11 +2864,17 @@ async function trackOrder(){
 
   try{
 
+    /*
+      IMPORTANT:
+      This uses the NEW RPC function:
+      track_order_v2
+    */
+
     const response =
       await fetch(
 
         SUPABASE_URL +
-        "/rest/v1/rpc/track_order",
+        "/rest/v1/rpc/track_order_v2",
 
         {
 
@@ -2826,14 +2914,19 @@ async function trackOrder(){
       await response.text();
 
 
+    console.log(
+      "TRACK ORDER STATUS:",
+      response.status
+    );
+
+
+    console.log(
+      "TRACK ORDER RESPONSE:",
+      responseText
+    );
+
+
     if(!response.ok){
-
-      console.error(
-        "Track Order Error:",
-        response.status,
-        responseText
-      );
-
 
       throw new Error(
         responseText ||
@@ -2875,12 +2968,53 @@ async function trackOrder(){
       orders[0];
 
 
+    /* ==========================================
+       CUSTOMER NAME
+    ========================================== */
+
+    document.getElementById(
+      "resultCustomerName"
+    ).textContent =
+      order.customer_name ||
+      "N/A";
+
+
+    /* ==========================================
+       PHONE
+    ========================================== */
+
+    document.getElementById(
+      "resultPhone"
+    ).textContent =
+      order.phone ||
+      cleanPhone;
+
+
+    /* ==========================================
+       ADDRESS
+    ========================================== */
+
+    document.getElementById(
+      "resultAddress"
+    ).textContent =
+      order.address ||
+      "N/A";
+
+
+    /* ==========================================
+       TRACKING CODE
+    ========================================== */
+
     document.getElementById(
       "resultTrackingCode"
     ).textContent =
       order.tracking_code ||
       trackingCode;
 
+
+    /* ==========================================
+       DATE
+    ========================================== */
 
     const date =
       order.created_at
@@ -2902,12 +3036,20 @@ async function trackOrder(){
       date;
 
 
+    /* ==========================================
+       STATUS
+    ========================================== */
+
     document.getElementById(
       "resultStatus"
     ).textContent =
       order.status ||
       "Pending";
 
+
+    /* ==========================================
+       TOTAL
+    ========================================== */
 
     document.getElementById(
       "resultTotal"
@@ -2920,19 +3062,50 @@ async function trackOrder(){
       );
 
 
+    /* ==========================================
+       PRODUCTS
+    ========================================== */
+
     const productsBox =
       document.getElementById(
         "resultProducts"
       );
 
 
-    const items =
+    let items = [];
+
+
+    if(
       Array.isArray(order.items)
-        ? order.items
-        : [];
+    ){
+
+      items =
+        order.items;
+
+    }else if(
+      typeof order.items === "string"
+    ){
+
+      try{
+
+        items =
+          JSON.parse(
+            order.items
+          );
+
+      }catch(error){
+
+        items = [];
+
+      }
+
+    }
 
 
-    if(items.length === 0){
+    if(
+      !Array.isArray(items) ||
+      items.length === 0
+    ){
 
       productsBox.innerHTML = `
 
@@ -2970,7 +3143,10 @@ async function trackOrder(){
             const subtotal =
               Number(
                 item.subtotal ||
-                price * quantity
+                (
+                  price *
+                  quantity
+                )
               );
 
 
@@ -3008,6 +3184,10 @@ async function trackOrder(){
 
     }
 
+
+    /* ==========================================
+       SHOW RESULT
+    ========================================== */
 
     resultBox.classList.add(
       "show"
@@ -3050,9 +3230,9 @@ async function trackOrder(){
 }
 
 
-/* ================================
+/* =========================================================
    SHOW PRODUCT DETAILS
-================================ */
+========================================================= */
 
 function showDetails(product){
 
@@ -3221,9 +3401,9 @@ function showDetails(product){
 }
 
 
-/* ================================
+/* =========================================================
    CLOSE DETAILS
-================================ */
+========================================================= */
 
 function closeDetails(){
 
@@ -3255,9 +3435,9 @@ function closeDetails(){
 }
 
 
-/* ================================
+/* =========================================================
    CHECKOUT
-================================ */
+========================================================= */
 
 function checkout(){
 
@@ -3276,7 +3456,9 @@ function checkout(){
 
   document.getElementById(
     "checkoutBox"
-  ).classList.add("show");
+  ).classList.add(
+    "show"
+  );
 
 
   document.getElementById(
@@ -3287,7 +3469,9 @@ function checkout(){
 
   document.getElementById(
     "orderSuccess"
-  ).classList.remove("show");
+  ).classList.remove(
+    "show"
+  );
 
 
   document.getElementById(
@@ -3303,15 +3487,17 @@ function checkout(){
 }
 
 
-/* ================================
+/* =========================================================
    CANCEL CHECKOUT
-================================ */
+========================================================= */
 
 function cancelCheckout(){
 
   document.getElementById(
     "checkoutBox"
-  ).classList.remove("show");
+  ).classList.remove(
+    "show"
+  );
 
 
   document.getElementById(
@@ -3324,9 +3510,9 @@ function cancelCheckout(){
 }
 
 
-/* ================================
+/* =========================================================
    GENERATE ORDER NUMBER
-================================ */
+========================================================= */
 
 function generateTrackingCode(){
 
@@ -3342,9 +3528,9 @@ function generateTrackingCode(){
 }
 
 
-/* ================================
+/* =========================================================
    PLACE ORDER
-================================ */
+========================================================= */
 
 async function placeOrder(){
 
@@ -3494,6 +3680,12 @@ async function placeOrder(){
 
   try{
 
+    /*
+      IMPORTANT:
+      Keep this order POST logic unchanged
+      because your order placement is already working.
+    */
+
     const response =
       await fetch(
 
@@ -3567,9 +3759,17 @@ async function placeOrder(){
     }
 
 
+    /* Save latest order tracking information */
+
     lastOrderTrackingCode =
       trackingCode;
 
+
+    lastOrderPhone =
+      cleanPhone;
+
+
+    /* Empty cart */
 
     cart = [];
 
@@ -3581,9 +3781,13 @@ async function placeOrder(){
     renderCart();
 
 
+    /* Close checkout */
+
     document.getElementById(
       "checkoutBox"
-    ).classList.remove("show");
+    ).classList.remove(
+      "show"
+    );
 
 
     document.getElementById(
@@ -3592,6 +3796,8 @@ async function placeOrder(){
       "none";
 
 
+    /* Show order number */
+
     document.getElementById(
       "orderId"
     ).textContent =
@@ -3599,12 +3805,16 @@ async function placeOrder(){
       trackingCode;
 
 
+    /* Show success */
+
     document.getElementById(
       "orderSuccess"
-    ).classList.add("show");
+    ).classList.add(
+      "show"
+    );
 
 
-    /* Show Track Order only AFTER successful order */
+    /* Track button becomes visible */
 
     showHeaderTrackButton();
 
@@ -3619,6 +3829,8 @@ async function placeOrder(){
 
     });
 
+
+    /* Clear checkout fields */
 
     document.getElementById(
       "customerName"
@@ -3659,9 +3871,9 @@ async function placeOrder(){
 }
 
 
-/* ================================
+/* =========================================================
    LOAD PRODUCTS
-================================ */
+========================================================= */
 
 async function loadProducts(){
 
@@ -3754,6 +3966,18 @@ async function loadProducts(){
     box.innerHTML =
       products.map(
         function(product){
+
+          /*
+            IMPORTANT:
+            Supabase column names are case-sensitive
+            and include:
+            Name
+            Price
+            Old price
+            Category
+            Stock
+            image_url
+          */
 
           const name =
             product.Name ||
@@ -3871,6 +4095,11 @@ async function loadProducts(){
 
           let buttonHTML = "";
 
+
+          /*
+            Convert Supabase product into the
+            frontend format used by cart/details.
+          */
 
           const cartProduct = {
 
@@ -4018,9 +4247,9 @@ async function loadProducts(){
 }
 
 
-/* ================================
+/* =========================================================
    START
-================================ */
+========================================================= */
 
 updateCartCount();
 
@@ -4031,4 +4260,5 @@ loadProducts();
 </script>
 
 </body>
+
 </html>
