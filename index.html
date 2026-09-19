@@ -128,6 +128,15 @@ header{
   color:#080808
 }
 
+/* Track Order hidden until order is placed */
+.track-header-btn{
+  display:none
+}
+
+.track-header-btn.show{
+  display:block
+}
+
 
 /* ================================
    HERO
@@ -671,32 +680,6 @@ header{
 
 
 /* ================================
-   WHY
-================================ */
-
-.why{
-  display:grid;
-  grid-template-columns:
-    repeat(auto-fit,minmax(180px,1fr));
-  gap:15px
-}
-
-.box{
-  background:#111;
-  border:1px solid #292929;
-  padding:25px;
-  border-radius:12px;
-  text-align:center
-}
-
-.box strong{
-  display:block;
-  color:#d4af37;
-  margin-bottom:8px
-}
-
-
-/* ================================
    CART
 ================================ */
 
@@ -1006,6 +989,32 @@ header{
 
 
 /* ================================
+   WHY
+================================ */
+
+.why{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(180px,1fr));
+  gap:15px
+}
+
+.box{
+  background:#111;
+  border:1px solid #292929;
+  padding:25px;
+  border-radius:12px;
+  text-align:center
+}
+
+.box strong{
+  display:block;
+  color:#d4af37;
+  margin-bottom:8px
+}
+
+
+/* ================================
    FOOTER
 ================================ */
 
@@ -1246,6 +1255,7 @@ footer b{
     <div class="header-actions">
 
       <button
+        id="headerTrackButton"
         class="track-header-btn"
         onclick="toggleTrackOrder()"
       >
@@ -1257,13 +1267,11 @@ footer b{
         class="cart"
         onclick="toggleCart()"
       >
-
         🛒 Cart:
 
         <span id="cartCount">
           0
         </span>
-
       </button>
 
     </div>
@@ -1339,7 +1347,6 @@ footer b{
 
     <div class="details-grid">
 
-
       <div
         id="detailsImage"
         class="details-image"
@@ -1391,54 +1398,45 @@ footer b{
             Product Specifications
           </h3>
 
-
           <div class="spec-row">
             <span>Movement</span>
             <span>Quartz</span>
           </div>
-
 
           <div class="spec-row">
             <span>Dial</span>
             <span>46 mm</span>
           </div>
 
-
           <div class="spec-row">
             <span>Thickness</span>
             <span>13 mm</span>
           </div>
-
 
           <div class="spec-row">
             <span>Case</span>
             <span>Alloy</span>
           </div>
 
-
           <div class="spec-row">
             <span>Band</span>
             <span>Alloy Steel</span>
           </div>
-
 
           <div class="spec-row">
             <span>Dial Shape</span>
             <span>Round</span>
           </div>
 
-
           <div class="spec-row">
             <span>Style</span>
             <span>Business</span>
           </div>
 
-
           <div class="spec-row">
             <span>Waterproof</span>
             <span>No</span>
           </div>
-
 
           <div class="spec-row">
             <span>Warranty</span>
@@ -1478,7 +1476,6 @@ footer b{
 
 <!-- ================================
      TRACK ORDER
-     HIDDEN BY DEFAULT
 ================================ -->
 
 <section
@@ -1666,7 +1663,6 @@ footer b{
 >
 
   <div class="cart-box">
-
 
     <div class="cart-header">
 
@@ -1872,7 +1868,6 @@ footer b{
 
   <div class="why">
 
-
     <div class="box">
 
       <strong>
@@ -1916,7 +1911,6 @@ footer b{
       Warranty support on selected products.
 
     </div>
-
 
   </div>
 
@@ -2004,7 +1998,6 @@ const SUPABASE_KEY =
 
 let cart = [];
 
-
 try{
 
   const savedCart =
@@ -2012,14 +2005,12 @@ try{
       "chronoVaultCart"
     );
 
-
   if(savedCart){
 
     cart =
       JSON.parse(savedCart);
 
   }
-
 
   if(!Array.isArray(cart)){
 
@@ -2067,7 +2058,6 @@ function safe(value){
     return "";
 
   }
-
 
   return String(value)
     .replace(/&/g,"&amp;")
@@ -2138,10 +2128,8 @@ function addCart(product){
   const id =
     String(product.id);
 
-
   const stock =
     Number(product.stock);
-
 
   const price =
     Number(product.price);
@@ -2197,7 +2185,6 @@ function addCart(product){
       return;
 
     }
-
 
     existing.quantity++;
 
@@ -2568,6 +2555,29 @@ function toggleCart(){
 
 
 /* ================================
+   SHOW HEADER TRACK BUTTON
+================================ */
+
+function showHeaderTrackButton(){
+
+  const button =
+    document.getElementById(
+      "headerTrackButton"
+    );
+
+
+  if(button){
+
+    button.classList.add(
+      "show"
+    );
+
+  }
+
+}
+
+
+/* ================================
    TRACK ORDER TOGGLE
 ================================ */
 
@@ -2632,6 +2642,8 @@ function openTrackFromSuccess(){
     "show"
   );
 
+
+  showHeaderTrackButton();
 
   toggleTrackOrder(true);
 
@@ -2822,7 +2834,9 @@ async function trackOrder(){
         responseText
       );
 
+
       throw new Error(
+        responseText ||
         "Unable to check order right now."
       );
 
@@ -3462,10 +3476,6 @@ async function placeOrder(){
     );
 
 
-  /* ==========================
-     TRACKING CODE
-  ========================== */
-
   const trackingCode =
     generateTrackingCode();
 
@@ -3557,10 +3567,6 @@ async function placeOrder(){
     }
 
 
-    /* ==========================
-       SAVE TRACKING CODE
-    ========================== */
-
     lastOrderTrackingCode =
       trackingCode;
 
@@ -3596,6 +3602,11 @@ async function placeOrder(){
     document.getElementById(
       "orderSuccess"
     ).classList.add("show");
+
+
+    /* Show Track Order only AFTER successful order */
+
+    showHeaderTrackButton();
 
 
     document.getElementById(
