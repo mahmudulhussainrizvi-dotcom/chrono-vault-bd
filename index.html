@@ -1028,6 +1028,12 @@ header{
   font-size:13px;
 }
 
+.status-badge.cancelled{
+  background:#2a1212;
+  color:#ff8b8b!important;
+  border-color:#6b2626;
+}
+
 .track-products h3{
   color:var(--gold);
   font-size:16px;
@@ -1814,6 +1820,8 @@ footer b{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
   font-size:13px;
   color:#aaa;
 }
@@ -1822,6 +1830,28 @@ footer b{
   color:var(--gold);
   font-weight:700;
   font-size:15px;
+}
+
+.cancel-order-user-btn{
+  margin-top:12px;
+  width:100%;
+  padding:9px 14px;
+  border:1px solid #8a3636;
+  background:rgba(180,55,55,.14);
+  color:#ff9494;
+  border-radius:8px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.cancel-order-user-btn:hover:not(:disabled){
+  background:#a83838;
+  color:#fff;
+}
+
+.cancel-order-user-btn:disabled{
+  opacity:.5;
+  cursor:not-allowed;
 }
 
 /* =========================
@@ -2828,12 +2858,29 @@ function safe(value){
 }
 
 /* =========================================================
-   INSTANT TELEGRAM ORDER NOTIFICATION
+   INSTANT TELEGRAM ORDER & CANCELLATION NOTIFICATIONS
 ========================================================= */
 
-async function sendTelegramOrderNotification(orderInfo){
+async function sendTelegramMessage(text){
   if(!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) return;
+  try{
+    await fetch(
+      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+      {
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body:JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: text
+        })
+      }
+    );
+  }catch(err){
+    console.error("Telegram notification error:", err);
+  }
+}
 
+async function sendTelegramOrderNotification(orderInfo){
   const watchItems = orderInfo.items
     .filter(item => item.product_id !== "DELIVERY")
     .map(item => `• ${item.name} (×${item.quantity}) — ৳${Number(item.subtotal).toLocaleString("en-BD")}`)
@@ -2853,21 +2900,21 @@ ${watchItems}
 
 💰 Total Payable (COD): ৳${Number(orderInfo.total).toLocaleString("en-BD")}`;
 
-  try{
-    await fetch(
-      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
-      {
-        method:"POST",
-        headers:{ "Content-Type":"application/json" },
-        body:JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
-          text: messageText
-        })
-      }
-    );
-  }catch(err){
-    console.error("Telegram notification error:", err);
-  }
+  await sendTelegramMessage(messageText);
+}
+
+async function sendTelegramCancelNotification(trackingCode, customerName, phone, total){
+  const messageText =
+`❌ ORDER CANCELLED BY CUSTOMER
+
+🆔 Order No: ${trackingCode}
+👤 Customer: ${customerName || "Customer"}
+📞 Phone: ${phone || "N/A"}
+💰 Amount: ৳${Number(total || 0).toLocaleString("en-BD")}
+
+ℹ️ Stock has been automatically restored.`;
+
+  await sendTelegramMessage(messageText);
 }
 
 /* =========================================================
@@ -3216,7 +3263,11 @@ async function trackOrder(){
       : "N/A";
 
     document.getElementById("resultDate").textContent = date;
-    document.getElementById("resultStatus").textContent = order.status || "Pending";
+    const statusBadge = document.getElementById("resultStatus");
+    const statusVal = order.status || "Pending";
+    statusBadge.textContent = statusVal;
+    statusBadge.className = "status-badge" + (statusVal.toLowerCase() === "cancelled" ? " cancelled" : "");
+
     document.getElementById("resultTotal").textContent = "৳" + Number(order.total || 0).toLocaleString("en-BD");
 
     const productsBox = document.getElementById("resultProducts");
@@ -3363,7 +3414,6 @@ function checkout(){
     return;
   }
 
-  // Enforce Sign Up / Login before checkout
   if(!currentAuthSession || !currentAuthSession.user || !currentAuthSession.access_token){
     pendingCheckoutAfterAuth = true;
     openAuthModal("Please Login or Sign Up first to place your order.");
@@ -3401,7 +3451,6 @@ async function placeOrder(){
     return;
   }
 
-  // Double-check authentication before placing order
   if(!currentAuthSession || !currentAuthSession.user || !currentAuthSession.access_token){
     pendingCheckoutAfterAuth = true;
     openAuthModal("Your session expired. Please Login or Sign Up to confirm your order.");
@@ -3498,7 +3547,6 @@ async function placeOrder(){
       throw new Error(responseText || "Order could not be placed.");
     }
 
-    // Send Instant Telegram Alert to Admin Phone
     await sendTelegramOrderNotification({
       tracking_code: trackingCode,
       customer_name: name,
@@ -3510,7 +3558,6 @@ async function placeOrder(){
       total: grandTotal
     });
 
-    // Prepare Pre-filled WhatsApp Order Summary Link for Customer
     const waItemsList = orderItems
       .filter(i => i.product_id !== "DELIVERY")
       .map(i => `• ${i.name} (×${i.quantity})`)
@@ -3550,7 +3597,6 @@ Total: ৳${grandTotal.toLocaleString("en-BD")}`
     showHeaderTrackButton();
     document.getElementById("orderSuccess").scrollIntoView({ behavior:"smooth", block:"start" });
 
-    // Reload products so updated stock reflects immediately on UI
     loadProducts();
 
   }catch(error){
@@ -3775,7 +3821,7 @@ async function loadProducts(){
 }
 
 /* =========================================================
-   AUTH & CUSTOMER ACCOUNT DASHBOARD
+   AUTH & CUSTOMER ACCOUNT DASHBOARD (WITH CANCEL ORDER)
 ========================================================= */
 
 function openAuthModal(infoText){
@@ -4007,6 +4053,56 @@ function closeAccountDashboard(){
   document.getElementById("accountDashboardOverlay").classList.remove("show");
 }
 
+async function cancelMyOrder(orderId, trackingCode, customerName, phone, total, btnEl){
+  const confirmed = confirm(`Are you sure you want to cancel order ${trackingCode}?`);
+  if(!confirmed) return;
+
+  if(!currentAuthSession || !currentAuthSession.access_token){
+    alert("Session expired. Please login again.");
+    return;
+  }
+
+  if(btnEl){
+    btnEl.disabled = true;
+    btnEl.textContent = "Cancelling...";
+  }
+
+  try{
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/orders?id=eq.${encodeURIComponent(orderId)}`,
+      {
+        method:"PATCH",
+        headers:{
+          "apikey":SUPABASE_KEY,
+          "Authorization":"Bearer " + currentAuthSession.access_token,
+          "Content-Type":"application/json",
+          "Prefer":"return=representation"
+        },
+        body:JSON.stringify({ status: "Cancelled" })
+      }
+    );
+
+    const updatedRows = await response.json();
+    if(!response.ok || !Array.isArray(updatedRows) || updatedRows.length === 0){
+      throw new Error("Order could not be cancelled (it may already be confirmed or shipped).");
+    }
+
+    // Notify Admin via Telegram
+    await sendTelegramCancelNotification(trackingCode, customerName, phone, total);
+
+    showCartToast("Order cancelled & stock restored");
+    loadUserOrderHistory();
+    loadProducts(); // Refresh product stock on main page
+  }catch(error){
+    console.error("Cancel order error:", error);
+    alert(error.message || "Could not cancel order.");
+    if(btnEl){
+      btnEl.disabled = false;
+      btnEl.textContent = "❌ Cancel Order";
+    }
+  }
+}
+
 async function loadUserOrderHistory(){
   const listBox = document.getElementById("userOrderHistoryList");
   if(!currentAuthSession || !currentAuthSession.user){
@@ -4030,6 +4126,7 @@ async function loadUserOrderHistory(){
       `${SUPABASE_URL}/rest/v1/orders?select=*&${filterQuery}&order=created_at.desc`,
       {
         method:"GET",
+        cache:"no-store",
         headers:{
           "apikey":SUPABASE_KEY,
           "Authorization":"Bearer " + token
@@ -4070,6 +4167,14 @@ async function loadUserOrderHistory(){
         .map(i => `${safe(i.name)} (×${i.quantity})`)
         .join(", ") || "Watch Order";
 
+      const statusText = order.status || "Pending";
+      const isPending = statusText.toLowerCase() === "pending";
+      const isCancelled = statusText.toLowerCase() === "cancelled";
+
+      const cancelBtnHTML = isPending
+        ? `<button class="cancel-order-user-btn" onclick="cancelMyOrder('${safe(order.id)}', '${safe(order.tracking_code || "")}', '${safe(order.customer_name || "")}', '${safe(order.phone || "")}', ${Number(order.total || 0)}, this)">❌ Cancel Order</button>`
+        : "";
+
       return `
         <div class="history-card">
           <div class="history-card-top">
@@ -4077,13 +4182,14 @@ async function loadUserOrderHistory(){
               <div class="history-code">${safe(order.tracking_code || ("#" + order.id))}</div>
               <div class="history-date">${date}</div>
             </div>
-            <span class="status-badge">${safe(order.status || "Pending")}</span>
+            <span class="status-badge ${isCancelled ? 'cancelled' : ''}">${safe(statusText)}</span>
           </div>
           <div class="history-items">${itemsSummary}</div>
           <div class="history-footer">
             <span>Cash on Delivery</span>
             <span class="history-total">Total: ৳${Number(order.total || 0).toLocaleString("en-BD")}</span>
           </div>
+          ${cancelBtnHTML}
         </div>
       `;
     }).join("");
