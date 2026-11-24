@@ -1433,16 +1433,42 @@ header{
   background:rgba(212,175,55,.06);
 }
 
+.success-actions-stack{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  margin-top:16px;
+}
+
 .success-track-btn{
   width:100%;
   max-width:340px;
-  margin-top:14px;
   padding:13px;
   border:0;
   border-radius:10px;
   background:var(--gold);
   color:#080808;
   font-weight:700;
+  font-size:14px;
+}
+
+.success-wa-btn{
+  display:block;
+  width:100%;
+  max-width:340px;
+  padding:13px;
+  border:1px solid #25D366;
+  border-radius:10px;
+  background:rgba(37,211,102,.12);
+  color:#5ef596;
+  font-weight:700;
+  font-size:14px;
+}
+
+.success-wa-btn:hover{
+  background:#25D366;
+  color:#080808;
 }
 
 /* =========================
@@ -2424,11 +2450,22 @@ footer b{
         Your order has been saved to your account history. We will call you shortly to confirm.
       </p>
 
-      <button
-        class="success-track-btn"
-        onclick="openTrackFromSuccess()">
-        📦 Track This Order
-      </button>
+      <div class="success-actions-stack">
+        <button
+          class="success-track-btn"
+          onclick="openTrackFromSuccess()">
+          📦 Track This Order
+        </button>
+
+        <a
+          id="successWhatsappLink"
+          class="success-wa-btn"
+          href="https://wa.me/8801326144735"
+          target="_blank"
+          rel="noopener noreferrer">
+          📲 Send Order Details on WhatsApp
+        </a>
+      </div>
 
     </div>
 
@@ -2701,12 +2738,16 @@ footer b{
 
 <script>
 /* =========================================================
-   SUPABASE
+   SUPABASE & NOTIFICATION CONFIG
 ========================================================= */
 
 const SUPABASE_URL = "https://rufdvkelwzsmnuruvdko.supabase.co";
 const SUPABASE_KEY = "sb_publishable_3j4Bs4rft9_w4r1j6uHo5w_fYLIJsNI";
 const WHATSAPP_NUMBER = "8801326144735";
+
+// Instant Telegram Order Alert
+const TELEGRAM_BOT_TOKEN = "9264290147:AAE-McUtrx1Z64KOpThGLYBWSgAjH3Cu4_0";
+const TELEGRAM_CHAT_ID = "8758298221";
 
 /* =========================================================
    DELIVERY CHARGE SETTINGS
@@ -2784,6 +2825,49 @@ function safe(value){
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
+}
+
+/* =========================================================
+   INSTANT TELEGRAM ORDER NOTIFICATION
+========================================================= */
+
+async function sendTelegramOrderNotification(orderInfo){
+  if(!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) return;
+
+  const watchItems = orderInfo.items
+    .filter(item => item.product_id !== "DELIVERY")
+    .map(item => `• ${item.name} (×${item.quantity}) — ৳${Number(item.subtotal).toLocaleString("en-BD")}`)
+    .join("\n");
+
+  const messageText =
+`🔔 NEW ORDER — CHRONO VAULT BD!
+
+🆔 Order No: ${orderInfo.tracking_code}
+👤 Customer: ${orderInfo.customer_name}
+📞 Phone: ${orderInfo.phone}
+🚚 Area: ${orderInfo.zone_label} (৳${orderInfo.delivery_fee})
+📍 Address: ${orderInfo.raw_address}
+
+⌚ Ordered Items:
+${watchItems}
+
+💰 Total Payable (COD): ৳${Number(orderInfo.total).toLocaleString("en-BD")}`;
+
+  try{
+    await fetch(
+      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+      {
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body:JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: messageText
+        })
+      }
+    );
+  }catch(err){
+    console.error("Telegram notification error:", err);
+  }
 }
 
 /* =========================================================
@@ -3412,6 +3496,41 @@ async function placeOrder(){
     const responseText = await response.text();
     if(!response.ok){
       throw new Error(responseText || "Order could not be placed.");
+    }
+
+    // Send Instant Telegram Alert to Admin Phone
+    await sendTelegramOrderNotification({
+      tracking_code: trackingCode,
+      customer_name: name,
+      phone: cleanPhone,
+      zone_label: deliveryInfo.label,
+      delivery_fee: deliveryInfo.fee,
+      raw_address: address,
+      items: orderItems,
+      total: grandTotal
+    });
+
+    // Prepare Pre-filled WhatsApp Order Summary Link for Customer
+    const waItemsList = orderItems
+      .filter(i => i.product_id !== "DELIVERY")
+      .map(i => `• ${i.name} (×${i.quantity})`)
+      .join("\n");
+
+    const waOrderMsg = encodeURIComponent(
+`Assalamu Alaikum CHRONO VAULT BD! I just placed an order:
+Order No: ${trackingCode}
+Name: ${name}
+Phone: ${cleanPhone}
+Area: ${deliveryInfo.label} (৳${deliveryInfo.fee})
+Address: ${address}
+Items:
+${waItemsList}
+Total: ৳${grandTotal.toLocaleString("en-BD")}`
+    );
+
+    const waSuccessBtn = document.getElementById("successWhatsappLink");
+    if(waSuccessBtn){
+      waSuccessBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waOrderMsg}`;
     }
 
     lastOrderTrackingCode = trackingCode;
