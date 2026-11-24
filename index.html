@@ -187,9 +187,9 @@ header{
 }
 
 .user-name-btn{
-  border:1px solid #444;
-  color:#eee;
-  background:#141414;
+  border:1px solid rgba(212,175,55,.6);
+  color:var(--gold-light);
+  background:rgba(212,175,55,.1);
   padding:9px 14px;
   border-radius:25px;
   font-weight:600;
@@ -198,8 +198,8 @@ header{
 }
 
 .user-name-btn:hover{
-  border-color:var(--gold);
-  color:var(--gold);
+  background:var(--gold);
+  color:#080808;
 }
 
 /* =========================
@@ -1439,7 +1439,7 @@ header{
 }
 
 /* =========================
-   WHY US & REVIEWS
+   WHY US
 ========================= */
 
 .why{
@@ -1520,7 +1520,7 @@ footer b{
 }
 
 /* =========================
-   AUTH MODAL
+   AUTH & ACCOUNT DASHBOARD MODAL
 ========================= */
 
 .auth-overlay{
@@ -1528,8 +1528,8 @@ footer b{
   position:fixed;
   inset:0;
   z-index:3000;
-  background:rgba(0,0,0,.8);
-  backdrop-filter:blur(6px);
+  background:rgba(0,0,0,.84);
+  backdrop-filter:blur(8px);
   align-items:center;
   justify-content:center;
   padding:20px;
@@ -1541,14 +1541,18 @@ footer b{
 
 .auth-box{
   width:100%;
-  max-width:430px;
+  max-width:450px;
   max-height:90vh;
-  overflow:auto;
+  overflow-y:auto;
   background:#111;
   border:1px solid rgba(212,175,55,.5);
-  border-radius:16px;
+  border-radius:18px;
   padding:26px;
-  box-shadow:0 20px 70px rgba(0,0,0,.7);
+  box-shadow:0 20px 70px rgba(0,0,0,.75);
+}
+
+.account-box{
+  max-width:650px;
 }
 
 .auth-header{
@@ -1565,12 +1569,13 @@ footer b{
 }
 
 .auth-close{
-  width:35px;
-  height:35px;
+  width:36px;
+  height:36px;
   border:1px solid #444;
   background:#181818;
   color:#aaa;
   border-radius:50%;
+  font-size:18px;
 }
 
 .auth-close:hover{
@@ -1609,7 +1614,7 @@ footer b{
 }
 
 .auth-form-group{
-  margin-bottom:15px;
+  margin-bottom:14px;
 }
 
 .auth-form-group label{
@@ -1641,6 +1646,7 @@ footer b{
   background:var(--gold);
   color:#080808;
   font-weight:700;
+  margin-top:4px;
 }
 
 .auth-message{
@@ -1668,10 +1674,115 @@ footer b{
 }
 
 .auth-note{
-  color:#777;
+  color:#888;
   font-size:12px;
   margin-top:15px;
   text-align:center;
+}
+
+/* ACCOUNT DASHBOARD STYLES */
+
+.account-profile-card{
+  background:#171717;
+  border:1px solid #2b2b2b;
+  border-radius:12px;
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+
+.account-profile-info strong{
+  display:block;
+  color:#fff;
+  font-size:16px;
+}
+
+.account-profile-info span{
+  color:#aaa;
+  font-size:13px;
+}
+
+.logout-action-btn{
+  padding:8px 16px;
+  border:1px solid #a84444;
+  background:rgba(168,68,68,.15);
+  color:#ff9b9b;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:600;
+}
+
+.logout-action-btn:hover{
+  background:#a84444;
+  color:#fff;
+}
+
+.history-title{
+  color:var(--gold);
+  font-size:16px;
+  font-weight:700;
+  margin-bottom:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.history-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.history-card{
+  background:#161616;
+  border:1px solid #2a2a2a;
+  border-radius:12px;
+  padding:15px;
+}
+
+.history-card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  border-bottom:1px solid #252525;
+  padding-bottom:10px;
+  margin-bottom:10px;
+}
+
+.history-code{
+  color:var(--gold);
+  font-weight:700;
+  font-size:14px;
+}
+
+.history-date{
+  color:#888;
+  font-size:12px;
+}
+
+.history-items{
+  font-size:13px;
+  color:#ccc;
+  margin-bottom:10px;
+}
+
+.history-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:13px;
+  color:#aaa;
+}
+
+.history-total{
+  color:var(--gold);
+  font-weight:700;
+  font-size:15px;
 }
 
 /* =========================
@@ -1825,15 +1936,15 @@ footer b{
         id="authHeaderButton"
         class="auth-header-btn"
         onclick="openAuthModal()">
-        👤 Login
+        👤 Login / Sign Up
       </button>
 
       <button
         id="userNameButton"
         class="user-name-btn"
         style="display:none"
-        onclick="openAccountMenu()">
-        👤 Account
+        onclick="openAccountDashboard()">
+        👤 My Account
       </button>
 
       <button
@@ -2403,14 +2514,14 @@ footer b{
   </span>
 </div>
 
-<!-- AUTH MODAL -->
-<div id="authOverlay" class="auth-overlay">
+<!-- AUTH LOGIN / SIGNUP MODAL -->
+<div id="authOverlay" class="auth-overlay" onclick="if(event.target===this) closeAuthModal()">
 
   <div class="auth-box">
 
     <div class="auth-header">
 
-      <h2>👤 My Account</h2>
+      <h2>👤 Customer Account</h2>
 
       <button
         class="auth-close"
@@ -2447,40 +2558,30 @@ footer b{
       onsubmit="loginUser(event)">
 
       <div class="auth-form-group">
-
-        <label for="loginEmail">
-          Email
-        </label>
-
+        <label for="loginEmail">Email Address</label>
         <input
           type="email"
           id="loginEmail"
           placeholder="Enter your email"
           autocomplete="email"
           required>
-
       </div>
 
       <div class="auth-form-group">
-
-        <label for="loginPassword">
-          Password
-        </label>
-
+        <label for="loginPassword">Password</label>
         <input
           type="password"
           id="loginPassword"
           placeholder="Enter your password"
           autocomplete="current-password"
           required>
-
       </div>
 
       <button
         id="loginSubmit"
         class="auth-submit"
         type="submit">
-        Login
+        Login to View Orders
       </button>
 
     </form>
@@ -2492,26 +2593,37 @@ footer b{
       onsubmit="signupUser(event)">
 
       <div class="auth-form-group">
+        <label for="signupName">Full Name</label>
+        <input
+          type="text"
+          id="signupName"
+          placeholder="Enter your full name"
+          autocomplete="name"
+          required>
+      </div>
 
-        <label for="signupEmail">
-          Email
-        </label>
+      <div class="auth-form-group">
+        <label for="signupPhone">Phone Number</label>
+        <input
+          type="tel"
+          id="signupPhone"
+          placeholder="01XXXXXXXXX"
+          autocomplete="tel"
+          required>
+      </div>
 
+      <div class="auth-form-group">
+        <label for="signupEmail">Email Address</label>
         <input
           type="email"
           id="signupEmail"
           placeholder="Enter your email"
           autocomplete="email"
           required>
-
       </div>
 
       <div class="auth-form-group">
-
-        <label for="signupPassword">
-          Password
-        </label>
-
+        <label for="signupPassword">Password</label>
         <input
           type="password"
           id="signupPassword"
@@ -2519,7 +2631,6 @@ footer b{
           autocomplete="new-password"
           minlength="6"
           required>
-
       </div>
 
       <button
@@ -2532,8 +2643,40 @@ footer b{
     </form>
 
     <p class="auth-note">
-      Account login is optional for shopping.
+      Create an account once to automatically save and track all your future orders!
     </p>
+
+  </div>
+
+</div>
+
+<!-- LOGGED-IN USER ACCOUNT & ORDER HISTORY MODAL -->
+<div id="accountDashboardOverlay" class="auth-overlay" onclick="if(event.target===this) closeAccountDashboard()">
+
+  <div class="auth-box account-box">
+
+    <div class="auth-header">
+      <h2>👑 My Vault Account</h2>
+      <button class="auth-close" onclick="closeAccountDashboard()">×</button>
+    </div>
+
+    <div class="account-profile-card">
+      <div class="account-profile-info">
+        <strong id="accProfileName">Valued Customer</strong>
+        <span id="accProfileEmail">user@example.com</span>
+        <span id="accProfilePhone" style="display:block;color:var(--gold);margin-top:2px;"></span>
+      </div>
+      <button class="logout-action-btn" onclick="logoutUser()">Logout</button>
+    </div>
+
+    <div class="history-title">
+      <span>📦 My Order History</span>
+      <button onclick="loadUserOrderHistory()" style="background:transparent;border:1px solid #444;color:#ccc;padding:4px 10px;border-radius:6px;font-size:12px;">↻ Refresh</button>
+    </div>
+
+    <div id="userOrderHistoryList" class="history-list">
+      <div class="loading" style="padding:25px;">Loading your order history...</div>
+    </div>
 
   </div>
 
@@ -3080,14 +3223,35 @@ function handleModalOutsideClick(event){
 }
 
 /* =========================================================
-   CHECKOUT & PLACE ORDER
+   CHECKOUT & PLACE ORDER (WITH AUTO-FILL & USER_ID LINKING)
 ========================================================= */
+
+function prefillCheckoutFromAccount(){
+  if(!currentAuthSession || !currentAuthSession.user) return;
+  const meta = currentAuthSession.user.user_metadata || {};
+  const nameField = document.getElementById("customerName");
+  const phoneField = document.getElementById("customerPhone");
+  const addressField = document.getElementById("customerAddress");
+
+  if(nameField && !nameField.value && meta.full_name){
+    nameField.value = meta.full_name;
+  }
+  if(phoneField && !phoneField.value && meta.phone){
+    phoneField.value = meta.phone;
+  }
+  const savedAddr = localStorage.getItem("cv_saved_address_" + currentAuthSession.user.id);
+  if(addressField && !addressField.value && savedAddr){
+    addressField.value = savedAddr;
+  }
+}
 
 function checkout(){
   if(cart.length === 0){
     alert("Your cart is empty.");
     return;
   }
+
+  prefillCheckoutFromAccount();
 
   document.getElementById("checkoutBox").classList.add("show");
   document.getElementById("checkoutButton").style.display = "none";
@@ -3158,7 +3322,6 @@ async function placeOrder(){
     };
   });
 
-  // Include delivery charge transparently in items & address for Admin & Tracking clarity
   orderItems.push({
     product_id: "DELIVERY",
     name: `Delivery Charge (${deliveryInfo.label})`,
@@ -3174,6 +3337,26 @@ async function placeOrder(){
   button.disabled = true;
   button.textContent = "Placing Order...";
 
+  const isLoggedIn = currentAuthSession && currentAuthSession.user && currentAuthSession.user.id;
+  const orderPayload = {
+    customer_name: name,
+    phone: cleanPhone,
+    address: formattedAddress,
+    items: orderItems,
+    total: grandTotal,
+    status: "Pending",
+    tracking_code: trackingCode
+  };
+
+  if(isLoggedIn){
+    orderPayload.user_id = currentAuthSession.user.id;
+    localStorage.setItem("cv_saved_address_" + currentAuthSession.user.id, address);
+  }
+
+  const authHeader = (isLoggedIn && currentAuthSession.access_token)
+    ? "Bearer " + currentAuthSession.access_token
+    : "Bearer " + SUPABASE_KEY;
+
   try{
     const response = await fetch(
       SUPABASE_URL + "/rest/v1/orders",
@@ -3181,19 +3364,11 @@ async function placeOrder(){
         method:"POST",
         headers:{
           "apikey":SUPABASE_KEY,
-          "Authorization":"Bearer " + SUPABASE_KEY,
+          "Authorization":authHeader,
           "Content-Type":"application/json",
           "Prefer":"return=minimal"
         },
-        body:JSON.stringify({
-          customer_name: name,
-          phone: cleanPhone,
-          address: formattedAddress,
-          items: orderItems,
-          total: grandTotal,
-          status: "Pending",
-          tracking_code: trackingCode
-        })
+        body:JSON.stringify(orderPayload)
       }
     );
 
@@ -3219,9 +3394,11 @@ async function placeOrder(){
     showHeaderTrackButton();
     document.getElementById("orderSuccess").scrollIntoView({ behavior:"smooth", block:"start" });
 
-    document.getElementById("customerName").value = "";
-    document.getElementById("customerPhone").value = "";
-    document.getElementById("customerAddress").value = "";
+    if(!isLoggedIn){
+      document.getElementById("customerName").value = "";
+      document.getElementById("customerPhone").value = "";
+      document.getElementById("customerAddress").value = "";
+    }
 
   }catch(error){
     console.error("Checkout Error:", error);
@@ -3320,7 +3497,6 @@ function renderProductGrid(products){
 
     const isComingSoon = !Number.isFinite(price) || price <= 0;
 
-    // Badges
     let leftBadge = "";
     let rightBadge = "";
 
@@ -3445,7 +3621,7 @@ async function loadProducts(){
 }
 
 /* =========================================================
-   AUTH MODAL
+   AUTH & CUSTOMER ACCOUNT DASHBOARD
 ========================================================= */
 
 function openAuthModal(){
@@ -3521,31 +3697,47 @@ async function loginUser(event){
     currentAuthSession = data;
     localStorage.setItem("cv_auth_session", JSON.stringify(data));
     updateAuthUI();
-    showAuthMessage("Login successful.", "success");
+    showAuthMessage("Login successful! Loading your account...", "success");
 
-    setTimeout(function(){ closeAuthModal(); }, 900);
+    setTimeout(function(){
+      closeAuthModal();
+      openAccountDashboard();
+    }, 800);
   }catch(error){
     showAuthMessage(error.message || "Login failed.", "error");
   }finally{
     button.disabled = false;
-    button.textContent = "Login";
+    button.textContent = "Login to View Orders";
   }
 }
 
 async function signupUser(event){
   event.preventDefault();
+  const fullName = document.getElementById("signupName").value.trim();
+  const phone = document.getElementById("signupPhone").value.trim().replace(/[\s-]/g,"");
   const email = document.getElementById("signupEmail").value.trim();
   const password = document.getElementById("signupPassword").value;
   const button = document.getElementById("signupSubmit");
 
   clearAuthMessage();
+
+  if(!fullName){
+    showAuthMessage("Please enter your full name.", "error");
+    return;
+  }
+
+  if(!/^01\d{9}$/.test(phone)){
+    showAuthMessage("Please enter a valid 11-digit BD phone number (01XXXXXXXXX).", "error");
+    return;
+  }
+
   if(password.length < 6){
     showAuthMessage("Password must be at least 6 characters.", "error");
     return;
   }
 
   button.disabled = true;
-  button.textContent = "Creating...";
+  button.textContent = "Creating Account...";
 
   try{
     const response = await fetch(
@@ -3556,7 +3748,14 @@ async function signupUser(event){
           "apikey":SUPABASE_KEY,
           "Content-Type":"application/json"
         },
-        body:JSON.stringify({ email:email, password:password })
+        body:JSON.stringify({
+          email: email,
+          password: password,
+          data: {
+            full_name: fullName,
+            phone: phone
+          }
+        })
       }
     );
 
@@ -3569,10 +3768,13 @@ async function signupUser(event){
       currentAuthSession = data;
       localStorage.setItem("cv_auth_session", JSON.stringify(data));
       updateAuthUI();
-      showAuthMessage("Account created successfully.", "success");
-      setTimeout(function(){ closeAuthModal(); }, 900);
+      showAuthMessage("Account created successfully!", "success");
+      setTimeout(function(){
+        closeAuthModal();
+        openAccountDashboard();
+      }, 800);
     }else{
-      showAuthMessage("Account created. Please check your email if confirmation is required, then login.", "success");
+      showAuthMessage("Account created! Please check your email if verification is required, then login.", "success");
       switchAuthTab("login");
     }
   }catch(error){
@@ -3600,22 +3802,125 @@ function updateAuthUI(){
   if(currentAuthSession && currentAuthSession.user){
     loginButton.style.display = "none";
     accountButton.style.display = "block";
-    const email = currentAuthSession.user.email || "Account";
-    accountButton.textContent = "👤 " + (email.length > 16 ? email.slice(0,13) + "..." : email);
+    const meta = currentAuthSession.user.user_metadata || {};
+    const displayName = meta.full_name || currentAuthSession.user.email || "My Orders";
+    accountButton.textContent = "👑 " + (displayName.length > 15 ? displayName.slice(0,12) + "..." : displayName);
   }else{
     loginButton.style.display = "block";
     accountButton.style.display = "none";
   }
 }
 
-function openAccountMenu(){
+function openAccountDashboard(){
   if(!currentAuthSession || !currentAuthSession.user){
     openAuthModal();
     return;
   }
-  const email = currentAuthSession.user.email || "your account";
-  if(confirm("Logged in as:\n" + email + "\n\nDo you want to logout?")){
-    logoutUser();
+
+  const user = currentAuthSession.user;
+  const meta = user.user_metadata || {};
+
+  document.getElementById("accProfileName").textContent = meta.full_name || "Valued Customer";
+  document.getElementById("accProfileEmail").textContent = user.email || "";
+  document.getElementById("accProfilePhone").textContent = meta.phone ? "📞 " + meta.phone : "";
+
+  document.getElementById("accountDashboardOverlay").classList.add("show");
+  loadUserOrderHistory();
+}
+
+function closeAccountDashboard(){
+  document.getElementById("accountDashboardOverlay").classList.remove("show");
+}
+
+async function loadUserOrderHistory(){
+  const listBox = document.getElementById("userOrderHistoryList");
+  if(!currentAuthSession || !currentAuthSession.user){
+    return;
+  }
+
+  listBox.innerHTML = '<div class="loading" style="padding:25px;">Loading your order history...</div>';
+
+  const userId = currentAuthSession.user.id;
+  const meta = currentAuthSession.user.user_metadata || {};
+  const userPhone = meta.phone || "";
+  const token = currentAuthSession.access_token || SUPABASE_KEY;
+
+  // Match orders by user_id OR saved phone number so even past guest orders appear!
+  let filterQuery = `user_id=eq.${encodeURIComponent(userId)}`;
+  if(userPhone){
+    filterQuery = `or=(user_id.eq.${encodeURIComponent(userId)},phone.eq.${encodeURIComponent(userPhone)})`;
+  }
+
+  try{
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/orders?select=*&${filterQuery}&order=created_at.desc`,
+      {
+        method:"GET",
+        headers:{
+          "apikey":SUPABASE_KEY,
+          "Authorization":"Bearer " + token
+        }
+      }
+    );
+
+    if(!response.ok){
+      throw new Error("Could not fetch order history.");
+    }
+
+    const orders = await response.json();
+
+    if(!Array.isArray(orders) || orders.length === 0){
+      listBox.innerHTML = `
+        <div class="empty" style="padding:25px;">
+          You haven't placed any orders yet.<br>
+          <small style="color:#777;">Any order you place while logged in will automatically appear here.</small>
+        </div>
+      `;
+      return;
+    }
+
+    listBox.innerHTML = orders.map(function(order){
+      const date = order.created_at
+        ? new Date(order.created_at).toLocaleDateString("en-BD", { year:"numeric", month:"short", day:"numeric" })
+        : "";
+
+      let items = [];
+      try{
+        items = typeof order.items === "string" ? JSON.parse(order.items) : (order.items || []);
+      }catch(e){
+        items = [];
+      }
+
+      const itemsSummary = items
+        .filter(i => i.product_id !== "DELIVERY")
+        .map(i => `${safe(i.name)} (×${i.quantity})`)
+        .join(", ") || "Watch Order";
+
+      return `
+        <div class="history-card">
+          <div class="history-card-top">
+            <div>
+              <div class="history-code">${safe(order.tracking_code || ("#" + order.id))}</div>
+              <div class="history-date">${date}</div>
+            </div>
+            <span class="status-badge">${safe(order.status || "Pending")}</span>
+          </div>
+          <div class="history-items">${itemsSummary}</div>
+          <div class="history-footer">
+            <span>Cash on Delivery</span>
+            <span class="history-total">Total: ৳${Number(order.total || 0).toLocaleString("en-BD")}</span>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+  }catch(error){
+    console.error("Order history error:", error);
+    listBox.innerHTML = `
+      <div class="empty" style="padding:20px;color:#ff9b9b;">
+        Could not load order history. Make sure you ran the <code>user_id</code> SQL update in Supabase.
+      </div>
+    `;
   }
 }
 
@@ -3639,13 +3944,10 @@ async function logoutUser(){
 
   currentAuthSession = null;
   localStorage.removeItem("cv_auth_session");
+  closeAccountDashboard();
   updateAuthUI();
-  alert("You have been logged out.");
+  showCartToast("Logged out successfully");
 }
-
-document.getElementById("authOverlay").addEventListener("click", function(event){
-  if(event.target === this) closeAuthModal();
-});
 
 /* =========================================================
    INIT
