@@ -1239,6 +1239,13 @@ header{
   font-size:15px;
 }
 
+.login-required-note{
+  text-align:center;
+  color:#aaa;
+  font-size:12px;
+  margin-top:8px;
+}
+
 .checkout-box{
   display:none;
   margin-top:25px;
@@ -1671,6 +1678,12 @@ footer b{
   color:#ffb3b3;
   background:#201010;
   border:1px solid #532828;
+}
+
+.auth-message.info{
+  color:var(--gold-light);
+  background:rgba(212,175,55,.12);
+  border:1px solid rgba(212,175,55,.45);
 }
 
 .auth-note{
@@ -2286,6 +2299,10 @@ footer b{
       Proceed to Checkout
     </button>
 
+    <div id="loginCheckoutHint" class="login-required-note" style="display:none;">
+      🔒 Account Login / Sign Up is required to place an order.
+    </div>
+
     <div id="checkoutBox" class="checkout-box">
 
       <div class="checkout-title">
@@ -2404,7 +2421,7 @@ footer b{
       </div>
 
       <p>
-        Please save your Order Number. We will call you shortly to confirm.
+        Your order has been saved to your account history. We will call you shortly to confirm.
       </p>
 
       <button
@@ -2581,7 +2598,7 @@ footer b{
         id="loginSubmit"
         class="auth-submit"
         type="submit">
-        Login to View Orders
+        Login
       </button>
 
     </form>
@@ -2643,7 +2660,7 @@ footer b{
     </form>
 
     <p class="auth-note">
-      Create an account once to automatically save and track all your future orders!
+      Sign up once to place orders and track your full order history anytime.
     </p>
 
   </div>
@@ -2751,6 +2768,7 @@ let currentDetailProduct = null;
 let lastOrderTrackingCode = "";
 let lastOrderPhone = "";
 let currentAuthSession = null;
+let pendingCheckoutAfterAuth = false;
 
 /* =========================================================
    SAFE HTML
@@ -2928,18 +2946,28 @@ function renderCart(){
   const box = document.getElementById("cartItems");
   const summaryBox = document.getElementById("cartSummaryBox");
   const checkoutBtn = document.getElementById("checkoutButton");
+  const loginHint = document.getElementById("loginCheckoutHint");
 
   if(cart.length === 0){
     box.innerHTML = '<div class="empty">Your cart is empty.</div>';
     summaryBox.style.display = "none";
     checkoutBtn.style.display = "none";
+    if(loginHint) loginHint.style.display = "none";
     document.getElementById("checkoutBox").classList.remove("show");
     return;
   }
 
   summaryBox.style.display = "flex";
+  const isLoggedIn = Boolean(currentAuthSession && currentAuthSession.user);
+
   if(!document.getElementById("checkoutBox").classList.contains("show")){
     checkoutBtn.style.display = "block";
+    checkoutBtn.textContent = isLoggedIn
+      ? "Proceed to Checkout"
+      : "🔒 Login / Sign Up to Checkout";
+    if(loginHint){
+      loginHint.style.display = isLoggedIn ? "none" : "block";
+    }
   }
 
   box.innerHTML = cart.map(function(item){
@@ -3223,7 +3251,7 @@ function handleModalOutsideClick(event){
 }
 
 /* =========================================================
-   CHECKOUT & PLACE ORDER (WITH AUTO-FILL & USER_ID LINKING)
+   CHECKOUT (LOGIN REQUIRED) & PLACE ORDER
 ========================================================= */
 
 function prefillCheckoutFromAccount(){
@@ -3251,10 +3279,19 @@ function checkout(){
     return;
   }
 
+  // Enforce Sign Up / Login before checkout
+  if(!currentAuthSession || !currentAuthSession.user || !currentAuthSession.access_token){
+    pendingCheckoutAfterAuth = true;
+    openAuthModal("Please Login or Sign Up first to place your order.");
+    return;
+  }
+
   prefillCheckoutFromAccount();
 
   document.getElementById("checkoutBox").classList.add("show");
   document.getElementById("checkoutButton").style.display = "none";
+  const loginHint = document.getElementById("loginCheckoutHint");
+  if(loginHint) loginHint.style.display = "none";
   document.getElementById("orderSuccess").classList.remove("show");
   renderCart();
 
@@ -3266,7 +3303,7 @@ function checkout(){
 
 function cancelCheckout(){
   document.getElementById("checkoutBox").classList.remove("show");
-  document.getElementById("checkoutButton").style.display = cart.length > 0 ? "block" : "none";
+  renderCart();
 }
 
 function generateTrackingCode(){
@@ -3277,6 +3314,13 @@ function generateTrackingCode(){
 async function placeOrder(){
   if(cart.length === 0){
     alert("Your cart is empty.");
+    return;
+  }
+
+  // Double-check authentication before placing order
+  if(!currentAuthSession || !currentAuthSession.user || !currentAuthSession.access_token){
+    pendingCheckoutAfterAuth = true;
+    openAuthModal("Your session expired. Please Login or Sign Up to confirm your order.");
     return;
   }
 
@@ -3337,8 +3381,8 @@ async function placeOrder(){
   button.disabled = true;
   button.textContent = "Placing Order...";
 
-  const isLoggedIn = currentAuthSession && currentAuthSession.user && currentAuthSession.user.id;
   const orderPayload = {
+    user_id: currentAuthSession.user.id,
     customer_name: name,
     phone: cleanPhone,
     address: formattedAddress,
@@ -3348,14 +3392,7 @@ async function placeOrder(){
     tracking_code: trackingCode
   };
 
-  if(isLoggedIn){
-    orderPayload.user_id = currentAuthSession.user.id;
-    localStorage.setItem("cv_saved_address_" + currentAuthSession.user.id, address);
-  }
-
-  const authHeader = (isLoggedIn && currentAuthSession.access_token)
-    ? "Bearer " + currentAuthSession.access_token
-    : "Bearer " + SUPABASE_KEY;
+  localStorage.setItem("cv_saved_address_" + currentAuthSession.user.id, address);
 
   try{
     const response = await fetch(
@@ -3364,7 +3401,7 @@ async function placeOrder(){
         method:"POST",
         headers:{
           "apikey":SUPABASE_KEY,
-          "Authorization":authHeader,
+          "Authorization":"Bearer " + currentAuthSession.access_token,
           "Content-Type":"application/json",
           "Prefer":"return=minimal"
         },
@@ -3394,11 +3431,8 @@ async function placeOrder(){
     showHeaderTrackButton();
     document.getElementById("orderSuccess").scrollIntoView({ behavior:"smooth", block:"start" });
 
-    if(!isLoggedIn){
-      document.getElementById("customerName").value = "";
-      document.getElementById("customerPhone").value = "";
-      document.getElementById("customerAddress").value = "";
-    }
+    // Reload products so updated stock reflects immediately on UI
+    loadProducts();
 
   }catch(error){
     console.error("Checkout Error:", error);
@@ -3596,6 +3630,7 @@ async function loadProducts(){
       SUPABASE_URL + "/rest/v1/products?select=*&order=created_at.desc",
       {
         method:"GET",
+        cache:"no-store",
         headers:{
           "apikey":SUPABASE_KEY,
           "Authorization":"Bearer " + SUPABASE_KEY,
@@ -3624,13 +3659,17 @@ async function loadProducts(){
    AUTH & CUSTOMER ACCOUNT DASHBOARD
 ========================================================= */
 
-function openAuthModal(){
+function openAuthModal(infoText){
   document.getElementById("authOverlay").classList.add("show");
   clearAuthMessage();
+  if(infoText){
+    showAuthMessage(infoText, "info");
+  }
 }
 
 function closeAuthModal(){
   document.getElementById("authOverlay").classList.remove("show");
+  pendingCheckoutAfterAuth = false;
 }
 
 function switchAuthTab(tab){
@@ -3697,17 +3736,25 @@ async function loginUser(event){
     currentAuthSession = data;
     localStorage.setItem("cv_auth_session", JSON.stringify(data));
     updateAuthUI();
-    showAuthMessage("Login successful! Loading your account...", "success");
+    renderCart();
+    showAuthMessage("Login successful!", "success");
+
+    const shouldProceedCheckout = pendingCheckoutAfterAuth;
+    pendingCheckoutAfterAuth = false;
 
     setTimeout(function(){
-      closeAuthModal();
-      openAccountDashboard();
-    }, 800);
+      document.getElementById("authOverlay").classList.remove("show");
+      if(shouldProceedCheckout){
+        checkout();
+      }else{
+        openAccountDashboard();
+      }
+    }, 700);
   }catch(error){
     showAuthMessage(error.message || "Login failed.", "error");
   }finally{
     button.disabled = false;
-    button.textContent = "Login to View Orders";
+    button.textContent = "Login";
   }
 }
 
@@ -3768,13 +3815,22 @@ async function signupUser(event){
       currentAuthSession = data;
       localStorage.setItem("cv_auth_session", JSON.stringify(data));
       updateAuthUI();
+      renderCart();
       showAuthMessage("Account created successfully!", "success");
+
+      const shouldProceedCheckout = pendingCheckoutAfterAuth;
+      pendingCheckoutAfterAuth = false;
+
       setTimeout(function(){
-        closeAuthModal();
-        openAccountDashboard();
-      }, 800);
+        document.getElementById("authOverlay").classList.remove("show");
+        if(shouldProceedCheckout){
+          checkout();
+        }else{
+          openAccountDashboard();
+        }
+      }, 700);
     }else{
-      showAuthMessage("Account created! Please check your email if verification is required, then login.", "success");
+      showAuthMessage("Account created! Please login now.", "success");
       switchAuthTab("login");
     }
   }catch(error){
@@ -3845,7 +3901,6 @@ async function loadUserOrderHistory(){
   const userPhone = meta.phone || "";
   const token = currentAuthSession.access_token || SUPABASE_KEY;
 
-  // Match orders by user_id OR saved phone number so even past guest orders appear!
   let filterQuery = `user_id=eq.${encodeURIComponent(userId)}`;
   if(userPhone){
     filterQuery = `or=(user_id.eq.${encodeURIComponent(userId)},phone.eq.${encodeURIComponent(userPhone)})`;
@@ -3873,7 +3928,7 @@ async function loadUserOrderHistory(){
       listBox.innerHTML = `
         <div class="empty" style="padding:25px;">
           You haven't placed any orders yet.<br>
-          <small style="color:#777;">Any order you place while logged in will automatically appear here.</small>
+          <small style="color:#777;">Any order you place will automatically appear here.</small>
         </div>
       `;
       return;
@@ -3918,7 +3973,7 @@ async function loadUserOrderHistory(){
     console.error("Order history error:", error);
     listBox.innerHTML = `
       <div class="empty" style="padding:20px;color:#ff9b9b;">
-        Could not load order history. Make sure you ran the <code>user_id</code> SQL update in Supabase.
+        Could not load order history. Please try again.
       </div>
     `;
   }
@@ -3945,7 +4000,9 @@ async function logoutUser(){
   currentAuthSession = null;
   localStorage.removeItem("cv_auth_session");
   closeAccountDashboard();
+  document.getElementById("checkoutBox").classList.remove("show");
   updateAuthUI();
+  renderCart();
   showCartToast("Logged out successfully");
 }
 
