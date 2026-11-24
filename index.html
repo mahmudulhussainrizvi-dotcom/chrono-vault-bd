@@ -76,6 +76,17 @@ button{
   100%{ box-shadow:0 8px 25px rgba(37,211,102,.28), 0 0 0 0 rgba(37,211,102,0); }
 }
 
+@keyframes socialPopIn{
+  0%{
+    opacity:0;
+    transform:translateY(16px) scale(.94);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
 .reveal-up{
   opacity:0;
   transform:translateY(24px);
@@ -1946,14 +1957,14 @@ header{
 }
 
 /* =========================
-   FOOTER
+   FOOTER & ANIMATED SOCIAL LINKS
 ========================= */
 
 footer{
   text-align:center;
-  padding:45px 20px 85px;
+  padding:48px 20px 90px;
   border-top:1px solid var(--border);
-  background:#050505;
+  background:radial-gradient(circle at 50% 0%, rgba(212,175,55,.07), #050505 65%);
   color:#888;
 }
 
@@ -1967,27 +1978,96 @@ footer b{
   display:flex;
   justify-content:center;
   flex-wrap:wrap;
-  gap:10px;
-  margin-top:20px;
+  gap:12px;
+  margin-top:22px;
 }
 
-.social-links a{
-  padding:9px 16px;
-  border:1px solid #333;
-  border-radius:25px;
-  color:#ccc;
+.social-btn{
+  position:relative;
+  overflow:hidden;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 18px;
+  border:1px solid rgba(212,175,55,.35);
+  border-radius:30px;
+  background:linear-gradient(145deg,#131313,#0b0b0b);
+  color:#e2e2e2;
   font-size:13px;
   font-weight:600;
+  opacity:0;
+  transition:transform .3s cubic-bezier(.16,1,.3,1), border-color .3s ease, color .3s ease, box-shadow .3s ease;
 }
 
-.social-links a:hover{
-  border-color:var(--gold);
-  color:var(--gold);
-  background:rgba(212,175,55,.08);
+.social-btn::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-110%;
+  width:75%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,rgba(241,211,122,.28),transparent);
+  transform:skewX(-22deg);
+  transition:left .55s ease;
+  pointer-events:none;
 }
+
+.social-btn:hover::before{
+  left:135%;
+}
+
+.social-btn:hover{
+  transform:translateY(-4px) scale(1.03);
+  border-color:var(--gold);
+  color:var(--gold-light);
+  box-shadow:0 10px 24px rgba(0,0,0,.65), 0 0 18px rgba(212,175,55,.22);
+}
+
+.social-btn.fb:hover{
+  border-color:#4ea8ff;
+  color:#8ec8ff;
+  box-shadow:0 10px 24px rgba(0,0,0,.65), 0 0 18px rgba(78,168,255,.25);
+}
+
+.social-btn.ig:hover{
+  border-color:#f472b6;
+  color:#fbcfe8;
+  box-shadow:0 10px 24px rgba(0,0,0,.65), 0 0 18px rgba(244,114,182,.25);
+}
+
+.social-btn.tt:hover{
+  border-color:#22d3ee;
+  color:#a5f3fc;
+  box-shadow:0 10px 24px rgba(0,0,0,.65), 0 0 18px rgba(34,211,238,.25);
+}
+
+.social-btn.wa:hover{
+  border-color:#4ade80;
+  color:#bbf7d0;
+  box-shadow:0 10px 24px rgba(0,0,0,.65), 0 0 18px rgba(74,222,128,.25);
+}
+
+.social-icon{
+  font-size:15px;
+  line-height:1;
+  transition:transform .3s ease;
+}
+
+.social-btn:hover .social-icon{
+  transform:scale(1.18) rotate(-6deg);
+}
+
+footer.footer-visible .social-btn{
+  animation:socialPopIn .5s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+footer.footer-visible .social-btn:nth-child(1){ animation-delay:.06s; }
+footer.footer-visible .social-btn:nth-child(2){ animation-delay:.14s; }
+footer.footer-visible .social-btn:nth-child(3){ animation-delay:.22s; }
+footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
 
 .social-note{
-  margin-top:14px;
+  margin-top:16px;
   font-size:12px;
 }
 
@@ -3098,7 +3178,7 @@ footer b{
 </section>
 
 <!-- FOOTER -->
-<footer>
+<footer id="siteFooter">
 
   <p>
     © 2026 <b>CHRONO VAULT BD</b>
@@ -3111,31 +3191,39 @@ footer b{
   <div class="social-links">
 
     <a
+      class="social-btn fb"
       href="https://www.facebook.com/share/1C3CqbjBXk/"
       target="_blank"
       rel="noopener noreferrer">
-      Facebook
+      <span class="social-icon">📘</span>
+      <span>Facebook</span>
     </a>
 
     <a
+      class="social-btn ig"
       href="https://www.instagram.com/chronovaultbd?stkn=MWYxMjBxNXA1YTZ1bg=="
       target="_blank"
       rel="noopener noreferrer">
-      Instagram
+      <span class="social-icon">📸</span>
+      <span>Instagram</span>
     </a>
 
     <a
+      class="social-btn tt"
       href="https://www.tiktok.com/@chrono.vault.bd?_r=1&_t=ZS-99qPMd7PspQ"
       target="_blank"
       rel="noopener noreferrer">
-      TikTok
+      <span class="social-icon">🎵</span>
+      <span>TikTok</span>
     </a>
 
     <a
+      class="social-btn wa"
       href="https://wa.me/8801326144735"
       target="_blank"
       rel="noopener noreferrer">
-      WhatsApp
+      <span class="social-icon">💬</span>
+      <span>WhatsApp</span>
     </a>
 
   </div>
@@ -3425,8 +3513,11 @@ function toggleFaq(btn){
 
 function initScrollReveal(){
   const elements = document.querySelectorAll(".reveal-up");
+  const footer = document.getElementById("siteFooter");
+
   if(!("IntersectionObserver" in window)){
     elements.forEach(el => el.classList.add("visible"));
+    if(footer) footer.classList.add("footer-visible");
     return;
   }
 
@@ -3440,6 +3531,18 @@ function initScrollReveal(){
   }, { threshold: 0.1 });
 
   elements.forEach(el => observer.observe(el));
+
+  if(footer){
+    const footerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          footer.classList.add("footer-visible");
+          footerObserver.unobserve(footer);
+        }
+      });
+    }, { threshold: 0.12 });
+    footerObserver.observe(footer);
+  }
 }
 
 /* =========================================================
