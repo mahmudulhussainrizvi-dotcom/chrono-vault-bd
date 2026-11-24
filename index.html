@@ -661,6 +661,221 @@ header{
 }
 
 /* =========================
+   LUXURY POPUP MODALS (ORDER CONFIRMED & CANCEL CONFIRM)
+========================= */
+
+.luxury-popup-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:5000;
+  background:rgba(0,0,0,.86);
+  backdrop-filter:blur(10px);
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  animation:fadeInOverlay .25s ease;
+}
+
+.luxury-popup-overlay.show{
+  display:flex;
+}
+
+@keyframes fadeInOverlay{
+  from{ opacity:0; }
+  to{ opacity:1; }
+}
+
+@keyframes popCardScale{
+  from{ opacity:0; transform:scale(.92) translateY(12px); }
+  to{ opacity:1; transform:scale(1) translateY(0); }
+}
+
+.luxury-popup-card{
+  width:100%;
+  max-width:440px;
+  background:linear-gradient(180deg,#151410 0%,#0d0d0d 100%);
+  border:1px solid rgba(212,175,55,.65);
+  border-radius:20px;
+  padding:30px 24px;
+  text-align:center;
+  box-shadow:0 25px 70px rgba(0,0,0,.85),0 0 35px rgba(212,175,55,.14);
+  animation:popCardScale .3s cubic-bezier(.16,1,.3,1);
+  position:relative;
+}
+
+.luxury-popup-card.danger-theme{
+  background:linear-gradient(180deg,#191010 0%,#0d0d0d 100%);
+  border-color:rgba(217,83,79,.65);
+  box-shadow:0 25px 70px rgba(0,0,0,.85),0 0 35px rgba(217,83,79,.14);
+}
+
+.popup-badge-circle{
+  width:68px;
+  height:68px;
+  margin:0 auto 16px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:32px;
+  background:radial-gradient(circle,rgba(212,175,55,.25) 0%,rgba(212,175,55,.06) 70%);
+  border:1.5px solid var(--gold);
+  color:var(--gold);
+  box-shadow:0 0 24px rgba(212,175,55,.25);
+}
+
+.popup-badge-circle.danger{
+  background:radial-gradient(circle,rgba(220,53,69,.25) 0%,rgba(220,53,69,.06) 70%);
+  border-color:#e05a5a;
+  color:#ff7b7b;
+  box-shadow:0 0 24px rgba(220,53,69,.22);
+}
+
+.luxury-popup-card h2{
+  color:var(--gold-light);
+  font-size:23px;
+  letter-spacing:1px;
+  margin-bottom:8px;
+}
+
+.luxury-popup-card.danger-theme h2{
+  color:#ff9494;
+}
+
+.luxury-popup-sub{
+  color:#b5b5b5;
+  font-size:14px;
+  margin-bottom:18px;
+}
+
+.popup-receipt-box{
+  background:rgba(255,255,255,.03);
+  border:1px dashed rgba(212,175,55,.55);
+  border-radius:12px;
+  padding:14px;
+  margin-bottom:18px;
+}
+
+.popup-order-code-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:6px;
+}
+
+.popup-order-code{
+  color:var(--gold);
+  font-size:21px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+.copy-code-btn{
+  padding:4px 10px;
+  border-radius:6px;
+  border:1px solid rgba(212,175,55,.5);
+  background:rgba(212,175,55,.12);
+  color:var(--gold-light);
+  font-size:11px;
+  font-weight:700;
+}
+
+.copy-code-btn:hover{
+  background:var(--gold);
+  color:#080808;
+}
+
+.popup-meta-line{
+  font-size:13px;
+  color:#aaa;
+}
+
+.popup-meta-line strong{
+  color:#fff;
+}
+
+.popup-btn-stack{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.popup-btn-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.popup-primary-btn{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:10px;
+  background:var(--gold);
+  color:#080808;
+  font-weight:700;
+  font-size:14px;
+}
+
+.popup-primary-btn:hover{
+  background:var(--gold-light);
+}
+
+.popup-wa-btn{
+  display:block;
+  width:100%;
+  padding:13px;
+  border:1px solid #25D366;
+  border-radius:10px;
+  background:rgba(37,211,102,.14);
+  color:#5ef596;
+  font-weight:700;
+  font-size:14px;
+}
+
+.popup-wa-btn:hover{
+  background:#25D366;
+  color:#080808;
+}
+
+.popup-danger-btn{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:10px;
+  background:#c93b3b;
+  color:#fff;
+  font-weight:700;
+  font-size:14px;
+}
+
+.popup-danger-btn:hover:not(:disabled){
+  background:#e04848;
+}
+
+.popup-danger-btn:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+.popup-secondary-btn{
+  width:100%;
+  padding:12px;
+  border:1px solid #3a3a3a;
+  border-radius:10px;
+  background:#181818;
+  color:#ccc;
+  font-weight:600;
+  font-size:13px;
+}
+
+.popup-secondary-btn:hover{
+  border-color:var(--gold);
+  color:var(--gold);
+}
+
+/* =========================
    PRODUCT DETAILS MODAL
 ========================= */
 
@@ -2598,6 +2813,70 @@ footer b{
   </span>
 </div>
 
+<!-- LUXURY ORDER CONFIRMED MODAL -->
+<div id="orderConfirmedModal" class="luxury-popup-overlay" onclick="if(event.target===this) closeOrderConfirmedModal()">
+  <div class="luxury-popup-card">
+    <div class="popup-badge-circle">✓</div>
+    <h2>Order Confirmed!</h2>
+    <p class="luxury-popup-sub">
+      Thank you for choosing <strong style="color:var(--gold);">CHRONO VAULT BD</strong>. Your timepiece is being prepared for dispatch.
+    </p>
+
+    <div class="popup-receipt-box">
+      <div class="popup-order-code-row">
+        <span id="popupOrderCode" class="popup-order-code">CVBD-000000</span>
+        <button class="copy-code-btn" onclick="copyOrderCode()">Copy</button>
+      </div>
+      <div class="popup-meta-line">
+        Payable on Delivery: <strong id="popupOrderTotal">৳0</strong>
+      </div>
+      <div id="popupOrderArea" class="popup-meta-line" style="font-size:12px;margin-top:3px;">
+        Inside Mymensingh
+      </div>
+    </div>
+
+    <div class="popup-btn-stack">
+      <button class="popup-primary-btn" onclick="closeOrderConfirmedModal(); openTrackFromSuccess();">
+        📦 Track This Order
+      </button>
+
+      <a
+        id="popupWhatsappLink"
+        class="popup-wa-btn"
+        href="https://wa.me/8801326144735"
+        target="_blank"
+        rel="noopener noreferrer">
+        📲 Send Order Details on WhatsApp
+      </a>
+
+      <button class="popup-secondary-btn" onclick="closeOrderConfirmedModal()">
+        Continue Shopping
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- LUXURY CANCEL ORDER CONFIRMATION MODAL -->
+<div id="cancelConfirmModal" class="luxury-popup-overlay" onclick="if(event.target===this) closeCancelConfirmModal()">
+  <div class="luxury-popup-card danger-theme">
+    <div class="popup-badge-circle danger">✕</div>
+    <h2>Cancel This Order?</h2>
+    <p class="luxury-popup-sub">
+      Are you sure you want to cancel order <strong id="cancelModalCode" style="color:#fff;">CVBD-000000</strong>?<br>
+      <span style="font-size:12px;color:#888;">This action cannot be undone.</span>
+    </p>
+
+    <div class="popup-btn-row">
+      <button class="popup-secondary-btn" onclick="closeCancelConfirmModal()">
+        Keep Order
+      </button>
+      <button id="confirmCancelActionBtn" class="popup-danger-btn" onclick="executeOrderCancellation()">
+        Yes, Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- AUTH LOGIN / SIGNUP MODAL -->
 <div id="authOverlay" class="auth-overlay" onclick="if(event.target===this) closeAuthModal()">
 
@@ -2840,6 +3119,7 @@ let lastOrderTrackingCode = "";
 let lastOrderPhone = "";
 let currentAuthSession = null;
 let pendingCheckoutAfterAuth = false;
+let pendingCancelOrderData = null;
 
 /* =========================================================
    SAFE HTML
@@ -2855,6 +3135,54 @@ function safe(value){
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
+}
+
+/* =========================================================
+   LUXURY POPUP CONTROLS
+========================================================= */
+
+function openOrderConfirmedModal(trackingCode, total, zoneLabel, waHref){
+  document.getElementById("popupOrderCode").textContent = trackingCode;
+  document.getElementById("popupOrderTotal").textContent = "৳" + Number(total || 0).toLocaleString("en-BD");
+  document.getElementById("popupOrderArea").textContent = zoneLabel + " • Cash on Delivery";
+  document.getElementById("popupWhatsappLink").href = waHref;
+  document.getElementById("orderConfirmedModal").classList.add("show");
+}
+
+function closeOrderConfirmedModal(){
+  document.getElementById("orderConfirmedModal").classList.remove("show");
+}
+
+function copyOrderCode(){
+  const code = document.getElementById("popupOrderCode").textContent.trim();
+  if(!code) return;
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(code).then(function(){
+      showCartToast("Order number copied: " + code);
+    });
+  }else{
+    showCartToast("Order Number: " + code);
+  }
+}
+
+function promptCancelOrder(orderId, trackingCode, customerName, phone, total){
+  pendingCancelOrderData = {
+    orderId: orderId,
+    trackingCode: trackingCode,
+    customerName: customerName,
+    phone: phone,
+    total: total
+  };
+  document.getElementById("cancelModalCode").textContent = trackingCode || ("#" + orderId);
+  const confirmBtn = document.getElementById("confirmCancelActionBtn");
+  confirmBtn.disabled = false;
+  confirmBtn.textContent = "Yes, Cancel";
+  document.getElementById("cancelConfirmModal").classList.add("show");
+}
+
+function closeCancelConfirmModal(){
+  document.getElementById("cancelConfirmModal").classList.remove("show");
+  pendingCancelOrderData = null;
 }
 
 /* =========================================================
@@ -2934,7 +3262,7 @@ function showCartToast(message){
   clearTimeout(cvToastTimer);
   cvToastTimer = setTimeout(function(){
     toast.classList.remove("show");
-  }, 2500);
+  }, 2600);
 }
 
 /* =========================================================
@@ -2991,12 +3319,12 @@ function addCart(product){
   const price = Number(product.price);
 
   if(!Number.isFinite(price) || price <= 0){
-    alert("This product is arriving soon. Price will be announced shortly!");
+    showCartToast("Price arriving soon!");
     return;
   }
 
   if(!Number.isFinite(stock) || stock <= 0){
-    alert("This product is out of stock.");
+    showCartToast("Product is out of stock");
     return;
   }
 
@@ -3006,7 +3334,7 @@ function addCart(product){
 
   if(existing){
     if(Number(existing.quantity) >= stock){
-      alert("Maximum available stock already added.");
+      showCartToast("Maximum available stock reached");
       return;
     }
     existing.quantity++;
@@ -3040,7 +3368,7 @@ function changeQuantity(id, change){
   }
 
   if(newQuantity > Number(item.stock)){
-    alert("Maximum available stock: " + item.stock);
+    showCartToast("Maximum stock: " + item.stock);
     return;
   }
 
@@ -3410,7 +3738,7 @@ function prefillCheckoutFromAccount(){
 
 function checkout(){
   if(cart.length === 0){
-    alert("Your cart is empty.");
+    showCartToast("Your cart is empty");
     return;
   }
 
@@ -3447,7 +3775,7 @@ function generateTrackingCode(){
 
 async function placeOrder(){
   if(cart.length === 0){
-    alert("Your cart is empty.");
+    showCartToast("Your cart is empty");
     return;
   }
 
@@ -3462,26 +3790,26 @@ async function placeOrder(){
   const address = document.getElementById("customerAddress").value.trim();
 
   if(!name){
-    alert("Please enter your full name.");
+    showCartToast("Please enter your full name");
     document.getElementById("customerName").focus();
     return;
   }
 
   if(!phone){
-    alert("Please enter your phone number.");
+    showCartToast("Please enter your phone number");
     document.getElementById("customerPhone").focus();
     return;
   }
 
   const cleanPhone = phone.replace(/[\s-]/g,"");
   if(!/^01\d{9}$/.test(cleanPhone)){
-    alert("Please enter a valid Bangladesh phone number. Example: 01712345678");
+    showCartToast("Enter valid 11-digit BD number");
     document.getElementById("customerPhone").focus();
     return;
   }
 
   if(!address){
-    alert("Please enter your full delivery address.");
+    showCartToast("Please enter full delivery address");
     document.getElementById("customerAddress").focus();
     return;
   }
@@ -3512,7 +3840,7 @@ async function placeOrder(){
   const button = document.getElementById("placeOrderButton");
 
   button.disabled = true;
-  button.textContent = "Placing Order...";
+  button.textContent = "Confirming Order...";
 
   const orderPayload = {
     user_id: currentAuthSession.user.id,
@@ -3575,9 +3903,11 @@ ${waItemsList}
 Total: ৳${grandTotal.toLocaleString("en-BD")}`
     );
 
+    const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${waOrderMsg}`;
+
     const waSuccessBtn = document.getElementById("successWhatsappLink");
     if(waSuccessBtn){
-      waSuccessBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waOrderMsg}`;
+      waSuccessBtn.href = waHref;
     }
 
     lastOrderTrackingCode = trackingCode;
@@ -3595,7 +3925,9 @@ Total: ৳${grandTotal.toLocaleString("en-BD")}`
     document.getElementById("orderSuccess").classList.add("show");
 
     showHeaderTrackButton();
-    document.getElementById("orderSuccess").scrollIntoView({ behavior:"smooth", block:"start" });
+
+    // Open Luxury Order Confirmed Modal
+    openOrderConfirmedModal(trackingCode, grandTotal, deliveryInfo.label, waHref);
 
     loadProducts();
 
@@ -3821,7 +4153,7 @@ async function loadProducts(){
 }
 
 /* =========================================================
-   AUTH & CUSTOMER ACCOUNT DASHBOARD (WITH CANCEL ORDER)
+   AUTH & CUSTOMER ACCOUNT DASHBOARD (WITH LUXURY CANCEL POPUP)
 ========================================================= */
 
 function openAuthModal(infoText){
@@ -4053,19 +4385,20 @@ function closeAccountDashboard(){
   document.getElementById("accountDashboardOverlay").classList.remove("show");
 }
 
-async function cancelMyOrder(orderId, trackingCode, customerName, phone, total, btnEl){
-  const confirmed = confirm(`Are you sure you want to cancel order ${trackingCode}?`);
-  if(!confirmed) return;
+async function executeOrderCancellation(){
+  if(!pendingCancelOrderData) return;
+
+  const { orderId, trackingCode, customerName, phone, total } = pendingCancelOrderData;
+  const confirmBtn = document.getElementById("confirmCancelActionBtn");
 
   if(!currentAuthSession || !currentAuthSession.access_token){
-    alert("Session expired. Please login again.");
+    closeCancelConfirmModal();
+    showCartToast("Session expired. Please login again.");
     return;
   }
 
-  if(btnEl){
-    btnEl.disabled = true;
-    btnEl.textContent = "Cancelling...";
-  }
+  confirmBtn.disabled = true;
+  confirmBtn.textContent = "Cancelling...";
 
   try{
     const response = await fetch(
@@ -4084,22 +4417,19 @@ async function cancelMyOrder(orderId, trackingCode, customerName, phone, total, 
 
     const updatedRows = await response.json();
     if(!response.ok || !Array.isArray(updatedRows) || updatedRows.length === 0){
-      throw new Error("Order could not be cancelled (it may already be confirmed or shipped).");
+      throw new Error("Order could not be cancelled (already confirmed or shipped).");
     }
 
-    // Notify Admin via Telegram
     await sendTelegramCancelNotification(trackingCode, customerName, phone, total);
 
+    closeCancelConfirmModal();
     showCartToast("Order cancelled & stock restored");
     loadUserOrderHistory();
-    loadProducts(); // Refresh product stock on main page
+    loadProducts();
   }catch(error){
     console.error("Cancel order error:", error);
-    alert(error.message || "Could not cancel order.");
-    if(btnEl){
-      btnEl.disabled = false;
-      btnEl.textContent = "❌ Cancel Order";
-    }
+    closeCancelConfirmModal();
+    showCartToast(error.message || "Could not cancel order");
   }
 }
 
@@ -4172,7 +4502,7 @@ async function loadUserOrderHistory(){
       const isCancelled = statusText.toLowerCase() === "cancelled";
 
       const cancelBtnHTML = isPending
-        ? `<button class="cancel-order-user-btn" onclick="cancelMyOrder('${safe(order.id)}', '${safe(order.tracking_code || "")}', '${safe(order.customer_name || "")}', '${safe(order.phone || "")}', ${Number(order.total || 0)}, this)">❌ Cancel Order</button>`
+        ? `<button class="cancel-order-user-btn" onclick="promptCancelOrder('${safe(order.id)}', '${safe(order.tracking_code || "")}', '${safe(order.customer_name || "")}', '${safe(order.phone || "")}', ${Number(order.total || 0)})">❌ Cancel Order</button>`
         : "";
 
       return `
