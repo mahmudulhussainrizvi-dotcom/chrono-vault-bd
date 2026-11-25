@@ -1099,6 +1099,14 @@ header{
 }
 
 /* =========================
+   MOBILE BOTTOM NAVIGATION BAR
+========================= */
+
+.mobile-bottom-nav{
+  display:none;
+}
+
+/* =========================
    PREMIUM CART TOAST
 ========================= */
 
@@ -2886,6 +2894,75 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
 }
 
 @media(max-width:700px){
+  body{
+    padding-bottom:84px;
+  }
+
+  .floating-wa{
+    display:none;
+  }
+
+  .mobile-bottom-nav{
+    position:fixed;
+    left:12px;
+    right:12px;
+    bottom:10px;
+    z-index:2100;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:4px;
+    padding:7px 8px;
+    border-radius:20px;
+    background:rgba(14,14,14,.94);
+    border:1px solid rgba(212,175,55,.38);
+    backdrop-filter:blur(16px);
+    box-shadow:0 14px 36px rgba(0,0,0,.85), 0 0 20px rgba(212,175,55,.14);
+  }
+
+  .bottom-nav-btn{
+    position:relative;
+    border:0;
+    background:transparent;
+    color:#9e9e9e;
+    padding:6px 4px;
+    border-radius:14px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2px;
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:.3px;
+  }
+
+  .bottom-nav-btn .nav-ico{
+    font-size:17px;
+    line-height:1.1;
+  }
+
+  .bottom-nav-btn.active{
+    color:var(--gold-light);
+    background:rgba(212,175,55,.15);
+  }
+
+  .nav-badge{
+    position:absolute;
+    top:2px;
+    right:16%;
+    min-width:16px;
+    height:16px;
+    padding:0 4px;
+    border-radius:999px;
+    background:var(--gold);
+    color:#080808;
+    font-size:10px;
+    font-weight:800;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+  }
+
   .nav{
     min-height:66px;
     padding:8px 3%;
@@ -2982,16 +3059,9 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
   }
 
   .cv-toast{
-    bottom:75px;
+    bottom:82px;
     max-width:calc(100vw - 24px);
     font-size:13px;
-  }
-
-  .floating-wa{
-    right:14px;
-    bottom:16px;
-    padding:10px 15px;
-    font-size:12px;
   }
 }
 
@@ -3755,7 +3825,7 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
 
 </footer>
 
-<!-- FLOATING WHATSAPP CHAT BUTTON -->
+<!-- FLOATING WHATSAPP CHAT BUTTON (DESKTOP) -->
 <a
   class="floating-wa"
   href="https://wa.me/8801326144735?text=Assalamu%20Alaikum%20CHRONO%20VAULT%20BD!%20I%20want%20to%20know%20about%20your%20watches."
@@ -3765,6 +3835,36 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
   <span class="floating-wa-icon">💬</span>
   <span>Chat on WhatsApp</span>
 </a>
+
+<!-- MOBILE BOTTOM NAVIGATION BAR -->
+<nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+  <button id="mobNavHome" class="bottom-nav-btn active" onclick="mobileGoHome()">
+    <span class="nav-ico">🏠</span>
+    <span>Home</span>
+  </button>
+
+  <button id="mobNavCart" class="bottom-nav-btn" onclick="mobileGoCart()">
+    <span class="nav-ico">🛒</span>
+    <span>Cart</span>
+    <span id="mobileCartBadge" class="nav-badge">0</span>
+  </button>
+
+  <button id="mobNavOrders" class="bottom-nav-btn" onclick="mobileGoOrders()">
+    <span class="nav-ico">📦</span>
+    <span>Orders</span>
+  </button>
+
+  <a
+    id="mobNavContact"
+    class="bottom-nav-btn"
+    href="https://wa.me/8801326144735?text=Assalamu%20Alaikum%20CHRONO%20VAULT%20BD!%20I%20want%20to%20know%20about%20your%20watches."
+    target="_blank"
+    rel="noopener noreferrer"
+    onclick="setActiveBottomNav('mobNavContact')">
+    <span class="nav-ico">💬</span>
+    <span>Contact</span>
+  </a>
+</nav>
 
 <!-- PREMIUM TOAST -->
 <div id="cvToast" class="cv-toast">
@@ -4061,6 +4161,42 @@ const WHATSAPP_NUMBER = "8801326144735";
 // Instant Telegram Order Alert
 const TELEGRAM_BOT_TOKEN = "9264290147:AAE-McUtrx1Z64KOpThGLYBWSgAjH3Cu4_0";
 const TELEGRAM_CHAT_ID = "8758298221";
+
+/* =========================================================
+   MOBILE BOTTOM NAV ACTIONS
+========================================================= */
+
+function setActiveBottomNav(activeId){
+  document.querySelectorAll(".mobile-bottom-nav .bottom-nav-btn").forEach(btn => {
+    btn.classList.remove("active");
+  });
+  const target = document.getElementById(activeId);
+  if(target) target.classList.add("active");
+}
+
+function mobileGoHome(){
+  setActiveBottomNav("mobNavHome");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function mobileGoCart(){
+  setActiveBottomNav("mobNavCart");
+  const cartSec = document.getElementById("cartSection");
+  if(!cartSec.classList.contains("show")){
+    toggleCart();
+  }else{
+    cartSec.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+function mobileGoOrders(){
+  setActiveBottomNav("mobNavOrders");
+  if(currentAuthSession && currentAuthSession.user){
+    openAccountDashboard();
+  }else{
+    toggleTrackOrder(true);
+  }
+}
 
 /* =========================================================
    3D VAULT BOX OPENING TRIGGER
@@ -4494,6 +4630,8 @@ function updateCartCount(){
     return total + Number(item.quantity || 0);
   }, 0);
   document.getElementById("cartCount").textContent = count;
+  const mobileBadge = document.getElementById("mobileCartBadge");
+  if(mobileBadge) mobileBadge.textContent = count;
 }
 
 function addCart(product, triggerBtn){
@@ -4658,8 +4796,11 @@ function toggleCart(){
   const section = document.getElementById("cartSection");
   section.classList.toggle("show");
   if(section.classList.contains("show")){
+    setActiveBottomNav("mobNavCart");
     renderCart();
     section.scrollIntoView({ behavior:"smooth", block:"start" });
+  }else{
+    setActiveBottomNav("mobNavHome");
   }
 }
 
@@ -4677,10 +4818,12 @@ function toggleTrackOrder(force){
   const shouldShow = typeof force === "boolean" ? force : !section.classList.contains("show");
 
   if(shouldShow){
+    setActiveBottomNav("mobNavOrders");
     section.classList.add("show");
     section.scrollIntoView({ behavior:"smooth", block:"start" });
   }else{
     section.classList.remove("show");
+    setActiveBottomNav("mobNavHome");
   }
 }
 
