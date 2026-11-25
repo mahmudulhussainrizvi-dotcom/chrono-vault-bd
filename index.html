@@ -94,6 +94,52 @@ button{
   100%{ transform:rotateY(360deg) rotateX(10deg); }
 }
 
+@keyframes vaultBoxDropIn{
+  0%{
+    opacity:0;
+    transform:perspective(900px) rotateX(25deg) translateY(34px) scale(.72);
+  }
+  45%{
+    opacity:1;
+    transform:perspective(900px) rotateX(-6deg) translateY(-4px) scale(1.04);
+  }
+  70%{
+    opacity:1;
+    transform:perspective(900px) rotateX(0deg) translateY(0) scale(1);
+  }
+  100%{
+    opacity:0;
+    transform:perspective(900px) rotateX(-18deg) translateY(-22px) scale(.86);
+  }
+}
+
+@keyframes vaultLidPopOpen{
+  0%, 38%{
+    transform:rotateX(0deg) translateY(0);
+  }
+  68%{
+    transform:rotateX(-115deg) translateY(-10px);
+  }
+  100%{
+    transform:rotateX(-130deg) translateY(-18px);
+  }
+}
+
+@keyframes vaultCardEmergence{
+  0%{
+    opacity:0;
+    transform:perspective(1200px) rotateX(-24deg) translateY(48px) scale(.78);
+  }
+  42%{
+    opacity:0;
+    transform:perspective(1200px) rotateX(-18deg) translateY(36px) scale(.84);
+  }
+  100%{
+    opacity:1;
+    transform:perspective(1200px) rotateX(0deg) translateY(0) scale(1);
+  }
+}
+
 @keyframes tabSwitch3D{
   0%{ opacity:0; transform:rotateX(-14deg) translateY(10px); }
   100%{ opacity:1; transform:rotateX(0deg) translateY(0); }
@@ -2362,7 +2408,7 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
 }
 
 /* =========================
-   3D AUTH & ACCOUNT DASHBOARD MODAL
+   3D VAULT BOX OPENING & AUTH MODAL
 ========================= */
 
 .auth-overlay{
@@ -2370,7 +2416,7 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
   position:fixed;
   inset:0;
   z-index:3000;
-  background:rgba(0,0,0,.85);
+  background:rgba(0,0,0,.86);
   backdrop-filter:blur(10px);
   align-items:center;
   justify-content:center;
@@ -2380,6 +2426,90 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
 
 .auth-overlay.show{
   display:flex;
+}
+
+.vault-open-stage{
+  position:relative;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  perspective:1200px;
+}
+
+/* 3D Box That Appears & Pops Open First */
+.vault-gift-box{
+  position:absolute;
+  z-index:20;
+  width:116px;
+  height:96px;
+  pointer-events:none;
+  transform-style:preserve-3d;
+  animation:vaultBoxDropIn .95s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+.vault-box-lid{
+  position:relative;
+  width:124px;
+  height:28px;
+  margin-left:-4px;
+  border-radius:8px;
+  background:linear-gradient(135deg,#f3d77f 0%,#d4af37 55%,#967416 100%);
+  border:1px solid #ffe89e;
+  box-shadow:0 6px 18px rgba(212,175,55,.4);
+  transform-origin:top center;
+  transform-style:preserve-3d;
+  animation:vaultLidPopOpen .95s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+.vault-box-lid::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:20px;
+  height:100%;
+  background:linear-gradient(180deg,#fff2ba,#b88d1d);
+}
+
+.vault-box-body{
+  width:116px;
+  height:68px;
+  border-radius:0 0 12px 12px;
+  background:linear-gradient(180deg,#241d0c 0%,#120f08 100%);
+  border:1.5px solid var(--gold);
+  box-shadow:0 18px 35px rgba(0,0,0,.85), 0 0 28px rgba(212,175,55,.35);
+  display:grid;
+  place-items:center;
+  position:relative;
+}
+
+.vault-box-body::before{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:20px;
+  background:linear-gradient(180deg,rgba(241,211,122,.35),rgba(212,175,55,.12));
+}
+
+.vault-box-emblem{
+  position:relative;
+  z-index:2;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:radial-gradient(circle,#f3d77f,#b88d1d);
+  color:#080808;
+  font-family:'Cinzel',serif;
+  font-weight:800;
+  font-size:12px;
+  display:grid;
+  place-items:center;
+  box-shadow:0 0 14px rgba(241,211,122,.75);
 }
 
 .auth-box{
@@ -2395,7 +2525,7 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
   padding:26px;
   transform-style:preserve-3d;
   box-shadow:0 28px 75px rgba(0,0,0,.88), 0 0 36px rgba(212,175,55,.16);
-  animation:popCard3D .42s cubic-bezier(.16,1,.3,1);
+  animation:vaultCardEmergence .9s cubic-bezier(.16,1,.3,1) forwards;
 }
 
 .account-box{
@@ -3712,180 +3842,202 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
   </div>
 </div>
 
-<!-- 3D AUTH LOGIN / SIGNUP MODAL -->
+<!-- 3D VAULT BOX LOGIN / SIGNUP MODAL -->
 <div id="authOverlay" class="auth-overlay" onclick="if(event.target===this) closeAuthModal()">
 
-  <div class="auth-box">
+  <div class="vault-open-stage">
 
-    <div class="auth-header">
+    <div class="vault-gift-box" aria-hidden="true">
+      <div class="vault-box-lid"></div>
+      <div class="vault-box-body">
+        <div class="vault-box-emblem">CV</div>
+      </div>
+    </div>
 
-      <div class="auth-3d-header-stage">
-        <div class="auth-3d-crest" aria-hidden="true">
-          <div class="auth-3d-ring"></div>
-          <span class="auth-3d-icon">⌚</span>
+    <div class="auth-box">
+
+      <div class="auth-header">
+
+        <div class="auth-3d-header-stage">
+          <div class="auth-3d-crest" aria-hidden="true">
+            <div class="auth-3d-ring"></div>
+            <span class="auth-3d-icon">⌚</span>
+          </div>
+          <h2>Customer Account</h2>
         </div>
-        <h2>Customer Account</h2>
+
+        <button
+          class="auth-close"
+          onclick="closeAuthModal()">
+          ×
+        </button>
+
       </div>
 
-      <button
-        class="auth-close"
-        onclick="closeAuthModal()">
-        ×
-      </button>
+      <div class="auth-tabs">
+
+        <button
+          id="loginTab"
+          class="auth-tab active"
+          onclick="switchAuthTab('login')">
+          Login
+        </button>
+
+        <button
+          id="signupTab"
+          class="auth-tab"
+          onclick="switchAuthTab('signup')">
+          Sign Up
+        </button>
+
+      </div>
+
+      <div id="authMessage" class="auth-message"></div>
+
+      <!-- LOGIN -->
+      <form
+        id="loginForm"
+        class="auth-form active"
+        onsubmit="loginUser(event)">
+
+        <div class="auth-form-group">
+          <label for="loginEmail">Email Address</label>
+          <input
+            type="email"
+            id="loginEmail"
+            placeholder="Enter your email"
+            autocomplete="email"
+            required>
+        </div>
+
+        <div class="auth-form-group">
+          <label for="loginPassword">Password</label>
+          <input
+            type="password"
+            id="loginPassword"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required>
+        </div>
+
+        <button
+          id="loginSubmit"
+          class="auth-submit"
+          type="submit">
+          Login
+        </button>
+
+      </form>
+
+      <!-- SIGN UP -->
+      <form
+        id="signupForm"
+        class="auth-form"
+        onsubmit="signupUser(event)">
+
+        <div class="auth-form-group">
+          <label for="signupName">Full Name</label>
+          <input
+            type="text"
+            id="signupName"
+            placeholder="Enter your full name"
+            autocomplete="name"
+            required>
+        </div>
+
+        <div class="auth-form-group">
+          <label for="signupPhone">Phone Number</label>
+          <input
+            type="tel"
+            id="signupPhone"
+            placeholder="01XXXXXXXXX"
+            autocomplete="tel"
+            required>
+        </div>
+
+        <div class="auth-form-group">
+          <label for="signupEmail">Email Address</label>
+          <input
+            type="email"
+            id="signupEmail"
+            placeholder="Enter your email"
+            autocomplete="email"
+            required>
+        </div>
+
+        <div class="auth-form-group">
+          <label for="signupPassword">Password</label>
+          <input
+            type="password"
+            id="signupPassword"
+            placeholder="Minimum 6 characters"
+            autocomplete="new-password"
+            minlength="6"
+            required>
+        </div>
+
+        <button
+          id="signupSubmit"
+          class="auth-submit"
+          type="submit">
+          Create Account
+        </button>
+
+      </form>
+
+      <p class="auth-note">
+        Sign up once to place orders and track your full order history anytime.
+      </p>
 
     </div>
-
-    <div class="auth-tabs">
-
-      <button
-        id="loginTab"
-        class="auth-tab active"
-        onclick="switchAuthTab('login')">
-        Login
-      </button>
-
-      <button
-        id="signupTab"
-        class="auth-tab"
-        onclick="switchAuthTab('signup')">
-        Sign Up
-      </button>
-
-    </div>
-
-    <div id="authMessage" class="auth-message"></div>
-
-    <!-- LOGIN -->
-    <form
-      id="loginForm"
-      class="auth-form active"
-      onsubmit="loginUser(event)">
-
-      <div class="auth-form-group">
-        <label for="loginEmail">Email Address</label>
-        <input
-          type="email"
-          id="loginEmail"
-          placeholder="Enter your email"
-          autocomplete="email"
-          required>
-      </div>
-
-      <div class="auth-form-group">
-        <label for="loginPassword">Password</label>
-        <input
-          type="password"
-          id="loginPassword"
-          placeholder="Enter your password"
-          autocomplete="current-password"
-          required>
-      </div>
-
-      <button
-        id="loginSubmit"
-        class="auth-submit"
-        type="submit">
-        Login
-      </button>
-
-    </form>
-
-    <!-- SIGN UP -->
-    <form
-      id="signupForm"
-      class="auth-form"
-      onsubmit="signupUser(event)">
-
-      <div class="auth-form-group">
-        <label for="signupName">Full Name</label>
-        <input
-          type="text"
-          id="signupName"
-          placeholder="Enter your full name"
-          autocomplete="name"
-          required>
-      </div>
-
-      <div class="auth-form-group">
-        <label for="signupPhone">Phone Number</label>
-        <input
-          type="tel"
-          id="signupPhone"
-          placeholder="01XXXXXXXXX"
-          autocomplete="tel"
-          required>
-      </div>
-
-      <div class="auth-form-group">
-        <label for="signupEmail">Email Address</label>
-        <input
-          type="email"
-          id="signupEmail"
-          placeholder="Enter your email"
-          autocomplete="email"
-          required>
-      </div>
-
-      <div class="auth-form-group">
-        <label for="signupPassword">Password</label>
-        <input
-          type="password"
-          id="signupPassword"
-          placeholder="Minimum 6 characters"
-          autocomplete="new-password"
-          minlength="6"
-          required>
-      </div>
-
-      <button
-        id="signupSubmit"
-        class="auth-submit"
-        type="submit">
-        Create Account
-      </button>
-
-    </form>
-
-    <p class="auth-note">
-      Sign up once to place orders and track your full order history anytime.
-    </p>
 
   </div>
 
 </div>
 
-<!-- 3D LOGGED-IN USER ACCOUNT & ORDER HISTORY MODAL -->
+<!-- 3D VAULT BOX LOGGED-IN USER ACCOUNT & ORDER HISTORY MODAL -->
 <div id="accountDashboardOverlay" class="auth-overlay" onclick="if(event.target===this) closeAccountDashboard()">
 
-  <div class="auth-box account-box">
+  <div class="vault-open-stage">
 
-    <div class="auth-header">
-      <div class="auth-3d-header-stage">
-        <div class="auth-3d-crest" aria-hidden="true">
-          <div class="auth-3d-ring"></div>
-          <span class="auth-3d-icon">👑</span>
+    <div class="vault-gift-box" aria-hidden="true">
+      <div class="vault-box-lid"></div>
+      <div class="vault-box-body">
+        <div class="vault-box-emblem">CV</div>
+      </div>
+    </div>
+
+    <div class="auth-box account-box">
+
+      <div class="auth-header">
+        <div class="auth-3d-header-stage">
+          <div class="auth-3d-crest" aria-hidden="true">
+            <div class="auth-3d-ring"></div>
+            <span class="auth-3d-icon">👑</span>
+          </div>
+          <h2>My Vault Account</h2>
         </div>
-        <h2>My Vault Account</h2>
+        <button class="auth-close" onclick="closeAccountDashboard()">×</button>
       </div>
-      <button class="auth-close" onclick="closeAccountDashboard()">×</button>
-    </div>
 
-    <div class="account-profile-card">
-      <div class="account-profile-info">
-        <strong id="accProfileName">Valued Customer</strong>
-        <span id="accProfileEmail">user@example.com</span>
-        <span id="accProfilePhone" style="display:block;color:var(--gold);margin-top:2px;"></span>
+      <div class="account-profile-card">
+        <div class="account-profile-info">
+          <strong id="accProfileName">Valued Customer</strong>
+          <span id="accProfileEmail">user@example.com</span>
+          <span id="accProfilePhone" style="display:block;color:var(--gold);margin-top:2px;"></span>
+        </div>
+        <button class="logout-action-btn" onclick="logoutUser()">Logout</button>
       </div>
-      <button class="logout-action-btn" onclick="logoutUser()">Logout</button>
-    </div>
 
-    <div class="history-title">
-      <span>📦 My Order History</span>
-      <button onclick="loadUserOrderHistory()" style="background:transparent;border:1px solid #444;color:#ccc;padding:4px 10px;border-radius:6px;font-size:12px;">↻ Refresh</button>
-    </div>
+      <div class="history-title">
+        <span>📦 My Order History</span>
+        <button onclick="loadUserOrderHistory()" style="background:transparent;border:1px solid #444;color:#ccc;padding:4px 10px;border-radius:6px;font-size:12px;">↻ Refresh</button>
+      </div>
 
-    <div id="userOrderHistoryList" class="history-list">
-      <div class="loading" style="padding:25px;">Loading your order history...</div>
+      <div id="userOrderHistoryList" class="history-list">
+        <div class="loading" style="padding:25px;">Loading your order history...</div>
+      </div>
+
     </div>
 
   </div>
@@ -3904,6 +4056,35 @@ const WHATSAPP_NUMBER = "8801326144735";
 // Instant Telegram Order Alert
 const TELEGRAM_BOT_TOKEN = "9264290147:AAE-McUtrx1Z64KOpThGLYBWSgAjH3Cu4_0";
 const TELEGRAM_CHAT_ID = "8758298221";
+
+/* =========================================================
+   3D VAULT BOX OPENING TRIGGER
+========================================================= */
+
+function triggerVaultBoxOpening(overlayId){
+  const overlay = document.getElementById(overlayId);
+  if(!overlay) return;
+
+  const box = overlay.querySelector(".vault-gift-box");
+  const lid = overlay.querySelector(".vault-box-lid");
+  const card = overlay.querySelector(".auth-box");
+
+  if(box){
+    box.style.animation = "none";
+    void box.offsetWidth;
+    box.style.animation = "";
+  }
+  if(lid){
+    lid.style.animation = "none";
+    void lid.offsetWidth;
+    lid.style.animation = "";
+  }
+  if(card){
+    card.style.animation = "none";
+    void card.offsetWidth;
+    card.style.animation = "";
+  }
+}
 
 /* =========================================================
    3D CARD TILT & FLY-TO-CART ANIMATION
@@ -5158,6 +5339,7 @@ async function loadProducts(){
 
 function openAuthModal(infoText){
   document.getElementById("authOverlay").classList.add("show");
+  triggerVaultBoxOpening("authOverlay");
   clearAuthMessage();
   if(infoText){
     showAuthMessage(infoText, "info");
@@ -5378,6 +5560,7 @@ function openAccountDashboard(){
   document.getElementById("accProfilePhone").textContent = meta.phone ? "📞 " + meta.phone : "";
 
   document.getElementById("accountDashboardOverlay").classList.add("show");
+  triggerVaultBoxOpening("accountDashboardOverlay");
   loadUserOrderHistory();
 }
 
