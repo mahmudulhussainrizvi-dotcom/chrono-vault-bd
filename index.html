@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#080808">
-<link rel="icon" type="image/jpeg" href="1794571163626.jpg">
 <title>CHRONO VAULT BD — Luxury Watches &amp; Accessories</title>
 
 <!-- Luxury Typography -->
@@ -321,26 +320,20 @@ header{
 }
 
 .logo{
-  width:52px;
-  height:52px;
+  width:48px;
+  height:48px;
   flex-shrink:0;
   border:2px solid var(--gold);
   border-radius:50%;
   display:grid;
   place-items:center;
-  overflow:hidden;
-  background:#000000;
-  padding:0;
+  background:radial-gradient(circle at 30% 30%,#2c230b 0%,#090909 78%);
+  color:var(--gold-light);
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:1px;
   box-shadow:0 0 18px rgba(212,175,55,.32);
-  transition:transform .5s ease;
-}
-
-.logo img{
-  width:74%;
-  height:74%;
-  object-fit:contain;
-  object-position:center;
-  display:block;
+  transition:transform .45s ease;
 }
 
 .brand:hover .logo{
@@ -2445,7 +2438,6 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
   perspective:1200px;
 }
 
-/* 3D Box That Appears & Pops Open First */
 .vault-gift-box{
   position:absolute;
   z-index:20;
@@ -2510,21 +2502,15 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
   width:42px;
   height:42px;
   border-radius:50%;
-  overflow:hidden;
   border:1.5px solid #ffe89e;
-  background:#000000;
-  padding:0;
+  background:#090909;
+  color:var(--gold-light);
+  font-family:'Cinzel',serif;
+  font-size:13px;
+  font-weight:800;
   display:grid;
   place-items:center;
   box-shadow:0 0 14px rgba(241,211,122,.75);
-}
-
-.vault-box-emblem img{
-  width:74%;
-  height:74%;
-  object-fit:contain;
-  object-position:center;
-  display:block;
 }
 
 .auth-box{
@@ -2919,9 +2905,9 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
   }
 
   .logo{
-    width:44px;
-    height:44px;
-    padding:0;
+    width:42px;
+    height:42px;
+    font-size:13px;
   }
 
   .header-actions{
@@ -3032,9 +3018,7 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
   <div class="nav">
 
     <a href="#" class="brand">
-      <div class="logo">
-        <img src="1794571163626.jpg" alt="CHRONO VAULT BD">
-      </div>
+      <div class="logo">CV</div>
       <div class="brand-info">
         <b>CHRONO VAULT BD</b>
         <span>Luxury Timepieces</span>
@@ -3871,9 +3855,7 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
     <div class="vault-gift-box" aria-hidden="true">
       <div class="vault-box-lid"></div>
       <div class="vault-box-body">
-        <div class="vault-box-emblem">
-          <img src="1794571163626.jpg" alt="CV">
-        </div>
+        <div class="vault-box-emblem">CV</div>
       </div>
     </div>
 
@@ -4026,9 +4008,7 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
     <div class="vault-gift-box" aria-hidden="true">
       <div class="vault-box-lid"></div>
       <div class="vault-box-body">
-        <div class="vault-box-emblem">
-          <img src="1794571163626.jpg" alt="CV">
-        </div>
+        <div class="vault-box-emblem">CV</div>
       </div>
     </div>
 
