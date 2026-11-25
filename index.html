@@ -305,7 +305,7 @@ header{
 .nav{
   max-width:1240px;
   margin:auto;
-  min-height:74px;
+  min-height:76px;
   padding:10px 4%;
   display:flex;
   align-items:center;
@@ -321,27 +321,26 @@ header{
 }
 
 .logo{
-  width:46px;
-  height:46px;
+  width:52px;
+  height:52px;
   flex-shrink:0;
   border:2px solid var(--gold);
   border-radius:50%;
   display:grid;
   place-items:center;
   overflow:hidden;
-  background:#0c0c0c;
+  background:#000000;
   padding:0;
-  box-shadow:0 0 18px rgba(212,175,55,.28);
+  box-shadow:0 0 18px rgba(212,175,55,.32);
   transition:transform .5s ease;
 }
 
 .logo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+  width:74%;
+  height:74%;
+  object-fit:contain;
   object-position:center;
-  border-radius:50%;
-  transform:scale(1.05);
+  display:block;
 }
 
 .brand:hover .logo{
@@ -2508,12 +2507,12 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
 .vault-box-emblem{
   position:relative;
   z-index:2;
-  width:38px;
-  height:38px;
+  width:42px;
+  height:42px;
   border-radius:50%;
   overflow:hidden;
   border:1.5px solid #ffe89e;
-  background:#0c0c0c;
+  background:#000000;
   padding:0;
   display:grid;
   place-items:center;
@@ -2521,11 +2520,11 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
 }
 
 .vault-box-emblem img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+  width:74%;
+  height:74%;
+  object-fit:contain;
   object-position:center;
-  border-radius:50%;
+  display:block;
 }
 
 .auth-box{
@@ -2902,8 +2901,12 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
 
 @media(max-width:700px){
   .nav{
-    min-height:64px;
+    min-height:66px;
     padding:8px 3%;
+  }
+
+  .brand{
+    gap:9px;
   }
 
   .brand b{
@@ -2916,8 +2919,8 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
   }
 
   .logo{
-    width:38px;
-    height:38px;
+    width:44px;
+    height:44px;
     padding:0;
   }
 
@@ -3869,7 +3872,7 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
       <div class="vault-box-lid"></div>
       <div class="vault-box-body">
         <div class="vault-box-emblem">
-          <img src="1794571163626.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center;border-radius:50%;" alt="CV">
+          <img src="1794571163626.jpg" alt="CV">
         </div>
       </div>
     </div>
@@ -4024,7 +4027,7 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
       <div class="vault-box-lid"></div>
       <div class="vault-box-body">
         <div class="vault-box-emblem">
-          <img src="1794571163626.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center;border-radius:50%;" alt="CV">
+          <img src="1794571163626.jpg" alt="CV">
         </div>
       </div>
     </div>
