@@ -674,6 +674,7 @@ header{
 
 .card{
   position:relative;
+  min-width:0;
   background:var(--bg-card);
   border:1px solid var(--border);
   border-radius:16px;
@@ -778,6 +779,7 @@ header{
 }
 
 .info{
+  min-width:0;
   padding:18px;
   display:flex;
   flex-direction:column;
@@ -798,6 +800,7 @@ header{
   font-weight:700;
   margin-bottom:8px;
   color:#f5f5f5;
+  overflow-wrap:anywhere;
 }
 
 .price-row{
@@ -809,6 +812,7 @@ header{
   color:var(--gold);
   font-size:22px;
   font-weight:700;
+  overflow-wrap:anywhere;
 }
 
 .price-coming{
@@ -3021,23 +3025,53 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
 
   .products{
     grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:12px;
+    gap:10px;
+  }
+
+  .card-badges{
+    top:8px;
+    left:8px;
+    right:8px;
+    gap:4px;
+  }
+
+  .badge-pill{
+    padding:3px 7px;
+    font-size:9.5px;
   }
 
   .pic{
-    height:185px;
+    height:175px;
+    padding:10px;
   }
 
   .info{
-    padding:13px;
+    padding:11px;
+  }
+
+  .category{
+    font-size:10px;
   }
 
   .info h3{
-    font-size:14px;
+    font-size:13.5px;
+    line-height:1.35;
   }
 
   .price{
-    font-size:18px;
+    font-size:16.5px;
+  }
+
+  .old{
+    font-size:11px;
+    margin-left:5px;
+  }
+
+  .btn,
+  .btn-whatsapp,
+  .details-btn{
+    padding:9px 8px;
+    font-size:12px;
   }
 
   .details-info{
@@ -3065,12 +3099,12 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
   }
 }
 
-@media(max-width:380px){
+@media(max-width:319px){
   .products{
     grid-template-columns:1fr;
   }
   .pic{
-    height:230px;
+    height:220px;
   }
 }
 </style>
