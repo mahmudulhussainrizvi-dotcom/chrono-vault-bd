@@ -2178,22 +2178,204 @@ header{
   resize:vertical;
 }
 
-.payment-box{
-  padding:15px;
-  background:#161616;
-  border:1px solid var(--border);
-  border-radius:10px;
-  margin:18px 0;
+/* =========================
+   MOBILE BANKING PAYMENT PANEL (BKASH / NAGAD / ROCKET / UPAY)
+========================= */
+
+.payment-panel{
+  background:linear-gradient(180deg,#151410 0%,#101010 100%);
+  border:1px solid rgba(212,175,55,.45);
+  border-radius:14px;
+  padding:18px;
+  margin:20px 0;
 }
 
-.payment-box strong{
+.payment-panel-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:14px;
+}
+
+.payment-panel-header strong{
   color:var(--gold);
+  font-size:16px;
 }
 
-.payment-box p{
-  color:#999;
+.mandatory-pill{
+  font-size:11px;
+  font-weight:700;
+  padding:3px 10px;
+  border-radius:20px;
+  background:rgba(212,175,55,.15);
+  border:1px solid rgba(212,175,55,.5);
+  color:var(--gold-light);
+}
+
+.payment-mode-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:16px;
+}
+
+.pay-mode-card{
+  padding:12px 14px;
+  border-radius:10px;
+  border:1.5px solid #333;
+  background:#161616;
+  cursor:pointer;
+  transition:all .2s ease;
+}
+
+.pay-mode-card:hover{
+  border-color:rgba(212,175,55,.6);
+}
+
+.pay-mode-card.selected{
+  border-color:var(--gold);
+  background:rgba(212,175,55,.11);
+}
+
+.pay-mode-card strong{
+  display:block;
+  font-size:13.5px;
+  color:#fff;
+  margin-bottom:2px;
+}
+
+.pay-mode-card small{
+  display:block;
+  font-size:11.5px;
+  color:#aaa;
+  line-height:1.4;
+}
+
+.mfs-methods-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-bottom:14px;
+}
+
+.mfs-btn{
+  padding:10px 6px;
+  border-radius:10px;
+  border:1.5px solid #333;
+  background:#161616;
+  color:#ddd;
+  font-weight:700;
   font-size:13px;
-  margin-top:4px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+}
+
+.mfs-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+}
+
+.mfs-btn.active.bkash{
+  border-color:#e2136e;
+  background:rgba(226,19,110,.15);
+  color:#ff7ab6;
+}
+
+.mfs-btn.active.nagad{
+  border-color:#f6921e;
+  background:rgba(246,146,30,.15);
+  color:#ffc078;
+}
+
+.mfs-btn.active.rocket{
+  border-color:#8c3494;
+  background:rgba(140,52,148,.22);
+  color:#e29be8;
+}
+
+.mfs-btn.active.upay{
+  border-color:#ffd400;
+  background:rgba(255,212,0,.15);
+  color:#ffe97d;
+}
+
+.mfs-instruction-box{
+  background:#0b0b0b;
+  border:1px dashed rgba(212,175,55,.55);
+  border-radius:11px;
+  padding:14px;
+  margin-bottom:15px;
+}
+
+.mfs-number-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+  padding-bottom:10px;
+  margin-bottom:10px;
+  border-bottom:1px solid #222;
+}
+
+.mfs-number-label{
+  font-size:12.5px;
+  color:#aaa;
+}
+
+.mfs-number-val{
+  font-size:18px;
+  font-weight:800;
+  color:var(--gold-light);
+  letter-spacing:.8px;
+}
+
+.mfs-copy-btn{
+  padding:6px 12px;
+  border-radius:7px;
+  border:1px solid var(--gold);
+  background:rgba(212,175,55,.15);
+  color:var(--gold-light);
+  font-size:12px;
+  font-weight:700;
+}
+
+.mfs-copy-btn:hover{
+  background:var(--gold);
+  color:#080808;
+}
+
+.mfs-breakdown{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  font-size:13px;
+}
+
+.mfs-breakdown-row{
+  display:flex;
+  justify-content:space-between;
+  color:#bbb;
+}
+
+.mfs-breakdown-row strong.advance-amt{
+  color:#5ef596;
+  font-size:15px;
+}
+
+.mfs-breakdown-row strong.cod-amt{
+  color:var(--gold-light);
+}
+
+.mfs-inputs-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
 }
 
 .place-order-btn{
@@ -2923,8 +3105,13 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
   .details-image{
     min-height:280px;
   }
-  .delivery-zone-grid{
+  .delivery-zone-grid,
+  .payment-mode-grid,
+  .mfs-inputs-grid{
     grid-template-columns:1fr;
+  }
+  .mfs-methods-grid{
+    grid-template-columns:repeat(2,1fr);
   }
 }
 
@@ -3145,7 +3332,7 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
 
 <!-- TOP ANNOUNCEMENT BAR -->
 <div class="top-banner">
-  🚚 Delivery: Inside Mymensingh ৳60 • Outside Mymensingh ৳120 | Cash on Delivery Available
+  🚚 Delivery: Inside Mymensingh ৳60 • Outside Mymensingh ৳120 | bKash • Nagad • Rocket • Upay
 </div>
 
 <!-- HEADER -->
@@ -3462,7 +3649,7 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
         </div>
 
         <div class="track-row">
-          <span>Total Payable</span>
+          <span>Grand Total</span>
           <span id="resultTotal" class="track-total"></span>
         </div>
 
@@ -3477,7 +3664,7 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
       </div>
 
       <p class="track-note">
-        Order status is updated by CHRONO VAULT BD after confirmation and processing.
+        Order status is updated by CHRONO VAULT BD after payment verification and processing.
       </p>
 
     </div>
@@ -3610,15 +3797,101 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
 
       </div>
 
-      <div class="payment-box">
+      <!-- MOBILE BANKING PAYMENT SECTION (ADVANCE DELIVERY MANDATORY / FULL OPTIONAL) -->
+      <div class="payment-panel">
 
-        <strong>
-          💵 Cash on Delivery (COD)
-        </strong>
+        <div class="payment-panel-header">
+          <strong>💳 Mobile Banking Payment</strong>
+          <span class="mandatory-pill">Delivery Charge Advance Required</span>
+        </div>
 
-        <p>
-          Pay the total amount (<span id="codPayablePreview" style="color:#d4af37;font-weight:bold;">৳0</span>) when your parcel arrives.
-        </p>
+        <label style="display:block;color:#bbb;font-size:12.5px;margin-bottom:8px;">
+          ১. পেমেন্ট অপশন বেছে নিন:
+        </label>
+
+        <div class="payment-mode-grid">
+          <div id="payModeDeliveryCard" class="pay-mode-card selected" onclick="selectPaymentMode('delivery_only')">
+            <strong>Advance Delivery + COD</strong>
+            <small id="payModeDeliveryDesc">শুধু ডেলিভারি চার্জ ৳60 অগ্রিম দিন, ঘড়ির দাম হাতে পেয়ে দিন</small>
+          </div>
+
+          <div id="payModeFullCard" class="pay-mode-card" onclick="selectPaymentMode('full')">
+            <strong>Full Payment Advance</strong>
+            <small id="payModeFullDesc">সম্পূর্ণ বিল ৳0 একবারেই পাঠিয়ে দিন (COD ৳0)</small>
+          </div>
+        </div>
+
+        <label style="display:block;color:#bbb;font-size:12.5px;margin-bottom:8px;">
+          ২. পেমেন্ট মাধ্যম সিলেক্ট করুন (Send Money):
+        </label>
+
+        <div class="mfs-methods-grid">
+          <button type="button" id="mfsBtnBkash" class="mfs-btn bkash active" onclick="selectMfsMethod('bkash')">
+            <span class="mfs-dot" style="background:#e2136e;"></span>
+            <span>bKash</span>
+          </button>
+
+          <button type="button" id="mfsBtnNagad" class="mfs-btn nagad" onclick="selectMfsMethod('nagad')">
+            <span class="mfs-dot" style="background:#f6921e;"></span>
+            <span>Nagad</span>
+          </button>
+
+          <button type="button" id="mfsBtnRocket" class="mfs-btn rocket" onclick="selectMfsMethod('rocket')">
+            <span class="mfs-dot" style="background:#8c3494;"></span>
+            <span>Rocket</span>
+          </button>
+
+          <button type="button" id="mfsBtnUpay" class="mfs-btn upay" onclick="selectMfsMethod('upay')">
+            <span class="mfs-dot" style="background:#ffd400;"></span>
+            <span>Upay</span>
+          </button>
+        </div>
+
+        <div class="mfs-instruction-box">
+          <div class="mfs-number-row">
+            <div>
+              <div id="mfsAccountLabel" class="mfs-number-label">bKash Personal (Send Money)</div>
+              <div id="mfsAccountNumber" class="mfs-number-val">01637626174</div>
+            </div>
+            <button type="button" class="mfs-copy-btn" onclick="copyMerchantNumber()">📋 Copy Number</button>
+          </div>
+
+          <div class="mfs-breakdown">
+            <div class="mfs-breakdown-row">
+              <span>এখন Send Money করতে হবে:</span>
+              <strong id="mfsPayNowAmount" class="advance-amt">৳60</strong>
+            </div>
+            <div class="mfs-breakdown-row">
+              <span>পার্সেল হাতে পেয়ে দিতে হবে (COD Due):</span>
+              <strong id="mfsCodDueAmount" class="cod-amt">৳0</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="mfs-inputs-grid">
+          <div class="form-group" style="margin-bottom:0;">
+            <label for="paymentSenderNumber" id="senderNumberLabel">
+              Your bKash Sender Number *
+            </label>
+            <input
+              type="tel"
+              id="paymentSenderNumber"
+              placeholder="01XXXXXXXXX"
+              inputmode="tel">
+          </div>
+
+          <div class="form-group" style="margin-bottom:0;">
+            <label for="paymentTrxId">
+              Transaction ID (TrxID) *
+            </label>
+            <input
+              type="text"
+              id="paymentTrxId"
+              placeholder="e.g., BGH7X92KLP"
+              autocomplete="off"
+              style="text-transform:uppercase;">
+          </div>
+        </div>
 
       </div>
 
@@ -3656,7 +3929,7 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
       </div>
 
       <p>
-        Your order has been saved to your account history. We will call you shortly to confirm.
+        We are verifying your Transaction ID and will call you shortly to confirm dispatch.
       </p>
 
       <div class="success-actions-stack">
@@ -3672,7 +3945,7 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
           href="https://wa.me/8801326144735"
           target="_blank"
           rel="noopener noreferrer">
-          📲 Send Order Details on WhatsApp
+          📲 Send Order &amp; TrxID on WhatsApp
         </a>
       </div>
 
@@ -3705,9 +3978,9 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
     </div>
 
     <div class="box">
-      <div class="box-icon">🚚</div>
-      <strong>Fast Cash on Delivery</strong>
-      ৳60 inside Mymensingh &amp; ৳120 anywhere in Bangladesh.
+      <div class="box-icon">💳</div>
+      <strong>Flexible Payment</strong>
+      Pay only delivery charge advance (or full) via bKash, Nagad, Rocket &amp; Upay.
     </div>
 
     <div class="box">
@@ -3750,7 +4023,7 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
       <div>
         <div class="review-stars">★★★★★</div>
         <p class="review-text">
-          "ঢাকা থেকে অর্ডার করেছিলাম। ক্যাশ অন ডেলিভারি থাকায় নিশ্চিন্তে রিসিভ করেছি। ডায়ালের শাইন আর চেইন কোয়ালিটি এই বাজেটে অসাধারণ!"
+          "ঢাকা থেকে অর্ডার করেছিলাম। শুধু ডেলিভারি চার্জ বিকাশে দিয়ে বাকিটা ক্যাশ অন ডেলিভারিতে নিশ্চিন্তে রিসিভ করেছি। ডায়ালের শাইন অসাধারণ!"
         </p>
       </div>
       <div class="review-author">
@@ -3804,11 +4077,11 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
 
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
-        <span>২. আগে কি কোনো অগ্রিম টাকা দিতে হবে?</span>
+        <span>২. অর্ডার কনফার্ম করতে কত টাকা অগ্রিম দিতে হবে?</span>
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-answer">
-        না, কোনো অগ্রিম টাকা লাগবে না! আমরা সম্পূর্ণ <strong>Cash on Delivery (COD)</strong> সুবিধা দিচ্ছি—পার্সেল হাতে পেয়ে তারপর ডেলিভারি ম্যানের কাছে টাকা পরিশোধ করবেন।
+        অর্ডার কনফার্ম করার জন্য শুধু <strong>ডেলিভারি চার্জ (৳60 বা ৳120)</strong> আমাদের <strong>bKash, Nagad, Rocket বা Upay</strong> নম্বরে Send Money করে Transaction ID দিতে হবে। ঘড়ির বাকি টাকা পার্সেল হাতে পেয়ে ডেলিভারি ম্যানের কাছে দেবেন—অথবা চাইলে পুরো বিলও একবারে পরিশোধ করতে পারবেন।
       </div>
     </div>
 
@@ -3948,16 +4221,16 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
 
     <div id="deliverySceneStage" class="delivery-scene-stage">
       <div class="scene-stars">✦ ✦ ✦</div>
-      <span class="scene-delivered-pill">✓ En Route to Doorstep</span>
+      <span class="scene-delivered-pill">✓ Payment Received &amp; Queued</span>
       <div class="scene-van">🚚</div>
       <div class="scene-parcel">📦</div>
       <div class="scene-house">🏡</div>
       <div class="scene-road-line"></div>
     </div>
 
-    <h2>Order Confirmed!</h2>
+    <h2>Order Received!</h2>
     <p class="luxury-popup-sub">
-      Your luxury timepiece from <strong style="color:var(--gold);">CHRONO VAULT BD</strong> is headed to your doorstep!
+      Your timepiece from <strong style="color:var(--gold);">CHRONO VAULT BD</strong> is queued for TrxID verification &amp; dispatch!
     </p>
 
     <div class="popup-receipt-box">
@@ -3966,7 +4239,7 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
         <button class="copy-code-btn" onclick="copyOrderCode()">Copy</button>
       </div>
       <div class="popup-meta-line">
-        Payable on Delivery: <strong id="popupOrderTotal">৳0</strong>
+        Paid Advance: <strong id="popupPaidAdvance" style="color:#5ef596;">৳0</strong> • COD Due: <strong id="popupOrderTotal">৳0</strong>
       </div>
       <div id="popupOrderArea" class="popup-meta-line" style="font-size:12px;margin-top:3px;">
         Inside Mymensingh
@@ -3984,7 +4257,7 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
         href="https://wa.me/8801326144735"
         target="_blank"
         rel="noopener noreferrer">
-        📲 Send Order Details on WhatsApp
+        📲 Send Order &amp; TrxID on WhatsApp
       </a>
 
       <button class="popup-secondary-btn" onclick="closeOrderConfirmedModal()">
@@ -4219,7 +4492,7 @@ footer.footer-visible .social-btn:nth-child(4){ animation-delay:.30s; }
 
 <script>
 /* =========================================================
-   SUPABASE & NOTIFICATION CONFIG
+   SUPABASE, PAYMENT & NOTIFICATION CONFIG
 ========================================================= */
 
 const SUPABASE_URL = "https://rufdvkelwzsmnuruvdko.supabase.co";
@@ -4229,6 +4502,112 @@ const WHATSAPP_NUMBER = "8801326144735";
 // Instant Telegram Order Alert
 const TELEGRAM_BOT_TOKEN = "9264290147:AAE-McUtrx1Z64KOpThGLYBWSgAjH3Cu4_0";
 const TELEGRAM_CHAT_ID = "8758298221";
+
+// Merchant Mobile Banking Numbers (Personal - Send Money)
+const MFS_ACCOUNTS = {
+  bkash:  { name: "bKash",  number: "01637626174", type: "Personal (Send Money)" },
+  nagad:  { name: "Nagad",  number: "01637626174", type: "Personal (Send Money)" },
+  rocket: { name: "Rocket", number: "01326144735", type: "Personal (Send Money)" },
+  upay:   { name: "Upay",   number: "01326144735", type: "Personal (Send Money)" }
+};
+
+let selectedMfsMethod = "bkash";      // "bkash" | "nagad" | "rocket" | "upay"
+let selectedPaymentMode = "delivery_only"; // "delivery_only" | "full"
+
+/* =========================================================
+   PAYMENT METHOD & MODE CONTROLLERS
+========================================================= */
+
+function selectMfsMethod(method){
+  if(!MFS_ACCOUNTS[method]) return;
+  selectedMfsMethod = method;
+
+  document.querySelectorAll(".mfs-btn").forEach(btn => btn.classList.remove("active"));
+  const activeBtnMap = {
+    bkash: "mfsBtnBkash",
+    nagad: "mfsBtnNagad",
+    rocket: "mfsBtnRocket",
+    upay: "mfsBtnUpay"
+  };
+  const btnEl = document.getElementById(activeBtnMap[method]);
+  if(btnEl) btnEl.classList.add("active");
+
+  updatePaymentUI();
+}
+
+function selectPaymentMode(mode){
+  if(mode !== "delivery_only" && mode !== "full") return;
+  selectedPaymentMode = mode;
+
+  const delCard = document.getElementById("payModeDeliveryCard");
+  const fullCard = document.getElementById("payModeFullCard");
+  if(delCard && fullCard){
+    delCard.classList.toggle("selected", mode === "delivery_only");
+    fullCard.classList.toggle("selected", mode === "full");
+  }
+
+  updatePaymentUI();
+}
+
+function getPaymentBreakdown(){
+  const subtotal = getCartSubtotal();
+  const deliveryFee = getDeliveryFee();
+  const grandTotal = subtotal + deliveryFee;
+
+  if(selectedPaymentMode === "full"){
+    return {
+      advanceAmount: grandTotal,
+      codDueAmount: 0,
+      modeLabel: "Full Payment Advance"
+    };
+  }
+  return {
+    advanceAmount: deliveryFee,
+    codDueAmount: subtotal,
+    modeLabel: "Advance Delivery + COD"
+  };
+}
+
+function updatePaymentUI(){
+  const mfs = MFS_ACCOUNTS[selectedMfsMethod] || MFS_ACCOUNTS.bkash;
+  const subtotal = getCartSubtotal();
+  const deliveryFee = getDeliveryFee();
+  const grandTotal = subtotal + deliveryFee;
+  const breakdown = getPaymentBreakdown();
+
+  const accLabel = document.getElementById("mfsAccountLabel");
+  const accNumber = document.getElementById("mfsAccountNumber");
+  const senderLabel = document.getElementById("senderNumberLabel");
+  const delDesc = document.getElementById("payModeDeliveryDesc");
+  const fullDesc = document.getElementById("payModeFullDesc");
+  const payNowEl = document.getElementById("mfsPayNowAmount");
+  const codDueEl = document.getElementById("mfsCodDueAmount");
+
+  if(accLabel) accLabel.textContent = `${mfs.name} ${mfs.type}`;
+  if(accNumber) accNumber.textContent = mfs.number;
+  if(senderLabel) senderLabel.textContent = `Your ${mfs.name} Sender Number *`;
+
+  if(delDesc){
+    delDesc.textContent = `শুধু ডেলিভারি চার্জ ৳${deliveryFee} অগ্রিম দিন, ঘড়ির দাম ৳${subtotal.toLocaleString("en-BD")} হাতে পেয়ে দিন`;
+  }
+  if(fullDesc){
+    fullDesc.textContent = `সম্পূর্ণ বিল ৳${grandTotal.toLocaleString("en-BD")} একবারেই পাঠিয়ে দিন (COD ৳0)`;
+  }
+
+  if(payNowEl) payNowEl.textContent = "৳" + breakdown.advanceAmount.toLocaleString("en-BD");
+  if(codDueEl) codDueEl.textContent = "৳" + breakdown.codDueAmount.toLocaleString("en-BD");
+}
+
+function copyMerchantNumber(){
+  const mfs = MFS_ACCOUNTS[selectedMfsMethod] || MFS_ACCOUNTS.bkash;
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(mfs.number).then(function(){
+      showCartToast(`${mfs.name} number copied: ${mfs.number}`);
+    });
+  }else{
+    showCartToast(`${mfs.name} Number: ${mfs.number}`);
+  }
+}
 
 /* =========================================================
    MOBILE BOTTOM NAV ACTIONS
@@ -4448,7 +4827,7 @@ const DELIVERY_RATES = {
 };
 
 let selectedDeliveryZone = "inside";
-let addressDetectedZone = "unknown"; // "inside" | "outside" | "unknown"
+let addressDetectedZone = "unknown";
 
 const OUTSIDE_MYMENSINGH_KEYWORDS = [
   "dhaka","ঢাকা","uttara","উত্তরা","mirpur","মিরপুর","dhanmondi","ধানমন্ডি","gulshan","গুলশান",
@@ -4533,7 +4912,6 @@ function validateAddressDeliveryZone(autoSwitch){
   const locationType = analyzeAddressLocation(addrInput.value);
   addressDetectedZone = locationType;
 
-  // CASE 1: Address is OUTSIDE Mymensingh
   if(locationType === "outside"){
     if(insideCard) insideCard.classList.add("locked");
     if(outsideCard) outsideCard.classList.remove("locked");
@@ -4558,7 +4936,6 @@ function validateAddressDeliveryZone(autoSwitch){
     return { valid: true };
   }
 
-  // CASE 2: Address is INSIDE Mymensingh
   if(locationType === "inside"){
     if(insideCard) insideCard.classList.remove("locked");
     if(outsideCard) outsideCard.classList.add("locked");
@@ -4583,7 +4960,6 @@ function validateAddressDeliveryZone(autoSwitch){
     return { valid: true };
   }
 
-  // CASE 3: Location unknown (no city/district/area name entered yet)
   if(insideCard) insideCard.classList.remove("locked");
   if(outsideCard) outsideCard.classList.remove("locked");
 
@@ -4682,10 +5058,11 @@ function safe(value){
    LUXURY POPUP CONTROLS
 ========================================================= */
 
-function openOrderConfirmedModal(trackingCode, total, zoneLabel, waHref){
+function openOrderConfirmedModal(trackingCode, advancePaid, codDue, zoneLabel, mfsName, waHref){
   document.getElementById("popupOrderCode").textContent = trackingCode;
-  document.getElementById("popupOrderTotal").textContent = "৳" + Number(total || 0).toLocaleString("en-BD");
-  document.getElementById("popupOrderArea").textContent = zoneLabel + " • Cash on Delivery";
+  document.getElementById("popupPaidAdvance").textContent = "৳" + Number(advancePaid || 0).toLocaleString("en-BD") + ` (${mfsName})`;
+  document.getElementById("popupOrderTotal").textContent = "৳" + Number(codDue || 0).toLocaleString("en-BD");
+  document.getElementById("popupOrderArea").textContent = zoneLabel + (codDue > 0 ? " • Remaining on Delivery" : " • Fully Paid");
   document.getElementById("popupWhatsappLink").href = waHref;
 
   const stage = document.getElementById("deliverySceneStage");
@@ -4758,7 +5135,7 @@ async function sendTelegramMessage(text){
 
 async function sendTelegramOrderNotification(orderInfo){
   const watchItems = orderInfo.items
-    .filter(item => item.product_id !== "DELIVERY")
+    .filter(item => item.product_id !== "DELIVERY" && item.product_id !== "PAYMENT_INFO")
     .map(item => `• ${item.name} (×${item.quantity}) — ৳${Number(item.subtotal).toLocaleString("en-BD")}`)
     .join("\n");
 
@@ -4771,10 +5148,17 @@ async function sendTelegramOrderNotification(orderInfo){
 🚚 Area: ${orderInfo.zone_label} (৳${orderInfo.delivery_fee})
 📍 Address: ${orderInfo.raw_address}
 
+💳 PAYMENT DETAILS (${orderInfo.mode_label}):
+• Method: ${orderInfo.mfs_name} (Sent to ${orderInfo.merchant_number})
+• Sender No: ${orderInfo.sender_number}
+• TrxID: ${orderInfo.trx_id}
+• Paid Advance: ৳${Number(orderInfo.advance_paid).toLocaleString("en-BD")}
+• COD Due on Delivery: ৳${Number(orderInfo.cod_due).toLocaleString("en-BD")}
+
 ⌚ Ordered Items:
 ${watchItems}
 
-💰 Total Payable (COD): ৳${Number(orderInfo.total).toLocaleString("en-BD")}`;
+💰 Grand Total: ৳${Number(orderInfo.total).toLocaleString("en-BD")}`;
 
   await sendTelegramMessage(messageText);
 }
@@ -5015,10 +5399,7 @@ function renderCart(){
   document.getElementById("cartDeliveryFee").textContent = "৳" + deliveryInfo.fee;
   document.getElementById("cartTotal").textContent = "৳" + grandTotal.toLocaleString("en-BD");
 
-  const codPreview = document.getElementById("codPayablePreview");
-  if(codPreview){
-    codPreview.textContent = "৳" + grandTotal.toLocaleString("en-BD");
-  }
+  updatePaymentUI();
 }
 
 function toggleCart(){
@@ -5168,6 +5549,9 @@ async function trackOrder(){
     }else{
       productsBox.innerHTML = items.map(function(item){
         const name = safe(item.name || "Product");
+        if(item.product_id === "PAYMENT_INFO"){
+          return `<div class="track-product"><strong style="color:var(--gold);">${name}</strong></div>`;
+        }
         const quantity = Number(item.quantity || 0);
         const price = Number(item.price || 0);
         const subtotal = Number(item.subtotal || (price * quantity));
@@ -5280,12 +5664,16 @@ function prefillCheckoutFromAccount(){
   const nameField = document.getElementById("customerName");
   const phoneField = document.getElementById("customerPhone");
   const addressField = document.getElementById("customerAddress");
+  const senderField = document.getElementById("paymentSenderNumber");
 
   if(nameField && !nameField.value && meta.full_name){
     nameField.value = meta.full_name;
   }
   if(phoneField && !phoneField.value && meta.phone){
     phoneField.value = meta.phone;
+  }
+  if(senderField && !senderField.value && meta.phone){
+    senderField.value = meta.phone;
   }
   const savedAddr = localStorage.getItem("cv_saved_address_" + currentAuthSession.user.id);
   if(addressField && !addressField.value && savedAddr){
@@ -5346,6 +5734,8 @@ async function placeOrder(){
   const name = document.getElementById("customerName").value.trim();
   const phone = document.getElementById("customerPhone").value.trim();
   const address = document.getElementById("customerAddress").value.trim();
+  const senderNumberRaw = document.getElementById("paymentSenderNumber").value.trim();
+  const trxIdRaw = document.getElementById("paymentTrxId").value.trim();
 
   if(!name){
     showCartToast("Please enter your full name");
@@ -5388,8 +5778,32 @@ async function placeOrder(){
     return;
   }
 
+  // Validate Mobile Banking Sender Number & TrxID
+  const mfs = MFS_ACCOUNTS[selectedMfsMethod] || MFS_ACCOUNTS.bkash;
+  const cleanSender = senderNumberRaw.replace(/[\s-]/g,"");
+
+  if(!cleanSender){
+    showCartToast(`Please enter your ${mfs.name} Sender Number`);
+    document.getElementById("paymentSenderNumber").focus();
+    return;
+  }
+
+  if(!/^01\d{9,10}$/.test(cleanSender)){
+    showCartToast(`Enter a valid ${mfs.name} number (11 or 12 digits)`);
+    document.getElementById("paymentSenderNumber").focus();
+    return;
+  }
+
+  const cleanTrxId = trxIdRaw.toUpperCase().replace(/\s+/g,"");
+  if(!cleanTrxId || cleanTrxId.length < 6){
+    showCartToast("Please enter a valid Transaction ID (TrxID)");
+    document.getElementById("paymentTrxId").focus();
+    return;
+  }
+
   const deliveryInfo = DELIVERY_RATES[selectedDeliveryZone];
   const grandTotal = getCartGrandTotal();
+  const breakdown = getPaymentBreakdown();
 
   const orderItems = cart.map(function(item){
     return {
@@ -5409,7 +5823,15 @@ async function placeOrder(){
     subtotal: deliveryInfo.fee
   });
 
-  const formattedAddress = `[${deliveryInfo.label} - ৳${deliveryInfo.fee}] ${address}`;
+  orderItems.push({
+    product_id: "PAYMENT_INFO",
+    name: `Paid ৳${breakdown.advanceAmount} via ${mfs.name} (From: ${cleanSender}, TrxID: ${cleanTrxId}) | COD Due: ৳${breakdown.codDueAmount}`,
+    price: 0,
+    quantity: 1,
+    subtotal: 0
+  });
+
+  const formattedAddress = `[${deliveryInfo.label} - ৳${deliveryInfo.fee} | ${mfs.name} Paid: ৳${breakdown.advanceAmount} | TrxID: ${cleanTrxId} | Sender: ${cleanSender} | COD Due: ৳${breakdown.codDueAmount}] ${address}`;
   const trackingCode = generateTrackingCode();
   const button = document.getElementById("placeOrderButton");
 
@@ -5423,7 +5845,7 @@ async function placeOrder(){
     address: formattedAddress,
     items: orderItems,
     total: grandTotal,
-    status: "Pending",
+    status: "Pending Payment Verification",
     tracking_code: trackingCode
   };
 
@@ -5457,11 +5879,18 @@ async function placeOrder(){
       delivery_fee: deliveryInfo.fee,
       raw_address: address,
       items: orderItems,
-      total: grandTotal
+      total: grandTotal,
+      mode_label: breakdown.modeLabel,
+      mfs_name: mfs.name,
+      merchant_number: mfs.number,
+      sender_number: cleanSender,
+      trx_id: cleanTrxId,
+      advance_paid: breakdown.advanceAmount,
+      cod_due: breakdown.codDueAmount
     });
 
     const waItemsList = orderItems
-      .filter(i => i.product_id !== "DELIVERY")
+      .filter(i => i.product_id !== "DELIVERY" && i.product_id !== "PAYMENT_INFO")
       .map(i => `• ${i.name} (×${i.quantity})`)
       .join("\n");
 
@@ -5472,9 +5901,16 @@ Name: ${name}
 Phone: ${cleanPhone}
 Area: ${deliveryInfo.label} (৳${deliveryInfo.fee})
 Address: ${address}
+
+Payment: ${mfs.name} (${breakdown.modeLabel})
+Sender: ${cleanSender}
+TrxID: ${cleanTrxId}
+Paid Advance: ৳${breakdown.advanceAmount.toLocaleString("en-BD")}
+COD Due: ৳${breakdown.codDueAmount.toLocaleString("en-BD")}
+
 Items:
 ${waItemsList}
-Total: ৳${grandTotal.toLocaleString("en-BD")}`
+Grand Total: ৳${grandTotal.toLocaleString("en-BD")}`
     );
 
     const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${waOrderMsg}`;
@@ -5488,6 +5924,8 @@ Total: ৳${grandTotal.toLocaleString("en-BD")}`
     lastOrderPhone = cleanPhone;
     saveLastOrder();
 
+    document.getElementById("paymentTrxId").value = "";
+
     cart = [];
     saveCart();
     updateCartCount();
@@ -5500,7 +5938,7 @@ Total: ৳${grandTotal.toLocaleString("en-BD")}`
 
     showHeaderTrackButton();
 
-    openOrderConfirmedModal(trackingCode, grandTotal, deliveryInfo.label, waHref);
+    openOrderConfirmedModal(trackingCode, breakdown.advanceAmount, breakdown.codDueAmount, deliveryInfo.label, mfs.name, waHref);
 
     loadProducts();
 
@@ -6070,15 +6508,19 @@ async function loadUserOrderHistory(){
       }
 
       const itemsSummary = items
-        .filter(i => i.product_id !== "DELIVERY")
+        .filter(i => i.product_id !== "DELIVERY" && i.product_id !== "PAYMENT_INFO")
         .map(i => `${safe(i.name)} (×${i.quantity})`)
         .join(", ") || "Watch Order";
 
-      const statusText = order.status || "Pending";
-      const isPending = statusText.toLowerCase() === "pending";
-      const isCancelled = statusText.toLowerCase() === "cancelled";
+      const paymentNoteItem = items.find(i => i.product_id === "PAYMENT_INFO");
+      const paymentFooterText = paymentNoteItem ? safe(paymentNoteItem.name) : "Mobile Banking + COD";
 
-      const cancelBtnHTML = isPending
+      const statusText = order.status || "Pending";
+      const statusLower = statusText.toLowerCase();
+      const isCancellable = statusLower === "pending" || statusLower === "pending payment verification";
+      const isCancelled = statusLower === "cancelled";
+
+      const cancelBtnHTML = isCancellable
         ? `<button class="cancel-order-user-btn" onclick="promptCancelOrder('${safe(order.id)}', '${safe(order.tracking_code || "")}', '${safe(order.customer_name || "")}', '${safe(order.phone || "")}', ${Number(order.total || 0)})">❌ Cancel Order</button>`
         : "";
 
@@ -6093,7 +6535,7 @@ async function loadUserOrderHistory(){
           </div>
           <div class="history-items">${itemsSummary}</div>
           <div class="history-footer">
-            <span>Cash on Delivery</span>
+            <span style="font-size:12px;">${paymentFooterText}</span>
             <span class="history-total">Total: ৳${Number(order.total || 0).toLocaleString("en-BD")}</span>
           </div>
           ${cancelBtnHTML}
