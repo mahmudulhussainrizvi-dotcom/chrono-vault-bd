@@ -4439,7 +4439,7 @@ function initScrollReveal(){
 }
 
 /* =========================================================
-   DELIVERY CHARGE & SMART ADDRESS VALIDATION
+   DELIVERY CHARGE & BIDIRECTIONAL SMART ADDRESS VALIDATION
 ========================================================= */
 
 const DELIVERY_RATES = {
@@ -4448,7 +4448,7 @@ const DELIVERY_RATES = {
 };
 
 let selectedDeliveryZone = "inside";
-let addressDetectedOutside = false;
+let addressDetectedZone = "unknown"; // "inside" | "outside" | "unknown"
 
 const OUTSIDE_MYMENSINGH_KEYWORDS = [
   "dhaka","ঢাকা","uttara","উত্তরা","mirpur","মিরপুর","dhanmondi","ধানমন্ডি","gulshan","গুলশান",
@@ -4479,7 +4479,9 @@ const INSIDE_MYMENSINGH_KEYWORDS = [
   "haluaghat","হালুয়াঘাট","হালুয়াঘাট","dhobaura","ধোবাউড়া","ধোবাউড়া","tarakanda","তারাকান্দা",
   "charpara","চরপাড়া","চরপাড়া","ganginarpar","গাঙ্গিনারপাড়","গাঙ্গিনারপাড়","maskanda","মাসকান্দা",
   "kewatkhali","কেওয়াটখালী","কেওআটখালী","bau","কৃষি বিশ্ববিদ্যালয়","কৃষি বিশ্ববিদ্যালয়",
-  "akua","আকুয়া","আকুয়া","choto bazar","বড় বাজার","boro bazar","kachari","কাচারি","shambhuganj","শম্ভুগঞ্জ"
+  "akua","আকুয়া","আকুয়া","choto bazar","বড় বাজার","boro bazar","kachari","কাচারি","shambhuganj","শম্ভুগঞ্জ",
+  "town hall","টাউন হল","rk mission","আর কে মিশন","boundary road","বাউন্ডারি রোড","patgudam","পাটগুদাম",
+  "notun bazar","নতুন বাজার","durgabari","দুর্গাবাড়ি","দুর্গাবাড়ি","shehora","সেহড়া","সেহড়া","brahmapalli","ব্রহ্মপল্লী"
 ];
 
 function analyzeAddressLocation(rawAddress){
@@ -4492,7 +4494,6 @@ function analyzeAddressLocation(rawAddress){
   if(hasOutside && !hasInside) return "outside";
   if(hasInside && !hasOutside) return "inside";
   if(hasOutside && hasInside){
-    // Check if user explicitly wrote "outside mymensingh" or a non-mymensingh district
     if(text.includes("outside mymensingh") || text.includes("ময়মনসিংহের বাইরে") || text.includes("ময়মনসিংহের বাইরে")){
       return "outside";
     }
@@ -4513,27 +4514,38 @@ function showZoneAlert(message, type){
   alertBox.innerHTML = message;
 }
 
+function applyZoneSelectionUI(zone){
+  selectedDeliveryZone = zone;
+  const insideCard = document.getElementById("zoneInsideCard");
+  const outsideCard = document.getElementById("zoneOutsideCard");
+  if(insideCard && outsideCard){
+    insideCard.classList.toggle("selected", zone === "inside");
+    outsideCard.classList.toggle("selected", zone === "outside");
+  }
+}
+
 function validateAddressDeliveryZone(autoSwitch){
   const addrInput = document.getElementById("customerAddress");
   const insideCard = document.getElementById("zoneInsideCard");
+  const outsideCard = document.getElementById("zoneOutsideCard");
   if(!addrInput) return { valid: true };
 
   const locationType = analyzeAddressLocation(addrInput.value);
+  addressDetectedZone = locationType;
 
+  // CASE 1: Address is OUTSIDE Mymensingh
   if(locationType === "outside"){
-    addressDetectedOutside = true;
     if(insideCard) insideCard.classList.add("locked");
+    if(outsideCard) outsideCard.classList.remove("locked");
 
     if(autoSwitch && selectedDeliveryZone !== "outside"){
-      selectedDeliveryZone = "outside";
-      document.getElementById("zoneInsideCard").classList.remove("selected");
-      document.getElementById("zoneOutsideCard").classList.add("selected");
+      applyZoneSelectionUI("outside");
       renderCart();
-      showCartToast("Delivery updated to Outside Mymensingh (৳120)");
+      showCartToast("Delivery auto-updated to Outside Mymensingh (৳120)");
     }
 
     showZoneAlert(
-      "⚠️ আপনার ঠিকানাটি <strong>ময়মনসিংহের বাইরের</strong> এলাকা হিসেবে শনাক্ত হয়েছে, তাই <strong>Outside Mymensingh (৳120)</strong> প্রযোজ্য হবে।",
+      "⚠️ আপনার ঠিকানাটি <strong>ময়মনসিংহের বাইরের</strong> এলাকা হিসেবে শনাক্ত হয়েছে, তাই <strong>Outside Mymensingh (৳120)</strong> সিলেক্ট করা হয়েছে।",
       "info"
     );
 
@@ -4546,15 +4558,35 @@ function validateAddressDeliveryZone(autoSwitch){
     return { valid: true };
   }
 
-  addressDetectedOutside = false;
-  if(insideCard) insideCard.classList.remove("locked");
-
+  // CASE 2: Address is INSIDE Mymensingh
   if(locationType === "inside"){
-    showZoneAlert("", "");
+    if(insideCard) insideCard.classList.remove("locked");
+    if(outsideCard) outsideCard.classList.add("locked");
+
+    if(autoSwitch && selectedDeliveryZone !== "inside"){
+      applyZoneSelectionUI("inside");
+      renderCart();
+      showCartToast("Delivery auto-updated to Inside Mymensingh (৳60)");
+    }
+
+    showZoneAlert(
+      "✅ আপনার ঠিকানাটি <strong>ময়মনসিংহের ভেতরের</strong> এলাকা হিসেবে শনাক্ত হয়েছে, তাই <strong>Inside Mymensingh (৳60)</strong> প্রযোজ্য হবে।",
+      "info"
+    );
+
+    if(selectedDeliveryZone === "outside"){
+      return {
+        valid: false,
+        reason: "Your delivery address is inside Mymensingh. Please select Inside Mymensingh (৳60)."
+      };
+    }
     return { valid: true };
   }
 
-  // Location unknown (user didn't write Mymensingh or any district name yet)
+  // CASE 3: Location unknown (no city/district/area name entered yet)
+  if(insideCard) insideCard.classList.remove("locked");
+  if(outsideCard) outsideCard.classList.remove("locked");
+
   if(addrInput.value.trim().length > 0 && selectedDeliveryZone === "inside"){
     showZoneAlert(
       "ℹ️ <strong>Inside Mymensingh (৳60)</strong> ডেলিভারির জন্য ঠিকানায় অবশ্যই <strong>Mymensingh</strong> বা এলাকার নাম (যেমন: Charpara, Trishal, Valuka) উল্লেখ করুন।",
@@ -4570,7 +4602,7 @@ function validateAddressDeliveryZone(autoSwitch){
 function selectDeliveryZone(zone){
   if(!DELIVERY_RATES[zone]) return;
 
-  if(zone === "inside" && addressDetectedOutside){
+  if(zone === "inside" && addressDetectedZone === "outside"){
     showZoneAlert(
       "🚫 আপনি ঠিকানায় ময়মনসিংহের বাইরের জেলা/এলাকা লিখেছেন। <strong>Inside Mymensingh (৳60)</strong> সিলেক্ট করা যাবে না।",
       "warning"
@@ -4579,16 +4611,16 @@ function selectDeliveryZone(zone){
     return;
   }
 
-  selectedDeliveryZone = zone;
-
-  const insideCard = document.getElementById("zoneInsideCard");
-  const outsideCard = document.getElementById("zoneOutsideCard");
-
-  if(insideCard && outsideCard){
-    insideCard.classList.toggle("selected", zone === "inside");
-    outsideCard.classList.toggle("selected", zone === "outside");
+  if(zone === "outside" && addressDetectedZone === "inside"){
+    showZoneAlert(
+      "ℹ️ আপনার ঠিকানাটি ময়মনসিংহের ভেতরের এলাকা, তাই <strong>Inside Mymensingh (৳60)</strong> প্রযোজ্য হবে।",
+      "warning"
+    );
+    showCartToast("Inside Mymensingh address automatically uses ৳60 delivery!");
+    return;
   }
 
+  applyZoneSelectionUI(zone);
   validateAddressDeliveryZone(false);
   renderCart();
 }
@@ -5342,7 +5374,7 @@ async function placeOrder(){
 
   const zoneCheck = validateAddressDeliveryZone(true);
   if(!zoneCheck.valid){
-    showCartToast(zoneCheck.reason || "Please select Outside Mymensingh (৳120)");
+    showCartToast(zoneCheck.reason || "Please verify your delivery area");
     return;
   }
 
