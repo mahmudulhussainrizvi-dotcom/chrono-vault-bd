@@ -5067,7 +5067,6 @@ function isJwtExpired(token){
     const padded = base64.padEnd(base64.length + (4 - (base64.length % 4)) % 4, "=");
     const payload = JSON.parse(atob(padded));
     if(!payload.exp) return false;
-    // Refresh if expired or within 60 seconds of expiring
     return (Math.floor(Date.now() / 1000) + 60) >= payload.exp;
   }catch(e){
     return true;
@@ -5206,7 +5205,6 @@ async function sendTelegramMessage(text){
 
 async function sendTelegramOrderNotification(orderInfo){
   const watchItems = orderInfo.items
-    .filter(item => item.product_id !== "DELIVERY" && item.product_id !== "PAYMENT_INFO")
     .map(item => `• ${item.name} (×${item.quantity}) — ৳${Number(item.subtotal).toLocaleString("en-BD")}`)
     .join("\n");
 
@@ -5620,9 +5618,6 @@ async function trackOrder(){
     }else{
       productsBox.innerHTML = items.map(function(item){
         const name = safe(item.name || "Product");
-        if(item.product_id === "PAYMENT_INFO"){
-          return `<div class="track-product"><strong style="color:var(--gold);">${name}</strong></div>`;
-        }
         const quantity = Number(item.quantity || 0);
         const price = Number(item.price || 0);
         const subtotal = Number(item.subtotal || (price * quantity));
@@ -5869,7 +5864,6 @@ async function placeOrder(){
     return;
   }
 
-  // Validate Mobile Banking Sender Number & TrxID
   const mfs = MFS_ACCOUNTS[selectedMfsMethod] || MFS_ACCOUNTS.bkash;
   const cleanSender = senderNumberRaw.replace(/[\s-]/g,"");
 
@@ -5902,9 +5896,11 @@ async function placeOrder(){
   const grandTotal = getCartGrandTotal();
   const breakdown = getPaymentBreakdown();
 
+  // Keep only actual cart products in `items` so DB triggers expecting numeric IDs won't fail on string IDs
   const orderItems = cart.map(function(item){
+    const numericId = Number(item.id);
     return {
-      product_id: item.id,
+      product_id: Number.isInteger(numericId) ? numericId : item.id,
       name: item.name,
       price: Number(item.price),
       quantity: Number(item.quantity),
@@ -5912,23 +5908,8 @@ async function placeOrder(){
     };
   });
 
-  orderItems.push({
-    product_id: "DELIVERY",
-    name: `Delivery Charge (${deliveryInfo.label})`,
-    price: deliveryInfo.fee,
-    quantity: 1,
-    subtotal: deliveryInfo.fee
-  });
-
-  orderItems.push({
-    product_id: "PAYMENT_INFO",
-    name: `Paid ৳${breakdown.advanceAmount} via ${mfs.name} (From: ${cleanSender}, TrxID: ${cleanTrxId}) | COD Due: ৳${breakdown.codDueAmount}`,
-    price: 0,
-    quantity: 1,
-    subtotal: 0
-  });
-
-  const formattedAddress = `[${deliveryInfo.label} - ৳${deliveryInfo.fee} | ${mfs.name} Paid: ৳${breakdown.advanceAmount} | TrxID: ${cleanTrxId} | Sender: ${cleanSender} | COD Due: ৳${breakdown.codDueAmount}] ${address}`;
+  const paymentSummaryNote = `${mfs.name} Paid ৳${breakdown.advanceAmount} | From: ${cleanSender} | TrxID: ${cleanTrxId} | COD Due: ৳${breakdown.codDueAmount}`;
+  const formattedAddress = `[${deliveryInfo.label} - ৳${deliveryInfo.fee} | ${paymentSummaryNote}] ${address}`;
   const trackingCode = generateTrackingCode();
 
   button.textContent = "Confirming Order...";
@@ -5945,6 +5926,7 @@ async function placeOrder(){
   };
 
   localStorage.setItem("cv_saved_address_" + currentAuthSession.user.id, address);
+  localStorage.setItem("cv_last_payment_note_" + trackingCode, paymentSummaryNote);
 
   try{
     const response = await fetch(
@@ -5985,7 +5967,6 @@ async function placeOrder(){
     });
 
     const waItemsList = orderItems
-      .filter(i => i.product_id !== "DELIVERY" && i.product_id !== "PAYMENT_INFO")
       .map(i => `• ${i.name} (×${i.quantity})`)
       .join("\n");
 
@@ -6612,12 +6593,12 @@ async function loadUserOrderHistory(){
       }
 
       const itemsSummary = items
-        .filter(i => i.product_id !== "DELIVERY" && i.product_id !== "PAYMENT_INFO")
         .map(i => `${safe(i.name)} (×${i.quantity})`)
         .join(", ") || "Watch Order";
 
-      const paymentNoteItem = items.find(i => i.product_id === "PAYMENT_INFO");
-      const paymentFooterText = paymentNoteItem ? safe(paymentNoteItem.name) : "Mobile Banking + COD";
+      const addrStr = String(order.address || "");
+      const bracketMatch = addrStr.match(/^\[([^\]]+)\]/);
+      const paymentFooterText = bracketMatch ? safe(bracketMatch[1]) : "Mobile Banking + COD";
 
       const statusText = order.status || "Pending";
       const statusLower = statusText.toLowerCase();
