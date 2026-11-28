@@ -4511,7 +4511,7 @@ const MFS_ACCOUNTS = {
   upay:   { name: "Upay",   number: "01326144735", type: "Personal (Send Money)" }
 };
 
-let selectedMfsMethod = "bkash";      // "bkash" | "nagad" | "rocket" | "upay"
+let selectedMfsMethod = "bkash";         // "bkash" | "nagad" | "rocket" | "upay"
 let selectedPaymentMode = "delivery_only"; // "delivery_only" | "full"
 
 /* =========================================================
@@ -5052,6 +5052,77 @@ function safe(value){
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
+}
+
+/* =========================================================
+   JWT EXPIRATION CHECK & AUTO TOKEN REFRESH (FIXES PGRST303)
+========================================================= */
+
+function isJwtExpired(token){
+  if(!token) return true;
+  try{
+    const parts = token.split(".");
+    if(parts.length !== 3) return true;
+    const base64 = parts[1].replace(/-/g, "+").replace(/_/g, "/");
+    const padded = base64.padEnd(base64.length + (4 - (base64.length % 4)) % 4, "=");
+    const payload = JSON.parse(atob(padded));
+    if(!payload.exp) return false;
+    // Refresh if expired or within 60 seconds of expiring
+    return (Math.floor(Date.now() / 1000) + 60) >= payload.exp;
+  }catch(e){
+    return true;
+  }
+}
+
+async function ensureValidAuthSession(){
+  if(!currentAuthSession || !currentAuthSession.access_token){
+    return false;
+  }
+
+  if(!isJwtExpired(currentAuthSession.access_token)){
+    return true;
+  }
+
+  if(!currentAuthSession.refresh_token){
+    currentAuthSession = null;
+    localStorage.removeItem("cv_auth_session");
+    updateAuthUI();
+    renderCart();
+    return false;
+  }
+
+  try{
+    const response = await fetch(
+      SUPABASE_URL + "/auth/v1/token?grant_type=refresh_token",
+      {
+        method:"POST",
+        headers:{
+          "apikey":SUPABASE_KEY,
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          refresh_token: currentAuthSession.refresh_token
+        })
+      }
+    );
+
+    const data = await response.json();
+    if(!response.ok || !data.access_token){
+      throw new Error("Refresh token expired");
+    }
+
+    currentAuthSession = data;
+    localStorage.setItem("cv_auth_session", JSON.stringify(data));
+    updateAuthUI();
+    return true;
+  }catch(err){
+    console.error("Session refresh failed:", err);
+    currentAuthSession = null;
+    localStorage.removeItem("cv_auth_session");
+    updateAuthUI();
+    renderCart();
+    return false;
+  }
 }
 
 /* =========================================================
@@ -5682,13 +5753,14 @@ function prefillCheckoutFromAccount(){
   validateAddressDeliveryZone(true);
 }
 
-function checkout(){
+async function checkout(){
   if(cart.length === 0){
     showCartToast("Your cart is empty");
     return;
   }
 
-  if(!currentAuthSession || !currentAuthSession.user || !currentAuthSession.access_token){
+  const hasValidSession = await ensureValidAuthSession();
+  if(!hasValidSession || !currentAuthSession || !currentAuthSession.user){
     pendingCheckoutAfterAuth = true;
     openAuthModal("Please Login or Sign Up first to place your order.");
     return;
@@ -5725,9 +5797,16 @@ async function placeOrder(){
     return;
   }
 
-  if(!currentAuthSession || !currentAuthSession.user || !currentAuthSession.access_token){
+  const button = document.getElementById("placeOrderButton");
+  button.disabled = true;
+  button.textContent = "Verifying Session...";
+
+  const hasValidSession = await ensureValidAuthSession();
+  if(!hasValidSession || !currentAuthSession || !currentAuthSession.user || !currentAuthSession.access_token){
+    button.disabled = false;
+    button.textContent = "Confirm & Place Order";
     pendingCheckoutAfterAuth = true;
-    openAuthModal("Your session expired. Please Login or Sign Up to confirm your order.");
+    openAuthModal("Your login session expired. Please Login again to confirm your order.");
     return;
   }
 
@@ -5738,12 +5817,16 @@ async function placeOrder(){
   const trxIdRaw = document.getElementById("paymentTrxId").value.trim();
 
   if(!name){
+    button.disabled = false;
+    button.textContent = "Confirm & Place Order";
     showCartToast("Please enter your full name");
     document.getElementById("customerName").focus();
     return;
   }
 
   if(!phone){
+    button.disabled = false;
+    button.textContent = "Confirm & Place Order";
     showCartToast("Please enter your phone number");
     document.getElementById("customerPhone").focus();
     return;
@@ -5751,12 +5834,16 @@ async function placeOrder(){
 
   const cleanPhone = phone.replace(/[\s-]/g,"");
   if(!/^01\d{9}$/.test(cleanPhone)){
+    button.disabled = false;
+    button.textContent = "Confirm & Place Order";
     showCartToast("Enter valid 11-digit BD number");
     document.getElementById("customerPhone").focus();
     return;
   }
 
   if(!address){
+    button.disabled = false;
+    button.textContent = "Confirm & Place Order";
     showCartToast("Please enter full delivery address");
     document.getElementById("customerAddress").focus();
     return;
@@ -5764,11 +5851,15 @@ async function placeOrder(){
 
   const zoneCheck = validateAddressDeliveryZone(true);
   if(!zoneCheck.valid){
+    button.disabled = false;
+    button.textContent = "Confirm & Place Order";
     showCartToast(zoneCheck.reason || "Please verify your delivery area");
     return;
   }
 
   if(zoneCheck.isAmbiguousInside){
+    button.disabled = false;
+    button.textContent = "Confirm & Place Order";
     showZoneAlert(
       "🚫 <strong>Inside Mymensingh (৳60)</strong> ডেলিভারি নিতে হলে ঠিকানায় অবশ্যই <strong>Mymensingh</strong> বা আপনার এলাকার নাম লিখুন, অথবা <strong>Outside Mymensingh (৳120)</strong> সিলেক্ট করুন।",
       "warning"
@@ -5783,12 +5874,16 @@ async function placeOrder(){
   const cleanSender = senderNumberRaw.replace(/[\s-]/g,"");
 
   if(!cleanSender){
+    button.disabled = false;
+    button.textContent = "Confirm & Place Order";
     showCartToast(`Please enter your ${mfs.name} Sender Number`);
     document.getElementById("paymentSenderNumber").focus();
     return;
   }
 
   if(!/^01\d{9,10}$/.test(cleanSender)){
+    button.disabled = false;
+    button.textContent = "Confirm & Place Order";
     showCartToast(`Enter a valid ${mfs.name} number (11 or 12 digits)`);
     document.getElementById("paymentSenderNumber").focus();
     return;
@@ -5796,6 +5891,8 @@ async function placeOrder(){
 
   const cleanTrxId = trxIdRaw.toUpperCase().replace(/\s+/g,"");
   if(!cleanTrxId || cleanTrxId.length < 6){
+    button.disabled = false;
+    button.textContent = "Confirm & Place Order";
     showCartToast("Please enter a valid Transaction ID (TrxID)");
     document.getElementById("paymentTrxId").focus();
     return;
@@ -5833,9 +5930,7 @@ async function placeOrder(){
 
   const formattedAddress = `[${deliveryInfo.label} - ৳${deliveryInfo.fee} | ${mfs.name} Paid: ৳${breakdown.advanceAmount} | TrxID: ${cleanTrxId} | Sender: ${cleanSender} | COD Due: ৳${breakdown.codDueAmount}] ${address}`;
   const trackingCode = generateTrackingCode();
-  const button = document.getElementById("placeOrderButton");
 
-  button.disabled = true;
   button.textContent = "Confirming Order...";
 
   const orderPayload = {
@@ -6352,14 +6447,18 @@ async function signupUser(event){
   }
 }
 
-function restoreAuthSession(){
+async function restoreAuthSession(){
   try{
     const saved = localStorage.getItem("cv_auth_session");
-    if(saved) currentAuthSession = JSON.parse(saved);
+    if(saved){
+      currentAuthSession = JSON.parse(saved);
+      await ensureValidAuthSession();
+    }
   }catch(error){
     currentAuthSession = null;
   }
   updateAuthUI();
+  renderCart();
 }
 
 function updateAuthUI(){
@@ -6378,9 +6477,10 @@ function updateAuthUI(){
   }
 }
 
-function openAccountDashboard(){
-  if(!currentAuthSession || !currentAuthSession.user){
-    openAuthModal();
+async function openAccountDashboard(){
+  const hasValidSession = await ensureValidAuthSession();
+  if(!hasValidSession || !currentAuthSession || !currentAuthSession.user){
+    openAuthModal("Your session expired. Please Login again.");
     return;
   }
 
@@ -6406,14 +6506,16 @@ async function executeOrderCancellation(){
   const { orderId, trackingCode, customerName, phone, total } = pendingCancelOrderData;
   const confirmBtn = document.getElementById("confirmCancelActionBtn");
 
-  if(!currentAuthSession || !currentAuthSession.access_token){
-    closeCancelConfirmModal();
-    showCartToast("Session expired. Please login again.");
-    return;
-  }
-
   confirmBtn.disabled = true;
   confirmBtn.textContent = "Cancelling...";
+
+  const hasValidSession = await ensureValidAuthSession();
+  if(!hasValidSession || !currentAuthSession || !currentAuthSession.access_token){
+    closeCancelConfirmModal();
+    closeAccountDashboard();
+    openAuthModal("Session expired. Please login again.");
+    return;
+  }
 
   try{
     const response = await fetch(
@@ -6450,7 +6552,9 @@ async function executeOrderCancellation(){
 
 async function loadUserOrderHistory(){
   const listBox = document.getElementById("userOrderHistoryList");
-  if(!currentAuthSession || !currentAuthSession.user){
+  const hasValidSession = await ensureValidAuthSession();
+  if(!hasValidSession || !currentAuthSession || !currentAuthSession.user){
+    listBox.innerHTML = `<div class="empty" style="padding:20px;color:#ff9b9b;">Session expired. Please logout and login again.</div>`;
     return;
   }
 
